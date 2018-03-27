@@ -1,0 +1,19 @@
+// Documentation file for Doxygen
+
+/// @file
+/// @brief Namespace documentation
+
+
+/// @brief All items that are part of the Mars Base Engine
+namespace mbe
+{
+	/// @brief Implementation details that are not relevant to the user of the sdk
+	namespace detail
+	{
+	}
+
+	/// @brief Events used by the mars base engine
+	namespace event
+	{
+	}
+}

@@ -1,0 +1,494 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Ressourcendateien">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Headerdateien\Components">
+      <UniqueIdentifier>{e225f7d0-eb73-4cd5-bbd8-5816ef0573e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Components">
+      <UniqueIdentifier>{bfea674d-509b-4af2-aca5-82afde1a1d33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Resources Management">
+      <UniqueIdentifier>{8024d5fd-af0b-4222-a8ef-3a0e8598c4f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Resources Management">
+      <UniqueIdentifier>{d3f6dc96-26e6-49e1-9f18-863ea17cadff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Resources Management\Constants">
+      <UniqueIdentifier>{a63b2887-cbe8-41c8-ac04-f0dbd123d858}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Framework">
+      <UniqueIdentifier>{5b6be9e6-b19a-497b-aace-e26b5151d3c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Framework">
+      <UniqueIdentifier>{902852ac-f24c-4e37-9253-41e9f7827f4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Systems">
+      <UniqueIdentifier>{06fd663d-ccee-481b-b9b9-0f5cf5829c18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems">
+      <UniqueIdentifier>{648cb55f-357f-4387-9f61-1366342e5245}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Systems\State System">
+      <UniqueIdentifier>{4c1a50d9-d7cd-4ee9-9470-3585e413cf75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Systems\Entity Component System">
+      <UniqueIdentifier>{5e9d960c-a335-41a0-ab4e-e450b651395b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Systems\Event System">
+      <UniqueIdentifier>{8b42e20f-5888-46c0-bb96-186ec97b82d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Systems\Event System\Events">
+      <UniqueIdentifier>{c72aca3c-b007-4641-b550-4388933e8cbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Event System">
+      <UniqueIdentifier>{33676ce7-b378-49b8-8e9a-b7229cd20b79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Event System\Events">
+      <UniqueIdentifier>{5f7b2745-0d5e-48b5-8546-e2c82543e04a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\State System">
+      <UniqueIdentifier>{5cd06ea2-7601-4ec7-b8c1-5a09bbdd0940}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Entity Component System">
+      <UniqueIdentifier>{78fe3683-3838-4302-9923-b8931dba6f90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Map">
+      <UniqueIdentifier>{1d33ab7c-9720-4a39-b1f4-dc16a6390d61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Systems\Event System\Events\InputEvents">
+      <UniqueIdentifier>{b5f7a535-ff47-4fa2-ac85-3dd82f6f582b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Systems\Event System\Events\InputEvents\Mouse">
+      <UniqueIdentifier>{5451ff2f-5848-4586-a9a8-be6c23c15f57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Event System\Events\InputEvents">
+      <UniqueIdentifier>{96f5d9cd-39fc-4494-b5fa-02f2ffbbdb92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Systems\Event System\Events\InputEvents\Actions">
+      <UniqueIdentifier>{d9a85fe8-848f-4eb0-861a-60af33ba5f2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Event System\Events\InputEvents\Actions">
+      <UniqueIdentifier>{6c609e7c-0e8b-4a7b-9031-e9d0da61747a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Event System\Events\InputEvents\Mouse">
+      <UniqueIdentifier>{37067aa3-dd2f-4f35-bd34-1c1552f27647}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Framework\Helpers">
+      <UniqueIdentifier>{33491c60-3003-4577-a9fe-6bb7451b0582}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Systems\Animation System">
+      <UniqueIdentifier>{2c5727b4-7915-4b0a-81f8-c96ea1911258}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Systems\Render System">
+      <UniqueIdentifier>{34c591d2-32bf-48ae-85e9-4b50e3b76d60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Systems\Render System\Effects">
+      <UniqueIdentifier>{e1cccb48-05ed-4ddb-9ba2-706b1b04f081}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Render System">
+      <UniqueIdentifier>{db2c171f-b29d-4fec-9677-e10853c86a24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Render System\Effects">
+      <UniqueIdentifier>{212d0125-5d6b-4d79-ae69-95d34478c971}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Animation System">
+      <UniqueIdentifier>{b97d91fe-785c-4f2d-aad6-42cdd32cf727}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Systems\Animation System\Animations">
+      <UniqueIdentifier>{736469b3-1007-47ba-8f26-fc489ed74b96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Animation System\Animations">
+      <UniqueIdentifier>{85f0d648-25d6-42d0-8b75-c00b04052f90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Systems\Clickable System">
+      <UniqueIdentifier>{f6d4d884-0931-4704-b3ac-495f1eb9a28d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\ClickableSystem">
+      <UniqueIdentifier>{bbb71426-f558-475c-9824-8ddbdc6ecd0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Framework\Map">
+      <UniqueIdentifier>{e582bd5e-15c5-42c4-ad63-37f90671cda2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Framework\Helpers">
+      <UniqueIdentifier>{f08d5e85-51db-49e1-a3d4-49c174d986fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Systems\Audio System">
+      <UniqueIdentifier>{aed507cd-02ce-45a3-bb1f-a28367224917}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Audio System">
+      <UniqueIdentifier>{bfb36fcb-1dd7-42da-b097-0d23029a4154}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>Quelldateien\Systems\Entity Component System</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Quelldateien\Systems\Entity Component System</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Quelldateien\Systems\Entity Component System</Filter>
+    </ClCompile>
+    <ClCompile Include="Constants.cpp">
+      <Filter>Quelldateien\Resources Management</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="InputHandler.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderSystem.cpp">
+      <Filter>Quelldateien\Systems\Render System</Filter>
+    </ClCompile>
+    <ClCompile Include="StateManager.cpp">
+      <Filter>Quelldateien\Systems\State System</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Quelldateien\Systems\State System</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseEvent.cpp">
+      <Filter>Quelldateien\Systems\Event System</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Quelldateien\Systems\Event System</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Quelldateien\Systems\Render System</Filter>
+    </ClCompile>
+    <ClCompile Include="OutlineEffect.cpp">
+      <Filter>Quelldateien\Systems\Render System\Effects</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderLayer.cpp">
+      <Filter>Quelldateien\Systems\Render System</Filter>
+    </ClCompile>
+    <ClCompile Include="ParallelTask.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureWrapper.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="TinyXML.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="TiledTerrain.cpp">
+      <Filter>Quelldateien\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="EventLogger.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionBaseEvent.cpp">
+      <Filter>Quelldateien\Systems\Event System\Events\InputEvents\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionEvents.cpp">
+      <Filter>Quelldateien\Systems\Event System\Events\InputEvents\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionHoldEvent.cpp">
+      <Filter>Quelldateien\Systems\Event System\Events\InputEvents\Actions</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseButtonHoldEvent.cpp">
+      <Filter>Quelldateien\Systems\Event System\Events\InputEvents\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseButtonPressedEvent.cpp">
+      <Filter>Quelldateien\Systems\Event System\Events\InputEvents\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseButtonReleasedEvent.cpp">
+      <Filter>Quelldateien\Systems\Event System\Events\InputEvents\Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameAnimation.cpp">
+      <Filter>Quelldateien\Systems\Animation System\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TopDownZOrderSorter.cpp">
+      <Filter>Quelldateien\Systems\Render System</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityCreatedEvent.cpp">
+      <Filter>Quelldateien\Systems\Event System\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityRemovedEvent.cpp">
+      <Filter>Quelldateien\Systems\Event System\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="TiledTerrainLayer.cpp">
+      <Filter>Quelldateien\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="TiledTerrainLayerRenderComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TiledTerrainLayerSystem.cpp">
+      <Filter>Quelldateien\Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="TiledTerrainLayerComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AStarNode.cpp">
+      <Filter>Quelldateien\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelMask.cpp">
+      <Filter>Quelldateien\Systems\ClickableSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ClickableSystem.cpp">
+      <Filter>Quelldateien\Systems\ClickableSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityClickedEvent.cpp">
+      <Filter>Quelldateien\Systems\Event System\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="BlinkingAnimation.cpp">
+      <Filter>Quelldateien\Systems\Animation System\Animations</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Quelldateien\Systems\Audio System</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundSystem.cpp">
+      <Filter>Quelldateien\Systems\Audio System</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioData.cpp">
+      <Filter>Quelldateien\Systems\Audio System</Filter>
+    </ClCompile>
+    <ClCompile Include="ClickableComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelMaskClickableComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TexturedRenderComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TopDownInformationComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Quelldateien\Framework\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="PitchAnimation.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Component.h">
+      <Filter>Headerdateien\Systems\Entity Component System</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
+      <Filter>Headerdateien\Systems\Entity Component System</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Headerdateien\Systems\Entity Component System</Filter>
+    </ClInclude>
+    <ClInclude Include="RegularExpressions.h">
+      <Filter>Headerdateien\Resources Management\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>Headerdateien\Resources Management\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetHolder.h">
+      <Filter>Headerdateien\Resources Management</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderComponent.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ClickableComponent.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="InputHandler.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationComponent.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>Headerdateien\Systems\Event System</Filter>
+    </ClInclude>
+    <ClInclude Include="StateManager.h">
+      <Filter>Headerdateien\Systems\State System</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Headerdateien\Systems\State System</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>Headerdateien\Systems\Render System</Filter>
+    </ClInclude>
+    <ClInclude Include="HandleBase.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEvent.h">
+      <Filter>Headerdateien\Systems\Event System</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>Headerdateien\Systems\Render System</Filter>
+    </ClInclude>
+    <ClInclude Include="OutlineEffect.h">
+      <Filter>Headerdateien\Systems\Render System\Effects</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderLayer.h">
+      <Filter>Headerdateien\Systems\Render System</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseButtonEvents.h">
+      <Filter>Headerdateien\Systems\Event System\Events\InputEvents\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseButtonBaseEvent.h">
+      <Filter>Headerdateien\Systems\Event System\Events\InputEvents\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseButtonPressedEvent.h">
+      <Filter>Headerdateien\Systems\Event System\Events\InputEvents\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseButtonReleasedEvent.h">
+      <Filter>Headerdateien\Systems\Event System\Events\InputEvents\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseButtonHoldEvent.h">
+      <Filter>Headerdateien\Systems\Event System\Events\InputEvents\Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="EventWrapper.h">
+      <Filter>Headerdateien\Systems\Event System</Filter>
+    </ClInclude>
+    <ClInclude Include="ParallelTask.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureWrapper.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionBaseEvent.h">
+      <Filter>Headerdateien\Systems\Event System\Events\InputEvents\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionHoldEvent.h">
+      <Filter>Headerdateien\Systems\Event System\Events\InputEvents\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionEvents.h">
+      <Filter>Headerdateien\Systems\Event System\Events\InputEvents\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="TinyXML.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="AStarPathfinder.h">
+      <Filter>Headerdateien\Framework\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledTerrain.h">
+      <Filter>Headerdateien\Framework\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMapBase.h">
+      <Filter>Headerdateien\Framework\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="EventLogger.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="EnumBitmask.h">
+      <Filter>Headerdateien\Framework\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseAnimator.h">
+      <Filter>Headerdateien\Systems\Animation System</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>Headerdateien\Systems\Animation System</Filter>
+    </ClInclude>
+    <ClInclude Include="RotationAnimation.h">
+      <Filter>Headerdateien\Systems\Animation System\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameAnimation.h">
+      <Filter>Headerdateien\Systems\Animation System\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformComponent.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TopDownZOrderSorter.h">
+      <Filter>Headerdateien\Systems\Render System</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderComponent.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityCreatedEvent.h">
+      <Filter>Headerdateien\Systems\Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityRemovedEvent.h">
+      <Filter>Headerdateien\Systems\Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledTerrainLayer.h">
+      <Filter>Headerdateien\Framework\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledTerrainLayerRenderComponent.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledTerrainLayerComponent.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TiledTerrainLayerSystem.h">
+      <Filter>Headerdateien\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="AStarNode.h">
+      <Filter>Headerdateien\Framework\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityClickedEvent.h">
+      <Filter>Headerdateien\Systems\Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="ClickableSystem.h">
+      <Filter>Headerdateien\Systems\Clickable System</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelMask.h">
+      <Filter>Headerdateien\Systems\Clickable System</Filter>
+    </ClInclude>
+    <ClInclude Include="BlinkingAnimation.h">
+      <Filter>Headerdateien\Systems\Animation System\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Headerdateien\Systems\Audio System</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundSystem.h">
+      <Filter>Headerdateien\Systems\Audio System</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioComponent.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioData.h">
+      <Filter>Headerdateien\Systems\Audio System</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Headerdateien\Framework\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelMaskClickableComponent.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TexturedRenderComponent.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TopDownInformationComponent.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>Headerdateien\Framework\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="FilePathDictionary.h">
+      <Filter>Headerdateien\Resources Management</Filter>
+    </ClInclude>
+    <ClInclude Include="PitchAnimation.h">
+      <Filter>Headerdateien\Systems\Animation System\Animations</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Namespace Documentation.txt">
+      <Filter>Ressourcendateien</Filter>
+    </Text>
+    <Text Include="Main page documentation.txt">
+      <Filter>Ressourcendateien</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,246 @@
+// Documentation file for doxygen
+
+/// @file
+/// @brief Main page documentation
+
+/** @mainpage Mars Base Engine Documentation
+
+@section welcome Welcome
+Welcome to the documentation of the Mars Base Engine. Here you'll find a reference for all types, functions, variables and macros
+of the public API.
+
+All functions, constants, namespaces, classes and other types which are part of the public API are located inside the namespace
+@b mbe (or one of the few nested namespaces). Everything inside namespace @b detail exist only for internal implementation.
+Don't use them.
+
+@n
+@n
+@section example Short example
+This is a short example to demonstrate how to use the mars base engine.
+
+@code {.cpp}
+
+int main()
+{
+	// Create the window and all the systems and managers needed
+	if (mbe::Constants::Instance().HasLoadedSuccessfully() == false)
+		return EXIT_FAILURE;
+
+	sf::RenderWindow window(sf::VideoMode(mbe::Constants::Instance().GetScreenWidth(), mbe::Constants::Instance().GetScreenHeight(), 32), "Mars Base Engine", sf::Style::Default);
+
+	sf::Event eve;
+	mbe::EventManager eventManager;
+	mbe::EntityManager entityManager(eventManager);
+	mbe::InputHandler inputHandler;
+	mbe::RenderSystem renderSystem(window, eventManager);
+
+	// The FrameTime Clock
+	sf::Clock frameTimeClock;
+	frameTimeClock.restart();
+	sf::Time frameTime = sf::Time::Zero;
+
+	mbe::TextureHolder<std::string> textureHolder;
+	textureHolder.Load("House", "Resources/Textures/animation.png");
+
+#pragma region Entity and Components
+	// Create Entity and add components
+	mbe::Entity & e = entityManager.CreateEntity();
+	e.AddComponent<mbe::PositionComponent>();
+
+	// Test - requesting non-existing component
+	try
+	{
+		auto & comp = e.GetComponent<mbe::RenderComponent>();
+	}
+	catch (std::runtime_error & error)
+	{
+		std::cerr << std::endl << "Runntime error: " << error.what();
+	}
+
+	// Add further components
+	e.AddComponent<mbe::RenderComponent>(textureHolder.Get("House"));
+	e.AddComponent<mbe::ClickableComponent<mbe::RenderComponent>>();
+	auto & animationComponent = e.AddComponent<mbe::AnimationComponent<std::string, mbe::RenderComponent>>();
+
+	// Add entity to group
+	e.AddToGroup("Test");
+
+	std::cout << std::endl;
+	if (e.IsInGroup("GHGH"))
+		std::cout << std::endl << "Entity e is in group: " << "GHGH";
+	else
+		std::cout << std::endl << "Entity e is not in group: " << "GHGH";
+	if (e.IsInGroup("Test"))
+		std::cout << std::endl << "Entity e is in group: " << "Test";
+	else
+		std::cout << std::endl << "Entity e is not in group: " << "Test";
+
+	// Try and get non-existing groups
+	entityManager.GetGroup("hjdkas");
+	entityManager.GetGroup("PeterAmBahnhof");
+	// It now has created empty lists for these groups
+
+	auto testGroupEntites = entityManager.GetGroup("Test");
+	for (auto & entity : testGroupEntites) // should only be one in this case
+	{
+		if (entity->HasComponent<mbe::PositionComponent>())
+			entity->GetComponent<mbe::PositionComponent>().SetPosition(300, 200);
+	}
+	testGroupEntites.clear();
+	std::cout << std::endl << std::endl << "The size of the testGroupEntities vector after clearing it: " << entityManager.GetGroup("Test").size();
+
+	// Try out the derived Component defined in another project
+	e.AddComponent<DerivedComponent>();
+	std::cout << std::endl << "Derived component information: " << e.GetComponent<DerivedComponent>().GetInformation();
+	e.GetComponent<DerivedComponent>().SetInformation("I am very informative!");
+	std::cout << std::endl << "Derived component information: " << e.GetComponent<DerivedComponent>().GetInformation();
+
+#pragma endregion
+
+#pragma region Animations
+	// Add animations
+	mbe::FrameAnimation testAnimation;
+	testAnimation.AddFrames(sf::Vector2u(140, 230), sf::Vector2u(0, 0), 7);
+	testAnimation.AddFrames(sf::Vector2u(140, 230), sf::Vector2u(0, 230), 7);
+	animationComponent.AddAnimation("Test", testAnimation, sf::seconds(17.f / 30.f));
+
+	mbe::RotationAnimation rotationAnimation(1.f);
+	animationComponent.AddAnimation("Rotate", rotationAnimation, sf::seconds(5.f));
+#pragma endregion
+
+#pragma region Input Handling
+	// Assign Keys
+	inputHandler.AssignKey("MoveLeft", sf::Keyboard::Key::A);
+	inputHandler.AssignKey("MoveLeft", sf::Keyboard::Key::Left);
+	inputHandler.AssignKey("MoveRight", sf::Keyboard::Key::D, true);
+	inputHandler.AssignKey("MoveRight", sf::Keyboard::Key::Right, true);
+
+	// Subscribe to input events
+	mbe::EventManager::Callback moveLeftFunction;
+	moveLeftFunction = [&](const mbe::Event & message) {
+		auto pos = e.GetComponent<mbe::PositionComponent>().GetPosition();
+		e.GetComponent<mbe::PositionComponent>().SetPosition(pos.x - 10.f, pos.y - 10.f);
+	};
+	eventManager.Subscribe("MoveLeft", moveLeftFunction);
+
+	mbe::EventManager::Callback moveRightFunction;
+	moveRightFunction = [&](const mbe::Event & message) {
+		auto pos = e.GetComponent<mbe::PositionComponent>().GetPosition();
+		e.GetComponent<mbe::PositionComponent>().SetPosition(pos.x + 10.f * frameTime.asSeconds(), pos.y + 10.f * frameTime.asSeconds());
+	};
+	eventManager.Subscribe("MoveRight", moveRightFunction);
+#pragma endregion
+
+	//window.setVerticalSyncEnabled(true);
+	while (window.isOpen())
+	{
+		// Get the frame time
+		 frameTime = frameTimeClock.restart();
+
+		// Handle event
+		while (window.pollEvent(eve))
+		{
+			if (eve.type == sf::Event::Closed)
+				window.close();
+			if (eve.type == sf::Event::KeyReleased)
+			{
+				switch (eve.key.code)
+				{
+				case sf::Keyboard::Escape:
+					window.close();
+					break;
+				case sf::Keyboard::T:
+					for (auto & entity : entityManager.GetGroup("Test"))
+					{
+						if (entity->HasComponent<mbe::AnimationComponent<std::string, mbe::RenderComponent>>())
+							entity->GetComponent<mbe::AnimationComponent<std::string, mbe::RenderComponent>>().PlayAnimation("Test", true);
+					}
+					break;
+				case sf::Keyboard::S:
+					for (auto & entity : entityManager.GetGroup("Test"))
+					{
+						if (entity->HasComponent<mbe::AnimationComponent<std::string, mbe::RenderComponent>>())
+							entity->GetComponent<mbe::AnimationComponent<std::string, mbe::RenderComponent>>().StopAnimation();
+					}
+					break;
+				case sf::Keyboard::L:
+					e.Destroy();
+					// The moveLeftFunction and moveRightFunction refernces e directly
+					// So when e is destroyed, it would cause an exception
+					eventManager.UnSubscribe(moveLeftFunction);
+					eventManager.UnSubscribe(moveRightFunction);
+					break;
+				case sf::Keyboard::K:
+					eventManager.UnSubscribe(moveLeftFunction);
+					eventManager.UnSubscribe(moveRightFunction);
+					break;
+				case sf::Keyboard::R:
+					for (auto & entity : entityManager.GetGroup("Test"))
+					{
+						try
+						{
+							if (entity->HasComponent<mbe::RenderComponent>())
+								entity->GetComponent<mbe::RenderComponent>().RemoveRenderNode();
+						}
+						catch (const std::runtime_error & error)
+						{
+							std::cerr << std::endl << "Render node removal error: " << error.what();
+						}
+					}
+					break;
+				case sf::Keyboard::Z:
+					for (auto & entity : entityManager.GetGroup("Test"))
+					{
+						if (entity->HasComponent<mbe::RenderComponent>())
+							entity->GetComponent<mbe::RenderComponent>().AddRenderNode();
+					}
+					break;
+				default:
+					break;
+				}
+			}
+
+			inputHandler.HandleEvent(eve, eventManager);
+		}
+		inputHandler.HandleRealtimeInput(eventManager);
+		//eventManager.Update();
+
+		// Update
+		entityManager.Update(frameTime);
+
+		#pragma region Click Handling
+		for (const auto & entity : entityManager.GetGroup("Test"))
+		{
+			auto & clickableComponent = entity->GetComponent<mbe::ClickableComponent<mbe::RenderComponent>>();
+			if (clickableComponent.IsClicked())
+			{
+				entity->GetComponent<mbe::AnimationComponent<std::string, mbe::RenderComponent>>().PlayAnimation("Rotate");
+				std::cout << std::endl << "The entity has been clicked!";
+				clickableComponent.Reset();
+			}
+		}
+		#pragma endregion
+
+		// Render
+		window.clear(sf::Color::Magenta);
+		renderSystem.Render();
+		window.display();
+	}
+
+	// Unsubscribing using an invalid refernce of a messenger causes exceptions
+	eventManager.UnSubscribe(moveLeftFunction);
+	eventManager.UnSubscribe(moveRightFunction);
+
+	// To make sure that the entities onClickFunction is unsubscribed before the messenger is deleted
+	for (auto & entity : entityManager.GetGroup("Test"))
+	{
+		entity->~Entity();
+	}
+
+	std::cout << std::endl << std::endl << "Press any key to end the program...";
+	_getch();
+	return EXIT_SUCCESS;
+}
+
+@endcode
+*/
