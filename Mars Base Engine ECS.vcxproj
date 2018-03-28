@@ -103,7 +103,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\C++ Libs\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -125,7 +125,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\C++ Libs\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -142,7 +142,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\C++ Libs\includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <WholeProgramOptimization>false</WholeProgramOptimization>
@@ -181,124 +181,124 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ActionEvents.cpp" />
-    <ClCompile Include="ActionHoldEvent.cpp" />
-    <ClCompile Include="AnimationComponent.cpp" />
-    <ClCompile Include="AStarNode.cpp" />
-    <ClCompile Include="BaseEvent.cpp" />
-    <ClCompile Include="BlinkingAnimation.cpp" />
-    <ClCompile Include="ClickableComponent.cpp" />
-    <ClCompile Include="ClickableSystem.cpp" />
-    <ClCompile Include="Effect.cpp" />
-    <ClCompile Include="EntityClickedEvent.cpp" />
-    <ClCompile Include="Source\EventLogger.cpp" />
-    <ClCompile Include="EventManager.cpp" />
-    <ClCompile Include="ActionBaseEvent.cpp" />
-    <ClCompile Include="MouseButtonPressedEvent.cpp" />
-    <ClCompile Include="MouseButtonReleasedEvent.cpp" />
-    <ClCompile Include="PitchAnimation.cpp" />
-    <ClCompile Include="PixelMaskClickableComponent.cpp" />
-    <ClCompile Include="AudioComponent.cpp" />
-    <ClCompile Include="AudioData.cpp" />
-    <ClCompile Include="SoundManager.cpp" />
-    <ClCompile Include="SoundSystem.cpp" />
-    <ClCompile Include="SpriteRenderComponent.cpp" />
-    <ClCompile Include="TexturedRenderComponent.cpp" />
-    <ClCompile Include="TiledTerrain.cpp" />
-    <ClCompile Include="Component.cpp" />
-    <ClCompile Include="Constants.cpp" />
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="FrameAnimation.cpp" />
-    <ClCompile Include="InputHandler.cpp" />
-    <ClCompile Include="EntityManager.cpp" />
-    <ClCompile Include="MouseButtonHoldEvent.cpp" />
-    <ClCompile Include="OutlineEffect.cpp" />
-    <ClCompile Include="ParallelTask.cpp" />
-    <ClCompile Include="PixelMask.cpp" />
-    <ClCompile Include="RenderComponent.cpp" />
-    <ClCompile Include="RenderLayer.cpp" />
-    <ClCompile Include="EntityCreatedEvent.cpp" />
-    <ClCompile Include="EntityRemovedEvent.cpp" />
-    <ClCompile Include="RenderSystem.cpp" />
-    <ClCompile Include="State.cpp" />
-    <ClCompile Include="StateManager.cpp" />
-    <ClCompile Include="TextureWrapper.cpp" />
-    <ClCompile Include="TiledTerrainLayer.cpp" />
-    <ClCompile Include="TiledTerrainLayerComponent.cpp" />
-    <ClCompile Include="TiledTerrainLayerRenderComponent.cpp" />
-    <ClCompile Include="TiledTerrainLayerSystem.cpp" />
-    <ClCompile Include="TinyXML.cpp" />
-    <ClCompile Include="TopDownInformationComponent.cpp" />
-    <ClCompile Include="TopDownZOrderSorter.cpp" />
-    <ClCompile Include="TransformComponent.cpp" />
-    <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="Source\MBE\Input\ActionEvents.cpp" />
+    <ClCompile Include="Source\MBE\Input\ActionHoldEvent.cpp" />
+    <ClCompile Include="Source\MBE\Animation\AnimationComponent.cpp" />
+    <ClCompile Include="Source\MBE\Core\AStarNode.cpp" />
+    <ClCompile Include="Source\MBE\Core\BaseEvent.cpp" />
+    <ClCompile Include="Source\MBE\Animation\BlinkingAnimation.cpp" />
+    <ClCompile Include="Source\MBE\Input\ClickableComponent.cpp" />
+    <ClCompile Include="Source\MBE\Input\ClickableSystem.cpp" />
+    <ClCompile Include="Source\MBE\Graphics\Effect.cpp" />
+    <ClCompile Include="Source\MBE\Input\EntityClickedEvent.cpp" />
+    <ClCompile Include="Source\MBE\Core\EventLogger.cpp" />
+    <ClCompile Include="Source\MBE\Core\EventManager.cpp" />
+    <ClCompile Include="Source\MBE\Input\ActionBaseEvent.cpp" />
+    <ClCompile Include="Source\MBE\Input\MouseButtonPressedEvent.cpp" />
+    <ClCompile Include="Source\MBE\Input\MouseButtonReleasedEvent.cpp" />
+    <ClCompile Include="Source\MBE\Animation\PitchAnimation.cpp" />
+    <ClCompile Include="Source\MBE\Input\PixelMaskClickableComponent.cpp" />
+    <ClCompile Include="Source\MBE\Audio\AudioComponent.cpp" />
+    <ClCompile Include="Source\MBE\Audio\AudioData.cpp" />
+    <ClCompile Include="Source\MBE\Audio\SoundManager.cpp" />
+    <ClCompile Include="Source\MBE\Audio\SoundSystem.cpp" />
+    <ClCompile Include="Source\MBE\Graphics\SpriteRenderComponent.cpp" />
+    <ClCompile Include="Source\MBE\Graphics\TexturedRenderComponent.cpp" />
+    <ClCompile Include="Source\MBE\TiledTerrain.cpp" />
+    <ClCompile Include="Source\MBE\Core\Component.cpp" />
+    <ClCompile Include="Source\MBE\Core\Constants.cpp" />
+    <ClCompile Include="Source\MBE\Core\Entity.cpp" />
+    <ClCompile Include="Source\MBE\Animation\FrameAnimation.cpp" />
+    <ClCompile Include="Source\MBE\Input\InputHandler.cpp" />
+    <ClCompile Include="Source\MBE\Core\EntityManager.cpp" />
+    <ClCompile Include="Source\MBE\Input\MouseButtonHoldEvent.cpp" />
+    <ClCompile Include="Source\MBE\Graphics\OutlineEffect.cpp" />
+    <ClCompile Include="Source\MBE\Core\ParallelTask.cpp" />
+    <ClCompile Include="Source\MBE\Core\PixelMask.cpp" />
+    <ClCompile Include="Source\MBE\Graphics\RenderComponent.cpp" />
+    <ClCompile Include="Source\MBE\Graphics\RenderLayer.cpp" />
+    <ClCompile Include="Source\MBE\Core\EntityCreatedEvent.cpp" />
+    <ClCompile Include="Source\MBE\Core\EntityRemovedEvent.cpp" />
+    <ClCompile Include="Source\MBE\Graphics\RenderSystem.cpp" />
+    <ClCompile Include="Source\MBE\Core\State.cpp" />
+    <ClCompile Include="Source\MBE\Core\StateManager.cpp" />
+    <ClCompile Include="Source\MBE\Graphics\TextureWrapper.cpp" />
+    <ClCompile Include="Source\MBE\TiledTerrainLayer.cpp" />
+    <ClCompile Include="Source\MBE\TiledTerrainLayerComponent.cpp" />
+    <ClCompile Include="Source\MBE\Graphics\TiledTerrainLayerRenderComponent.cpp" />
+    <ClCompile Include="Source\MBE\TiledTerrainLayerSystem.cpp" />
+    <ClCompile Include="Source\MBE\Core\TinyXML.cpp" />
+    <ClCompile Include="Source\MBE\Graphics\TopDownInformationComponent.cpp" />
+    <ClCompile Include="Source\MBE\Graphics\TopDownZOrderSorter.cpp" />
+    <ClCompile Include="Source\MBE\TransformComponent.cpp" />
+    <ClCompile Include="Source\MBE\Core\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ActionEvents.h" />
-    <ClInclude Include="ActionHoldEvent.h" />
-    <ClInclude Include="AnimationComponent.h" />
-    <ClInclude Include="Animator.h" />
-    <ClInclude Include="AssetHolder.h" />
-    <ClInclude Include="AStarNode.h" />
-    <ClInclude Include="AStarPathfinder.h" />
-    <ClInclude Include="BaseAnimator.h" />
-    <ClInclude Include="BaseEvent.h" />
-    <ClInclude Include="BlinkingAnimation.h" />
-    <ClInclude Include="ClickableComponent.h" />
-    <ClInclude Include="ClickableSystem.h" />
-    <ClInclude Include="Effect.h" />
-    <ClInclude Include="EntityClickedEvent.h" />
-    <ClInclude Include="EnumBitmask.h" />
-    <ClInclude Include="Include\EventLogger.h" />
-    <ClInclude Include="FilePathDictionary.h" />
-    <ClInclude Include="HandleBase.h" />
-    <ClInclude Include="ActionBaseEvent.h" />
-    <ClInclude Include="PitchAnimation.h" />
-    <ClInclude Include="PixelMaskClickableComponent.h" />
-    <ClInclude Include="AudioComponent.h" />
-    <ClInclude Include="AudioData.h" />
-    <ClInclude Include="SoundManager.h" />
-    <ClInclude Include="SoundSystem.h" />
-    <ClInclude Include="SpriteRenderComponent.h" />
-    <ClInclude Include="TexturedRenderComponent.h" />
-    <ClInclude Include="TiledTerrain.h" />
-    <ClInclude Include="MouseButtonBaseEvent.h" />
-    <ClInclude Include="MouseButtonEvents.h" />
-    <ClInclude Include="Component.h" />
-    <ClInclude Include="Constants.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="EntityManager.h" />
-    <ClInclude Include="FrameAnimation.h" />
-    <ClInclude Include="InputHandler.h" />
-    <ClInclude Include="EventWrapper.h" />
-    <ClInclude Include="EventManager.h" />
-    <ClInclude Include="MouseButtonHoldEvent.h" />
-    <ClInclude Include="MouseButtonPressedEvent.h" />
-    <ClInclude Include="MouseButtonReleasedEvent.h" />
-    <ClInclude Include="OutlineEffect.h" />
-    <ClInclude Include="ParallelTask.h" />
-    <ClInclude Include="PixelMask.h" />
-    <ClInclude Include="RegularExpressions.h" />
-    <ClInclude Include="RenderComponent.h" />
-    <ClInclude Include="RenderLayer.h" />
-    <ClInclude Include="EntityCreatedEvent.h" />
-    <ClInclude Include="EntityRemovedEvent.h" />
-    <ClInclude Include="RenderSystem.h" />
-    <ClInclude Include="RotationAnimation.h" />
-    <ClInclude Include="Singleton.h" />
-    <ClInclude Include="State.h" />
-    <ClInclude Include="StateManager.h" />
-    <ClInclude Include="TextureWrapper.h" />
-    <ClInclude Include="TiledTerrainLayerComponent.h" />
-    <ClInclude Include="TiledTerrainLayerRenderComponent.h" />
-    <ClInclude Include="TiledTerrainLayerSystem.h" />
-    <ClInclude Include="TileMapBase.h" />
-    <ClInclude Include="TiledTerrainLayer.h" />
-    <ClInclude Include="TinyXML.h" />
-    <ClInclude Include="TopDownInformationComponent.h" />
-    <ClInclude Include="TopDownZOrderSorter.h" />
-    <ClInclude Include="TransformComponent.h" />
-    <ClInclude Include="Utility.h" />
+    <ClInclude Include="Include\MBE\Input\ActionEvents.h" />
+    <ClInclude Include="Include\MBE\Input\ActionHoldEvent.h" />
+    <ClInclude Include="Include\MBE\Animation\AnimationComponent.h" />
+    <ClInclude Include="Include\MBE\Animation\Animator.h" />
+    <ClInclude Include="Include\MBE\Core\AssetHolder.h" />
+    <ClInclude Include="Include\MBE\Core\AStarNode.h" />
+    <ClInclude Include="Include\MBE\Core\AStarPathfinder.h" />
+    <ClInclude Include="Include\MBE\Animation\BaseAnimator.h" />
+    <ClInclude Include="Include\MBE\Core\BaseEvent.h" />
+    <ClInclude Include="Include\MBE\Animation\BlinkingAnimation.h" />
+    <ClInclude Include="Include\MBE\Input\ClickableComponent.h" />
+    <ClInclude Include="Include\MBE\Input\ClickableSystem.h" />
+    <ClInclude Include="Include\MBE\Graphics\Effect.h" />
+    <ClInclude Include="Include\MBE\Input\EntityClickedEvent.h" />
+    <ClInclude Include="Include\MBE\Core\EnumBitmask.h" />
+    <ClInclude Include="Include\MBE\Core\EventLogger.h" />
+    <ClInclude Include="Include\MBE\Core\FilePathDictionary.h" />
+    <ClInclude Include="Include\MBE\Core\HandleBase.h" />
+    <ClInclude Include="Include\MBE\Input\ActionBaseEvent.h" />
+    <ClInclude Include="Include\MBE\Animation\PitchAnimation.h" />
+    <ClInclude Include="Include\MBE\Input\PixelMaskClickableComponent.h" />
+    <ClInclude Include="Include\MBE\Audio\AudioComponent.h" />
+    <ClInclude Include="Include\MBE\Audio\AudioData.h" />
+    <ClInclude Include="Include\MBE\Audio\SoundManager.h" />
+    <ClInclude Include="Include\MBE\Audio\SoundSystem.h" />
+    <ClInclude Include="Include\MBE\Graphics\SpriteRenderComponent.h" />
+    <ClInclude Include="Include\MBE\Graphics\TexturedRenderComponent.h" />
+    <ClInclude Include="Include\MBE\TiledTerrain.h" />
+    <ClInclude Include="Include\MBE\Input\MouseButtonBaseEvent.h" />
+    <ClInclude Include="Include\MBE\Input\MouseButtonEvents.h" />
+    <ClInclude Include="Include\MBE\Core\Component.h" />
+    <ClInclude Include="Include\MBE\Core\Constants.h" />
+    <ClInclude Include="Include\MBE\Core\Entity.h" />
+    <ClInclude Include="Include\MBE\Core\EntityManager.h" />
+    <ClInclude Include="Include\MBE\Animation\FrameAnimation.h" />
+    <ClInclude Include="Include\MBE\Input\InputHandler.h" />
+    <ClInclude Include="Include\MBE\Core\EventWrapper.h" />
+    <ClInclude Include="Include\MBE\Core\EventManager.h" />
+    <ClInclude Include="Include\MBE\Input\MouseButtonHoldEvent.h" />
+    <ClInclude Include="Include\MBE\Input\MouseButtonPressedEvent.h" />
+    <ClInclude Include="Include\MBE\Input\MouseButtonReleasedEvent.h" />
+    <ClInclude Include="Include\MBE\Graphics\OutlineEffect.h" />
+    <ClInclude Include="Include\MBE\Core\ParallelTask.h" />
+    <ClInclude Include="Include\MBE\Core\PixelMask.h" />
+    <ClInclude Include="Include\MBE\Core\RegularExpressions.h" />
+    <ClInclude Include="Include\MBE\Graphics\RenderComponent.h" />
+    <ClInclude Include="Include\MBE\Graphics\RenderLayer.h" />
+    <ClInclude Include="Include\MBE\Core\EntityCreatedEvent.h" />
+    <ClInclude Include="Include\MBE\Core\EntityRemovedEvent.h" />
+    <ClInclude Include="Include\MBE\Graphics\RenderSystem.h" />
+    <ClInclude Include="Include\MBE\Animation\RotationAnimation.h" />
+    <ClInclude Include="Include\MBE\Core\Singleton.h" />
+    <ClInclude Include="Include\MBE\Core\State.h" />
+    <ClInclude Include="Include\MBE\Core\StateManager.h" />
+    <ClInclude Include="Include\MBE\Graphics\TextureWrapper.h" />
+    <ClInclude Include="Include\MBE\TiledTerrainLayerComponent.h" />
+    <ClInclude Include="Include\MBE\Graphics\TiledTerrainLayerRenderComponent.h" />
+    <ClInclude Include="Include\MBE\TiledTerrainLayerSystem.h" />
+    <ClInclude Include="Include\MBE\TileMapBase.h" />
+    <ClInclude Include="Include\MBE\TiledTerrainLayer.h" />
+    <ClInclude Include="Include\MBE\Core\TinyXML.h" />
+    <ClInclude Include="Include\MBE\Graphics\TopDownInformationComponent.h" />
+    <ClInclude Include="Include\MBE\Graphics\TopDownZOrderSorter.h" />
+    <ClInclude Include="Include\MBE\TransformComponent.h" />
+    <ClInclude Include="Include\MBE\Core\Utility.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Main page documentation.txt" />
