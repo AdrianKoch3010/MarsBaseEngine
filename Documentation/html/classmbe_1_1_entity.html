@@ -116,7 +116,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa75151fc607686b42d27f8c3ba73143d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adff817339f38213ed42ad8e480fe1de5"><td class="memTemplParams" colspan="2">template&lt;class TComponent , typename... TArguments&gt; </td></tr>
 <tr class="memitem:adff817339f38213ed42ad8e480fe1de5"><td class="memTemplItemLeft" align="right" valign="top">TComponent &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classmbe_1_1_entity.html#adff817339f38213ed42ad8e480fe1de5">AddComponent</a> (TArguments &amp;&amp;... arguments)</td></tr>
-<tr class="memdesc:adff817339f38213ed42ad8e480fe1de5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a component and adds it to this entities component list.  <a href="#adff817339f38213ed42ad8e480fe1de5">More...</a><br /></td></tr>
+<tr class="memdesc:adff817339f38213ed42ad8e480fe1de5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a component and adds it to the component list.  <a href="#adff817339f38213ed42ad8e480fe1de5">More...</a><br /></td></tr>
 <tr class="separator:adff817339f38213ed42ad8e480fe1de5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae24ad54c0116fdcc8b96d457333f5840"><td class="memTemplParams" colspan="2">template&lt;class TComponent &gt; </td></tr>
 <tr class="memitem:ae24ad54c0116fdcc8b96d457333f5840"><td class="memTemplItemLeft" align="right" valign="top">TComponent &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classmbe_1_1_entity.html#ae24ad54c0116fdcc8b96d457333f5840">GetComponent</a> () const</td></tr>
@@ -193,7 +193,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An Object that can have multiple Components. </p>
-<p>The entity class sits at the heart of the entity component system. By adding components, state and behaviour can be added dynamically during runtime. This presents an alternative to the traditional inheritance model in which behaviour is added through inheriting from a base class such as e.g. game object. Entities can be added to groups to allow simple and efficient retrieval. To couple the life time of one entity to another, entities can be attached as child entities to other entities. This also allows to retrieve entities that logically belong to each other. For instance, a house entity might have three child entities all with a different set of components. Two of them might have a transfrom, render and collision compoent acting as some drawable, clickable game object whereas the third might only have a transform and audio component and thus store the audio information associated with the house entity. This allows for more flexibility that just adding components to the one instance of the house entity. </p>
+<p>The entity class sits at the heart of the entity component system. By adding components, state and behaviour can be added dynamically during runtime. This presents an alternative to the traditional inheritance model in which behaviour is added through inheriting from a base class such as e.g. game object. Entities can be added to groups to allow simple and efficient retrieval. To couple the life time of one entity to another, entities can be attached as child entities. This also allows to retrieve entities that logically belong to each other. For instance, a house entity might have three child entities all with a different set of components. Two of them might have a transfrom, render and collision compoent acting as some drawable and clickable game object whereas the third might only have a transform and audio component and thus store the audio information associated with the house entity. This allows for more flexibility that just adding components to the one instance of the house entity. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3142e75ad29fc9b44b3625e40cf9e93a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3142e75ad29fc9b44b3625e40cf9e93a">&#9670;&nbsp;</a></span>Entity()</h2>
@@ -223,7 +223,6 @@ Additional Inherited Members</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">entityManager</td><td>A reference to the <a class="el" href="classmbe_1_1_entity_manager.html" title="Keeps track of a list of entities. ">mbe::EntityManager</a> in which this component is created </td></tr>
-    <tr><td class="paramname">eventManager</td><td>A reference to the <a class="el" href="classmbe_1_1_event_manager.html" title="The core communication system. ">mbe::EventManager</a> which can be used to raise, subscribe or unsubscribe to events </td></tr>
   </table>
   </dd>
 </dl>
@@ -257,7 +256,7 @@ template&lt;class TComponent , typename... TArguments&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Creates a component and adds it to this entities component list. </p>
+<p>Creates a component and adds it to the component list. </p>
 <p>This should be the only way to create components. Components created elsewhere may not be managed properly. </p><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">arguments</td><td>The arguments that the created component requires in its constructor. </td></tr>

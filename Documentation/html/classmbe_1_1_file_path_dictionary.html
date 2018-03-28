@@ -105,8 +105,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab5e282b842d88b95554cf68093427d7e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a new file path into the dictionary by moving it.  <a href="#ab5e282b842d88b95554cf68093427d7e">More...</a><br /></td></tr>
 <tr class="separator:ab5e282b842d88b95554cf68093427d7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae06005d3e72010746cbd08dad14739d9"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_file_path_dictionary.html#ae06005d3e72010746cbd08dad14739d9">Get</a> (const TID &amp;id) const</td></tr>
+<tr class="memdesc:ae06005d3e72010746cbd08dad14739d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds and returns the file path with the respective id.  <a href="#ae06005d3e72010746cbd08dad14739d9">More...</a><br /></td></tr>
 <tr class="separator:ae06005d3e72010746cbd08dad14739d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a226147821be0b009342e17c198e0cb67"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_file_path_dictionary.html#a226147821be0b009342e17c198e0cb67">operator[]</a> (const TID &amp;id) const</td></tr>
+<tr class="memdesc:a226147821be0b009342e17c198e0cb67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds and returns the file path with the respective id.  <a href="#a226147821be0b009342e17c198e0cb67">More...</a><br /></td></tr>
 <tr class="separator:a226147821be0b009342e17c198e0cb67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -146,7 +148,9 @@ template&lt;typename TID &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>and returns the file path with the respective id </p><dl class="params"><dt>Parameters</dt><dd>
+
+<p>Finds and returns the file path with the respective id. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>The id of the file path to get </td></tr>
   </table>
@@ -281,7 +285,8 @@ template&lt;typename TID  = std::string&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>and returns the file path with the respective id</p>
+
+<p>Finds and returns the file path with the respective id. </p>
 <p>Equivalent to calling mbe::FilePathDictionary::Get(id) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">id</td><td>The id of the file path to get </td></tr>

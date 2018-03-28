@@ -31,6 +31,7 @@ var searchData=
   ['state_2eh',['State.h',['../_state_8h.html',1,'']]],
   ['statemanager',['StateManager',['../classmbe_1_1_state_manager.html',1,'mbe::StateManager'],['../classmbe_1_1_state_manager.html#a4fbfb54fde50aefb32f8fd1cfe234c76',1,'mbe::StateManager::StateManager()']]],
   ['statemanager_2eh',['StateManager.h',['../_state_manager_8h.html',1,'']]],
+  ['statetypeid',['StateTypeID',['../namespacembe_1_1detail.html#ab00db943a7b8b97ef4f740d4618ef1e8',1,'mbe::detail']]],
   ['stopanimation',['StopAnimation',['../classmbe_1_1_animator.html#a0ac7f790611cc635a12f8c361720f520',1,'mbe::Animator::StopAnimation()'],['../classmbe_1_1_animator_3_01_t_animated_00_01std_1_1string_01_4.html#a5a9f0645bd9124576cd0979013d0d00d',1,'mbe::Animator&lt; TAnimated, std::string &gt;::StopAnimation()']]],
   ['strpair',['StrPair',['../classtinyxml2_1_1_str_pair.html',1,'tinyxml2']]],
   ['subscribe',['Subscribe',['../classmbe_1_1_event_logger.html#aaae25caddfec654ec192fc6e47645d0a',1,'mbe::EventLogger::Subscribe()'],['../classmbe_1_1_event_manager.html#a48807d2a414fd43dcfb429c52fc7ac1f',1,'mbe::EventManager::Subscribe()']]],

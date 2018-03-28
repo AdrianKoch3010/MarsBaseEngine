@@ -16,14 +16,21 @@ namespace mbe
 {
 	namespace detail
 	{
+		/// @brief Defines the type of the component id
+		/// @details This id is generated at runtime for each component class by calling mbe::detail::GetComponentTypeID()
 		typedef std::size_t StateTypeID;
 
+		/// @brief Returns a unique StateTypeID (for each function call)
 		inline StateTypeID GetStateID() noexcept
 		{
 			static StateTypeID lastId = 0;
 			return lastId++;
 		}
 
+		/// @brief Returns a StateTypeID for each type T
+		/// @details Each component type will have its own unique id.
+		/// The id will be the same for every instance of that type
+		/// @tparam T The type for which the id is generated ie classes that inherit from mbe::State
 		template <typename T>
 		inline StateTypeID GetStateTypeID() noexcept
 		{

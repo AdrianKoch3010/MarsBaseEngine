@@ -25,9 +25,11 @@ namespace mbe
 
 	namespace detail
 	{
+		/// @brief Defines the type of the component id
+		/// @details This id is generated at runtime for each component class by calling mbe::detail::GetComponentTypeID()
 		typedef std::size_t ComponentTypeID;
 
-		/// @brief Returns a unique number (for each function call) of type std::size_t
+		/// @brief Returns a unique ComponentTypeID (for each function call)
 		inline ComponentTypeID GetComponentID() noexcept
 		{
 			// This will only be initialised once
@@ -40,7 +42,7 @@ namespace mbe
 		/// @brief Returns a unique number (of type std::size_t) for each type T
 		/// @details Each component type will have its own unique id.
 		/// The id will be the same for every instance of that type
-		/// @tparam T The type for which the id is generated
+		/// @tparam T The type for which the id is generated ie classes that inherit from mbe::Component
 		template <typename T>
 		inline ComponentTypeID GetComponentTypeID() noexcept
 		{
@@ -97,10 +99,10 @@ namespace mbe
 \def MBE_ENABLE_COMPONENT_POLYMORPHISM(derivedComponent, baseComponent)
 Enables polymorphic behaviour between the derived and base components
 
-The derivedComponent must inherit from baseComponent and both component must directly or indirectly inherit from mbe::Component.
-Multiple inheritance is not supported but chains of inheritance are. For instance, if Derived3 inherit Derived 2 which inherits
+The derivedComponent must inherit from baseComponent and both components must directly or indirectly inherit from mbe::Component.
+Multiple inheritance is not supported but chains of inheritance are. For instance, if Derived3 inherits Derived 2 which inherits
 from Derived1 and MBE_ENABLE_COMPONENT_POLYMORPHISM(Derived3, Derived2) and MBE_ENABLE_COMPONENT_POLYMORPHISM(Derived2, Derived1)
-has been called, the Derived3 and Derived1 also behave polymorphically.
+has been called, then Derived3 and Derived1 also behave polymorphically.
 
 \note This macro should be put in the .cpp file of the derived component. Putting it in the .h file still works but is less efficient
 since the polymorphism is added every time the header file is included.
@@ -122,10 +124,10 @@ namespace mbe
 	/// This presents an alternative to the traditional inheritance model in which behaviour is
 	/// added through inheriting from a base class such as e.g. game object.
 	/// Entities can be added to groups to allow simple and efficient retrieval.
-	/// To couple the life time of one entity to another, entities can be attached as child entities to other entities.
+	/// To couple the life time of one entity to another, entities can be attached as child entities.
 	/// This also allows to retrieve entities that  logically belong to each other. For instance, a house entity might have
 	/// three child entities all with a different set of components. Two of them might have a transfrom, render and collision compoent
-	/// acting as some drawable, clickable game object whereas the third might only have a transform and audio component and thus
+	/// acting as some drawable and clickable game object whereas the third might only have a transform and audio component and thus
 	/// store the audio information associated with the house entity.
 	/// This allows for more flexibility that just adding components to the one instance of the house entity.
 	class Entity : public HandleBase<Entity>, private sf::NonCopyable
@@ -142,7 +144,6 @@ namespace mbe
 	protected:
 		/// @brief Constructor
 		/// @param entityManager A reference to the mbe::EntityManager in which this component is created
-		/// @param eventManager A reference to the mbe::EventManager which can be used to raise, subscribe or unsubscribe to events
 		Entity(EntityManager & entityManager);
 
 	public:
@@ -164,7 +165,7 @@ namespace mbe
 		/// @details When this entity is destroyed it detatches itself automatically from its parent entity.
 		void Destroy();
 
-		/// @brief Creates a component and adds it to this entities component list
+		/// @brief Creates a component and adds it to the component list
 		/// @details This should be the only way to create components. Components created elsewhere may not be managed properly.
 		/// @tparam arguments The arguments that the created component requires in its constructor.
 		/// @attention Note that the parentEntity must not be passed (It is added implicetly by this function)

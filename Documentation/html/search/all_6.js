@@ -19,6 +19,8 @@ var searchData=
   ['getobjectfromid',['GetObjectFromID',['../classmbe_1_1_handle_base.html#a6fc6f3f723e6137a293dd7206b5121c3',1,'mbe::HandleBase']]],
   ['getparententity',['GetParentEntity',['../classmbe_1_1_component.html#a40a4144bbb6bf794d8b36b06810befce',1,'mbe::Component']]],
   ['getplayinganimation',['GetPlayingAnimation',['../classmbe_1_1_animator.html#a8d47f331da1b79636d5502bbd4e779f1',1,'mbe::Animator::GetPlayingAnimation()'],['../classmbe_1_1_animator_3_01_t_animated_00_01std_1_1string_01_4.html#a042bf25ff7bd2120f571ed3b03e66a59',1,'mbe::Animator&lt; TAnimated, std::string &gt;::GetPlayingAnimation()']]],
+  ['getstateid',['GetStateID',['../namespacembe_1_1detail.html#a7476e5afe5516bf3e9dd337852329d70',1,'mbe::detail']]],
+  ['getstatetypeid',['GetStateTypeID',['../namespacembe_1_1detail.html#a74040f60f5843ac61338a183928297f2',1,'mbe::detail']]],
   ['gettext',['GetText',['../classtinyxml2_1_1_x_m_l_element.html#a0fa5bea0a4daf3ddd503dcabb823eba6',1,'tinyxml2::XMLElement']]],
   ['gettypeid',['GetTypeID',['../classmbe_1_1detail_1_1_event_wrapper.html#a786e63d3fbaa95a02a29bdd17a9eeb7a',1,'mbe::detail::EventWrapper']]],
   ['getuserdata',['GetUserData',['../classtinyxml2_1_1_x_m_l_node.html#a7f0687574afa03bc479dc44f29db0afe',1,'tinyxml2::XMLNode']]],

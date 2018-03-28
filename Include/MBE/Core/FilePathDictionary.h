@@ -48,13 +48,13 @@ namespace mbe
 		/// @param filePath An rvalue reference of the file path to insert
 		void Insert(TID && id, std::string && filePath);
 
-		/// @Finds and returns the file path with the respective id
+		/// @brief Finds and returns the file path with the respective id
 		/// @param id The id of the file path to get
 		/// @returns a const reference to the found path
 		/// @throws std::runtime_error if the id could not be found
 		const std::string & Get(const TID & id) const;
 
-		/// @Finds and returns the file path with the respective id
+		/// @brief Finds and returns the file path with the respective id
 		/// @details Equivalent to calling mbe::FilePathDictionary::Get(id)
 		/// @param id The id of the file path to get
 		/// @returns a const reference to the found path
@@ -106,13 +106,13 @@ namespace mbe
 		/// @param filePath An rvalue reference of the file path to insert
 		void Insert(std::string && id, std::string && filePath);
 
-		/// @Finds and returns the file path with the respective id
+		/// @brief Finds and returns the file path with the respective id
 		/// @param id The id of the asset to get. It is not case sensetive so capital letters do not matter. <b>Only use ASCII strings!</b>
 		/// @returns a const reference to the found path
 		/// @throws std::runtime_error if the id could not be found
 		const std::string & Get(const std::string & id) const;
 
-		/// @Finds and returns the file path with the respective id
+		/// @brief Finds and returns the file path with the respective id
 		/// @details Equivalent to calling mbe::FilePathDictionary::Get(id)
 		/// @param id The id of the asset to get. It is not case sensetive so capital letters do not matter. <b>Only use ASCII strings!</b>
 		/// @returns a const reference to the found path
