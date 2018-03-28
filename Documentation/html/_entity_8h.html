@@ -114,7 +114,7 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a88bc2acdc673ec936a98b88ebe986747"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><b>MBE_ENABLE_COMPONENT_POLYMORPHISM</b>(derivedComponent,  baseComponent)</td></tr>
+<tr class="memitem:a88bc2acdc673ec936a98b88ebe986747"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_entity_8h.html#a88bc2acdc673ec936a98b88ebe986747">MBE_ENABLE_COMPONENT_POLYMORPHISM</a>(derivedComponent,  baseComponent)</td></tr>
 <tr class="separator:a88bc2acdc673ec936a98b88ebe986747"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
@@ -163,7 +163,10 @@ ComponentTypeID&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code" href="namespacembe.html">mbe</a>                                                                                                                   \</div><div class="line">{                                                                                                                               \</div><div class="line">    namespace componentPolymorphismDefinitions                                                                                  \</div><div class="line">    {                                                                                                                           \</div><div class="line">        static <span class="keyword">const</span> ComponentPolyimorphismAdder&lt;derivedComponent, baseComponent&gt; derivedComponent##baseComponent##_variable;   \</div><div class="line">    }                                                                                                                           \</div><div class="line">}</div><div class="ttc" id="namespacembe_html"><div class="ttname"><a href="namespacembe.html">mbe</a></div><div class="ttdoc">Add a template parameter for the heuristic. </div><div class="ttdef"><b>Definition:</b> AnimationComponent.h:16</div></div>
-</div><!-- fragment -->
+</div><!-- fragment --><p>Enables polymorphic behaviour between the derived and base components</p>
+<p>The derivedComponent must inherit from baseComponent and both component must directly or indirectly inherit from <a class="el" href="classmbe_1_1_component.html" title="The base class for all components. ">mbe::Component</a>. Multiple inheritance is not supported but chains of inheritance are. For instance, if Derived3 inherit Derived 2 which inherits from Derived1 and <a class="el" href="_entity_8h.html#a88bc2acdc673ec936a98b88ebe986747">MBE_ENABLE_COMPONENT_POLYMORPHISM(Derived3, Derived2)</a> and <a class="el" href="_entity_8h.html#a88bc2acdc673ec936a98b88ebe986747">MBE_ENABLE_COMPONENT_POLYMORPHISM(Derived2, Derived1)</a> has been called, the Derived3 and Derived1 also behave polymorphically.</p>
+<dl class="section note"><dt>Note</dt><dd>This macro should be put in the .cpp file of the derived component. Putting it in the .h file still works but is less efficient since the polymorphism is added every time the header file is included. </dd></dl>
+
 </div>
 </div>
 </div><!-- contents -->

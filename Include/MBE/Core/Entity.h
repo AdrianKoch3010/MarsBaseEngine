@@ -87,18 +87,24 @@ namespace mbe
 		ComponentPolyimorphismAdder() { detail::ComponentPolyimorphismAdderStatic<TDerivedComponent, TBaseComponent>::Instance(); } // Ensures that the singleton is initialised
 	};
 
-	// Version without the extra layer of abstraction
-	/*template <class TDerivedComponent, class TBaseComponent>
-	struct ComponentPolyimorphismAdder
-	{
-	ComponentPolyimorphismAdder() { detail::PolyimorphicComponentDictionary::Instance().AddPolymorphism<TDerivedComponent, TBaseComponent>(); }
-	};*/
-
 } // namespace mbe
 
   // Note that multiple inheritance is not supported and is not meant to be used. For cases where multiple inheritance would be applicable
   // it should always be possible to split up the derived component into multiple smaller components
   // See Token concatenation https://en.wikipedia.org/wiki/C_preprocessor#Token_concatenation
+
+/*!
+\def MBE_ENABLE_COMPONENT_POLYMORPHISM(derivedComponent, baseComponent)
+Enables polymorphic behaviour between the derived and base components
+
+The derivedComponent must inherit from baseComponent and both component must directly or indirectly inherit from mbe::Component.
+Multiple inheritance is not supported but chains of inheritance are. For instance, if Derived3 inherit Derived 2 which inherits
+from Derived1 and MBE_ENABLE_COMPONENT_POLYMORPHISM(Derived3, Derived2) and MBE_ENABLE_COMPONENT_POLYMORPHISM(Derived2, Derived1)
+has been called, the Derived3 and Derived1 also behave polymorphically.
+
+\note This macro should be put in the .cpp file of the derived component. Putting it in the .h file still works but is less efficient
+since the polymorphism is added every time the header file is included.
+*/
 #define MBE_ENABLE_COMPONENT_POLYMORPHISM(derivedComponent, baseComponent)														\
 namespace mbe																													\
 {																																\
@@ -108,22 +114,25 @@ namespace mbe																													\
 	}																															\
 }
 
-  //// Defines a makro that makes asserting an entities existance a one-liner
-  //#define MBE_ASSERT_ENTITY_EXISTS(entityId) \
-  //assert(mbe::Entity::GetObjectFromID(entityId) != nullptr && "The entity must exist")
-
 namespace mbe
 {
 	/// @brief An Object that can have multiple Components
 	/// @details The entity class sits at the heart of the entity component system.
 	/// By adding components, state and behaviour can be added dynamically during runtime.
 	/// This presents an alternative to the traditional inheritance model in which behaviour is
-	/// added through inheriting from a base class such as e.g. game object
+	/// added through inheriting from a base class such as e.g. game object.
+	/// Entities can be added to groups to allow simple and efficient retrieval.
+	/// To couple the life time of one entity to another, entities can be attached as child entities to other entities.
+	/// This also allows to retrieve entities that  logically belong to each other. For instance, a house entity might have
+	/// three child entities all with a different set of components. Two of them might have a transfrom, render and collision compoent
+	/// acting as some drawable, clickable game object whereas the third might only have a transform and audio component and thus
+	/// store the audio information associated with the house entity.
+	/// This allows for more flexibility that just adding components to the one instance of the house entity.
 	class Entity : public HandleBase<Entity>, private sf::NonCopyable
 	{
-		// Enables the entity manager to use the components constructor
-		// Making the constructor protected is necessarry to ensure that the
-		// entity manager is the only place where entities can be created
+		/// @brief Enables the entity manager to use the components constructor
+		/// @details Making the constructor protected is necessarry to ensure that the
+		/// mbe::EntityManager is the only place where entities can be created.
 		friend class EntityManager;
 
 	public:

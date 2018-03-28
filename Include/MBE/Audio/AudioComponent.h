@@ -44,7 +44,7 @@ namespace mbe
 		// This function is prefered over SetAudioData() since the data can be modified directly
 		AudioData & GetAudioData();
 
-		// const overload
+		// const overload of the GetAudioData() method
 		const AudioData & GetAudioData() const;
 
 	private:

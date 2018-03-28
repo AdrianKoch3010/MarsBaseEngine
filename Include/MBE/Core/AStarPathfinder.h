@@ -40,7 +40,7 @@ namespace mbe
 	/// @n - Position GetSize() const
 	/// @n - float GetTileMovementSpeed(unsigned int x, unsigned int y)
 	/// @n - std::vector<Position> GetReachableTiles(unsigned int x, unsigned int y)
-	/// @n It must further provide a typedef Position with an x and a y member.
+	/// @n - typedef Position with an x and a y member.
 	//// @details STUFF ON MULTITHREADING
 	template <class TTileMap/*, Heuristic heuristic = Heuristic::PythagorasDistance*/>
 	class AStarPathfinder

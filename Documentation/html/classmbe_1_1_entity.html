@@ -177,8 +177,8 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a6f579cda6059d102e9074e11a27e0282"><td class="memItemLeft" align="right" valign="top"><a id="a6f579cda6059d102e9074e11a27e0282"></a>
-class&#160;</td><td class="memItemRight" valign="bottom"><b>EntityManager</b></td></tr>
+<tr class="memitem:a6f579cda6059d102e9074e11a27e0282"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_entity.html#a6f579cda6059d102e9074e11a27e0282">EntityManager</a></td></tr>
+<tr class="memdesc:a6f579cda6059d102e9074e11a27e0282"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables the entity manager to use the components constructor.  <a href="#a6f579cda6059d102e9074e11a27e0282">More...</a><br /></td></tr>
 <tr class="separator:a6f579cda6059d102e9074e11a27e0282"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
@@ -193,7 +193,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An Object that can have multiple Components. </p>
-<p>The entity class sits at the heart of the entity component system. By adding components, state and behaviour can be added dynamically during runtime. This presents an alternative to the traditional inheritance model in which behaviour is added through inheriting from a base class such as e.g. game object </p>
+<p>The entity class sits at the heart of the entity component system. By adding components, state and behaviour can be added dynamically during runtime. This presents an alternative to the traditional inheritance model in which behaviour is added through inheriting from a base class such as e.g. game object. Entities can be added to groups to allow simple and efficient retrieval. To couple the life time of one entity to another, entities can be attached as child entities to other entities. This also allows to retrieve entities that logically belong to each other. For instance, a house entity might have three child entities all with a different set of components. Two of them might have a transfrom, render and collision compoent acting as some drawable, clickable game object whereas the third might only have a transform and audio component and thus store the audio information associated with the house entity. This allows for more flexibility that just adding components to the one instance of the house entity. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3142e75ad29fc9b44b3625e40cf9e93a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3142e75ad29fc9b44b3625e40cf9e93a">&#9670;&nbsp;</a></span>Entity()</h2>
@@ -416,6 +416,32 @@ template&lt;class TComponent &gt; </div>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a6f579cda6059d102e9074e11a27e0282"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f579cda6059d102e9074e11a27e0282">&#9670;&nbsp;</a></span>EntityManager</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="classmbe_1_1_entity_manager.html">EntityManager</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enables the entity manager to use the components constructor. </p>
+<p>Making the constructor protected is necessarry to ensure that the <a class="el" href="classmbe_1_1_entity_manager.html" title="Keeps track of a list of entities. ">mbe::EntityManager</a> is the only place where entities can be created. </p>
 
 </div>
 </div>

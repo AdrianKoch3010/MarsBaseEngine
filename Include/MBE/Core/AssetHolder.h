@@ -85,7 +85,7 @@ namespace mbe
 #pragma region Template Overload for TID = std::string
 
 	/// @brief A class managing the loading and access of assets
-	/// @details Template overload of the mbe::AssetHolder class when using a std::string as an id
+	/// @details Template overload of the mbe::AssetHolder class for TID == std::string
 	/// @tparam Asset The type of asset to be managed (e.g. sf::Texture).
 	/// The Asset must provide a loadFromFile() function
 	/// @attention The id strings are <b>not</b> case sensitive! This is to reduce the likelyhood of mistyping an id which may cause unwanted behaviour.

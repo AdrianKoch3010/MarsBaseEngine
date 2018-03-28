@@ -27,7 +27,6 @@ namespace mbe
 		typedef std::unique_ptr<Component> UPtr;
 
 	public:
-		// Make the constructor protected
 		/// @brief Constructor
 		/// @param parentEntity A reference to the mbe::Entity in which this class is created (To which it then belongs to)
 		Component(Entity & parentEntity);
