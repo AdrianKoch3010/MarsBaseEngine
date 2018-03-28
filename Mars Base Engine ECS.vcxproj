@@ -191,7 +191,7 @@
     <ClCompile Include="ClickableSystem.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EntityClickedEvent.cpp" />
-    <ClCompile Include="EventLogger.cpp" />
+    <ClCompile Include="Source\EventLogger.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="ActionBaseEvent.cpp" />
     <ClCompile Include="MouseButtonPressedEvent.cpp" />
@@ -249,7 +249,7 @@
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EntityClickedEvent.h" />
     <ClInclude Include="EnumBitmask.h" />
-    <ClInclude Include="EventLogger.h" />
+    <ClInclude Include="Include\EventLogger.h" />
     <ClInclude Include="FilePathDictionary.h" />
     <ClInclude Include="HandleBase.h" />
     <ClInclude Include="ActionBaseEvent.h" />

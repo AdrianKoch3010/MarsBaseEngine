@@ -12,8 +12,8 @@
 #include <chrono>
 #include <ctime>
 
-#include "EventManager.h"
-#include "EnumBitmask.h"
+#include "../EventManager.h"
+#include "../EnumBitmask.h"
 
 namespace mbe
 {

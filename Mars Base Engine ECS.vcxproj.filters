@@ -186,9 +186,6 @@
     <ClCompile Include="TiledTerrain.cpp">
       <Filter>Quelldateien\Map</Filter>
     </ClCompile>
-    <ClCompile Include="EventLogger.cpp">
-      <Filter>Quelldateien\Framework</Filter>
-    </ClCompile>
     <ClCompile Include="ActionBaseEvent.cpp">
       <Filter>Quelldateien\Systems\Event System\Events\InputEvents\Actions</Filter>
     </ClCompile>
@@ -284,6 +281,9 @@
     </ClCompile>
     <ClCompile Include="PitchAnimation.cpp">
       <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EventLogger.cpp">
+      <Filter>Quelldateien\Framework</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -389,9 +389,6 @@
     <ClInclude Include="TileMapBase.h">
       <Filter>Headerdateien\Framework\Map</Filter>
     </ClInclude>
-    <ClInclude Include="EventLogger.h">
-      <Filter>Headerdateien\Framework</Filter>
-    </ClInclude>
     <ClInclude Include="EnumBitmask.h">
       <Filter>Headerdateien\Framework\Helpers</Filter>
     </ClInclude>
@@ -481,6 +478,9 @@
     </ClInclude>
     <ClInclude Include="PitchAnimation.h">
       <Filter>Headerdateien\Systems\Animation System\Animations</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\EventLogger.h">
+      <Filter>Headerdateien\Framework</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
