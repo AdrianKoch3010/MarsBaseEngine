@@ -1,7 +1,7 @@
 #pragma once
 
 /// @file
-/// @brief Class mbe::Entity, GetComponentID() and GetComponentTypeID()
+/// @brief Class mbe::Entity and functions mbe::detial::GetComponentID() and mbe::detail::GetComponentTypeID()
 
 #include <string>
 #include <vector>
@@ -86,14 +86,11 @@ namespace mbe
 	template <class TDerivedComponent, class TBaseComponent>
 	struct ComponentPolyimorphismAdder
 	{
-		ComponentPolyimorphismAdder() { detail::ComponentPolyimorphismAdderStatic<TDerivedComponent, TBaseComponent>::Instance(); } // Ensures that the singleton is initialised
+		// Ensures that the singleton is initialised
+		ComponentPolyimorphismAdder() { detail::ComponentPolyimorphismAdderStatic<TDerivedComponent, TBaseComponent>::Instance(); }
 	};
 
 } // namespace mbe
-
-  // Note that multiple inheritance is not supported and is not meant to be used. For cases where multiple inheritance would be applicable
-  // it should always be possible to split up the derived component into multiple smaller components
-  // See Token concatenation https://en.wikipedia.org/wiki/C_preprocessor#Token_concatenation
 
 /*!
 \def MBE_ENABLE_COMPONENT_POLYMORPHISM(derivedComponent, baseComponent)
@@ -103,6 +100,8 @@ The derivedComponent must inherit from baseComponent and both components must di
 Multiple inheritance is not supported but chains of inheritance are. For instance, if Derived3 inherits Derived 2 which inherits
 from Derived1 and MBE_ENABLE_COMPONENT_POLYMORPHISM(Derived3, Derived2) and MBE_ENABLE_COMPONENT_POLYMORPHISM(Derived2, Derived1)
 has been called, then Derived3 and Derived1 also behave polymorphically.
+For cases where multiple inheritance would be applicable it should always be possible to split up the derived component into multiple smaller components.
+Token concatenation is used to generate the variable name (see https://en.wikipedia.org/wiki/C_preprocessor#Token_concatenation)
 
 \note This macro should be put in the .cpp file of the derived component. Putting it in the .h file still works but is less efficient
 since the polymorphism is added every time the header file is included.
@@ -130,6 +129,8 @@ namespace mbe
 	/// acting as some drawable and clickable game object whereas the third might only have a transform and audio component and thus
 	/// store the audio information associated with the house entity.
 	/// This allows for more flexibility that just adding components to the one instance of the house entity.
+	/// @attention The group id strings are <b>not</b> case sensitive! This is to reduce the likelyhood of mistyping an id which may cause unwanted behaviour.
+	/// Furthermore <b>only ASCII</b> strings should be used.
 	class Entity : public HandleBase<Entity>, private sf::NonCopyable
 	{
 		/// @brief Enables the entity manager to use the components constructor
@@ -186,28 +187,44 @@ namespace mbe
 		template <class TComponent>
 		bool HasComponent() const;
 
-		// The group ids are not case sensitive, ACSII only
+		/// @brief Looks up whether this entity is the group
+		/// @param groupId The id of the group to check. It is not case sensitive so capital letters do not matter. Only use ASCII strings!
+		/// @returns True if the entity is in the passed in group, false otherwise
 		bool IsInGroup(Group groupId) const;
+
+		/// @brief Adds this entity to the group
+		/// @param groupId The group to which this entity is added to
 		void AddToGroup(Group groupId);
+
+		/// @brief Removes this entity from the group
+		/// @param The group to remove the entity from
 		void RemoveFromGroup(Group groupId);
 
-		// Couples the child entity's lifetime with the life time of this entity.
-		// Thus, when this entity gets destroyed all its child entities will get destroyed as well
+		/// @brief Attaches the passed in entity as a child of this entity
+		/// @details Couples the child entity's lifetime with the life time of this entity.
+		/// Thus, when this entity gets destroyed all its child entities will get destroyed too.
+		/// @param childEntityId The id of the child entity to attach (The entity must exist)
 		void AttachChild(HandleID childEntityId);
 
-		// Throws if the passed in child entity is not a child of this entity
+		/// @brief Removes the passed in entity as a child of this entity
+		/// @details Since this the child entity is no longer a child of this entity, their lifetimes are no longer coupled.
+		/// @param childEntityId The id of the child entity to remove (The entity must exist)
+		/// @throws std::runtime_error if the passed in child entity is not a child of this entity
 		void DetatchChild(HandleID childEntityId);
 
-		// Attaches this entity to the parent
-		// Equivalent to calling parentEntity.AttachChild(this->GetHandleID())
-		// To detach from the parent, pass in Entity::GetNullID()
-		// This entity is detatched from its current parent
+		///@brief Attaches this entity as a child of the passed in parent entity
+		/// @details Equivalent to calling parentEntity.AttachChild(this->GetHandleID())
+		/// @note To detach from the parent, pass in mbe::Entity::GetNullID(). Passing in an invalid entity id
+		/// (one for which no entity exists) has the same effect as passing in mbe::Entity::GetNullID().
+		/// @param parentEntityId The id of the parent entity (Can be a null id)
 		void SetParentEntityID(HandleID parentEntityId);
 
-		// If this entity has no parentEntity, mbe::Entity::GetNullID() is returned
+		/// @brief Gets the parent entity
+		/// @returns The id of the parent entity. If this entity has no parent entity, mbe::Entity::GetNullID() is returned
 		inline HandleID GetParentEntityID() const { return parentEntityId; }
 
-		// If this entity has no child entities, an empty list is returned
+		/// @breif Returns all child entities
+		/// @returns A list of child entity ids.If this entity has no child entities, an empty list is returned
 		inline const std::set<HandleID> & GetChildEntityIDList() const { return childEntityIdList; }
 
 	private:
@@ -240,17 +257,6 @@ namespace mbe
 
 		// Make sure that the component doesn't already exist
 		assert(this->HasComponent<TComponent>() == false && "Entity: The component already exists");
-		//assert(componentBitSet[detail::GetComponentTypeID<TComponent>()] == false && "The component already exists");
-		//assert(componentArray[detail::GetComponentTypeID<TComponent>()] == nullptr && "The component already exists");
-
-		//TComponent * c = new TComponent(*this, std::forward<TArguments>(arguments)...);
-		//std::unique_ptr<Component> uPtr{ c };
-		//componentList.emplace_back(std::move(uPtr));
-		//// set the component * in the array
-		//componentArray[detail::GetComponentTypeID<TComponent>()] = c;
-		//// set the according component flag to true
-		//componentBitSet[detail::GetComponentTypeID<TComponent>()] = true;
-		//return *c;
 
 		auto component = std::make_shared<TComponent>(*this, std::forward<TArguments>(arguments)...);
 
@@ -268,13 +274,6 @@ namespace mbe
 	template<class TComponent>
 	inline TComponent & Entity::GetComponent() const
 	{
-		//// Should be the same as
-		////Component * component = componentArray[getComponentTypeID<T>()];
-		//auto ptr(componentArray[detail::GetComponentTypeID<TComponent>()]);
-
-		//if (ptr == nullptr)
-		//	throw std::runtime_error("Entity: This entity does not have the requested component");
-
 		const auto it = componentDictionary.find(detail::GetComponentTypeID<TComponent>());
 
 		// Don't use has component to avoid unnecessary lookup
@@ -287,9 +286,6 @@ namespace mbe
 	template <class TComponent>
 	inline bool Entity::HasComponent() const
 	{
-		// Performs a lookup in the bitset for the specific type (The id is the position in the bitset)
-		//return componentBitSet[detail::GetComponentTypeID<TComponent>()];
-
 		return componentDictionary.find(detail::GetComponentTypeID<TComponent>()) != componentDictionary.end();
 	}
 

@@ -109,7 +109,7 @@ namespace mbe
 		/// @details Every asset requires a file path. Any additional arguments can be passed
 		/// using the variadic template.
 		/// @tparam TArguments The types of the additional parameters passed to the asset's loadFromFile() method
-		/// @param id The id that can later be used to access this asset. It is not case sensetive so capital letters do not matter. <b>Only use ASCII strings!</b>
+		/// @param id The id that can later be used to access this asset. It is not case sensetive so capital letters do not matter. Only use ASCII strings!
 		/// @param filePath The file path from which the asset will be loaded
 		/// @param arguments The additional Parameters for the asset's loadFromFile() function (e.g. fragment shader for sf::Shader)
 		/// @throws std::runntime_error if the asset failed to load
@@ -118,18 +118,18 @@ namespace mbe
 		void Load(std::string id, const std::string & filePath, TArguments&&... arguments);
 
 		/// @brief Returns a reference to the asset with the given id
-		/// @param id The id of the asset to get. It is not case sensetive so capital letters do not matter. <b>Only use ASCII strings!</b>
+		/// @param id The id of the asset to get. It is not case sensetive so capital letters do not matter. Only use ASCII strings!
 		/// @throws std::runntime error when trying to get an asset that has not been loaded
 		TAsset & Get(std::string id);
 
 		/// @brief Returns a const reference of the asset with the given id
 		/// @details Const overload enabling the class to be used in when only a const version is available
-		/// @param id The id of the asset to get. It is not case sensetive so capital letters do not matter. <b>Only use ASCII strings!</b>
+		/// @param id The id of the asset to get. It is not case sensetive so capital letters do not matter. Only use ASCII strings!
 		/// @throws std::runntime error when trying to get an asset that has not been loaded
 		const TAsset & Get(std::string id) const;
 
 		/// @brief An operator overload that allows for accessing assets using the index operator
-		/// @param id The id of the asset to get. It is not case sensetive so capital letters do not matter. <b>Only use ASCII strings!</b>
+		/// @param id The id of the asset to get. It is not case sensetive so capital letters do not matter. Only use ASCII strings!
 		/// @returns A reference to the requested asset
 		/// @throws Whenever mbe::AssetHolder::Get() throws
 		/// @see mbe::AssetHolder::Get()
