@@ -59,7 +59,7 @@ sf::Vector2f ClickableSystem::CalculatePosition(const Entity & entity, sf::Vecto
 	{
 		const auto & transformComponent = entity.GetComponent<TransformComponent>();
 		const auto & renderComponent = entity.GetComponent<RenderComponent>();
-		const auto & view = renderSystem.GetView(renderComponent.GetRenderLayer());
+		const auto & view = renderSystem.GetRenderManager().GetView(renderComponent.GetRenderLayer());
 
 		// Reverse the view transform
 		clickPosition = renderSystem.GetRenderWindow().mapPixelToCoords(static_cast<sf::Vector2i>(clickPosition), view);

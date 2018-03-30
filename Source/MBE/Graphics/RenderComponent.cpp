@@ -2,9 +2,8 @@
 
 using namespace mbe;
 
-RenderComponent::RenderComponent(Entity & parentEntity, RenderLayer renderLayer) :
+RenderComponent::RenderComponent(Entity & parentEntity, RenderObject::RenderLayer renderLayer) :
 	Component(parentEntity),
-	renderLayer(renderLayer),
-	zOrder(0.f)
+	RenderObject(renderLayer)
 {
 }

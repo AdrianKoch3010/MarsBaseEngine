@@ -3,65 +3,61 @@
 /// @file
 /// @brief Class mbe::RenderComponent
 
-#include <SFML/Graphics.hpp>
-
 #include <MBE/Core/Entity.h>
 #include <MBE/Core/Component.h>
+#include <MBE/Graphics/RenderObject.h>
 
 namespace mbe
 {
-	class RenderComponent : public Component
+	class RenderComponent : public Component, public RenderObject
 	{
-	public:
-		/// @brief The render layers used to determine which objects are drawn after each other
-		/// @details The background is drawn first followed by the foreground and all the objects. Lastly,
-		/// the gui is drawn. Note that object later drawn are drawn above previously drawn objects.
-		enum RenderLayer
-		{
-			/// The background such as a stationary picture or parrallax scrolling
-			Background,
-			/// The forground such as a tile map or platforms for a platformer
-			Foreground,
-			/// All objects such as movable items, characters etc.
-			Objects,
-			/// The graphical user interface
-			GUI,
-			/// The number of the render layers
-			LayerCount
-		};
+	//private:
+	//	// Calls the respective Draw() and IsVisible() methods of this class
+	//	class DrawableAdapter : public Drawable
+	//	{
+	//	public:
+	//		DrawableAdapter(const RenderComponent & renderComponent) : renderComponent(renderComponent) {}
+
+	//	public:
+	//		inline void Draw(sf::RenderTarget & target) const override { renderComponent.Draw(target); }
+
+	//		inline bool IsVisible(const sf::View & view) const override { return renderComponent.IsVisible(view); }
+
+	//	private:
+	//		const RenderComponent & renderComponent;
+	//	};
 
 	public:
 		/// @brief Constructor
 		/// @param parentEntity A reference to the mbe::Entity in which this class is created (To which it then belongs to)
-		/// @param eventManager A reference the mbe::EventManager that is used to raise the events:
-		/// @n - RenderComponentCreatedEvent
-		/// @n - RenderComponentRemovedEvent
-		/// @param texture The texture of the RenderComponent
-		RenderComponent(Entity & parentEntity, RenderLayer renderLayer);
+		/// @param renderLayer The renderLayer in which this render object will be drawn
+		RenderComponent(Entity & parentEntity, RenderObject::RenderLayer renderLayer);
 
 		/// @brief Default destructor
 		virtual ~RenderComponent() = default;
 
 	public:
-		// Maybe implement the same functionality using an entity moved event
 		/// @brief The update method that should be called every frame (automatically done by the mbe::EntityManager)
 		/// @param frameTime The delta time between two successive frames
 		inline void Update(sf::Time frameTime) override {};
 
-		virtual void Draw(sf::RenderTarget & target) = 0;
+		//virtual void Draw(sf::RenderTarget & target) const = 0;
 
-		// No reference is returned since the bounding box may be calculated within the function - avoid local references
-		virtual sf::FloatRect GetBoundingBox() const = 0; // can be determined by the inherited class
+		//virtual bool IsVisible(const sf::View & view) const = 0;
 
-		inline void SetZOrder(float value) { zOrder = value; }
+		//inline void SetZOrder(float value) { zOrder = value; }
 
-		inline auto GetZOrder() const { return zOrder; }
+		//inline auto GetZOrder() const { return zOrder; }
 
-		inline RenderLayer GetRenderLayer() const { return renderLayer; }
+		//inline auto GetRenderLayer() const { return renderLayer; }
+
+		//inline const Drawable & GetDrawable() const { return drawableAdapter; }
 
 	private:
-		float zOrder;
-		const RenderLayer renderLayer;
+
+		//DrawableAdapter drawableAdapter;
+		//float zOrder;
+		//const RenderObject::RenderLayer renderLayer;
 	};
 } // namespace mbe
 

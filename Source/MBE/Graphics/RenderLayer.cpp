@@ -20,5 +20,4 @@ void RenderLayer::RemoveRenderEntity(Entity::HandleID entityId)
 		throw std::runtime_error("The render node could not be found");
 
 	renderEntityIdList.erase(it);
-	renderEntityIdList.end();
 }

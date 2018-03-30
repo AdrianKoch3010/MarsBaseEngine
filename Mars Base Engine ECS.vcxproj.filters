@@ -285,6 +285,12 @@
     <ClCompile Include="Source\MBE\Animation\PitchAnimation.cpp">
       <Filter>Quelldateien\Systems\Animation System\Animations</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MBE\Graphics\RenderManager.cpp">
+      <Filter>Quelldateien\Systems\Render System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Graphics\RenderObject.cpp">
+      <Filter>Quelldateien\Systems\Render System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\TiledTerrain.h">
@@ -481,6 +487,12 @@
     </ClInclude>
     <ClInclude Include="Include\MBE\Core\Utility.h">
       <Filter>Headerdateien\Framework\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Graphics\RenderManager.h">
+      <Filter>Headerdateien\Systems\Render System</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Graphics\RenderObject.h">
+      <Filter>Headerdateien\Systems\Render System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

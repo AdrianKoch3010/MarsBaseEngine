@@ -5,7 +5,6 @@ using namespace mbe;
 TiledTerrain::TiledTerrain(EventManager & eventManager, EntityManager & entityManager, sf::Vector2u size, sf::Vector2u tileSize) :
 	eventManager(eventManager),
 	entityManager(entityManager),
-	tiledTerrainLayerSystem(eventManager),
 	size(size),
 	tileSize(tileSize)
 {
@@ -14,7 +13,6 @@ TiledTerrain::TiledTerrain(EventManager & eventManager, EntityManager & entityMa
 TiledTerrain::TiledTerrain(EventManager & eventManager, EntityManager & entityManager, Data::Ptr mapData, const sf::Texture & tileMapTexture) :
 	eventManager(eventManager),
 	entityManager(entityManager),
-	tiledTerrainLayerSystem(eventManager),
 	size(mapData->GetMapSize()),
 	tileSize(mapData->GetTileSize())
 {
@@ -23,41 +21,21 @@ TiledTerrain::TiledTerrain(EventManager & eventManager, EntityManager & entityMa
 	{
 		Entity::HandleID layerId = this->AddTileMapLayer(tileMapTexture);
 		/// Check if exists
-		Entity::GetObjectFromID(layerId)->GetComponent<TiledTerrainLayerComponent>().SetTileIndexList(layer);
-		eventManager.RaiseEvent(event::EntityCreatedEvent(layerId));
-		//TiledTerrainLayer::GetObjectFromID(layerId)->Create(layer);
+		Entity::GetObjectFromID(layerId)->GetComponent<TiledTerrainLayerRenderComponent>().Create(layer);
 	}
 }
 
 Entity::HandleID TiledTerrain::AddTileMapLayer(const sf::Texture & texture)
 {
-	// Create the layer and renderNode
-	//std::unique_ptr<TiledTerrainLayer> layer(new TiledTerrainLayer(texture, size, tileSize)); // Raw new since std::make_unique cannot access protected constructor
-
-	//auto renderNode = std::make_unique<RenderNode>(*layer, RenderNode::Layer::Foreground);
-
 	// Create the layer entity and add the according components
 	auto & layer = entityManager.CreateEntity();
 	layer.AddComponent<TransformComponent>();
-	layer.AddComponent<TiledTerrainLayerComponent>(size, tileSize);
-	layer.AddComponent<TiledTerrainLayerRenderComponent>(texture);
+	layer.AddComponent<TiledTerrainLayerRenderComponent>(texture, size, tileSize);
 
-	// Set the render nodes zOrder to the number of tile map layers (not -1 since this layer has not been inserted yet)
-	//renderNode->SetZOrder(tileMapLayerList.size());
-	layer.GetComponent<TiledTerrainLayerRenderComponent>().SetZOrder(static_cast<float>(layerList.size()));
+	// Set the render objects zOrder to the number of tile map layers (not -1 since this layer has not been inserted yet)
+	layer.GetComponent<TiledTerrainLayerRenderComponent>().SetZOrder(static_cast<float>(renderLayerList.size()));
 
-
-	// Raise the renderNodeCreated event
-	//eventManager.RaiseEvent(mbe::event::EntityCreatedEvent(renderNode->GetHandleID()));
-
-	// Get the layer id so that it can be returned
-	//LayerID layerId = layer->GetHandleID();
-
-	// Insert the layer and renderNode in order to expand their live span (until this object gets deleted)
-	//tileMapLayerRenderNodeList.push_back(std::move(renderNode));
-	//tileMapLayerList.push_back(std::move(layer));
-
-	layerList.push_back(layer.GetHandleID());
+	renderLayerList.push_back(layer.GetHandleID());
 
 	return layer.GetHandleID();
 }
@@ -65,27 +43,27 @@ Entity::HandleID TiledTerrain::AddTileMapLayer(const sf::Texture & texture)
 Entity::HandleID TiledTerrain::GetLayer(const size_t layerIndex)
 {
 	// If the index is invalid, return a LayerId for which no object will exist
-	if (layerIndex >= layerList.size())
+	if (layerIndex >= renderLayerList.size())
 		return Entity::GetNullID();
 
-	return layerList[layerIndex];
+	return renderLayerList[layerIndex];
 }
 
 void TiledTerrain::SwopRenderLayerOrder(const size_t first, const size_t second)
 {
 	// Check wether the indecies are valid (the list of render nodes should always be the same size)
-	if (first >= layerList.size() || second >= layerList.size())
+	if (first >= renderLayerList.size() || second >= renderLayerList.size())
 		throw std::runtime_error("No tile map layer exists for this index");
 
 	// Swopping does not make a difference
 	if (first == second)
 		return;
 
-	assert(Entity::GetObjectFromID(layerList[first]) != nullptr && "TiledTerrain: The layer entity must exists");
-	assert(Entity::GetObjectFromID(layerList[second]) != nullptr && "TiledTerrain: The layer entity must exists");
+	assert(Entity::GetObjectFromID(renderLayerList[first]) != nullptr && "TiledTerrain: The layer entity must exists");
+	assert(Entity::GetObjectFromID(renderLayerList[second]) != nullptr && "TiledTerrain: The layer entity must exists");
 
-	auto & firstRenderComponent = Entity::GetObjectFromID(layerList[first])->GetComponent<TiledTerrainLayerRenderComponent>();
-	auto & secondRenderComponent = Entity::GetObjectFromID(layerList[second])->GetComponent<TiledTerrainLayerRenderComponent>();
+	auto & firstRenderComponent = Entity::GetObjectFromID(renderLayerList[first])->GetComponent<TiledTerrainLayerRenderComponent>();
+	auto & secondRenderComponent = Entity::GetObjectFromID(renderLayerList[second])->GetComponent<TiledTerrainLayerRenderComponent>();
 
 	// swop the zOrder
 	auto temp = firstRenderComponent.GetZOrder();

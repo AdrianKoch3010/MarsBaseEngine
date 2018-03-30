@@ -11,9 +11,7 @@
 #include <MBE/TiledTerrainLayer.h>
 
 #include <MBE/TransformComponent.h>
-#include <MBE/TiledTerrainLayerComponent.h>
 #include <MBE/Graphics/TiledTerrainLayerRenderComponent.h>
-#include <MBE/TiledTerrainLayerSystem.h>
 
 namespace mbe
 {
@@ -58,8 +56,8 @@ namespace mbe
 
 	public:
 
-		inline sf::Vector2u GetSize() const { return size; }
-		inline sf::Vector2u GetTileSize() const { return tileSize; }
+		inline const sf::Vector2u & GetSize() const { return size; }
+		inline const sf::Vector2u & GetTileSize() const { return tileSize; }
 
 		// The zOrder Of the layer is automatically set to last
 		Entity::HandleID AddTileMapLayer(const sf::Texture & texture);
@@ -73,14 +71,12 @@ namespace mbe
 		const sf::Vector2u size;
 		const sf::Vector2u tileSize;
 
-		std::vector<Entity::HandleID> layerList;
+		std::vector<Entity::HandleID> renderLayerList;
+		std::vector<std::vector<size_t>> tileMapLayersIndexList;
 		//std::vector<TiledTerrainLayer::UPtr> tileMapLayerList;
-		//std::vector<std::unique_ptr<RenderNode>> tileMapLayerRenderNodeList;
 		
 		EventManager & eventManager;
 		EntityManager & entityManager;
-
-		TiledTerrainLayerSystem tiledTerrainLayerSystem;
 	};
 
 } // namespace mbe

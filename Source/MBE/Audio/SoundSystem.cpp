@@ -124,7 +124,7 @@ sf::Vector2f SoundSystem::CalculatePosition(const Entity & entity)
 
 		position = transformComponent.GetWorldPosition();
 		position = renderSystem.GetRenderWindow().mapPixelToCoords(static_cast<sf::Vector2i>(position),
-			renderSystem.GetView(renderComponent.GetRenderLayer()));
+			renderSystem.GetRenderManager().GetView(renderComponent.GetRenderLayer()));
 	}
 	else if (entity.HasComponent<AudioComponent>() && entity.HasComponent<TransformComponent>())
 	{

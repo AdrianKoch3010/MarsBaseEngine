@@ -33,6 +33,8 @@ namespace mbe
 
 	public:
 		typedef std::shared_ptr<AudioData> Ptr;
+		typedef std::weak_ptr<AudioData> WPtr;
+		typedef std::unique_ptr<AudioData> UPtr;
 		typedef std::string ID;
 
 	public:

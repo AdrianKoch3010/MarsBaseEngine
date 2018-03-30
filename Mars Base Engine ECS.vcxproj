@@ -181,6 +181,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\MBE\Graphics\RenderObject.cpp" />
+    <ClCompile Include="Source\MBE\Graphics\RenderManager.cpp" />
     <ClCompile Include="Source\MBE\Input\ActionEvents.cpp" />
     <ClCompile Include="Source\MBE\Input\ActionHoldEvent.cpp" />
     <ClCompile Include="Source\MBE\Animation\AnimationComponent.cpp" />
@@ -299,6 +301,8 @@
     <ClInclude Include="Include\MBE\Graphics\TopDownZOrderSorter.h" />
     <ClInclude Include="Include\MBE\TransformComponent.h" />
     <ClInclude Include="Include\MBE\Core\Utility.h" />
+    <ClInclude Include="Include\MBE\Graphics\RenderManager.h" />
+    <ClInclude Include="Include\MBE\Graphics\RenderObject.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Main page documentation.txt" />
