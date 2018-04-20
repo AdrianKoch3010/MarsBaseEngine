@@ -10,6 +10,7 @@
 #include <map>
 
 #include <MBE/Animation/BaseAnimator.h>
+#include <MBE/Core/Utility.h>
 
 namespace mbe
 {
@@ -397,8 +398,7 @@ namespace mbe
 	template<class TAnimated>
 	inline void Animator<TAnimated, std::string>::AddAnimation(std::string id, const AnimationFunction & animation, sf::Time duration)
 	{
-		// Convert id string to lower case
-		std::transform(id.begin(), id.end(), id.begin(), ::tolower);
+		NormaliseIDString(id);
 
 		// Make sure that the id is unique
 		if (animationDictionary.find(id) != animationDictionary.end())

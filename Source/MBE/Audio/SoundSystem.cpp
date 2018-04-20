@@ -9,7 +9,7 @@ SoundSystem::SoundSystem(SoundManager & soundManager, EventManager & eventManage
 	renderSystem(renderSystem)
 {
 	// Subscribe to the entity created event
-	eventManager.Subscribe(EventManager::TCallback<EntityCreatedEvent>([this](const EntityCreatedEvent & event) {
+	entityCreatedSubscription = eventManager.Subscribe(EventManager::TCallback<EntityCreatedEvent>([this](const EntityCreatedEvent & event) {
 		this->OnEntityCreated(event.GetEntityID());
 	}));
 }

@@ -291,6 +291,15 @@
     <ClCompile Include="Source\MBE\Graphics\RenderObject.cpp">
       <Filter>Quelldateien\Systems\Render System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MBE\Audio\BaseAudioComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Audio\SoundComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Audio\MusicComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\TiledTerrain.h">
@@ -493,6 +502,15 @@
     </ClInclude>
     <ClInclude Include="Include\MBE\Graphics\RenderObject.h">
       <Filter>Headerdateien\Systems\Render System</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Audio\BaseAudioComponent.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Audio\SoundComponent.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Audio\MusicComponent.h">
+      <Filter>Headerdateien\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

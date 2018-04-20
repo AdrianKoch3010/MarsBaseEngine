@@ -181,6 +181,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\MBE\Audio\MusicComponent.cpp" />
+    <ClCompile Include="Source\MBE\Audio\SoundComponent.cpp" />
+    <ClCompile Include="Source\MBE\Audio\BaseAudioComponent.cpp" />
     <ClCompile Include="Source\MBE\Graphics\RenderObject.cpp" />
     <ClCompile Include="Source\MBE\Graphics\RenderManager.cpp" />
     <ClCompile Include="Source\MBE\Input\ActionEvents.cpp" />
@@ -236,6 +239,7 @@
     <ClCompile Include="Source\MBE\Core\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\MBE\Audio\BaseAudioComponent.h" />
     <ClInclude Include="Include\MBE\Input\ActionEvents.h" />
     <ClInclude Include="Include\MBE\Input\ActionHoldEvent.h" />
     <ClInclude Include="Include\MBE\Animation\AnimationComponent.h" />
@@ -303,6 +307,8 @@
     <ClInclude Include="Include\MBE\Core\Utility.h" />
     <ClInclude Include="Include\MBE\Graphics\RenderManager.h" />
     <ClInclude Include="Include\MBE\Graphics\RenderObject.h" />
+    <ClInclude Include="Include\MBE\Audio\SoundComponent.h" />
+    <ClInclude Include="Include\MBE\Audio\MusicComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Main page documentation.txt" />
