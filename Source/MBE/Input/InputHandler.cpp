@@ -107,15 +107,17 @@ void InputHandler::HandleRealtimeInput(EventManager & eventManager, sf::Window &
 		eventManager.RaiseEvent(actionHoldEvent);
 }
 
-void mbe::InputHandler::AssignMouseButton(ActionBaseEvent::Action action, sf::Mouse::Button button, bool isRealTimeInput)
+void InputHandler::AssignMouseButton(ActionBaseEvent::Action action, sf::Mouse::Button button, bool isRealTimeInput)
 {
+	NormaliseIDString(action);
+
 	if (isRealTimeInput)
 		realtimeMouseButtonBindings[button] = action;
 	else
 		eventMouseButtonBindings[button] = action;
 }
 
-std::vector<sf::Mouse::Button> mbe::InputHandler::GetAssignedMouseButtons(ActionBaseEvent::Action action) const
+std::vector<sf::Mouse::Button> InputHandler::GetAssignedMouseButtons(ActionBaseEvent::Action action) const
 {
 	// Create an empty mouse button list
 	std::vector<sf::Mouse::Button> mouseButtonList;
@@ -139,6 +141,8 @@ std::vector<sf::Mouse::Button> mbe::InputHandler::GetAssignedMouseButtons(Action
 
 void InputHandler::AssignKey(ActionBaseEvent::Action action, sf::Keyboard::Key key, bool isRealtimeInput)
 {
+	NormaliseIDString(action);
+
 	if (isRealtimeInput)
 		realtimeInputKeyBindings[key] = action;
 	else
@@ -169,6 +173,8 @@ std::vector<sf::Keyboard::Key> InputHandler::GetAssignedKeys(ActionBaseEvent::Ac
 
 bool InputHandler::IsActionActive(ActionBaseEvent::Action action) const
 {
+	NormaliseIDString(action);
+
 	// Get the associated mouse buttons
 	auto assignedMouseButtons = GetAssignedMouseButtons(action);
 

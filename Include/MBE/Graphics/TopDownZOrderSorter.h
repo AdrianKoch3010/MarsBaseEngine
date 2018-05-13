@@ -9,6 +9,7 @@
 
 #include <MBE/Core/Entity.h>
 #include <MBE/Graphics/RenderComponent.h>
+#include <MBE/Graphics/RenderInformationComponent.h>
 #include <MBE/Graphics/TopDownInformationComponent.h>
 
 namespace mbe

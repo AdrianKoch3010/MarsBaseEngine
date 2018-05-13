@@ -8,10 +8,14 @@
 
 #include <MBE/Core/EventManager.h>
 #include <MBE/Core/EntityManager.h>
+#include <MBE/Core/EntityCreatedEvent.h>
 #include <MBE/TiledTerrainLayer.h>
 
 #include <MBE/TransformComponent.h>
+#include <MBE/Graphics/RenderInformationComponent.h>
 #include <MBE/Graphics/TiledTerrainLayerRenderComponent.h>
+
+using mbe::event::EntityCreatedEvent;
 
 namespace mbe
 {
@@ -51,7 +55,7 @@ namespace mbe
 		
 	public:
 		TiledTerrain(EventManager & eventManager, EntityManager & entityManager, sf::Vector2u size, sf::Vector2u tileSize);
-		TiledTerrain(EventManager & eventManager, EntityManager & entityManager, Data::Ptr mapData, const sf::Texture & tileMapTexture);
+		TiledTerrain(EventManager & eventManager, EntityManager & entityManager, Data::Ptr mapData, const TextureWrapper & tileMapTextureWrapper);
 		~TiledTerrain() = default;
 
 	public:
@@ -60,7 +64,7 @@ namespace mbe
 		inline const sf::Vector2u & GetTileSize() const { return tileSize; }
 
 		// The zOrder Of the layer is automatically set to last
-		Entity::HandleID AddTileMapLayer(const sf::Texture & texture);
+		Entity::HandleID AddTileMapLayer(const TextureWrapper & textureWrapper);
 		Entity::HandleID GetLayer(const size_t layerIndex);
 		void SwopRenderLayerOrder(const size_t first, const size_t second);
 

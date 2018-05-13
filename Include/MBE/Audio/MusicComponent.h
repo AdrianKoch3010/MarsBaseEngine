@@ -3,6 +3,8 @@
 /// @file
 /// @brief Class mbe::MusicComponent
 
+#include <string>
+
 #include <SFML/Audio/Music.hpp>
 
 #include <MBE/Audio/BaseAudioComponent.h>
@@ -18,13 +20,11 @@ namespace mbe
 		typedef std::unique_ptr<MusicComponent> UPtr;
 
 	public:
-		MusicComponent(Entity & parentEntity);
+		explicit MusicComponent(Entity & parentEntity, std::string filePath);
 
 		~MusicComponent() = default;
 
 	public:
-		void Update(sf::Time frameTime) override;
-
 		void Update(sf::Time frameTime) override;
 
 		void Play() override;
@@ -60,8 +60,12 @@ namespace mbe
 		// Is stopped valid?
 		AudioStatus GetAudioStatus() override;
 
+	public:
+		const std::string & GetFilePath() const;
+
 	private:
 		sf::Music music;
+		const std::string filePath;
 	};
 
 } // namespace mbe

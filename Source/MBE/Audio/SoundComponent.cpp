@@ -4,7 +4,9 @@ using namespace mbe;
 
 MBE_ENABLE_COMPONENT_POLYMORPHISM(SoundComponent, BaseAudioComponent)
 
-SoundComponent::SoundComponent(Entity & parentEntity) : BaseAudioComponent(parentEntity)
+SoundComponent::SoundComponent(Entity & parentEntity, const sf::SoundBuffer & soundBuffer) :
+	BaseAudioComponent(parentEntity),
+	soundBuffer(soundBuffer)
 {
 }
 
@@ -21,7 +23,7 @@ void SoundComponent::Update(sf::Time frameTime)
 
 void SoundComponent::Play()
 {
-	// Play the sound
+	sound.setBuffer(soundBuffer);
 	sound.play();
 
 	// Set its initial position
@@ -123,4 +125,9 @@ BaseAudioComponent::AudioStatus SoundComponent::GetAudioStatus()
 	default:
 		return AudioStatus::Stopped;
 	}
+}
+
+const sf::SoundBuffer & SoundComponent::GetSoundBuffer() const
+{
+	return *sound.getBuffer();
 }

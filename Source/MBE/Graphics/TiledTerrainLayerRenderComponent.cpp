@@ -2,14 +2,16 @@
 
 using namespace mbe;
 
-TiledTerrainLayerRenderComponent::TiledTerrainLayerRenderComponent(Entity & parentEntity, const sf::Texture & tilesetTexture, sf::Vector2u size, sf::Vector2u tileSize) :
-	RenderComponent(parentEntity, RenderLayer::Foreground),
-	tilesetTexture(tilesetTexture),
+MBE_ENABLE_COMPONENT_POLYMORPHISM(TiledTerrainLayerRenderComponent, RenderComponent)
+
+TiledTerrainLayerRenderComponent::TiledTerrainLayerRenderComponent(Entity & parentEntity, sf::Vector2u size, sf::Vector2u tileSize) :
+	RenderComponent(parentEntity),
 	size(size),
 	tileSize(tileSize),
 	isCreated(false)
 {
 	assert(parentEntity.HasComponent<TransformComponent>() && "TiledTerrainLayerRenderComponent: The parent entity must have a mbe::TransformComponent");
+	assert(parentEntity.HasComponent<TextureWrapperComponent>() && "TiledTerrainLayerRenderComponent: The parent entity must have a mbe::TextureWrapperComponent");
 }
 
 void TiledTerrainLayerRenderComponent::Draw(sf::RenderTarget & target) const
@@ -19,23 +21,20 @@ void TiledTerrainLayerRenderComponent::Draw(sf::RenderTarget & target) const
 		return;
 
 	sf::RenderStates states;
-	states.texture = &tilesetTexture;
+	states.texture = &parentEntity.GetComponent<TextureWrapperComponent>().GetTextureWrapper().GetTexture();
 	states.transform = parentEntity.GetComponent<TransformComponent>().GetWorldTransform();
 
 	target.draw(vertices, states);
 }
 
-sf::FloatRect TiledTerrainLayerRenderComponent::GetBoundingBox() const
+sf::FloatRect TiledTerrainLayerRenderComponent::GetLocalBounds() const
 {
 	sf::FloatRect rect;
-	const auto & transformComponent = parentEntity.GetComponent<TransformComponent>();
 
-	rect.left = transformComponent.GetPosition().x;
-	rect.top = transformComponent.GetPosition().y;
-	rect.width = static_cast<float>(size.x * tileSize.x);
-	rect.height = static_cast<float>(size.y * tileSize.y);
+	rect.width = size.x * tileSize.x;
+	rect.height = size.y * tileSize.y;
 
-	return rect;	
+	return rect;
 }
 
 void TiledTerrainLayerRenderComponent::Create(std::vector<size_t> tileIndexList)
@@ -72,6 +71,7 @@ void TiledTerrainLayerRenderComponent::SetTile(sf::Vector2u pos, size_t tileInde
 {
 	// Find the tiles position in the tileset texture
 	sf::Vector2u texPos;
+	const auto & tilesetTexture = parentEntity.GetComponent<TextureWrapperComponent>().GetTextureWrapper().GetTexture();
 	texPos.x = tileIndex % (tilesetTexture.getSize().x / tileSize.x);
 	texPos.y = tileIndex / (tilesetTexture.getSize().x / tileSize.x); // integer division
 

@@ -7,7 +7,47 @@ AnimationComponent::AnimationComponent(Entity & parentEntity) :
 {
 }
 
-const BaseAnimator<> & AnimationComponent::GetAnimator(std::string id) const
+void AnimationComponent::Update(sf::Time frameTime)
+{
+	// Delete inactive animators
+	for (auto it = animatorDictionary.cbegin(); it != animatorDictionary.cend();)
+	{
+		if (it->second->IsActive() == false)
+			it = animatorDictionary.erase(it);
+		else
+			++it;
+	}
+
+	// Update all animators
+	for (auto & pair : animatorDictionary)
+		pair.second->Update(frameTime);
+}
+
+typename AnimationComponent::EntityAnimator & AnimationComponent::CreateAnimator(std::string id)
+{
+	// Convert id string to lower case
+	NormaliseIDString(id);
+
+	auto animatorPtr = std::make_unique<EntityAnimator>(this->parentEntity);
+	auto & animator = *animatorPtr;
+	animatorDictionary.insert(std::make_pair(id, std::move(animatorPtr)));
+	return animator;
+}
+
+typename AnimationComponent::EntityAnimator & mbe::AnimationComponent::GetAnimator(std::string id)
+{
+	NormaliseIDString(id);
+
+	const auto it = animatorDictionary.find(id);
+
+	// If the id could not be found throw
+	if (it == animatorDictionary.cend())
+		throw std::runtime_error("AnimationComponent: No animator exists under this id: " + id);
+
+	return *it->second;
+}
+
+const typename AnimationComponent::EntityAnimator & AnimationComponent::GetAnimator(std::string id) const
 {
 	NormaliseIDString(id);
 
@@ -196,20 +236,4 @@ std::vector<std::string> AnimationComponent::GetPlayingAnimations() const
 		}
 	}
 	return playingAnimations;
-}
-
-void AnimationComponent::Update(sf::Time frameTime)
-{
-	// Delete inactive animators
-	for (auto it = animatorDictionary.cbegin(); it != animatorDictionary.cend();)
-	{
-		if (it->second->IsActive() == false)
-			it = animatorDictionary.erase(it);
-		else
-			++it;
-	}
-
-	// Update all animators
-	for (auto & pair : animatorDictionary)
-		pair.second->Update(frameTime);
 }

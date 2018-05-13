@@ -8,7 +8,7 @@
 namespace mbe
 {
 	// wrapper around sf::Transformable
-	class TransformComponent : public Component, public HandleBase<TransformComponent>
+	class TransformComponent : public Component
 	{
 	public:
 		TransformComponent(Entity & parentEntity, Entity::HandleID parentTransformEntityId = Entity::GetNullID());

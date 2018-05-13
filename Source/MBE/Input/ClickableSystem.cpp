@@ -55,11 +55,11 @@ void ClickableSystem::OnClick(sf::Vector2f clickPosition, sf::Mouse::Button butt
 
 sf::Vector2f ClickableSystem::CalculatePosition(const Entity & entity, sf::Vector2f clickPosition)
 {
-	if (entity.HasComponent<ClickableComponent>() && entity.HasComponent<TransformComponent>() && entity.HasComponent<RenderComponent>())
+	if (entity.HasComponent<ClickableComponent>() && entity.HasComponent<TransformComponent>() && entity.HasComponent<RenderInformationComponent>())
 	{
 		const auto & transformComponent = entity.GetComponent<TransformComponent>();
-		const auto & renderComponent = entity.GetComponent<RenderComponent>();
-		const auto & view = renderSystem.GetRenderManager().GetView(renderComponent.GetRenderLayer());
+		const auto & renderInformationComponent = entity.GetComponent<RenderInformationComponent>();
+		const auto & view = renderSystem.GetView(renderInformationComponent.GetRenderLayer());
 
 		// Reverse the view transform
 		clickPosition = renderSystem.GetRenderWindow().mapPixelToCoords(static_cast<sf::Vector2i>(clickPosition), view);

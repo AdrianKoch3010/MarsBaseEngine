@@ -10,7 +10,7 @@ TiledTerrain::TiledTerrain(EventManager & eventManager, EntityManager & entityMa
 {
 }
 
-TiledTerrain::TiledTerrain(EventManager & eventManager, EntityManager & entityManager, Data::Ptr mapData, const sf::Texture & tileMapTexture) :
+TiledTerrain::TiledTerrain(EventManager & eventManager, EntityManager & entityManager, Data::Ptr mapData, const TextureWrapper & tileMapTextureWrapper) :
 	eventManager(eventManager),
 	entityManager(entityManager),
 	size(mapData->GetMapSize()),
@@ -19,21 +19,24 @@ TiledTerrain::TiledTerrain(EventManager & eventManager, EntityManager & entityMa
 	// Add layers
 	for (const auto & layer : mapData->GetTileMapLayersIndexList())
 	{
-		Entity::HandleID layerId = this->AddTileMapLayer(tileMapTexture);
+		Entity::HandleID layerId = this->AddTileMapLayer(tileMapTextureWrapper);
 		/// Check if exists
 		Entity::GetObjectFromID(layerId)->GetComponent<TiledTerrainLayerRenderComponent>().Create(layer);
 	}
 }
 
-Entity::HandleID TiledTerrain::AddTileMapLayer(const sf::Texture & texture)
+Entity::HandleID TiledTerrain::AddTileMapLayer(const TextureWrapper & textureWrapper)
 {
 	// Create the layer entity and add the according components
 	auto & layer = entityManager.CreateEntity();
 	layer.AddComponent<TransformComponent>();
-	layer.AddComponent<TiledTerrainLayerRenderComponent>(texture, size, tileSize);
+	layer.AddComponent<RenderInformationComponent>(RenderLayer::Foreground);
+	layer.AddComponent<TextureWrapperComponent>(textureWrapper);
+	layer.AddComponent<TiledTerrainLayerRenderComponent>(size, tileSize);
+	eventManager.RaiseEvent(EntityCreatedEvent(layer.GetHandleID()));
 
 	// Set the render objects zOrder to the number of tile map layers (not -1 since this layer has not been inserted yet)
-	layer.GetComponent<TiledTerrainLayerRenderComponent>().SetZOrder(static_cast<float>(renderLayerList.size()));
+	layer.GetComponent<RenderInformationComponent>().SetZOrder(static_cast<float>(renderLayerList.size()));
 
 	renderLayerList.push_back(layer.GetHandleID());
 
@@ -62,13 +65,13 @@ void TiledTerrain::SwopRenderLayerOrder(const size_t first, const size_t second)
 	assert(Entity::GetObjectFromID(renderLayerList[first]) != nullptr && "TiledTerrain: The layer entity must exists");
 	assert(Entity::GetObjectFromID(renderLayerList[second]) != nullptr && "TiledTerrain: The layer entity must exists");
 
-	auto & firstRenderComponent = Entity::GetObjectFromID(renderLayerList[first])->GetComponent<TiledTerrainLayerRenderComponent>();
-	auto & secondRenderComponent = Entity::GetObjectFromID(renderLayerList[second])->GetComponent<TiledTerrainLayerRenderComponent>();
+	auto & firstRenderInformationComponent = Entity::GetObjectFromID(renderLayerList[first])->GetComponent<RenderInformationComponent>();
+	auto & secondRenderInformationComponent = Entity::GetObjectFromID(renderLayerList[second])->GetComponent<RenderInformationComponent>();
 
 	// swop the zOrder
-	auto temp = firstRenderComponent.GetZOrder();
-	firstRenderComponent.SetZOrder(secondRenderComponent.GetZOrder());
-	secondRenderComponent.SetZOrder(temp);
+	auto temp = firstRenderInformationComponent.GetZOrder();
+	firstRenderInformationComponent.SetZOrder(secondRenderInformationComponent.GetZOrder());
+	secondRenderInformationComponent.SetZOrder(temp);
 }
 
 void TiledTerrain::Data::Load(const std::string filePath)

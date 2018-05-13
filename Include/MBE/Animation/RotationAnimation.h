@@ -37,9 +37,11 @@ namespace mbe
 	{
 		// The progress part may not be final
 		if (progress > 1.f)
-			target.SetRotation(0.f);
+			//target.SetRotation(0.f);
+			target.GetComponent<TransformComponent>().SetRotation(0.f);
 		else
-			target.SetRotation(360.f * relativeMaximumRotation * progress);
+			//target.SetRotation(360.f * relativeMaximumRotation * progress);
+			target.GetComponent<TransformComponent>().SetRotation(360.f * relativeMaximumRotation * progress);
 	}
 
 #pragma endregion

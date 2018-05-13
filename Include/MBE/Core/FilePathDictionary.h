@@ -110,7 +110,7 @@ namespace mbe
 		/// @param id The id of the asset to get. It is not case sensetive so capital letters do not matter. Only use ASCII strings!
 		/// @returns a const reference to the found path
 		/// @throws std::runtime_error if the id could not be found
-		const std::string & Get(const std::string & id) const;
+		const std::string & Get(std::string id) const;
 
 		/// @brief Finds and returns the file path with the respective id
 		/// @details Equivalent to calling mbe::FilePathDictionary::Get(id)
@@ -164,8 +164,10 @@ namespace mbe
 		dictionary.insert({ id, filePath });
 	}
 
-	inline const std::string & FilePathDictionary<std::string>::Get(const std::string & id) const
+	inline const std::string & FilePathDictionary<std::string>::Get(std::string id) const
 	{
+		NormaliseIDString(id);
+
 		const auto it = dictionary.find(id);
 		if (it == dictionary.cend())
 			throw std::runtime_error("FilePathDictionary: No file path exists under this id: " + id);

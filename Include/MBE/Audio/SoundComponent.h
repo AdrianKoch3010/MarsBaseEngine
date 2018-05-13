@@ -19,12 +19,11 @@ namespace mbe
 		typedef std::unique_ptr<SoundComponent> UPtr;
 
 	public:
-		SoundComponent(Entity & parentEntity);
+		SoundComponent(Entity & parentEntity, const sf::SoundBuffer & soundBuffer);
 
 		~SoundComponent() = default;
 
 	public:
-
 		void Update(sf::Time frameTime) override;
 
 		void Play() override;
@@ -60,8 +59,12 @@ namespace mbe
 		// Is stopped valid?
 		AudioStatus GetAudioStatus() override;
 
+	public:
+		const sf::SoundBuffer & GetSoundBuffer() const;
+
 	private:
 		sf::Sound sound;
+		const sf::SoundBuffer & soundBuffer;
 	};
 
 } // namespace mbe

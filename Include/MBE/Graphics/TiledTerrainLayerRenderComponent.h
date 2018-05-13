@@ -10,8 +10,9 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Clock.hpp>
 
-#include <MBE/Graphics/RenderComponent.h>
 #include <MBE/TransformComponent.h>
+#include <MBE/Graphics/RenderComponent.h>
+#include <MBE/Graphics/TextureWrapperComponent.h>
 
 
 namespace mbe
@@ -21,14 +22,15 @@ namespace mbe
 	class TiledTerrainLayerRenderComponent : public RenderComponent
 	{
 	public:
-		TiledTerrainLayerRenderComponent(Entity & parentEntity, const sf::Texture & tilesetTexture, sf::Vector2u size, sf::Vector2u tileSize);
+		TiledTerrainLayerRenderComponent(Entity & parentEntity, sf::Vector2u size, sf::Vector2u tileSize);
 		~TiledTerrainLayerRenderComponent() = default;
 
 	public:
 		void Draw(sf::RenderTarget & target) const override;
 
-		sf::FloatRect GetBoundingBox() const override;
+		sf::FloatRect GetLocalBounds() const override;
 
+	public:
 		void Create(std::vector<size_t> tileIndexList);
 
 		void SetTile(sf::Vector2u position, size_t tileIndex);
@@ -36,8 +38,6 @@ namespace mbe
 		inline bool IsCreated() const { return isCreated; }
 
 		inline sf::VertexArray & GetVertices() { return vertices; }
-
-		inline const sf::Texture & GetTexture() const { return tilesetTexture; }
 
 		// Throws
 		//size_t GetTile(sf::Vector2u position) const;
@@ -51,7 +51,6 @@ namespace mbe
 
 	private:
 		sf::VertexArray vertices;
-		const sf::Texture & tilesetTexture;
 
 		bool isCreated;
 		const sf::Vector2u size;

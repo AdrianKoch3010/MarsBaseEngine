@@ -1,18 +1,15 @@
-#include <MBE/Graphics/TexturedRenderComponent.h>
+#include <MBE/Graphics/TextureWrapperComponent.h>
 
 using namespace mbe;
 
-MBE_ENABLE_COMPONENT_POLYMORPHISM(TexturedRenderComponent, RenderComponent)
-
-TexturedRenderComponent::TexturedRenderComponent(Entity & parentEntity, const TextureWrapper & textureWrapper, RenderLayer renderLayer) :
-	RenderComponent(parentEntity, renderLayer),
+TextureWrapperComponent::TextureWrapperComponent(Entity & parentEntity, const TextureWrapper & textureWrapper) :
+	Component(parentEntity),
 	textureWrapper(&textureWrapper),
-	// Set the texture rect to the size of the texture
 	textureRect({ 0, 0 }, static_cast<sf::Vector2i>(textureWrapper.GetTexture().getSize()))
 {
 }
 
-void TexturedRenderComponent::SetTextureWrapper(const TextureWrapper & textureWrapper, bool resetTextureRect)
+void TextureWrapperComponent::SetTextureWrapper(const TextureWrapper & textureWrapper, bool resetTextureRect)
 {
 	// Recompute the texture rect if required
 	if (resetTextureRect)
@@ -22,7 +19,7 @@ void TexturedRenderComponent::SetTextureWrapper(const TextureWrapper & textureWr
 	this->textureWrapper = &textureWrapper;
 }
 
-void TexturedRenderComponent::SetTextureRect(const sf::IntRect & textureRect)
+void TextureWrapperComponent::SetTextureRect(const sf::IntRect & textureRect)
 {
 	// If the current texture rect is the same as the new one
 	if (textureRect == this->textureRect)

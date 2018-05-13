@@ -11,7 +11,7 @@
 #include <MBE/Input/MouseButtonReleasedEvent.h>
 #include <MBE/Input/EntityClickedEvent.h>
 #include <MBE/Graphics/RenderSystem.h>
-#include <MBE/Graphics/RenderComponent.h>
+#include <MBE/Graphics/RenderInformationComponent.h>
 #include <MBE/TransformComponent.h>
 
 // There are 3 cases of managing audio clickable components

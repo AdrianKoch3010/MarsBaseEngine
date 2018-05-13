@@ -10,6 +10,7 @@
 #include <SFML/Window/Window.hpp>
 
 #include <MBE/Core/EventManager.h>
+#include <MBE/Core/Utility.h>
 #include <MBE/Input/MouseButtonEvents.h>
 #include <MBE/Input/ActionEvents.h>
 
@@ -26,6 +27,9 @@ namespace mbe
 {
 	/// @brief Handels mouse and keyboard events as well as realtime input and raises respective events
 	/// @details Furthermore, the input handler allows for subscribing keys to actions which allows for dynamic key bindings.
+	/// @note The action strings are not case sensitive so capital letters don't matter. <b>Use ACII characters only!<b>
+	/// When an action string or a list of action strings is returned, they are always normalised. To compare an action string,
+	/// call mbe::NormaliseIDString() on it before the comparision.
 	class InputHandler
 	{
 	public:

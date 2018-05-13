@@ -4,7 +4,9 @@ using namespace mbe;
 
 MBE_ENABLE_COMPONENT_POLYMORPHISM(MusicComponent, BaseAudioComponent)
 
-MusicComponent::MusicComponent(Entity & parentEntity) : BaseAudioComponent(parentEntity)
+MusicComponent::MusicComponent(Entity & parentEntity, std::string filePath) :
+	BaseAudioComponent(parentEntity),
+	filePath(filePath)
 {
 }
 
@@ -21,6 +23,9 @@ void MusicComponent::Update(sf::Time frameTime)
 
 void MusicComponent::Play()
 {
+	// Open the file path
+	music.openFromFile(filePath);
+
 	// Play the sound
 	music.play();
 
@@ -123,4 +128,9 @@ BaseAudioComponent::AudioStatus MusicComponent::GetAudioStatus()
 	default:
 		return AudioStatus::Stopped;
 	}
+}
+
+const std::string & MusicComponent::GetFilePath() const
+{
+	return filePath;
 }

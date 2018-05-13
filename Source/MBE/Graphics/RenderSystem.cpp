@@ -1,234 +1,208 @@
-//#include <MBE/Graphics/RenderSystem.h>
-//
-//using namespace mbe;
-//
-//RenderSystem::RenderSystem(sf::RenderWindow & window, EventManager & eventManager) :
-//	window(window),
-//	eventManager(eventManager)
-//{
-//	// Set the default views
-//	for (auto & renderLayer : renderLayers)
-//	{
-//		renderLayer.SetView(window.getDefaultView());
-//	}
-//
-//	// Subscribe the events
-//	std::function<void(const EntityCreatedEvent &)> onRenderEntityCreatedFunction = [this](const EntityCreatedEvent & event)
-//	{
-//		Entity::HandleID entityId = event.GetEntityID();
-//		AddRenderEntity(entityId);
-//	};
-//
-//	std::function<void(const EntityRemovedEvent &)> onRenderEntityRemovedFunction = [this](const EntityRemovedEvent & event)
-//	{
-//		Entity::HandleID entityId = event.GetEntityID();
-//		RemoveRenderEntity(entityId);
-//	};
-//
-//	renderEntityCreatedSubscription = eventManager.Subscribe(onRenderEntityCreatedFunction);
-//	renderEntityRemovedSubscription = eventManager.Subscribe(onRenderEntityRemovedFunction);
-//}
-//
-//mbe::RenderSystem::~RenderSystem()
-//{
-//	eventManager.UnSubscribe<EntityCreatedEvent>(renderEntityCreatedSubscription);
-//	eventManager.UnSubscribe<EntityRemovedEvent>(renderEntityRemovedSubscription);
-//}
-//
-//void RenderSystem::Render()
-//{
-//	// Remove all expired nodes
-//	this->Refresh();
-//	
-//	for (size_t i = 0; i < RenderComponent::RenderLayer::LayerCount; i++)
-//	{
-//		// Draw all the render nodes in the current layer
-//		window.setView(renderLayers[i].GetView());
-//		std::vector<Entity::HandleID> & renderEntityIdList = renderLayers[i].GetRenderEntityIdList();
-//
-//		// Assign the z-order based on the sorting method
-//		// Make sure a function has been registered
-//		if (zOrderAssignmentFunctions[i])
-//			zOrderAssignmentFunctions[i](renderEntityIdList);
-//		
-//		// Sort the render nodes based on their z-order
-//		SortByZOrder(renderEntityIdList);
-//
-//		for (const auto renderEntityId : renderEntityIdList)
-//		{
-//			// Get the pointer that corresponds to the id
-//			auto * entity = Entity::GetObjectFromID(renderEntityId);
-//
-//			// Culling - only draw if the entity is visible on screen
-//			if (IsVisible(*entity, renderLayers[i].GetView()))
-//			{
-//				// If the entity still exists
-//				// This should always be the case since expired entities are removed in the refresh function
-//				entity->GetComponent<RenderComponent>().Draw(window);
-//			}
-//		}
-//	}
-//}
-//
-//void RenderSystem::SetZOrderAssignmentFunction(RenderComponent::RenderLayer layer, ZOrderAssignmentFunction function)
-//{
-//	zOrderAssignmentFunctions[layer] = function;
-//}
-//
-//void RenderSystem::SetView(RenderComponent::RenderLayer renderLayer, const sf::View & view)
-//{
-//	renderLayers[renderLayer].SetView(view);
-//}
-//
-//sf::View & mbe::RenderSystem::GetView(RenderComponent::RenderLayer renderLayer)
-//{
-//	return renderLayers[renderLayer].GetView();
-//}
-//
-//const sf::View & mbe::RenderSystem::GetView(RenderComponent::RenderLayer renderLayer) const
-//{
-//	return renderLayers[renderLayer].GetView();
-//}
-//
-//void RenderSystem::AddRenderEntity(Entity::HandleID renderEntityId)
-//{
-//	auto * entity = Entity::GetObjectFromID(renderEntityId);
-//	// Can't add a non existing node
-//	if (entity == nullptr)
-//		return;
-//
-//	// The entity must have a mbe::RenderComponent
-//	if (entity->HasComponent<RenderComponent>() == false)
-//		return;
-//
-//	auto layer = entity->GetComponent<RenderComponent>().GetRenderLayer();
-//	renderLayers[layer].AddRenderEntity(renderEntityId);
-//}
-//
-//void RenderSystem::RemoveRenderEntity(Entity::HandleID renderEntityId)
-//{
-//	// Get the renderNode (nullptr if if doesn't exist)
-//	auto * entity = Entity::GetObjectFromID(renderEntityId);
-//
-//	// If the pointed-to object no longer exists (or e.g. an invalid id has been passed)
-//	if (entity == nullptr)
-//		return;
-//
-//	// The entity must have a mbe::RenderComponent
-//	if (entity->HasComponent<RenderComponent>() == false)
-//		return;
-//
-//	// Get the render layer;
-//	auto renderLayer = entity->GetComponent<RenderComponent>().GetRenderLayer();
-//	
-//	// Remove the node from this layer
-//	renderLayers[renderLayer].RemoveRenderEntity(renderEntityId);
-//}
-//
-//void RenderSystem::Refresh()
-//{
-//	// Remove expired entities
-//	// Entities are automatically deleted when they expire (This is much more efficient than calling RemoveRenderEntity())
-//	for (auto & renderLayer : renderLayers)
-//	{
-//		auto & entityList = renderLayer.GetRenderEntityIdList();
-//		entityList.erase(std::remove_if(entityList.begin(), entityList.end(), [](auto currentEntityId)
-//		{
-//			return Entity::GetObjectFromID(currentEntityId) == nullptr;
-//		}), entityList.end());
-//	}
-//}
-//
-//bool RenderSystem::IsVisible(const Entity & entity, const sf::View & view)
-//{
-//	const auto & boundingBox = entity.GetComponent<RenderComponent>().GetBoundingBox();
-//
-//	return true;
-//}
-//
-//void RenderSystem::SortByZOrder(std::vector<Entity::HandleID> & entityIdList)
-//{
-//	// Use insertion sort to sort by zOrder
-//	// Insertion sort is fast for nearly sorted lists
-//	// This will nearly always be the case since not many, if any object will changes between two frames
-//	// Furthermore, it is a consistent sort which prevents flickering if two render nodes have the z order
-//	size_t size = entityIdList.size();
-//	for (size_t i = 1; i < size; i++)
-//	{
-//		for (size_t j = i; j > 0 && Entity::GetObjectFromID(entityIdList[j - 1])->GetComponent<RenderComponent>().GetZOrder() > Entity::GetObjectFromID(entityIdList[j])->GetComponent<RenderComponent>().GetZOrder(); j--)
-//		{
-//			std::swap(entityIdList[j], entityIdList[j - 1]);
-//		}
-//	}
-//}
-
 #include <MBE/Graphics/RenderSystem.h>
 
 using namespace mbe;
 
-RenderSystem::RenderSystem(sf::RenderWindow & window, EventManager & eventManager, RenderManager & renderManager) :
+RenderSystem::RenderSystem(sf::RenderWindow & window, EventManager & eventManager) :
 	window(window),
-	eventManager(eventManager),
-	renderManager(renderManager)
+	eventManager(eventManager)
 {
-	// Subscribe to the entity created event
-	eventManager.Subscribe(EventManager::TCallback<EntityCreatedEvent>([this](const EntityCreatedEvent & event)
+	// Set the default views
+	for (auto renderLayer = RenderLayer::Background; renderLayer != RenderLayer::LayerCount; ++renderLayer)
+		viewDictionary[renderLayer] = window.getDefaultView();
+
+	// Subscribe to the events
+	std::function<void(const EntityCreatedEvent &)> onRenderEntityCreatedFunction = [this](const EntityCreatedEvent & event)
 	{
-		this->AddRenderEntity(event.GetEntityID());
-	}));
+		Entity::HandleID entityId = event.GetEntityID();
+		AddRenderEntity(entityId);
+	};
+
+	std::function<void(const EntityRemovedEvent &)> onRenderEntityRemovedFunction = [this](const EntityRemovedEvent & event)
+	{
+		Entity::HandleID entityId = event.GetEntityID();
+		RemoveRenderEntity(entityId);
+	};
+
+	renderEntityCreatedSubscription = eventManager.Subscribe(onRenderEntityCreatedFunction);
+	renderEntityRemovedSubscription = eventManager.Subscribe(onRenderEntityRemovedFunction);
 }
 
 RenderSystem::~RenderSystem()
 {
-	eventManager.UnSubscribe<EntityCreatedEvent>(entityCreatedSubscription);
-	//eventManager.UnSubscribe<EntityRemovedEvent>(entityRemovedSubscription);
+	// Unsubscribe events
+	eventManager.UnSubscribe<EntityCreatedEvent>(renderEntityCreatedSubscription);
+	eventManager.UnSubscribe<EntityRemovedEvent>(renderEntityRemovedSubscription);
+
+	// Make sure that all non-existing entity ids are deleted
+	this->Refresh();
+
+	// Reset the render information component getters
+	for (auto renderLayer = RenderLayer::Background; renderLayer != RenderLayer::LayerCount; ++renderLayer)
+	{
+		const auto & renderEntityIdList = renderEntityDictionary[renderLayer];
+		for (auto entityId : renderEntityIdList)
+		{
+			// This should always be the case
+			assert(Entity::GetObjectFromID(entityId) != nullptr && "RenderSystem: The entity must exist");
+			assert(Entity::GetObjectFromID(entityId)->HasComponent<RenderInformationComponent>() && "RenderSystem: The entity must have a mbe::RenderInformationComponent");
+
+			// Get the render information component and reset the getters
+			auto & renderInformationComponent = Entity::GetObjectFromID(entityId)->GetComponent<RenderInformationComponent>();
+			renderInformationComponent.SetViewGetterFunction([](const Entity & entity) { return nullptr; });
+			renderInformationComponent.SetWindowGetterFunction([]() { return nullptr; });
+		}
+	}
 }
 
 void RenderSystem::Render()
 {
-	// Apply the z-order assignment functions
-	for (auto renderLayer = RenderObject::RenderLayer::Background; renderLayer != RenderObject::RenderLayer::LayerCount; ++renderLayer)
-		zOrderAssignmentFunctionDictionary[renderLayer](renderEntityDictionary[renderLayer]);
+	// Remove all expired nodes
+	this->Refresh();
+	
+	for (auto renderLayer = RenderLayer::Background; renderLayer != RenderLayer::LayerCount; ++renderLayer)
+	{
+		// Draw all the render nodes in the current layer
+		window.setView(viewDictionary[renderLayer]);
+		auto & renderEntityIdList = renderEntityDictionary[renderLayer];
 
-	renderManager.Render(window);
+		// Assign the z-order based on the sorting method
+		// Make sure a function has been registered
+		if (zOrderAssignmentFunctionDictionary[renderLayer])
+			zOrderAssignmentFunctionDictionary[renderLayer](renderEntityIdList);
+
+		// Sort the render nodes based on their z-order
+		SortByZOrder(renderEntityIdList);
+
+		for (const auto renderEntityId : renderEntityIdList)
+		{
+			// Get the pointer that corresponds to the id
+			auto * entity = Entity::GetObjectFromID(renderEntityId);
+
+			// Culling - only draw if the entity is visible on screen
+			if (entity->GetComponent<RenderComponent>().IsVisible(viewDictionary[renderLayer]))
+			{
+				// If the entity still exists
+				// This should always be the case since expired entities are removed in the refresh function
+				entity->GetComponent<RenderComponent>().Draw(window);
+			}
+		}
+	}
 }
 
-void RenderSystem::SetZOrderAssignmentFunction(RenderObject::RenderLayer renderLayer, ZOrderAssignmentFunction function)
+void RenderSystem::SetZOrderAssignmentFunction(RenderLayer layer, ZOrderAssignmentFunction function)
 {
-	zOrderAssignmentFunctionDictionary[renderLayer] = function;
+	zOrderAssignmentFunctionDictionary[layer] = function;
+}
+
+void RenderSystem::SetView(RenderLayer renderLayer, const sf::View & view)
+{
+	viewDictionary[renderLayer] = view;
+}
+
+sf::View & RenderSystem::GetView(RenderLayer renderLayer)
+{
+	return viewDictionary[renderLayer];
+}
+
+const sf::View & RenderSystem::GetView(RenderLayer renderLayer) const
+{
+	return viewDictionary[renderLayer];
 }
 
 void RenderSystem::AddRenderEntity(Entity::HandleID entityId)
 {
-	// Guaranteed when using mbe::event::EntityCreatedEvent correctly
-	assert(Entity::GetObjectFromID(entityId) != nullptr && "RenderSystem: The entity must exist");
-
-	auto & entity = *Entity::GetObjectFromID(entityId);
-
-	// The entity must have a mbe::RenderComponent
-	if (entity.HasComponent<RenderComponent>() == false)
+	auto * entity = Entity::GetObjectFromID(entityId);
+	// Can't add a non existing node
+	if (entity == nullptr)
 		return;
 
-	auto & renderComponent = entity.GetComponent<RenderComponent>();
-	renderEntityDictionary[renderComponent.GetRenderLayer()].push_back(entityId);
+	// The entity must have a mbe::RenderComponent and a mbe::RenderInformationComponent
+	if (entity->HasComponent<RenderComponent>() == false
+		|| entity->HasComponent<RenderInformationComponent>() == false)
+		return;
 
-	renderManager.AddRenderObject(renderComponent);
+	auto & renderInformationComponent = entity->GetComponent<RenderInformationComponent>();
+	
+	// Set the view and window getter functions
+	renderInformationComponent.SetViewGetterFunction([this](const Entity & entity)
+	{
+		// Since this function can only be called within the render information component, the entity must also have that component
+		return &this->GetView(entity.GetComponent<RenderInformationComponent>().GetRenderLayer());
+	});
+	renderInformationComponent.SetWindowGetterFunction([this]()
+	{
+		return &this->GetRenderWindow();
+	});
+
+	renderEntityDictionary[renderInformationComponent.GetRenderLayer()].push_back(entityId);
+}
+
+void RenderSystem::RemoveRenderEntity(Entity::HandleID entityId)
+{
+	// Get the renderNode (nullptr if if doesn't exist)
+	auto * entity = Entity::GetObjectFromID(entityId);
+
+	// If the pointed-to object no longer exists (or e.g. an invalid id has been passed)
+	if (entity == nullptr)
+		return;
+
+	// The entity must have a mbe::RenderComponent and a mbe::RenderInformationComponent
+	if (entity->HasComponent<RenderComponent>() == false
+		&& entity->HasComponent<RenderInformationComponent>() == false)
+		return;
+
+	// Get the render layer;
+	auto renderLayer = entity->GetComponent<RenderInformationComponent>().GetRenderLayer();
+	
+	// Remove the node from this layer
+	// std::find_if returns an it to the first intance for which the lambda returns true
+	auto & renderEntityIdList = renderEntityDictionary[renderLayer];
+	auto it = std::find_if(renderEntityIdList.begin(), renderEntityIdList.end(), [=](auto currentEntityId)
+	{
+		return entityId == currentEntityId;
+	});
+
+	if (it == renderEntityIdList.end())
+		throw std::runtime_error("RenderSystem: The render entity could not be found");
+
+	renderEntityIdList.erase(it);
 }
 
 void RenderSystem::Refresh()
 {
 	// Remove expired entities
 	// Entities are automatically deleted when they expire (This is much more efficient than calling RemoveRenderEntity())
-	for (auto renderLayer = RenderObject::RenderLayer::Background; renderLayer != RenderObject::RenderLayer::LayerCount; ++renderLayer)
+	for (auto & pair : renderEntityDictionary)
 	{
-		auto & renderEntityIdList = renderEntityDictionary[renderLayer];
-		for (auto it = renderEntityIdList.cbegin(); it != renderEntityIdList.cend(); )
+		auto & entityList = pair.second;
+		entityList.erase(std::remove_if(entityList.begin(), entityList.end(), [](auto currentEntityId)
 		{
-			// If the entity has been deleted, remove it from the list of rendered entities and delete the according render data instance
-			if (Entity::GetObjectFromID(*it) == nullptr)
-				it = renderEntityIdList.erase(it);
-			else
-				++it;
+			Entity * entityPtr = Entity::GetObjectFromID(currentEntityId);
+			// The second condition is not checked if the first one is true. So IsActive() is never called on nullptr
+			return entityPtr == nullptr || entityPtr->IsActive() == false;
+		}), entityList.end());
+	}
+}
+
+bool RenderSystem::IsVisible(const Entity & entity, const sf::View & view)
+{
+	//const auto & boundingBox = entity.GetComponent<RenderComponent>().GetBoundingBox();
+
+	return true;
+}
+
+void RenderSystem::SortByZOrder(std::vector<Entity::HandleID> & entityIdList)
+{
+	// Use insertion sort to sort by zOrder
+	// Insertion sort is fast for nearly sorted lists
+	// This will nearly always be the case since not many, if any object will changes between two frames
+	// Furthermore, it is a consistent sort which prevents flickering if two render nodes have the z order
+	size_t size = entityIdList.size();
+	for (size_t i = 1; i < size; i++)
+	{
+		for (size_t j = i; j > 0 && Entity::GetObjectFromID(entityIdList[j - 1])->GetComponent<RenderInformationComponent>().GetZOrder() > Entity::GetObjectFromID(entityIdList[j])->GetComponent<RenderInformationComponent>().GetZOrder(); j--)
+		{
+			std::swap(entityIdList[j], entityIdList[j - 1]);
 		}
 	}
 }

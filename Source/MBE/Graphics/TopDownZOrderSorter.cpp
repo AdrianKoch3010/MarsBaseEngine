@@ -7,24 +7,29 @@ void TopDownZOrderSorter::operator()(std::vector<Entity::HandleID> & layer)
 	// Loop through this list and assign the zOrder
 	for (const auto & topDownObjectID : layer)
 	{
-		// Get the entity
-		Entity * entity = Entity::GetObjectFromID(topDownObjectID);
-
 		// Makes sure that the entity exists (This should be guaranteed by the entity manager)
-		assert(entity != nullptr && "TopDownZOrderSorter: The entity must exists");
+		assert(Entity::GetObjectFromID(topDownObjectID) != nullptr && "TopDownZOrderSorter: The entity must exists");
 
-		// Make sure that the entity has a RenderComponent (This should always be the case)
-		assert(entity->HasComponent<RenderComponent>() && "TopDownZOrderSorter: The entity must have a mbe::RenderComponent");
+		// Get the entity
+		Entity & entity = *Entity::GetObjectFromID(topDownObjectID);
+
+		// Make sure the entity has a RenderComponent
+		/// Should this always be the case (yes when only use by the render system)
+		assert(entity.HasComponent<RenderComponent>() && "TopDownZOrderSorter: The entity must have a mbe::RenderComponent");
+
+		// Make sure the entity has a RenderInformationComponent (This should always be the case)
+		assert(entity.HasComponent<RenderInformationComponent>() && "TopDownZOrderSorter: The entity must have a mbe::RenderInformationComponent");
 
 		// Only sort entities with a mbe::TopDownInformationComponent
-		if (entity->HasComponent<TopDownInformationComponent>())
+		if (entity.HasComponent<TopDownInformationComponent>())
 		{
 			// Assign the z-order based on the objects position, height and logicalBottomOffset
-			const auto & topDownInformationComponent = entity->GetComponent<TopDownInformationComponent>();
-			auto & renderComponent = entity->GetComponent<RenderComponent>();
+			const auto & topDownInformationComponent = entity.GetComponent<TopDownInformationComponent>();
+			auto & renderComponent = entity.GetComponent<RenderComponent>();
+			auto & renderInformationComponent = entity.GetComponent<RenderInformationComponent>();
 
-			auto zOrder = renderComponent.GetBoundingBox().top + renderComponent.GetBoundingBox().height - topDownInformationComponent.GetLogicalBottomOffset();
-			renderComponent.SetZOrder(zOrder);
+			auto zOrder = renderComponent.GetGlobalBounds().top + renderComponent.GetGlobalBounds().height - topDownInformationComponent.GetLogicalBottomOffset();
+			renderInformationComponent.SetZOrder(zOrder);
 		}
 	}
 }

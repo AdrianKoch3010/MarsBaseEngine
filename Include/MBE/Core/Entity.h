@@ -133,7 +133,7 @@ namespace mbe
 	/// Furthermore <b>only ASCII</b> strings should be used.
 	class Entity : public HandleBase<Entity>, private sf::NonCopyable
 	{
-		/// @brief Enables the entity manager to use the components constructor
+		/// @brief Enables the entity manager to use the entity's constructor
 		/// @details Making the constructor protected is necessarry to ensure that the
 		/// mbe::EntityManager is the only place where entities can be created.
 		friend class EntityManager;

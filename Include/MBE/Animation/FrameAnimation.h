@@ -8,6 +8,8 @@
 #include <vector>
 #include <cassert>
 
+#include <MBE/TransformComponent.h>
+#include <MBE/Graphics/TextureWrapperComponent.h>
 
 namespace mbe
 {
@@ -100,9 +102,11 @@ namespace mbe
 
 			if (progress < 0.f)
 			{
-				target.SetTextureRect(frame.subrect);
+				//target.SetTextureRect(frame.subrect);
+				target.GetComponent<TextureWrapperComponent>().SetTextureRect(frame.subrect);
 				if (frame.applyOrigin)
-					target.SetOrigin(frame.origin);
+					//target.SetOrigin(frame.origin);
+					target.GetComponent<TransformComponent>().SetOrigin(frame.origin);
 				return;
 			}
 		}

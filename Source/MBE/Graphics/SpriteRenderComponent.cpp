@@ -2,26 +2,37 @@
 
 using namespace mbe;
 
-MBE_ENABLE_COMPONENT_POLYMORPHISM(SpriteRenderComponent, TexturedRenderComponent)
+MBE_ENABLE_COMPONENT_POLYMORPHISM(SpriteRenderComponent, RenderComponent)
 
-SpriteRenderComponent::SpriteRenderComponent(Entity & parentEntity, const TextureWrapper & textureWrapper, RenderObject::RenderLayer renderLayer) :
-	TexturedRenderComponent(parentEntity, textureWrapper, renderLayer),
-	sprite(textureWrapper.GetTexture())
+SpriteRenderComponent::SpriteRenderComponent(Entity & parentEntity) :
+	RenderComponent(parentEntity)
 {
-	assert(parentEntity.HasComponent<TransformComponent>() && "SpriteRenderComponent: The parentEntity must have a mbe::TransformComponent");
+}
+
+void SpriteRenderComponent::Update(sf::Time deltaTime)
+{
+	// Set the sprite texture and texture rect if the entity has a mbe::TextureWrapperComponent
+	// This effects the size of the sprite as well hence it should be updated outside of the draw method
+	if (parentEntity.HasComponent<TextureWrapperComponent>())
+	{
+		sprite.setTexture(parentEntity.GetComponent<TextureWrapperComponent>().GetTextureWrapper().GetTexture());
+		sprite.setTextureRect(parentEntity.GetComponent<TextureWrapperComponent>().GetTextureRect());
+	}
 }
 
 void SpriteRenderComponent::Draw(sf::RenderTarget & target) const
 {
-	sprite.setTexture(this->GetTextureWrapper().GetTexture());
-	sprite.setTextureRect(this->GetTextureRect());
-
-	target.draw(sprite, parentEntity.GetComponent<TransformComponent>().GetWorldTransform());
+	// Set the sprite position if the entity has a mbe::TransformComponent
+	auto transform = sf::Transform::Identity;
+	if (parentEntity.HasComponent<TransformComponent>())
+		transform = parentEntity.GetComponent<TransformComponent>().GetWorldTransform();
 
 	// Add effects maybe get from an effects component
+	
+	target.draw(sprite, transform);
 }
 
-sf::FloatRect SpriteRenderComponent::GetBoundingBox() const
+sf::FloatRect SpriteRenderComponent::GetLocalBounds() const
 {
-	return parentEntity.GetComponent<TransformComponent>().GetWorldTransform().transformRect(sprite.getLocalBounds());
+	return sprite.getLocalBounds();
 }

@@ -181,11 +181,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\MBE\Graphics\RenderComponent.cpp" />
+    <ClCompile Include="Source\MBE\Graphics\RenderInformationComponent.cpp" />
     <ClCompile Include="Source\MBE\Audio\MusicComponent.cpp" />
     <ClCompile Include="Source\MBE\Audio\SoundComponent.cpp" />
     <ClCompile Include="Source\MBE\Audio\BaseAudioComponent.cpp" />
-    <ClCompile Include="Source\MBE\Graphics\RenderObject.cpp" />
-    <ClCompile Include="Source\MBE\Graphics\RenderManager.cpp" />
+    <ClCompile Include="Source\MBE\Graphics\TextureWrapperComponent.cpp" />
     <ClCompile Include="Source\MBE\Input\ActionEvents.cpp" />
     <ClCompile Include="Source\MBE\Input\ActionHoldEvent.cpp" />
     <ClCompile Include="Source\MBE\Animation\AnimationComponent.cpp" />
@@ -203,12 +204,10 @@
     <ClCompile Include="Source\MBE\Input\MouseButtonReleasedEvent.cpp" />
     <ClCompile Include="Source\MBE\Animation\PitchAnimation.cpp" />
     <ClCompile Include="Source\MBE\Input\PixelMaskClickableComponent.cpp" />
-    <ClCompile Include="Source\MBE\Audio\AudioComponent.cpp" />
     <ClCompile Include="Source\MBE\Audio\AudioData.cpp" />
     <ClCompile Include="Source\MBE\Audio\SoundManager.cpp" />
     <ClCompile Include="Source\MBE\Audio\SoundSystem.cpp" />
     <ClCompile Include="Source\MBE\Graphics\SpriteRenderComponent.cpp" />
-    <ClCompile Include="Source\MBE\Graphics\TexturedRenderComponent.cpp" />
     <ClCompile Include="Source\MBE\TiledTerrain.cpp" />
     <ClCompile Include="Source\MBE\Core\Component.cpp" />
     <ClCompile Include="Source\MBE\Core\Constants.cpp" />
@@ -220,8 +219,6 @@
     <ClCompile Include="Source\MBE\Graphics\OutlineEffect.cpp" />
     <ClCompile Include="Source\MBE\Core\ParallelTask.cpp" />
     <ClCompile Include="Source\MBE\Core\PixelMask.cpp" />
-    <ClCompile Include="Source\MBE\Graphics\RenderComponent.cpp" />
-    <ClCompile Include="Source\MBE\Graphics\RenderLayer.cpp" />
     <ClCompile Include="Source\MBE\Core\EntityCreatedEvent.cpp" />
     <ClCompile Include="Source\MBE\Core\EntityRemovedEvent.cpp" />
     <ClCompile Include="Source\MBE\Graphics\RenderSystem.cpp" />
@@ -261,12 +258,10 @@
     <ClInclude Include="Include\MBE\Input\ActionBaseEvent.h" />
     <ClInclude Include="Include\MBE\Animation\PitchAnimation.h" />
     <ClInclude Include="Include\MBE\Input\PixelMaskClickableComponent.h" />
-    <ClInclude Include="Include\MBE\Audio\AudioComponent.h" />
     <ClInclude Include="Include\MBE\Audio\AudioData.h" />
     <ClInclude Include="Include\MBE\Audio\SoundManager.h" />
     <ClInclude Include="Include\MBE\Audio\SoundSystem.h" />
     <ClInclude Include="Include\MBE\Graphics\SpriteRenderComponent.h" />
-    <ClInclude Include="Include\MBE\Graphics\TexturedRenderComponent.h" />
     <ClInclude Include="Include\MBE\TiledTerrain.h" />
     <ClInclude Include="Include\MBE\Input\MouseButtonBaseEvent.h" />
     <ClInclude Include="Include\MBE\Input\MouseButtonEvents.h" />
@@ -286,7 +281,6 @@
     <ClInclude Include="Include\MBE\Core\PixelMask.h" />
     <ClInclude Include="Include\MBE\Core\RegularExpressions.h" />
     <ClInclude Include="Include\MBE\Graphics\RenderComponent.h" />
-    <ClInclude Include="Include\MBE\Graphics\RenderLayer.h" />
     <ClInclude Include="Include\MBE\Core\EntityCreatedEvent.h" />
     <ClInclude Include="Include\MBE\Core\EntityRemovedEvent.h" />
     <ClInclude Include="Include\MBE\Graphics\RenderSystem.h" />
@@ -305,10 +299,10 @@
     <ClInclude Include="Include\MBE\Graphics\TopDownZOrderSorter.h" />
     <ClInclude Include="Include\MBE\TransformComponent.h" />
     <ClInclude Include="Include\MBE\Core\Utility.h" />
-    <ClInclude Include="Include\MBE\Graphics\RenderManager.h" />
-    <ClInclude Include="Include\MBE\Graphics\RenderObject.h" />
     <ClInclude Include="Include\MBE\Audio\SoundComponent.h" />
     <ClInclude Include="Include\MBE\Audio\MusicComponent.h" />
+    <ClInclude Include="Include\MBE\Graphics\RenderInformationComponent.h" />
+    <ClInclude Include="Include\MBE\Graphics\TextureWrapperComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Main page documentation.txt" />

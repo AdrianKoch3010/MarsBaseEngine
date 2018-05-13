@@ -7,7 +7,7 @@
 #include <cassert>
 
 #include <MBE/Input/ClickableComponent.h>
-#include <MBE/Graphics/TexturedRenderComponent.h>
+#include <MBE/Graphics/TextureWrapperComponent.h>
 #include <MBE/Core/PixelMask.h>
 
 namespace mbe

@@ -13,7 +13,8 @@
 #include <MBE/Core/Entity.h>
 
 #include <MBE/TransformComponent.h>
-#include <MBE/Graphics/RenderComponent.h>
+#include <MBE/Graphics/RenderInformationComponent.h>
+#include <MBE/Graphics/RenderSystem.h>
 
 namespace mbe
 {

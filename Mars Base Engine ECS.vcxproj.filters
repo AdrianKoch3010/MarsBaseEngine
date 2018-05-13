@@ -237,9 +237,6 @@
     <ClCompile Include="Source\MBE\Input\EntityClickedEvent.cpp">
       <Filter>Quelldateien\Systems\Event System\Events</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MBE\Audio\AudioComponent.cpp">
-      <Filter>Quelldateien\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Source\MBE\Audio\AudioData.cpp">
       <Filter>Quelldateien\Systems\Audio System</Filter>
     </ClCompile>
@@ -255,19 +252,10 @@
     <ClCompile Include="Source\MBE\Graphics\OutlineEffect.cpp">
       <Filter>Quelldateien\Systems\Render System\Effects</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MBE\Graphics\RenderComponent.cpp">
-      <Filter>Quelldateien\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\MBE\Graphics\RenderLayer.cpp">
-      <Filter>Quelldateien\Systems\Render System</Filter>
-    </ClCompile>
     <ClCompile Include="Source\MBE\Graphics\RenderSystem.cpp">
       <Filter>Quelldateien\Systems\Render System</Filter>
     </ClCompile>
     <ClCompile Include="Source\MBE\Graphics\SpriteRenderComponent.cpp">
-      <Filter>Quelldateien\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\MBE\Graphics\TexturedRenderComponent.cpp">
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
     <ClCompile Include="Source\MBE\Graphics\TextureWrapper.cpp">
@@ -285,12 +273,6 @@
     <ClCompile Include="Source\MBE\Animation\PitchAnimation.cpp">
       <Filter>Quelldateien\Systems\Animation System\Animations</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MBE\Graphics\RenderManager.cpp">
-      <Filter>Quelldateien\Systems\Render System</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\MBE\Graphics\RenderObject.cpp">
-      <Filter>Quelldateien\Systems\Render System</Filter>
-    </ClCompile>
     <ClCompile Include="Source\MBE\Audio\BaseAudioComponent.cpp">
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
@@ -298,6 +280,15 @@
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
     <ClCompile Include="Source\MBE\Audio\MusicComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Graphics\RenderInformationComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Graphics\TextureWrapperComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Graphics\RenderComponent.cpp">
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -446,9 +437,6 @@
     <ClInclude Include="Include\MBE\Animation\PitchAnimation.h">
       <Filter>Headerdateien\Systems\Animation System\Animations</Filter>
     </ClInclude>
-    <ClInclude Include="Include\MBE\Audio\AudioComponent.h">
-      <Filter>Headerdateien\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Include\MBE\Audio\AudioData.h">
       <Filter>Headerdateien\Systems\Audio System</Filter>
     </ClInclude>
@@ -470,16 +458,10 @@
     <ClInclude Include="Include\MBE\Graphics\RenderComponent.h">
       <Filter>Headerdateien\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Include\MBE\Graphics\RenderLayer.h">
-      <Filter>Headerdateien\Systems\Render System</Filter>
-    </ClInclude>
     <ClInclude Include="Include\MBE\Graphics\RenderSystem.h">
       <Filter>Headerdateien\Systems\Render System</Filter>
     </ClInclude>
     <ClInclude Include="Include\MBE\Graphics\SpriteRenderComponent.h">
-      <Filter>Headerdateien\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\MBE\Graphics\TexturedRenderComponent.h">
       <Filter>Headerdateien\Components</Filter>
     </ClInclude>
     <ClInclude Include="Include\MBE\Graphics\TextureWrapper.h">
@@ -497,12 +479,6 @@
     <ClInclude Include="Include\MBE\Core\Utility.h">
       <Filter>Headerdateien\Framework\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="Include\MBE\Graphics\RenderManager.h">
-      <Filter>Headerdateien\Systems\Render System</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\MBE\Graphics\RenderObject.h">
-      <Filter>Headerdateien\Systems\Render System</Filter>
-    </ClInclude>
     <ClInclude Include="Include\MBE\Audio\BaseAudioComponent.h">
       <Filter>Headerdateien\Components</Filter>
     </ClInclude>
@@ -510,6 +486,12 @@
       <Filter>Headerdateien\Components</Filter>
     </ClInclude>
     <ClInclude Include="Include\MBE\Audio\MusicComponent.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Graphics\RenderInformationComponent.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Graphics\TextureWrapperComponent.h">
       <Filter>Headerdateien\Components</Filter>
     </ClInclude>
   </ItemGroup>
