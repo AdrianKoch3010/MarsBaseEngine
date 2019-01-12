@@ -6,7 +6,6 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <unordered_map>
 #include <memory>
 #include <algorithm>
 
@@ -26,7 +25,7 @@ namespace mbe
 		friend class Entity;
 
 	private:
-		typedef std::unordered_map<detail::ComponentTypeID, std::vector<Entity::HandleID>> EntityGroupDictionary;
+		typedef std::map<detail::ComponentTypeID, std::vector<Entity::HandleID>> EntityGroupDictionary;
 
 	public:
 		/// @brief Default constructor
@@ -79,6 +78,8 @@ namespace mbe
 		// If done so the entity manager might add an entity to a group that the entity itself is not added to
 		void AddEntityToGroup(const Entity & entity, Entity::Group groupId);
 
+		// This method is private since it should never be called directly
+		// If done so the entity might be added to a component group of a component that it doesn't have
 		void AddEntityToGroup(const Entity & entity, detail::ComponentTypeID componentTypeId);
 
 	private:

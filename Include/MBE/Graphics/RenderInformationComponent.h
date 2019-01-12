@@ -65,6 +65,13 @@ namespace mbe
 
 		void ResetWindowGetterFunction();
 
+		// Returns true if the passed in render information component would be drawn above this
+		bool IsAboveOrEqual(const RenderInformationComponent & renderInformationComponent) const;
+
+	public:
+		// Returns true if is a is above or equal b
+		static bool IsAboveOrEqual(const RenderInformationComponent & a, const RenderInformationComponent & b);
+
 	private:
 		RenderLayer renderLayer;
 		float zOrder;
@@ -75,5 +82,17 @@ namespace mbe
 	using RenderLayer = RenderInformationComponent::RenderLayer;
 
 	RenderLayer operator++ (RenderLayer & renderLayer);
-	
+
+	bool operator == (RenderLayer a, RenderLayer b);
+
+	bool operator != (RenderLayer a, RenderLayer b);
+
+	bool operator > (RenderLayer a, RenderLayer b);
+
+	bool operator < (RenderLayer a, RenderLayer b);
+
+	bool operator >= (RenderLayer a, RenderLayer b);
+
+	bool operator <= (RenderLayer a, RenderLayer b);
+
 } // namespace mbe

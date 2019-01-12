@@ -37,7 +37,12 @@ namespace mbe
 		void RemoveConnectedClickableEntity(Entity::HandleID entityId);
 
 		// The entity ids contained by this list are not guaranteed to exist
+		// The parent entity is always part of that list
 		inline const std::set<Entity::HandleID> & GetConnectedClickableIdList() const { return connectedClickableEntityIdList; }
+
+		inline void SetAbsorbeClick(bool value = true) { absorbeClick = value; }
+
+		inline const bool IsClickAbsorebd() const { return absorbeClick; }
 
 	private:
 		// Is this necessarry?
@@ -48,6 +53,8 @@ namespace mbe
 		// make sure that the list only goes one way - to avoid infinite loops
 		// The set guarantees that there no entity id can be inserted multiple times.
 		std::set<Entity::HandleID> connectedClickableEntityIdList;
+
+		bool absorbeClick;
 	};
 
 } // namespace mbe

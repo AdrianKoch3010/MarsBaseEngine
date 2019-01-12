@@ -36,6 +36,9 @@ namespace mbe
 		// Reverses view and entity transfroms based on the entity's components
 		sf::Vector2f CalculatePosition(const Entity & entity, sf::Vector2f clickPosition);
 
+		// Raise the mbe::event::EntityClickedEvent for the clicked entity and every entity connected to it
+		void RaiseConnectedClickEvents(const ClickableComponent & clickableComponent, sf::Mouse::Button button);
+
 	private:
 		EventManager & eventManager;
 		EntityManager & entityManager;

@@ -2,7 +2,8 @@
 
 using namespace mbe;
 
-ClickableComponent::ClickableComponent(Entity & parentEntity) : Component(parentEntity)
+ClickableComponent::ClickableComponent(Entity & parentEntity) : Component(parentEntity),
+	absorbeClick(false)
 {
 	connectedClickableEntityIdList.insert(parentEntity.GetHandleID());
 }
@@ -14,6 +15,8 @@ void ClickableComponent::AddConnectedClickableEntity(Entity::HandleID entityId)
 
 void ClickableComponent::RemoveConnectedClickableEntity(Entity::HandleID entityId)
 {
+	// Should be able to remove parent entity
+
 	connectedClickableEntityIdList.erase(entityId);
 }
 
