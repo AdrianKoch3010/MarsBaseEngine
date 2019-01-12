@@ -20,8 +20,7 @@ ClickableSystem::~ClickableSystem()
 
 void ClickableSystem::OnClick(sf::Vector2f clickPosition, sf::Mouse::Button button)
 {
-	// Provided by entity manager / managed by this through EntityCreatedEvent
-	const auto & clickableEntities = entityManager.GetGroup("Clickable");
+	const auto & clickableEntities = entityManager.GetComponentGroup<ClickableComponent>();
 
 	for (const auto entityId : clickableEntities)
 	{

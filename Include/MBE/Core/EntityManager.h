@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <unordered_map>
 #include <memory>
 #include <algorithm>
 
@@ -23,6 +24,9 @@ namespace mbe
 	{
 		/// @brief Enables the entity to access the entity managers AddEntityToGroup() method
 		friend class Entity;
+
+	private:
+		typedef std::unordered_map<detail::ComponentTypeID, std::vector<Entity::HandleID>> EntityGroupDictionary;
 
 	public:
 		/// @brief Default constructor
@@ -62,18 +66,25 @@ namespace mbe
 		// The group id is not case sensitive - ASCII only
 		const std::vector<Entity::HandleID>& GetGroup(Entity::Group groupId) const;
 
-	protected:
+		// Returns a list of all entities that have component TComponent
+		template <class TComponent>
+		const std::vector<Entity::HandleID>& GetComponentGroup() const;
+
+	private:
 		/// @brief Deletes all inactive entities
 		/// @details Entities are set inactive when calling the mbe::Entity::Destroy() method
 		void Refresh();
 
-		// This method is protected since it should never be called directly
+		// This method is private since it should never be called directly
 		// If done so the entity manager might add an entity to a group that the entity itself is not added to
-		void AddEntityToGroup(Entity::HandleID entityId, Entity::Group groupId);
+		void AddEntityToGroup(const Entity & entity, Entity::Group groupId);
+
+		void AddEntityToGroup(const Entity & entity, detail::ComponentTypeID componentTypeId);
 
 	private:
 		std::vector<std::unique_ptr<Entity>> entityList;
 		mutable std::map<Entity::Group, std::vector<Entity::HandleID>> entityGroups;
+		mutable EntityGroupDictionary entityGroupDictionary;
 	};
 
 #pragma region Template Implementations
@@ -95,6 +106,17 @@ namespace mbe
 		// The returned reference just for user convenience (note that the unique_ptr entity has already been moved thus its empty)
 		return *rawEntity;
 		// Implicetly delete the obsolete/empty unique pointer
+	}
+
+	template<class TComponent>
+	inline const std::vector<Entity::HandleID>& EntityManager::GetComponentGroup() const
+	{
+		// Make sure that only Components are added as type id keys for the dictionary
+		static_assert(std::is_base_of<Component, TComponent>::value, "EntityManager: TComponent must inherit from mbe::Component");
+		static_assert(std::is_same<Component, TComponent>::value == false, "EntityManager: TComponent must inherit from mbe::Component");
+
+		// If no entity with this component has been added, the does not exist and an empty std::vector is inserted and returned for that key
+		return entityGroupDictionary[detail::GetComponentTypeID<TComponent>()];
 	}
 
 #pragma endregion

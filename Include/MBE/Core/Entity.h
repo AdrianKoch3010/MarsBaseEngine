@@ -183,6 +183,7 @@ namespace mbe
 		TComponent & GetComponent() const;
 
 		/// @brief Returns true if the Entity has the requested component, flase otherwise
+		/// @details If an entity has comonent TComponent, it will also be in the corresponding entity group
 		/// @tparam T The type of the requested component
 		template <class TComponent>
 		bool HasComponent() const;
@@ -265,6 +266,8 @@ namespace mbe
 
 		componentList.push_back(component);
 		componentDictionary.insert(std::make_pair(typeId, component));
+
+		entityManager.AddEntityToGroup(*this, typeId);
 
 		this->AddPolymorphism(typeId, component);
 

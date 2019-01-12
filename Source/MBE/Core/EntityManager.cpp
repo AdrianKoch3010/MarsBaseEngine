@@ -60,18 +60,28 @@ Entity & EntityManager::CreateEntity()
 	// Implicetly delete the obsolete/empty unique pointer
 }
 
-void EntityManager::AddEntityToGroup(Entity::HandleID entityId, Entity::Group groupId)
+void EntityManager::AddEntityToGroup(const Entity & entity, Entity::Group groupId)
 {
 	NormaliseIDString(groupId);
 
-	entityGroups[groupId].push_back(entityId);
+	entityGroups[groupId].push_back(entity.GetHandleID());
+}
+
+void EntityManager::AddEntityToGroup(const Entity & entity, detail::ComponentTypeID componentTypeId)
+{
+	entityGroupDictionary[componentTypeId].push_back(entity.GetHandleID());
 }
 
 const std::vector<Entity::HandleID>& EntityManager::GetGroup(Entity::Group groupId) const
 {
 	NormaliseIDString(groupId);
 
-	// This creates a new empty std::vector if a groupId is passed that does not exist
-	// This may lead to unnecessary memory usage
-	return entityGroups[groupId];
+	const auto & it = entityGroups.find(groupId);
+
+	// If the group id has not been found, an emtpy list is returned
+	// This is better than using the [] operator since no emtpy vector is inserted into the dictionary for nonsense keys
+	if (it == entityGroups.cend())
+		return std::vector<Entity::HandleID>();
+
+	return it->second;
 }

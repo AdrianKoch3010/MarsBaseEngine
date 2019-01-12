@@ -51,7 +51,7 @@ void Entity::AddToGroup(Group groupId)
 	NormaliseIDString(groupId);
 
 	groupList.push_back(groupId);
-	entityManager.AddEntityToGroup(this->GetHandleID(), groupId);
+	entityManager.AddEntityToGroup(*this, groupId);
 }
 
 void Entity::RemoveFromGroup(Group groupId)
@@ -131,5 +131,8 @@ void Entity::AddPolymorphism(detail::ComponentTypeID typeId, Component::Ptr comp
 		// (inheriting from the same base component) has already been added.
 		assert(componentDictionary.find(baseComponentTypeId) == componentDictionary.end() && "Entity: The base component already exists");
 		componentDictionary.insert(std::make_pair(baseComponentTypeId, component));
+
+		// Add it to the entity group for this component type
+		entityManager.AddEntityToGroup(*this, baseComponentTypeId);
 	}
 }
