@@ -3,10 +3,9 @@
 using namespace mbe;
 using mbe::event::MouseButtonReleasedEvent;
 
-ClickableSystem::ClickableSystem(EventManager & eventManager, EntityManager & entityManager, RenderSystem & renderSystem) :
+ClickableSystem::ClickableSystem(EventManager & eventManager, EntityManager & entityManager) :
 	eventManager(eventManager),
-	entityManager(entityManager),
-	renderSystem(renderSystem)
+	entityManager(entityManager)
 {
 	onClickSubscription = eventManager.Subscribe(EventManager::TCallback<MouseButtonReleasedEvent>([this](const MouseButtonReleasedEvent & event)
 	{
@@ -53,16 +52,17 @@ void ClickableSystem::OnClick(sf::Vector2f clickPosition, sf::Mouse::Button butt
 	}
 }
 
+
 sf::Vector2f ClickableSystem::CalculatePosition(const Entity & entity, sf::Vector2f clickPosition)
 {
 	if (entity.HasComponent<ClickableComponent>() && entity.HasComponent<TransformComponent>() && entity.HasComponent<RenderInformationComponent>())
 	{
 		const auto & transformComponent = entity.GetComponent<TransformComponent>();
 		const auto & renderInformationComponent = entity.GetComponent<RenderInformationComponent>();
-		const auto & view = renderSystem.GetView(renderInformationComponent.GetRenderLayer());
+		const auto & view = *renderInformationComponent.GetView();
 
 		// Reverse the view transform
-		clickPosition = renderSystem.GetRenderWindow().mapPixelToCoords(static_cast<sf::Vector2i>(clickPosition), view);
+		clickPosition = renderInformationComponent.GetRenderWindow()->mapPixelToCoords(static_cast<sf::Vector2i>(clickPosition), view);
 		// Reverse the entity transform
 		clickPosition = transformComponent.GetWorldTransform().getInverse().transformPoint(clickPosition);
 	}

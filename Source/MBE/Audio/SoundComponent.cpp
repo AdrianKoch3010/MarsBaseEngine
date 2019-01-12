@@ -6,7 +6,8 @@ MBE_ENABLE_COMPONENT_POLYMORPHISM(SoundComponent, BaseAudioComponent)
 
 SoundComponent::SoundComponent(Entity & parentEntity, const sf::SoundBuffer & soundBuffer) :
 	BaseAudioComponent(parentEntity),
-	soundBuffer(soundBuffer)
+	soundBuffer(soundBuffer),
+	sound(soundBuffer)
 {
 }
 
@@ -61,7 +62,7 @@ void SoundComponent::SetAttenuation(float value)
 
 void SoundComponent::SetMinDistance(float value)
 {
-	sound.setMinDistance(Convert3DTo2DMinDistance(value));
+	sound.setMinDistance(AudioData::Convert3DTo2DMinDistance(value));
 }
 
 void SoundComponent::SetVolume(float value)
@@ -91,7 +92,7 @@ float SoundComponent::GetAttenuation()
 
 float SoundComponent::GetMinDistance()
 {
-	return Convert3DTo2DMinDistance(sound.getMinDistance());
+	return AudioData::Convert3DTo2DMinDistance(sound.getMinDistance());
 }
 
 float SoundComponent::GetVolume()
@@ -114,7 +115,7 @@ float SoundComponent::IsLooped()
 	return sound.getLoop();
 }
 
-BaseAudioComponent::AudioStatus SoundComponent::GetAudioStatus()
+AudioData::AudioStatus SoundComponent::GetAudioStatus()
 {
 	switch (sound.getStatus())
 	{

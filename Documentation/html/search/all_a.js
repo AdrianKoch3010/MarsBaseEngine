@@ -25,5 +25,7 @@ var searchData=
   ['mousebuttonpressedevent_2eh',['MouseButtonPressedEvent.h',['../_mouse_button_pressed_event_8h.html',1,'']]],
   ['mousebuttonreleasedevent',['MouseButtonReleasedEvent',['../classmbe_1_1event_1_1_mouse_button_released_event.html',1,'mbe::event']]],
   ['mousebuttonreleasedevent_2eh',['MouseButtonReleasedEvent.h',['../_mouse_button_released_event_8h.html',1,'']]],
-  ['mousebuttonstringdictionary',['mouseButtonStringDictionary',['../namespacembe.html#a377c00f435f5a0c19515b3bd52c04227',1,'mbe']]]
+  ['mousebuttonstringdictionary',['mouseButtonStringDictionary',['../namespacembe.html#a377c00f435f5a0c19515b3bd52c04227',1,'mbe']]],
+  ['musiccomponent',['MusicComponent',['../classmbe_1_1_music_component.html',1,'mbe']]],
+  ['musiccomponent_2eh',['MusicComponent.h',['../_music_component_8h.html',1,'']]]
 ];

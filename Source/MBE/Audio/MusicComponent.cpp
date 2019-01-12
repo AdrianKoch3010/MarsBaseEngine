@@ -64,7 +64,7 @@ void MusicComponent::SetAttenuation(float value)
 
 void MusicComponent::SetMinDistance(float value)
 {
-	music.setMinDistance(Convert3DTo2DMinDistance(value));
+	music.setMinDistance(AudioData::Convert3DTo2DMinDistance(value));
 }
 
 void MusicComponent::SetVolume(float value)
@@ -94,7 +94,7 @@ float MusicComponent::GetAttenuation()
 
 float MusicComponent::GetMinDistance()
 {
-	return Convert3DTo2DMinDistance(music.getMinDistance());
+	return AudioData::Convert3DTo2DMinDistance(music.getMinDistance());
 }
 
 float MusicComponent::GetVolume()
@@ -117,7 +117,7 @@ float MusicComponent::IsLooped()
 	return music.getLoop();
 }
 
-BaseAudioComponent::AudioStatus MusicComponent::GetAudioStatus()
+AudioData::AudioStatus MusicComponent::GetAudioStatus()
 {
 	switch (music.getStatus())
 	{

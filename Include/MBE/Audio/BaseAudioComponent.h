@@ -14,7 +14,8 @@
 
 #include <MBE/TransformComponent.h>
 #include <MBE/Graphics/RenderInformationComponent.h>
-#include <MBE/Graphics/RenderSystem.h>
+
+#include <MBE/Audio/AudioData.h>
 
 namespace mbe
 {
@@ -22,21 +23,15 @@ namespace mbe
 	class BaseAudioComponent : public Component
 	{
 	public:
-		enum class AudioStatus : unsigned short int
-		{
-			Playing,
-			Paused,
-			Stopped
-		};
-
-	public:
 		typedef std::shared_ptr<BaseAudioComponent> Ptr;
 		typedef std::weak_ptr<BaseAudioComponent> WPtr;
 		typedef std::unique_ptr<BaseAudioComponent> UPtr;
 
+		typedef AudioData::AudioStatus AudioStatus;
+
 	public:
 		BaseAudioComponent(Entity & parentEntity);
-		virtual ~BaseAudioComponent() = default;
+		virtual ~BaseAudioComponent();
 
 	public:
 		virtual void Play() = 0;
@@ -74,29 +69,6 @@ namespace mbe
 	protected:
 		// Logic that depends on Audio, Transform and RenderInformation / View Components
 		sf::Vector2f CalculatePosition();
-
-	public:
-		static void SetListenerPosition(const sf::Vector2f & position);
-
-		inline static void SetListenerZPosition(float value) { listenerZ = value; }
-
-		static sf::Vector2f GetListenerPosition();
-
-		inline static float GetListenerZPosition() { return listenerZ; }
-
-		inline static unsigned short int GetCurrentNumberOfSounds() { return totalNumberOfSounds; }
-
-		static float Convert2DTo3DMinDistance(float minDistance2d);
-
-		static float Convert3DTo2DMinDistance(float minDistance3d);
-
-		inline static unsigned short int GetMaxNumberOfSounds() { return maxNumberOfSounds; }
-
-	private:
-		static float listenerZ;
-
-		static unsigned short int totalNumberOfSounds;
-		static const unsigned short int maxNumberOfSounds;
 	};
 
 } // namespace mbe

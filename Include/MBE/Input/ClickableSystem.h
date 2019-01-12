@@ -10,7 +10,6 @@
 #include <MBE/Input/ClickableComponent.h>
 #include <MBE/Input/MouseButtonReleasedEvent.h>
 #include <MBE/Input/EntityClickedEvent.h>
-#include <MBE/Graphics/RenderSystem.h>
 #include <MBE/Graphics/RenderInformationComponent.h>
 #include <MBE/TransformComponent.h>
 
@@ -28,7 +27,7 @@ namespace mbe
 	class ClickableSystem
 	{
 	public:
-		ClickableSystem(EventManager & eventManager, EntityManager & entityManager, RenderSystem & renderSystem);
+		ClickableSystem(EventManager & eventManager, EntityManager & entityManager);
 		~ClickableSystem();
 
 	private:
@@ -40,7 +39,6 @@ namespace mbe
 	private:
 		EventManager & eventManager;
 		EntityManager & entityManager;
-		RenderSystem & renderSystem;
 
 		EventManager::SubscriptionID onClickSubscription;
 	};

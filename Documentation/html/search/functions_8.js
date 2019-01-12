@@ -12,6 +12,7 @@ var searchData=
   ['intvalue',['IntValue',['../classtinyxml2_1_1_x_m_l_attribute.html#adfa2433f0fdafd5c3880936de9affa80',1,'tinyxml2::XMLAttribute']]],
   ['isactionactive',['IsActionActive',['../classmbe_1_1_input_handler.html#a64594f498aef1262d3e323ad2353117d',1,'mbe::InputHandler']]],
   ['isactive',['IsActive',['../classmbe_1_1_animator.html#a9b63a93d8ede71bc4a5cff07ed9db4fd',1,'mbe::Animator::IsActive()'],['../classmbe_1_1_animator_3_01_t_animated_00_01std_1_1string_01_4.html#a1a6ac40741fd5bdcbcd4ec463f44a0af',1,'mbe::Animator&lt; TAnimated, std::string &gt;::IsActive()'],['../classmbe_1_1_entity.html#ac3e66dbf9fbc26d685d8714428ab4f4a',1,'mbe::Entity::IsActive()']]],
+  ['isingroup',['IsInGroup',['../classmbe_1_1_entity.html#a46fe71478f5bb14c42ef060738b3cc66',1,'mbe::Entity']]],
   ['isotocartesian',['IsoToCartesian',['../namespacembe.html#aa757076606ccf162a3d2405837de386b',1,'mbe']]],
   ['isplayinganimation',['IsPlayingAnimation',['../classmbe_1_1_animator.html#a9a48259ba89c4067db509b08b1966d59',1,'mbe::Animator::IsPlayingAnimation()'],['../classmbe_1_1_animator_3_01_t_animated_00_01std_1_1string_01_4.html#ac69d8ecd40309346b4f1d22ba5c9c1dc',1,'mbe::Animator&lt; TAnimated, std::string &gt;::IsPlayingAnimation()']]],
   ['isstatestackempty',['IsStateStackEmpty',['../classmbe_1_1_state_manager.html#a5990def1ae26e6578bc81b663c15df9c',1,'mbe::StateManager']]]

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['renderlayer',['RenderLayer',['../classmbe_1_1_render_component.html#a37723c7c8175fc6af4d6a18a620d107b',1,'mbe::RenderComponent']]]
+  ['renderlayer',['RenderLayer',['../classmbe_1_1_render_information_component.html#a95bf04c3be90708e7cf77c4d82279478',1,'mbe::RenderInformationComponent']]]
 ];

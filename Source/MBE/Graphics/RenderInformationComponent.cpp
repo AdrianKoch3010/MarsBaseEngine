@@ -22,6 +22,16 @@ const sf::RenderWindow * RenderInformationComponent::GetRenderWindow() const
 	return windowGetterFunction();
 }
 
+void RenderInformationComponent::ResetViewGetterFunction()
+{
+	viewGetterFunction = [](const Entity & entity) {return nullptr; };
+}
+
+void RenderInformationComponent::ResetWindowGetterFunction()
+{
+	windowGetterFunction = []() {return nullptr; };
+}
+
 RenderLayer mbe::operator++(RenderLayer & renderLayer)
 {
 	return renderLayer = static_cast<RenderLayer>(static_cast<std::underlying_type<RenderLayer>::type>(renderLayer) + 1);

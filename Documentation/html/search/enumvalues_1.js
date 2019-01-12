@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['foreground',['Foreground',['../classmbe_1_1_render_component.html#a37723c7c8175fc6af4d6a18a620d107ba169ac37528c611312cc8de374d216c54',1,'mbe::RenderComponent']]]
+  ['foreground',['Foreground',['../classmbe_1_1_render_information_component.html#a95bf04c3be90708e7cf77c4d82279478a45bd1d5b32931106efbf1a82fe6a732f',1,'mbe::RenderInformationComponent']]]
 ];

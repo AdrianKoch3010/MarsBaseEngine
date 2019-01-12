@@ -66,10 +66,12 @@ $(function() {
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#friends">Friends</a> &#124;
 <a href="classmbe_1_1_component-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">mbe::Component Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">mbe::Component Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -83,17 +85,14 @@ Inheritance diagram for mbe::Component:</div>
  <div class="center">
   <img src="classmbe_1_1_component.png" usemap="#mbe::Component_map" alt=""/>
   <map id="mbe::Component_map" name="mbe::Component_map">
-<area href="classmbe_1_1_animation_component.html" alt="mbe::AnimationComponent" shape="rect" coords="0,112,246,136"/>
-<area href="classmbe_1_1_audio_component.html" alt="mbe::AudioComponent" shape="rect" coords="256,112,502,136"/>
-<area href="classmbe_1_1_clickable_component.html" alt="mbe::ClickableComponent" shape="rect" coords="512,112,758,136"/>
-<area href="classmbe_1_1_render_component.html" alt="mbe::RenderComponent" shape="rect" coords="896,112,1142,136"/>
-<area href="classmbe_1_1_tiled_terrain_layer_component.html" alt="mbe::TiledTerrainLayerComponent" shape="rect" coords="1152,112,1398,136"/>
-<area href="classmbe_1_1_top_down_information_component.html" alt="mbe::TopDownInformationComponent" shape="rect" coords="1408,112,1654,136"/>
-<area href="classmbe_1_1_transform_component.html" alt="mbe::TransformComponent" shape="rect" coords="1664,112,1910,136"/>
-<area href="classmbe_1_1_pixel_mask_clickable_component.html" alt="mbe::PixelMaskClickableComponent" shape="rect" coords="512,168,758,192"/>
-<area href="classmbe_1_1_textured_render_component.html" alt="mbe::TexturedRenderComponent" shape="rect" coords="768,168,1014,192"/>
-<area href="classmbe_1_1_tiled_terrain_layer_render_component.html" alt="mbe::TiledTerrainLayerRenderComponent" shape="rect" coords="1024,168,1270,192"/>
-<area href="classmbe_1_1_sprite_render_component.html" alt="mbe::SpriteRenderComponent" shape="rect" coords="768,224,1014,248"/>
+<area href="classmbe_1_1_animation_component.html" alt="mbe::AnimationComponent" shape="rect" coords="229,112,448,136"/>
+<area href="classmbe_1_1_base_audio_component.html" alt="mbe::BaseAudioComponent" shape="rect" coords="229,168,448,192"/>
+<area href="classmbe_1_1_clickable_component.html" alt="mbe::ClickableComponent" shape="rect" coords="229,224,448,248"/>
+<area href="classmbe_1_1_render_component.html" alt="mbe::RenderComponent" shape="rect" coords="229,280,448,304"/>
+<area href="classmbe_1_1_render_information_component.html" alt="mbe::RenderInformationComponent" shape="rect" coords="229,336,448,360"/>
+<area href="classmbe_1_1_texture_wrapper_component.html" alt="mbe::TextureWrapperComponent" shape="rect" coords="229,392,448,416"/>
+<area href="classmbe_1_1_top_down_information_component.html" alt="mbe::TopDownInformationComponent" shape="rect" coords="229,448,448,472"/>
+<area href="classmbe_1_1_transform_component.html" alt="mbe::TransformComponent" shape="rect" coords="229,504,448,528"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -111,35 +110,47 @@ typedef std::unique_ptr&lt; <a class="el" href="classmbe_1_1_component.html">Com
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad9c48e04e930f700f1ef293588b3527b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_component.html#ad9c48e04e930f700f1ef293588b3527b">Component</a> (<a class="el" href="classmbe_1_1_entity.html">Entity</a> &amp;parentEntity)</td></tr>
-<tr class="memdesc:ad9c48e04e930f700f1ef293588b3527b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#ad9c48e04e930f700f1ef293588b3527b">More...</a><br /></td></tr>
-<tr class="separator:ad9c48e04e930f700f1ef293588b3527b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3eb489a43075c453319ffe800b5c7a4"><td class="memItemLeft" align="right" valign="top"><a id="ab3eb489a43075c453319ffe800b5c7a4"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_component.html#ab3eb489a43075c453319ffe800b5c7a4">~Component</a> ()=default</td></tr>
 <tr class="memdesc:ab3eb489a43075c453319ffe800b5c7a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor. <br /></td></tr>
 <tr class="separator:ab3eb489a43075c453319ffe800b5c7a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c75d3234fae7f7fb00808afc68d8517"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_component.html#a0c75d3234fae7f7fb00808afc68d8517">Update</a> (sf::Time frameTime)=0</td></tr>
-<tr class="memdesc:a0c75d3234fae7f7fb00808afc68d8517"><td class="mdescLeft">&#160;</td><td class="mdescRight">Purely virtual function to update the component that should be called every frame.  <a href="#a0c75d3234fae7f7fb00808afc68d8517">More...</a><br /></td></tr>
-<tr class="separator:a0c75d3234fae7f7fb00808afc68d8517"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a710ebbe46c5ec9712e748abad72c199f"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_component.html#a710ebbe46c5ec9712e748abad72c199f">Update</a> (sf::Time frameTime)</td></tr>
+<tr class="memdesc:a710ebbe46c5ec9712e748abad72c199f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual function to update the component that should be called every frame  This method can but does not have to be overwritten in derived components and is guaranteed to be called once each frame.  <a href="#a710ebbe46c5ec9712e748abad72c199f">More...</a><br /></td></tr>
+<tr class="separator:a710ebbe46c5ec9712e748abad72c199f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a40a4144bbb6bf794d8b36b06810befce"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmbe_1_1_entity.html">Entity</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_component.html#a40a4144bbb6bf794d8b36b06810befce">GetParentEntity</a> () const</td></tr>
 <tr class="memdesc:a40a4144bbb6bf794d8b36b06810befce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the entity to which this component belongs.  <a href="#a40a4144bbb6bf794d8b36b06810befce">More...</a><br /></td></tr>
 <tr class="separator:a40a4144bbb6bf794d8b36b06810befce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ad9c48e04e930f700f1ef293588b3527b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_component.html#ad9c48e04e930f700f1ef293588b3527b">Component</a> (<a class="el" href="classmbe_1_1_entity.html">Entity</a> &amp;parentEntity)</td></tr>
+<tr class="memdesc:ad9c48e04e930f700f1ef293588b3527b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#ad9c48e04e930f700f1ef293588b3527b">More...</a><br /></td></tr>
+<tr class="separator:ad9c48e04e930f700f1ef293588b3527b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a6af84d005d1c0e94f34e010f0f468b0f"><td class="memItemLeft" align="right" valign="top"><a id="a6af84d005d1c0e94f34e010f0f468b0f"></a>
 <a class="el" href="classmbe_1_1_entity.html">Entity</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>parentEntity</b></td></tr>
 <tr class="separator:a6af84d005d1c0e94f34e010f0f468b0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+Friends</h2></td></tr>
+<tr class="memitem:a614439ccac0344926adc4c0165d64060"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_component.html#a614439ccac0344926adc4c0165d64060">Entity</a></td></tr>
+<tr class="memdesc:a614439ccac0344926adc4c0165d64060"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables an entity to use the components constructor.  <a href="#a614439ccac0344926adc4c0165d64060">More...</a><br /></td></tr>
+<tr class="separator:a614439ccac0344926adc4c0165d64060"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The base class for all components. </p>
-<p>Components can be added to a <a class="el" href="classmbe_1_1_entity.html" title="An Object that can have multiple Components. ">mbe::Entity</a>. They encapsulate one specific functionality and provide an interface for accessing that functionality through the <a class="el" href="classmbe_1_1_entity.html#ae24ad54c0116fdcc8b96d457333f5840" title="Returns a refernce to the requested component. ">mbe::Entity::GetComponent()</a> function. A component may require its parent entity to have/provide one or more other components of a specific type. </p><dl class="section warning"><dt>Warning</dt><dd>Components should only be created using the <a class="el" href="classmbe_1_1_entity.html#adff817339f38213ed42ad8e480fe1de5" title="Creates a component and adds it to the component list. ">mbe::Entity::AddComponent()</a> function. Otherwise, it cannot be guaranteed that their <a class="el" href="classmbe_1_1_component.html#a0c75d3234fae7f7fb00808afc68d8517" title="Purely virtual function to update the component that should be called every frame. ">Update()</a> methods will be called correctly </dd></dl>
+<p>Components can be added to a <a class="el" href="classmbe_1_1_entity.html" title="An Object that can have multiple Components. ">mbe::Entity</a>. They encapsulate one specific functionality and provide an interface for accessing that functionality through the <a class="el" href="classmbe_1_1_entity.html#ae24ad54c0116fdcc8b96d457333f5840" title="Returns a refernce to the requested component. ">mbe::Entity::GetComponent()</a> function. A component may require its parent entity to have/provide one or more other components of a specific type. </p><dl class="section warning"><dt>Warning</dt><dd>Components should only be created using the <a class="el" href="classmbe_1_1_entity.html#adff817339f38213ed42ad8e480fe1de5" title="Creates a component and adds it to the component list. ">mbe::Entity::AddComponent()</a> function. Otherwise, it cannot be guaranteed that their <a class="el" href="classmbe_1_1_component.html#a710ebbe46c5ec9712e748abad72c199f" title="Virtual function to update the component that should be called every frame  This method can but does ...">Update()</a> methods will be called correctly </dd></dl>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad9c48e04e930f700f1ef293588b3527b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad9c48e04e930f700f1ef293588b3527b">&#9670;&nbsp;</a></span>Component()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Component::Component </td>
@@ -149,6 +160,11 @@ Protected Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Constructor. </p>
@@ -190,8 +206,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a0c75d3234fae7f7fb00808afc68d8517"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c75d3234fae7f7fb00808afc68d8517">&#9670;&nbsp;</a></span>Update()</h2>
+<a id="a710ebbe46c5ec9712e748abad72c199f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a710ebbe46c5ec9712e748abad72c199f">&#9670;&nbsp;</a></span>Update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -209,12 +225,12 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Purely virtual function to update the component that should be called every frame. </p>
+<p>Virtual function to update the component that should be called every frame  This method can but does not have to be overwritten in derived components and is guaranteed to be called once each frame. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">frameTime</td><td>The delta time between two successive frames </td></tr>
@@ -222,7 +238,33 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classmbe_1_1_animation_component.html#a34ee989b0b1eff8e64c975d066a3ef56">mbe::AnimationComponent</a>, <a class="el" href="classmbe_1_1_render_component.html#acfabe10d8056a6ac5263b7f3c35e691a">mbe::RenderComponent</a>, <a class="el" href="classmbe_1_1_audio_component.html#adb6faf9512b26b579c8de7671793b6bb">mbe::AudioComponent</a>, <a class="el" href="classmbe_1_1_clickable_component.html#abb673fa641da6a5de38c15e0967708d7">mbe::ClickableComponent</a>, <a class="el" href="classmbe_1_1_tiled_terrain_layer_component.html#aac87b71f361ed7c4eb17ca4a829682da">mbe::TiledTerrainLayerComponent</a>, <a class="el" href="classmbe_1_1_top_down_information_component.html#ac2700bad5ee0b249d23720a9aa8e4078">mbe::TopDownInformationComponent</a>, and <a class="el" href="classmbe_1_1_transform_component.html#a67f63e6e213626c2a9e2c94160d2e572">mbe::TransformComponent</a>.</p>
+<p>Reimplemented in <a class="el" href="classmbe_1_1_animation_component.html#a87ea74ba942095b02154bbe62b5c0419">mbe::AnimationComponent</a>, <a class="el" href="classmbe_1_1_clickable_component.html#abb673fa641da6a5de38c15e0967708d7">mbe::ClickableComponent</a>, <a class="el" href="classmbe_1_1_music_component.html#af8f6b6e2136148c536be29ed409e1256">mbe::MusicComponent</a>, <a class="el" href="classmbe_1_1_sound_component.html#a3ad4a29ebb7e026f4bc3291cd3d38c7e">mbe::SoundComponent</a>, <a class="el" href="classmbe_1_1_sprite_render_component.html#a30838218c18486e4878580072406c313">mbe::SpriteRenderComponent</a>, <a class="el" href="classmbe_1_1_top_down_information_component.html#ac2700bad5ee0b249d23720a9aa8e4078">mbe::TopDownInformationComponent</a>, and <a class="el" href="classmbe_1_1_transform_component.html#a67f63e6e213626c2a9e2c94160d2e572">mbe::TransformComponent</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Friends And Related Function Documentation</h2>
+<a id="a614439ccac0344926adc4c0165d64060"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a614439ccac0344926adc4c0165d64060">&#9670;&nbsp;</a></span>Entity</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class <a class="el" href="classmbe_1_1_entity.html">Entity</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enables an entity to use the components constructor. </p>
+<p>Making the constructor protected is necessarry to ensure that the <a class="el" href="classmbe_1_1_entity.html" title="An Object that can have multiple Components. ">mbe::Entity</a> class (mbe::Entity::CreateComponentis the only place where components can be created. </p>
 
 </div>
 </div>

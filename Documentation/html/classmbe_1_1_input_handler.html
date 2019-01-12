@@ -92,12 +92,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a97131dd69024b6efbc5567324c793cb6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_input_handler.html#a97131dd69024b6efbc5567324c793cb6">HandleRealtimeInput</a> (<a class="el" href="classmbe_1_1_event_manager.html">EventManager</a> &amp;eventManager, sf::Window &amp;window)</td></tr>
 <tr class="memdesc:a97131dd69024b6efbc5567324c793cb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Raises respective events for the mouse buttons or any registered keys that are currently pressed.  <a href="#a97131dd69024b6efbc5567324c793cb6">More...</a><br /></td></tr>
 <tr class="separator:a97131dd69024b6efbc5567324c793cb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a960985e94c41a17a1350e21b1f3bb840"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_input_handler.html#a960985e94c41a17a1350e21b1f3bb840">AssignMouseButton</a> (ActionBaseEvent::Action action, sf::Mouse::Button button, bool isRealTimeInput=false)</td></tr>
-<tr class="memdesc:a960985e94c41a17a1350e21b1f3bb840"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns a mouse button to an action.  <a href="#a960985e94c41a17a1350e21b1f3bb840">More...</a><br /></td></tr>
-<tr class="separator:a960985e94c41a17a1350e21b1f3bb840"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a563365455ef49bcdf0afc851c40dff37"><td class="memItemLeft" align="right" valign="top">std::vector&lt; sf::Mouse::Button &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_input_handler.html#a563365455ef49bcdf0afc851c40dff37">GetAssignedMouseButtons</a> (ActionBaseEvent::Action action) const</td></tr>
-<tr class="memdesc:a563365455ef49bcdf0afc851c40dff37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a list of the mouse buttons assigned to the past in action.  <a href="#a563365455ef49bcdf0afc851c40dff37">More...</a><br /></td></tr>
-<tr class="separator:a563365455ef49bcdf0afc851c40dff37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a695c8f4c8d2faa07b498048b53b5206f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_input_handler.html#a695c8f4c8d2faa07b498048b53b5206f">AssignMouseButton</a> (ActionBaseEvent::Action action, sf::Mouse::Button button, bool isRealTimeInput=false)</td></tr>
+<tr class="memdesc:a695c8f4c8d2faa07b498048b53b5206f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns a mouse button to an action.  <a href="#a695c8f4c8d2faa07b498048b53b5206f">More...</a><br /></td></tr>
+<tr class="separator:a695c8f4c8d2faa07b498048b53b5206f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9085ba42c6e52d243908fb24f5bca6d7"><td class="memItemLeft" align="right" valign="top">std::vector&lt; sf::Mouse::Button &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_input_handler.html#a9085ba42c6e52d243908fb24f5bca6d7">GetAssignedMouseButtons</a> (ActionBaseEvent::Action action) const</td></tr>
+<tr class="memdesc:a9085ba42c6e52d243908fb24f5bca6d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a list of the mouse buttons assigned to the past in action.  <a href="#a9085ba42c6e52d243908fb24f5bca6d7">More...</a><br /></td></tr>
+<tr class="separator:a9085ba42c6e52d243908fb24f5bca6d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ff949957719b4c4efa108d060dfeeb4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_input_handler.html#a0ff949957719b4c4efa108d060dfeeb4">AssignKey</a> (ActionBaseEvent::Action action, sf::Keyboard::Key key, bool isRealtimeInput=false)</td></tr>
 <tr class="memdesc:a0ff949957719b4c4efa108d060dfeeb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assigns a key to an action.  <a href="#a0ff949957719b4c4efa108d060dfeeb4">More...</a><br /></td></tr>
 <tr class="separator:a0ff949957719b4c4efa108d060dfeeb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -110,7 +110,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Handels mouse and keyboard events as well as realtime input and raises respective events. </p>
-<p>Furthermore, the input handler allows for subscribing keys to actions which allows for dynamic key bindings. </p>
+<p>Furthermore, the input handler allows for subscribing keys to actions which allows for dynamic key bindings. </p><dl class="section note"><dt>Note</dt><dd>The action strings are not case sensitive so capital letters don't matter. <b>Use ACII characters only!<b> When an action string or a list of action strings is returned, they are always normalised. To compare an action string, call mbe::NormaliseIDString() on it before the comparision. </b></b></dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a0ff949957719b4c4efa108d060dfeeb4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0ff949957719b4c4efa108d060dfeeb4">&#9670;&nbsp;</a></span>AssignKey()</h2>
@@ -156,14 +156,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a960985e94c41a17a1350e21b1f3bb840"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a960985e94c41a17a1350e21b1f3bb840">&#9670;&nbsp;</a></span>AssignMouseButton()</h2>
+<a id="a695c8f4c8d2faa07b498048b53b5206f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a695c8f4c8d2faa07b498048b53b5206f">&#9670;&nbsp;</a></span>AssignMouseButton()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void mbe::InputHandler::AssignMouseButton </td>
+          <td class="memname">void InputHandler::AssignMouseButton </td>
           <td>(</td>
           <td class="paramtype">ActionBaseEvent::Action&#160;</td>
           <td class="paramname"><em>action</em>, </td>
@@ -227,14 +227,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a563365455ef49bcdf0afc851c40dff37"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a563365455ef49bcdf0afc851c40dff37">&#9670;&nbsp;</a></span>GetAssignedMouseButtons()</h2>
+<a id="a9085ba42c6e52d243908fb24f5bca6d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9085ba42c6e52d243908fb24f5bca6d7">&#9670;&nbsp;</a></span>GetAssignedMouseButtons()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt; sf::Mouse::Button &gt; mbe::InputHandler::GetAssignedMouseButtons </td>
+          <td class="memname">std::vector&lt; sf::Mouse::Button &gt; InputHandler::GetAssignedMouseButtons </td>
           <td>(</td>
           <td class="paramtype">ActionBaseEvent::Action&#160;</td>
           <td class="paramname"><em>action</em></td><td>)</td>

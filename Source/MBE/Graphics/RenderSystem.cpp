@@ -48,8 +48,8 @@ RenderSystem::~RenderSystem()
 
 			// Get the render information component and reset the getters
 			auto & renderInformationComponent = Entity::GetObjectFromID(entityId)->GetComponent<RenderInformationComponent>();
-			renderInformationComponent.SetViewGetterFunction([](const Entity & entity) { return nullptr; });
-			renderInformationComponent.SetWindowGetterFunction([]() { return nullptr; });
+			renderInformationComponent.ResetViewGetterFunction();
+			renderInformationComponent.ResetWindowGetterFunction();
 		}
 	}
 }
@@ -152,7 +152,8 @@ void RenderSystem::RemoveRenderEntity(Entity::HandleID entityId)
 		return;
 
 	// Get the render layer;
-	auto renderLayer = entity->GetComponent<RenderInformationComponent>().GetRenderLayer();
+	auto & renderInformationComponent = entity->GetComponent<RenderInformationComponent>();
+	auto renderLayer = renderInformationComponent.GetRenderLayer();
 	
 	// Remove the node from this layer
 	// std::find_if returns an it to the first intance for which the lambda returns true
@@ -166,6 +167,10 @@ void RenderSystem::RemoveRenderEntity(Entity::HandleID entityId)
 		throw std::runtime_error("RenderSystem: The render entity could not be found");
 
 	renderEntityIdList.erase(it);
+
+	// Reset the RenderInformationComponent getters
+	renderInformationComponent.ResetViewGetterFunction();
+	renderInformationComponent.ResetWindowGetterFunction();
 }
 
 void RenderSystem::Refresh()

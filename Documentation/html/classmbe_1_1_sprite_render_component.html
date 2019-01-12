@@ -76,73 +76,46 @@ Inheritance diagram for mbe::SpriteRenderComponent:</div>
  <div class="center">
   <img src="classmbe_1_1_sprite_render_component.png" usemap="#mbe::SpriteRenderComponent_map" alt=""/>
   <map id="mbe::SpriteRenderComponent_map" name="mbe::SpriteRenderComponent_map">
-<area href="classmbe_1_1_textured_render_component.html" alt="mbe::TexturedRenderComponent" shape="rect" coords="0,168,270,192"/>
-<area href="classmbe_1_1_handle_base.html" alt="mbe::HandleBase&lt; SpriteRenderComponent &gt;" shape="rect" coords="280,168,550,192"/>
-<area href="classmbe_1_1_render_component.html" alt="mbe::RenderComponent" shape="rect" coords="0,112,270,136"/>
-<area href="classmbe_1_1_component.html" title="The base class for all components. " alt="mbe::Component" shape="rect" coords="0,56,270,80"/>
+<area href="classmbe_1_1_render_component.html" alt="mbe::RenderComponent" shape="rect" coords="0,112,178,136"/>
+<area href="classmbe_1_1_component.html" title="The base class for all components. " alt="mbe::Component" shape="rect" coords="0,56,178,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ab767e55945a506821c199fc1398d6f4e"><td class="memItemLeft" align="right" valign="top"><a id="ab767e55945a506821c199fc1398d6f4e"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>SpriteRenderComponent</b> (<a class="el" href="classmbe_1_1_entity.html">Entity</a> &amp;parentEntity, const <a class="el" href="classmbe_1_1_texture_wrapper.html">TextureWrapper</a> &amp;textureWrapper, <a class="el" href="classmbe_1_1_render_component.html#a37723c7c8175fc6af4d6a18a620d107b">RenderLayer</a> renderLayer=RenderLayer::GUI)</td></tr>
-<tr class="separator:ab767e55945a506821c199fc1398d6f4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ec07165d2723a8159bf7325f8219b26"><td class="memItemLeft" align="right" valign="top"><a id="a1ec07165d2723a8159bf7325f8219b26"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Draw</b> (sf::RenderTarget &amp;target) override</td></tr>
-<tr class="separator:a1ec07165d2723a8159bf7325f8219b26"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5cec15b9161d6f4d7d1452f9624ccdee"><td class="memItemLeft" align="right" valign="top"><a id="a5cec15b9161d6f4d7d1452f9624ccdee"></a>
-sf::FloatRect&#160;</td><td class="memItemRight" valign="bottom"><b>GetBoundingBox</b> () const override</td></tr>
-<tr class="separator:a5cec15b9161d6f4d7d1452f9624ccdee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34e4bd8c7c015465c9977e1f3c8d51a0"><td class="memItemLeft" align="right" valign="top"><a id="a34e4bd8c7c015465c9977e1f3c8d51a0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>SpriteRenderComponent</b> (<a class="el" href="classmbe_1_1_entity.html">Entity</a> &amp;parentEntity)</td></tr>
+<tr class="separator:a34e4bd8c7c015465c9977e1f3c8d51a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a30838218c18486e4878580072406c313"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_sprite_render_component.html#a30838218c18486e4878580072406c313">Update</a> (sf::Time deltaTime) override</td></tr>
+<tr class="memdesc:a30838218c18486e4878580072406c313"><td class="mdescLeft">&#160;</td><td class="mdescRight">Virtual function to update the component that should be called every frame  This method can but does not have to be overwritten in derived components and is guaranteed to be called once each frame.  <a href="#a30838218c18486e4878580072406c313">More...</a><br /></td></tr>
+<tr class="separator:a30838218c18486e4878580072406c313"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35f6832d88115af2ef6c6da9bf0f02fb"><td class="memItemLeft" align="right" valign="top"><a id="a35f6832d88115af2ef6c6da9bf0f02fb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>Draw</b> (sf::RenderTarget &amp;target) const override</td></tr>
+<tr class="separator:a35f6832d88115af2ef6c6da9bf0f02fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af91af3f4e13d486f1d80bcc54892e1b0"><td class="memItemLeft" align="right" valign="top"><a id="af91af3f4e13d486f1d80bcc54892e1b0"></a>
+sf::FloatRect&#160;</td><td class="memItemRight" valign="bottom"><b>GetLocalBounds</b> () const override</td></tr>
+<tr class="separator:af91af3f4e13d486f1d80bcc54892e1b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6afa2dcedb17aad773a06940076f8371"><td class="memItemLeft" align="right" valign="top"><a id="a6afa2dcedb17aad773a06940076f8371"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>SetColor</b> (const sf::Color &amp;color)</td></tr>
 <tr class="separator:a6afa2dcedb17aad773a06940076f8371"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a3cfa33a6cafd39dd609a7fa8de82ad"><td class="memItemLeft" align="right" valign="top"><a id="a5a3cfa33a6cafd39dd609a7fa8de82ad"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetOrigin</b> (const sf::Vector2f &amp;origin)</td></tr>
-<tr class="separator:a5a3cfa33a6cafd39dd609a7fa8de82ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed6c1f85256c0396323fdf4f79c6ca09"><td class="memItemLeft" align="right" valign="top"><a id="aed6c1f85256c0396323fdf4f79c6ca09"></a>
 const sf::Color &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetColor</b> () const</td></tr>
 <tr class="separator:aed6c1f85256c0396323fdf4f79c6ca09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classmbe_1_1_textured_render_component"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classmbe_1_1_textured_render_component')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classmbe_1_1_textured_render_component.html">mbe::TexturedRenderComponent</a></td></tr>
-<tr class="memitem:a2a66da55589000690fc5b7b7391b750b inherit pub_methods_classmbe_1_1_textured_render_component"><td class="memItemLeft" align="right" valign="top"><a id="a2a66da55589000690fc5b7b7391b750b"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>TexturedRenderComponent</b> (<a class="el" href="classmbe_1_1_entity.html">Entity</a> &amp;parentEntity, const <a class="el" href="classmbe_1_1_texture_wrapper.html">TextureWrapper</a> &amp;textureWrapper, <a class="el" href="classmbe_1_1_render_component.html#a37723c7c8175fc6af4d6a18a620d107b">RenderLayer</a> renderLayer=RenderLayer::GUI)</td></tr>
-<tr class="separator:a2a66da55589000690fc5b7b7391b750b inherit pub_methods_classmbe_1_1_textured_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3081359c1319c96d624900adcf7b1811 inherit pub_methods_classmbe_1_1_textured_render_component"><td class="memItemLeft" align="right" valign="top"><a id="a3081359c1319c96d624900adcf7b1811"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetTextureWrapper</b> (const <a class="el" href="classmbe_1_1_texture_wrapper.html">TextureWrapper</a> &amp;textureWrapper, bool resetTextureRect=true)</td></tr>
-<tr class="separator:a3081359c1319c96d624900adcf7b1811 inherit pub_methods_classmbe_1_1_textured_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7489fcca2a4e504e2813f42a7e5bfc5 inherit pub_methods_classmbe_1_1_textured_render_component"><td class="memItemLeft" align="right" valign="top"><a id="ab7489fcca2a4e504e2813f42a7e5bfc5"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetTextureRect</b> (const sf::IntRect &amp;textureRect)</td></tr>
-<tr class="separator:ab7489fcca2a4e504e2813f42a7e5bfc5 inherit pub_methods_classmbe_1_1_textured_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41191c232347648ecec1bdc89b5093cb inherit pub_methods_classmbe_1_1_textured_render_component"><td class="memItemLeft" align="right" valign="top"><a id="a41191c232347648ecec1bdc89b5093cb"></a>
-const <a class="el" href="classmbe_1_1_texture_wrapper.html">TextureWrapper</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetTextureWrapper</b> () const</td></tr>
-<tr class="separator:a41191c232347648ecec1bdc89b5093cb inherit pub_methods_classmbe_1_1_textured_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac27f89fee52b821c3b452fad5b14befe inherit pub_methods_classmbe_1_1_textured_render_component"><td class="memItemLeft" align="right" valign="top"><a id="ac27f89fee52b821c3b452fad5b14befe"></a>
-const sf::IntRect &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetTextureRect</b> () const</td></tr>
-<tr class="separator:ac27f89fee52b821c3b452fad5b14befe inherit pub_methods_classmbe_1_1_textured_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classmbe_1_1_render_component"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classmbe_1_1_render_component')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classmbe_1_1_render_component.html">mbe::RenderComponent</a></td></tr>
-<tr class="memitem:a1f772c0df9ad092a68ca53d2dcfd199e inherit pub_methods_classmbe_1_1_render_component"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_render_component.html#a1f772c0df9ad092a68ca53d2dcfd199e">RenderComponent</a> (<a class="el" href="classmbe_1_1_entity.html">Entity</a> &amp;parentEntity, <a class="el" href="classmbe_1_1_render_component.html#a37723c7c8175fc6af4d6a18a620d107b">RenderLayer</a> renderLayer)</td></tr>
-<tr class="memdesc:a1f772c0df9ad092a68ca53d2dcfd199e inherit pub_methods_classmbe_1_1_render_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classmbe_1_1_render_component.html#a1f772c0df9ad092a68ca53d2dcfd199e">More...</a><br /></td></tr>
-<tr class="separator:a1f772c0df9ad092a68ca53d2dcfd199e inherit pub_methods_classmbe_1_1_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe5fa9f14e65a6cc56c87935d71fe102 inherit pub_methods_classmbe_1_1_render_component"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_render_component.html#afe5fa9f14e65a6cc56c87935d71fe102">RenderComponent</a> (<a class="el" href="classmbe_1_1_entity.html">Entity</a> &amp;parentEntity)</td></tr>
+<tr class="memdesc:afe5fa9f14e65a6cc56c87935d71fe102 inherit pub_methods_classmbe_1_1_render_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classmbe_1_1_render_component.html#afe5fa9f14e65a6cc56c87935d71fe102">More...</a><br /></td></tr>
+<tr class="separator:afe5fa9f14e65a6cc56c87935d71fe102 inherit pub_methods_classmbe_1_1_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba000e5ae0cedeb3c9074517cddd2e5a inherit pub_methods_classmbe_1_1_render_component"><td class="memItemLeft" align="right" valign="top"><a id="aba000e5ae0cedeb3c9074517cddd2e5a"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_render_component.html#aba000e5ae0cedeb3c9074517cddd2e5a">~RenderComponent</a> ()=default</td></tr>
 <tr class="memdesc:aba000e5ae0cedeb3c9074517cddd2e5a inherit pub_methods_classmbe_1_1_render_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor. <br /></td></tr>
 <tr class="separator:aba000e5ae0cedeb3c9074517cddd2e5a inherit pub_methods_classmbe_1_1_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acfabe10d8056a6ac5263b7f3c35e691a inherit pub_methods_classmbe_1_1_render_component"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_render_component.html#acfabe10d8056a6ac5263b7f3c35e691a">Update</a> (sf::Time frameTime) override</td></tr>
-<tr class="memdesc:acfabe10d8056a6ac5263b7f3c35e691a inherit pub_methods_classmbe_1_1_render_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">The update method that should be called every frame (automatically done by the <a class="el" href="classmbe_1_1_entity_manager.html" title="Keeps track of a list of entities. ">mbe::EntityManager</a>)  <a href="classmbe_1_1_render_component.html#acfabe10d8056a6ac5263b7f3c35e691a">More...</a><br /></td></tr>
-<tr class="separator:acfabe10d8056a6ac5263b7f3c35e691a inherit pub_methods_classmbe_1_1_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a9701217147908060032e76cc3a3e45 inherit pub_methods_classmbe_1_1_render_component"><td class="memItemLeft" align="right" valign="top"><a id="a7a9701217147908060032e76cc3a3e45"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetZOrder</b> (float value)</td></tr>
-<tr class="separator:a7a9701217147908060032e76cc3a3e45 inherit pub_methods_classmbe_1_1_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae0eb09105fdf06fffd9a2d5a318d449a inherit pub_methods_classmbe_1_1_render_component"><td class="memItemLeft" align="right" valign="top"><a id="ae0eb09105fdf06fffd9a2d5a318d449a"></a>
-auto&#160;</td><td class="memItemRight" valign="bottom"><b>GetZOrder</b> () const</td></tr>
-<tr class="separator:ae0eb09105fdf06fffd9a2d5a318d449a inherit pub_methods_classmbe_1_1_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c0bb92daec96cdcd9aebad87e555889 inherit pub_methods_classmbe_1_1_render_component"><td class="memItemLeft" align="right" valign="top"><a id="a1c0bb92daec96cdcd9aebad87e555889"></a>
-<a class="el" href="classmbe_1_1_render_component.html#a37723c7c8175fc6af4d6a18a620d107b">RenderLayer</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetRenderLayer</b> () const</td></tr>
-<tr class="separator:a1c0bb92daec96cdcd9aebad87e555889 inherit pub_methods_classmbe_1_1_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa95eef5a66dab855563f4a3068a88398 inherit pub_methods_classmbe_1_1_render_component"><td class="memItemLeft" align="right" valign="top"><a id="aa95eef5a66dab855563f4a3068a88398"></a>
+virtual sf::FloatRect&#160;</td><td class="memItemRight" valign="bottom"><b>GetGlobalBounds</b> () const</td></tr>
+<tr class="separator:aa95eef5a66dab855563f4a3068a88398 inherit pub_methods_classmbe_1_1_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9b99fe6ac8f6600173b122cda0191ad inherit pub_methods_classmbe_1_1_render_component"><td class="memItemLeft" align="right" valign="top"><a id="ae9b99fe6ac8f6600173b122cda0191ad"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsVisible</b> (const sf::View &amp;view) const</td></tr>
+<tr class="separator:ae9b99fe6ac8f6600173b122cda0191ad inherit pub_methods_classmbe_1_1_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classmbe_1_1_component"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classmbe_1_1_component')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classmbe_1_1_component.html">mbe::Component</a></td></tr>
-<tr class="memitem:ad9c48e04e930f700f1ef293588b3527b inherit pub_methods_classmbe_1_1_component"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_component.html#ad9c48e04e930f700f1ef293588b3527b">Component</a> (<a class="el" href="classmbe_1_1_entity.html">Entity</a> &amp;parentEntity)</td></tr>
-<tr class="memdesc:ad9c48e04e930f700f1ef293588b3527b inherit pub_methods_classmbe_1_1_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classmbe_1_1_component.html#ad9c48e04e930f700f1ef293588b3527b">More...</a><br /></td></tr>
-<tr class="separator:ad9c48e04e930f700f1ef293588b3527b inherit pub_methods_classmbe_1_1_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3eb489a43075c453319ffe800b5c7a4 inherit pub_methods_classmbe_1_1_component"><td class="memItemLeft" align="right" valign="top"><a id="ab3eb489a43075c453319ffe800b5c7a4"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_component.html#ab3eb489a43075c453319ffe800b5c7a4">~Component</a> ()=default</td></tr>
 <tr class="memdesc:ab3eb489a43075c453319ffe800b5c7a4 inherit pub_methods_classmbe_1_1_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor. <br /></td></tr>
@@ -150,49 +123,19 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memitem:a40a4144bbb6bf794d8b36b06810befce inherit pub_methods_classmbe_1_1_component"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmbe_1_1_entity.html">Entity</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_component.html#a40a4144bbb6bf794d8b36b06810befce">GetParentEntity</a> () const</td></tr>
 <tr class="memdesc:a40a4144bbb6bf794d8b36b06810befce inherit pub_methods_classmbe_1_1_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the entity to which this component belongs.  <a href="classmbe_1_1_component.html#a40a4144bbb6bf794d8b36b06810befce">More...</a><br /></td></tr>
 <tr class="separator:a40a4144bbb6bf794d8b36b06810befce inherit pub_methods_classmbe_1_1_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_classmbe_1_1_handle_base"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classmbe_1_1_handle_base')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classmbe_1_1_handle_base.html">mbe::HandleBase&lt; SpriteRenderComponent &gt;</a></td></tr>
-<tr class="memitem:a5fec6dcc981b09d38ce78bd4a3572b3a inherit pub_methods_classmbe_1_1_handle_base"><td class="memItemLeft" align="right" valign="top"><a id="a5fec6dcc981b09d38ce78bd4a3572b3a"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_handle_base.html#a5fec6dcc981b09d38ce78bd4a3572b3a">HandleBase</a> ()</td></tr>
-<tr class="memdesc:a5fec6dcc981b09d38ce78bd4a3572b3a inherit pub_methods_classmbe_1_1_handle_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
-<tr class="separator:a5fec6dcc981b09d38ce78bd4a3572b3a inherit pub_methods_classmbe_1_1_handle_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1b66a094ec4473a91d98108e64fb1534 inherit pub_methods_classmbe_1_1_handle_base"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_handle_base.html#a1b66a094ec4473a91d98108e64fb1534">HandleBase</a> (const <a class="el" href="classmbe_1_1_handle_base.html">HandleBase</a> &amp;other)</td></tr>
-<tr class="memdesc:a1b66a094ec4473a91d98108e64fb1534 inherit pub_methods_classmbe_1_1_handle_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="classmbe_1_1_handle_base.html#a1b66a094ec4473a91d98108e64fb1534">More...</a><br /></td></tr>
-<tr class="separator:a1b66a094ec4473a91d98108e64fb1534 inherit pub_methods_classmbe_1_1_handle_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa52d493617e1ea1118ccca2ff7897c50 inherit pub_methods_classmbe_1_1_handle_base"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmbe_1_1_handle_base.html">HandleBase</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_handle_base.html#aa52d493617e1ea1118ccca2ff7897c50">operator=</a> (const <a class="el" href="classmbe_1_1_handle_base.html">HandleBase</a> &amp;other)</td></tr>
-<tr class="memdesc:aa52d493617e1ea1118ccca2ff7897c50 inherit pub_methods_classmbe_1_1_handle_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignment operator.  <a href="classmbe_1_1_handle_base.html#aa52d493617e1ea1118ccca2ff7897c50">More...</a><br /></td></tr>
-<tr class="separator:aa52d493617e1ea1118ccca2ff7897c50 inherit pub_methods_classmbe_1_1_handle_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae3a1b93b5657f5363435a3bdde762ab inherit pub_methods_classmbe_1_1_handle_base"><td class="memItemLeft" align="right" valign="top"><a id="aae3a1b93b5657f5363435a3bdde762ab"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_handle_base.html#aae3a1b93b5657f5363435a3bdde762ab">~HandleBase</a> ()</td></tr>
-<tr class="memdesc:aae3a1b93b5657f5363435a3bdde762ab inherit pub_methods_classmbe_1_1_handle_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor. <br /></td></tr>
-<tr class="separator:aae3a1b93b5657f5363435a3bdde762ab inherit pub_methods_classmbe_1_1_handle_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12e2fc24874f3055d6b29cd0ff9e49f8 inherit pub_methods_classmbe_1_1_handle_base"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classmbe_1_1_handle_base.html#a9a1d158b0bdd993e082f50c80dab11cc">HandleID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_handle_base.html#a12e2fc24874f3055d6b29cd0ff9e49f8">GetHandleID</a> () const</td></tr>
-<tr class="memdesc:a12e2fc24874f3055d6b29cd0ff9e49f8 inherit pub_methods_classmbe_1_1_handle_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the id of this object.  <a href="classmbe_1_1_handle_base.html#a12e2fc24874f3055d6b29cd0ff9e49f8">More...</a><br /></td></tr>
-<tr class="separator:a12e2fc24874f3055d6b29cd0ff9e49f8 inherit pub_methods_classmbe_1_1_handle_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_types_classmbe_1_1_textured_render_component"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classmbe_1_1_textured_render_component')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classmbe_1_1_textured_render_component.html">mbe::TexturedRenderComponent</a></td></tr>
-<tr class="memitem:a2b42b8963af257278d5ba27efb3ad104 inherit pub_types_classmbe_1_1_textured_render_component"><td class="memItemLeft" align="right" valign="top"><a id="a2b42b8963af257278d5ba27efb3ad104"></a>
-typedef std::shared_ptr&lt; <a class="el" href="classmbe_1_1_textured_render_component.html">TexturedRenderComponent</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Ptr</b></td></tr>
-<tr class="separator:a2b42b8963af257278d5ba27efb3ad104 inherit pub_types_classmbe_1_1_textured_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae28c57cf08870e5a59a7d49b4f87c455 inherit pub_types_classmbe_1_1_textured_render_component"><td class="memItemLeft" align="right" valign="top"><a id="ae28c57cf08870e5a59a7d49b4f87c455"></a>
-typedef std::weak_ptr&lt; <a class="el" href="classmbe_1_1_textured_render_component.html">TexturedRenderComponent</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>WPtr</b></td></tr>
-<tr class="separator:ae28c57cf08870e5a59a7d49b4f87c455 inherit pub_types_classmbe_1_1_textured_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a83962b59f4e819a42a2f599e48bb3eec inherit pub_types_classmbe_1_1_textured_render_component"><td class="memItemLeft" align="right" valign="top"><a id="a83962b59f4e819a42a2f599e48bb3eec"></a>
-typedef std::unique_ptr&lt; <a class="el" href="classmbe_1_1_textured_render_component.html">TexturedRenderComponent</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>UPtr</b></td></tr>
-<tr class="separator:a83962b59f4e819a42a2f599e48bb3eec inherit pub_types_classmbe_1_1_textured_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_classmbe_1_1_render_component"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classmbe_1_1_render_component')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classmbe_1_1_render_component.html">mbe::RenderComponent</a></td></tr>
-<tr class="memitem:a37723c7c8175fc6af4d6a18a620d107b inherit pub_types_classmbe_1_1_render_component"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_render_component.html#a37723c7c8175fc6af4d6a18a620d107b">RenderLayer</a> { <br />
-&#160;&#160;<a class="el" href="classmbe_1_1_render_component.html#a37723c7c8175fc6af4d6a18a620d107baaada19a6b53f8abe47591bfbcd3e854f">Background</a>, 
-<a class="el" href="classmbe_1_1_render_component.html#a37723c7c8175fc6af4d6a18a620d107ba169ac37528c611312cc8de374d216c54">Foreground</a>, 
-<a class="el" href="classmbe_1_1_render_component.html#a37723c7c8175fc6af4d6a18a620d107bab49ca7e37e2e02dc0cf34726a4d870e1">Objects</a>, 
-<a class="el" href="classmbe_1_1_render_component.html#a37723c7c8175fc6af4d6a18a620d107babc7486452385c7ed1659f4e8028014ca">GUI</a>, 
-<br />
-&#160;&#160;<a class="el" href="classmbe_1_1_render_component.html#a37723c7c8175fc6af4d6a18a620d107bab4ebb748c7b29ea1c0ab99b4de9e320f">LayerCount</a>
-<br />
- }<tr class="memdesc:a37723c7c8175fc6af4d6a18a620d107b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The render layers used to determine which objects are drawn after each other.  <a href="classmbe_1_1_render_component.html#a37723c7c8175fc6af4d6a18a620d107b">More...</a><br /></td></tr>
-</td></tr>
-<tr class="separator:a37723c7c8175fc6af4d6a18a620d107b inherit pub_types_classmbe_1_1_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a230111d38c327b6aba95f822271a96a6 inherit pub_types_classmbe_1_1_render_component"><td class="memItemLeft" align="right" valign="top"><a id="a230111d38c327b6aba95f822271a96a6"></a>
+typedef std::shared_ptr&lt; <a class="el" href="classmbe_1_1_render_component.html">RenderComponent</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Ptr</b></td></tr>
+<tr class="separator:a230111d38c327b6aba95f822271a96a6 inherit pub_types_classmbe_1_1_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4de1dce0d91a37d9b1268da09e9428e1 inherit pub_types_classmbe_1_1_render_component"><td class="memItemLeft" align="right" valign="top"><a id="a4de1dce0d91a37d9b1268da09e9428e1"></a>
+typedef std::weak_ptr&lt; <a class="el" href="classmbe_1_1_render_component.html">RenderComponent</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>WPtr</b></td></tr>
+<tr class="separator:a4de1dce0d91a37d9b1268da09e9428e1 inherit pub_types_classmbe_1_1_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a283c4e20852e705f6265ed1cb73befdb inherit pub_types_classmbe_1_1_render_component"><td class="memItemLeft" align="right" valign="top"><a id="a283c4e20852e705f6265ed1cb73befdb"></a>
+typedef std::unique_ptr&lt; <a class="el" href="classmbe_1_1_render_component.html">RenderComponent</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>UPtr</b></td></tr>
+<tr class="separator:a283c4e20852e705f6265ed1cb73befdb inherit pub_types_classmbe_1_1_render_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_classmbe_1_1_component"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classmbe_1_1_component')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classmbe_1_1_component.html">mbe::Component</a></td></tr>
 <tr class="memitem:a468c2e69aaf31d2fa88125603e72c820 inherit pub_types_classmbe_1_1_component"><td class="memItemLeft" align="right" valign="top"><a id="a468c2e69aaf31d2fa88125603e72c820"></a>
 typedef std::shared_ptr&lt; <a class="el" href="classmbe_1_1_component.html">Component</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Ptr</b></td></tr>
@@ -203,22 +146,52 @@ typedef std::weak_ptr&lt; <a class="el" href="classmbe_1_1_component.html">Compo
 <tr class="memitem:a7c8921f73844042a81dd00b03cf37610 inherit pub_types_classmbe_1_1_component"><td class="memItemLeft" align="right" valign="top"><a id="a7c8921f73844042a81dd00b03cf37610"></a>
 typedef std::unique_ptr&lt; <a class="el" href="classmbe_1_1_component.html">Component</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>UPtr</b></td></tr>
 <tr class="separator:a7c8921f73844042a81dd00b03cf37610 inherit pub_types_classmbe_1_1_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_types_classmbe_1_1_handle_base"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classmbe_1_1_handle_base')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classmbe_1_1_handle_base.html">mbe::HandleBase&lt; SpriteRenderComponent &gt;</a></td></tr>
-<tr class="memitem:a9a1d158b0bdd993e082f50c80dab11cc inherit pub_types_classmbe_1_1_handle_base"><td class="memItemLeft" align="right" valign="top">typedef unsigned long long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_handle_base.html#a9a1d158b0bdd993e082f50c80dab11cc">HandleID</a></td></tr>
-<tr class="memdesc:a9a1d158b0bdd993e082f50c80dab11cc inherit pub_types_classmbe_1_1_handle_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines the id type used to uniquely identify a handled object.  <a href="classmbe_1_1_handle_base.html#a9a1d158b0bdd993e082f50c80dab11cc">More...</a><br /></td></tr>
-<tr class="separator:a9a1d158b0bdd993e082f50c80dab11cc inherit pub_types_classmbe_1_1_handle_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_static_methods_classmbe_1_1_handle_base"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classmbe_1_1_handle_base')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classmbe_1_1_handle_base.html">mbe::HandleBase&lt; SpriteRenderComponent &gt;</a></td></tr>
-<tr class="memitem:a6fc6f3f723e6137a293dd7206b5121c3 inherit pub_static_methods_classmbe_1_1_handle_base"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classmbe_1_1_sprite_render_component.html">SpriteRenderComponent</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_handle_base.html#a6fc6f3f723e6137a293dd7206b5121c3">GetObjectFromID</a> (<a class="el" href="classmbe_1_1_handle_base.html#a9a1d158b0bdd993e082f50c80dab11cc">HandleID</a> id)</td></tr>
-<tr class="memdesc:a6fc6f3f723e6137a293dd7206b5121c3 inherit pub_static_methods_classmbe_1_1_handle_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the object corresponding to the id and returns a pointer to it.  <a href="classmbe_1_1_handle_base.html#a6fc6f3f723e6137a293dd7206b5121c3">More...</a><br /></td></tr>
-<tr class="separator:a6fc6f3f723e6137a293dd7206b5121c3 inherit pub_static_methods_classmbe_1_1_handle_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80888d292e4ba88a9c6ffc17f39ee8eb inherit pub_static_methods_classmbe_1_1_handle_base"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="classmbe_1_1_handle_base.html#a9a1d158b0bdd993e082f50c80dab11cc">HandleID</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_handle_base.html#a80888d292e4ba88a9c6ffc17f39ee8eb">GetNullID</a> ()</td></tr>
-<tr class="memdesc:a80888d292e4ba88a9c6ffc17f39ee8eb inherit pub_static_methods_classmbe_1_1_handle_base"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns an id for which no object exists.  <a href="classmbe_1_1_handle_base.html#a80888d292e4ba88a9c6ffc17f39ee8eb">More...</a><br /></td></tr>
-<tr class="separator:a80888d292e4ba88a9c6ffc17f39ee8eb inherit pub_static_methods_classmbe_1_1_handle_base"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classmbe_1_1_component"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classmbe_1_1_component')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classmbe_1_1_component.html">mbe::Component</a></td></tr>
+<tr class="memitem:ad9c48e04e930f700f1ef293588b3527b inherit pro_methods_classmbe_1_1_component"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_component.html#ad9c48e04e930f700f1ef293588b3527b">Component</a> (<a class="el" href="classmbe_1_1_entity.html">Entity</a> &amp;parentEntity)</td></tr>
+<tr class="memdesc:ad9c48e04e930f700f1ef293588b3527b inherit pro_methods_classmbe_1_1_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classmbe_1_1_component.html#ad9c48e04e930f700f1ef293588b3527b">More...</a><br /></td></tr>
+<tr class="separator:ad9c48e04e930f700f1ef293588b3527b inherit pro_methods_classmbe_1_1_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classmbe_1_1_component"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classmbe_1_1_component')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classmbe_1_1_component.html">mbe::Component</a></td></tr>
 <tr class="memitem:a6af84d005d1c0e94f34e010f0f468b0f inherit pro_attribs_classmbe_1_1_component"><td class="memItemLeft" align="right" valign="top"><a id="a6af84d005d1c0e94f34e010f0f468b0f"></a>
 <a class="el" href="classmbe_1_1_entity.html">Entity</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>parentEntity</b></td></tr>
 <tr class="separator:a6af84d005d1c0e94f34e010f0f468b0f inherit pro_attribs_classmbe_1_1_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a30838218c18486e4878580072406c313"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a30838218c18486e4878580072406c313">&#9670;&nbsp;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SpriteRenderComponent::Update </td>
+          <td>(</td>
+          <td class="paramtype">sf::Time&#160;</td>
+          <td class="paramname"><em>frameTime</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Virtual function to update the component that should be called every frame  This method can but does not have to be overwritten in derived components and is guaranteed to be called once each frame. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frameTime</td><td>The delta time between two successive frames </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="classmbe_1_1_component.html#a710ebbe46c5ec9712e748abad72c199f">mbe::Component</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>C:/Users/Adrian/Documents/Visual Studio 2017/Projects/Mars Base Project/Mars Base Engine ECS/Include/MBE/Graphics/<a class="el" href="_sprite_render_component_8h_source.html">SpriteRenderComponent.h</a></li>
 <li>C:/Users/Adrian/Documents/Visual Studio 2017/Projects/Mars Base Project/Mars Base Engine ECS/Source/MBE/Graphics/SpriteRenderComponent.cpp</li>

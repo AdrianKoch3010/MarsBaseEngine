@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['layercount',['LayerCount',['../classmbe_1_1_render_component.html#a37723c7c8175fc6af4d6a18a620d107bab4ebb748c7b29ea1c0ab99b4de9e320f',1,'mbe::RenderComponent']]]
+  ['layercount',['LayerCount',['../classmbe_1_1_render_information_component.html#a95bf04c3be90708e7cf77c4d82279478a335df925181734d0f6454fedc52f2314',1,'mbe::RenderInformationComponent']]]
 ];

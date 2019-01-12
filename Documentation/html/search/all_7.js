@@ -2,12 +2,9 @@ var searchData=
 [
   ['handlebase',['HandleBase',['../classmbe_1_1_handle_base.html',1,'mbe::HandleBase&lt; TDerived &gt;'],['../classmbe_1_1_handle_base.html#a5fec6dcc981b09d38ce78bd4a3572b3a',1,'mbe::HandleBase::HandleBase()'],['../classmbe_1_1_handle_base.html#a1b66a094ec4473a91d98108e64fb1534',1,'mbe::HandleBase::HandleBase(const HandleBase &amp;other)']]],
   ['handlebase_2eh',['HandleBase.h',['../_handle_base_8h.html',1,'']]],
-  ['handlebase_3c_20audiocomponent_20_3e',['HandleBase&lt; AudioComponent &gt;',['../classmbe_1_1_handle_base.html',1,'mbe']]],
   ['handlebase_3c_20basecallbackwrapper_20_3e',['HandleBase&lt; BaseCallbackWrapper &gt;',['../classmbe_1_1_handle_base.html',1,'mbe']]],
   ['handlebase_3c_20effect_20_3e',['HandleBase&lt; Effect &gt;',['../classmbe_1_1_handle_base.html',1,'mbe']]],
   ['handlebase_3c_20entity_20_3e',['HandleBase&lt; Entity &gt;',['../classmbe_1_1_handle_base.html',1,'mbe']]],
-  ['handlebase_3c_20spriterendercomponent_20_3e',['HandleBase&lt; SpriteRenderComponent &gt;',['../classmbe_1_1_handle_base.html',1,'mbe']]],
-  ['handlebase_3c_20transformcomponent_20_3e',['HandleBase&lt; TransformComponent &gt;',['../classmbe_1_1_handle_base.html',1,'mbe']]],
   ['handleevent',['HandleEvent',['../classmbe_1_1_input_handler.html#a635fe65daed84d4d0e76e36c42b52c22',1,'mbe::InputHandler']]],
   ['handleid',['HandleID',['../classmbe_1_1_handle_base.html#a9a1d158b0bdd993e082f50c80dab11cc',1,'mbe::HandleBase']]],
   ['handlerealtimeinput',['HandleRealtimeInput',['../classmbe_1_1_input_handler.html#a97131dd69024b6efbc5567324c793cb6',1,'mbe::InputHandler']]],

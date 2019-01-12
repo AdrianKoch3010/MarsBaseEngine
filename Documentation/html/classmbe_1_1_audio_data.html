@@ -65,79 +65,66 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classmbe_1_1_audio_data-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">mbe::AudioData Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Static class containing global audio information.  
+ <a href="classmbe_1_1_audio_data.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_audio_data_8h_source.html">AudioData.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a876adddf7203247187ee6822a1ef71db"><td class="memItemLeft" align="right" valign="top"><a id="a876adddf7203247187ee6822a1ef71db"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>Type</b> : unsigned short int { <b>Sound</b>, 
-<b>Music</b>
- }</td></tr>
-<tr class="separator:a876adddf7203247187ee6822a1ef71db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abec890da53c040c2bf3be81d5d2a1e53"><td class="memItemLeft" align="right" valign="top"><a id="abec890da53c040c2bf3be81d5d2a1e53"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>AudioStatus</b> : unsigned short int { <b>Playing</b>, 
 <b>Paused</b>, 
 <b>Stopped</b>
  }</td></tr>
 <tr class="separator:abec890da53c040c2bf3be81d5d2a1e53"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b45603d9bc4c3300eee3d61a145b662"><td class="memItemLeft" align="right" valign="top"><a id="a2b45603d9bc4c3300eee3d61a145b662"></a>
-typedef std::shared_ptr&lt; <a class="el" href="classmbe_1_1_audio_data.html">AudioData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Ptr</b></td></tr>
-<tr class="separator:a2b45603d9bc4c3300eee3d61a145b662"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa978a865e61bcd9f25a4d637b09fd101"><td class="memItemLeft" align="right" valign="top"><a id="aa978a865e61bcd9f25a4d637b09fd101"></a>
-typedef std::string&#160;</td><td class="memItemRight" valign="bottom"><b>ID</b></td></tr>
-<tr class="separator:aa978a865e61bcd9f25a4d637b09fd101"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a9b92e486e8423ba4aa5df89347e7c6a3"><td class="memItemLeft" align="right" valign="top"><a id="a9b92e486e8423ba4aa5df89347e7c6a3"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AudioData</b> (ID soundBufferId, Type type, float attenuation, float minDistance, float volume, float pitch, sf::Time playingOffset, bool looped)</td></tr>
-<tr class="separator:a9b92e486e8423ba4aa5df89347e7c6a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1355f9c3d42bbd8b017f2881f3935623"><td class="memItemLeft" align="right" valign="top"><a id="a1355f9c3d42bbd8b017f2881f3935623"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AudioData</b> (const <a class="el" href="classmbe_1_1_audio_data.html">AudioData</a> &amp;obj)=default</td></tr>
-<tr class="separator:a1355f9c3d42bbd8b017f2881f3935623"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a028c9d07488979b082d811ffb23a944f"><td class="memItemLeft" align="right" valign="top"><a id="a028c9d07488979b082d811ffb23a944f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetAudioSourceID</b> (ID soundBufferId)</td></tr>
-<tr class="separator:a028c9d07488979b082d811ffb23a944f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12af4f745e3ff26db292c3ba5c594ae3"><td class="memItemLeft" align="right" valign="top"><a id="a12af4f745e3ff26db292c3ba5c594ae3"></a>
-const ID &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetAudioSourceID</b> () const</td></tr>
-<tr class="separator:a12af4f745e3ff26db292c3ba5c594ae3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a463f7e32e281f0c09a57ae6222283cd5"><td class="memItemLeft" align="right" valign="top"><a id="a463f7e32e281f0c09a57ae6222283cd5"></a>
-Type&#160;</td><td class="memItemRight" valign="bottom"><b>audioType</b></td></tr>
-<tr class="separator:a463f7e32e281f0c09a57ae6222283cd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a60a6589c735adbb6f74e29a21fe9fc5c"><td class="memItemLeft" align="right" valign="top"><a id="a60a6589c735adbb6f74e29a21fe9fc5c"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>attenuation</b></td></tr>
-<tr class="separator:a60a6589c735adbb6f74e29a21fe9fc5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b76c9855bdb28ed7b173a912f355088"><td class="memItemLeft" align="right" valign="top"><a id="a6b76c9855bdb28ed7b173a912f355088"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>minDistance</b></td></tr>
-<tr class="separator:a6b76c9855bdb28ed7b173a912f355088"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6d8a13c6615a3858a418de348497328c"><td class="memItemLeft" align="right" valign="top"><a id="a6d8a13c6615a3858a418de348497328c"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>volume</b></td></tr>
-<tr class="separator:a6d8a13c6615a3858a418de348497328c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94d160f4a5edb6663ddc7e3cd8791dfd"><td class="memItemLeft" align="right" valign="top"><a id="a94d160f4a5edb6663ddc7e3cd8791dfd"></a>
-float&#160;</td><td class="memItemRight" valign="bottom"><b>pitch</b></td></tr>
-<tr class="separator:a94d160f4a5edb6663ddc7e3cd8791dfd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a883ee3ff96c0ec9e587774255b80d7fb"><td class="memItemLeft" align="right" valign="top"><a id="a883ee3ff96c0ec9e587774255b80d7fb"></a>
-sf::Time&#160;</td><td class="memItemRight" valign="bottom"><b>playingOffset</b></td></tr>
-<tr class="separator:a883ee3ff96c0ec9e587774255b80d7fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a537598b8ca8dfa3c77d2ee718cc5b755"><td class="memItemLeft" align="right" valign="top"><a id="a537598b8ca8dfa3c77d2ee718cc5b755"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>looped</b></td></tr>
-<tr class="separator:a537598b8ca8dfa3c77d2ee718cc5b755"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
-Static Public Attributes</h2></td></tr>
-<tr class="memitem:a6a9cfb73bf994a44df022e57caae482b"><td class="memItemLeft" align="right" valign="top"><a id="a6a9cfb73bf994a44df022e57caae482b"></a>
-static <a class="el" href="classmbe_1_1_audio_data.html">AudioData</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Default</b> = <a class="el" href="classmbe_1_1_audio_data.html">AudioData</a>(ID(), AudioData::Type::Sound, 8.f, 200.f, 100.f, 1.f, sf::seconds(0.f), false)</td></tr>
-<tr class="separator:a6a9cfb73bf994a44df022e57caae482b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:aa8b89514afc6519a8314b23a0283ab11"><td class="memItemLeft" align="right" valign="top"><a id="aa8b89514afc6519a8314b23a0283ab11"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>SetListenerPosition</b> (const sf::Vector2f &amp;position)</td></tr>
+<tr class="separator:aa8b89514afc6519a8314b23a0283ab11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a335245ebed7a9949c61fa58ecd7c56b3"><td class="memItemLeft" align="right" valign="top"><a id="a335245ebed7a9949c61fa58ecd7c56b3"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>SetListenerZPosition</b> (float value)</td></tr>
+<tr class="separator:a335245ebed7a9949c61fa58ecd7c56b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76b68e43066e4c89151c645568bf4ee6"><td class="memItemLeft" align="right" valign="top"><a id="a76b68e43066e4c89151c645568bf4ee6"></a>
+static sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>GetListenerPosition</b> ()</td></tr>
+<tr class="separator:a76b68e43066e4c89151c645568bf4ee6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f4402fc5f4b119dc9a2268fa2835471"><td class="memItemLeft" align="right" valign="top"><a id="a2f4402fc5f4b119dc9a2268fa2835471"></a>
+static float&#160;</td><td class="memItemRight" valign="bottom"><b>GetListenerZPosition</b> ()</td></tr>
+<tr class="separator:a2f4402fc5f4b119dc9a2268fa2835471"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3eae8a741a3e8297fc03dcbe5e3747b"><td class="memItemLeft" align="right" valign="top"><a id="af3eae8a741a3e8297fc03dcbe5e3747b"></a>
+static unsigned short int&#160;</td><td class="memItemRight" valign="bottom"><b>GetCurrentNumberOfSounds</b> ()</td></tr>
+<tr class="separator:af3eae8a741a3e8297fc03dcbe5e3747b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a848806746d823465c99a22899ba86033"><td class="memItemLeft" align="right" valign="top"><a id="a848806746d823465c99a22899ba86033"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>IncrementNumberOfSounds</b> ()</td></tr>
+<tr class="separator:a848806746d823465c99a22899ba86033"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0c5337b947da7ad41019c76068888aa"><td class="memItemLeft" align="right" valign="top"><a id="aa0c5337b947da7ad41019c76068888aa"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>DecrementNumberOfSounds</b> ()</td></tr>
+<tr class="separator:aa0c5337b947da7ad41019c76068888aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1de165edab7e8e430e98bf7a3b06eb78"><td class="memItemLeft" align="right" valign="top"><a id="a1de165edab7e8e430e98bf7a3b06eb78"></a>
+static float&#160;</td><td class="memItemRight" valign="bottom"><b>Convert2DTo3DMinDistance</b> (float minDistance2d)</td></tr>
+<tr class="separator:a1de165edab7e8e430e98bf7a3b06eb78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a767bd1361ac795a181fd07d814d1ffba"><td class="memItemLeft" align="right" valign="top"><a id="a767bd1361ac795a181fd07d814d1ffba"></a>
+static float&#160;</td><td class="memItemRight" valign="bottom"><b>Convert3DTo2DMinDistance</b> (float minDistance3d)</td></tr>
+<tr class="separator:a767bd1361ac795a181fd07d814d1ffba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a30fabe914a6c55e02136389b4557a5"><td class="memItemLeft" align="right" valign="top"><a id="a6a30fabe914a6c55e02136389b4557a5"></a>
+static unsigned short int&#160;</td><td class="memItemRight" valign="bottom"><b>GetMaxNumberOfSounds</b> ()</td></tr>
+<tr class="separator:a6a30fabe914a6c55e02136389b4557a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Static class containing global audio information. </p>
+<p>Stores the </p><ul>
+<li>listener position </li>
+<li>total number of sf::Sound and sf::Music instances present at a time It also provides functionality for converting between 2D and 3D minimum distances </li>
+</ul>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>C:/Users/Adrian/Documents/Visual Studio 2017/Projects/Mars Base Project/Mars Base Engine ECS/Include/MBE/Audio/<a class="el" href="_audio_data_8h_source.html">AudioData.h</a></li>
 <li>C:/Users/Adrian/Documents/Visual Studio 2017/Projects/Mars Base Project/Mars Base Engine ECS/Source/MBE/Audio/AudioData.cpp</li>
 </ul>

@@ -4,6 +4,7 @@
 /// @brief Class mbe::MusicComponent
 
 #include <string>
+#include <unordered_map>
 
 #include <SFML/Audio/Music.hpp>
 

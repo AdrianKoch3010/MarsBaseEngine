@@ -82,31 +82,40 @@ Public Types</h2></td></tr>
 <tr class="memitem:a66e0c1e5fccd83c9d2319b6c5707cda9"><td class="memItemLeft" align="right" valign="top"><a id="a66e0c1e5fccd83c9d2319b6c5707cda9"></a>
 typedef std::function&lt; void(std::vector&lt; <a class="el" href="classmbe_1_1_handle_base.html#a9a1d158b0bdd993e082f50c80dab11cc">Entity::HandleID</a> &gt; &amp;)&gt;&#160;</td><td class="memItemRight" valign="bottom"><b>ZOrderAssignmentFunction</b></td></tr>
 <tr class="separator:a66e0c1e5fccd83c9d2319b6c5707cda9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2315a71d89f202478f067bfcf5dccf39"><td class="memItemLeft" align="right" valign="top"><a id="a2315a71d89f202478f067bfcf5dccf39"></a>
+typedef std::unordered_map&lt; <a class="el" href="classmbe_1_1_render_information_component.html#a95bf04c3be90708e7cf77c4d82279478">RenderLayer</a>, sf::View &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>ViewDictionary</b></td></tr>
+<tr class="separator:a2315a71d89f202478f067bfcf5dccf39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c0093bf297735e36f693b8d416b0f57"><td class="memItemLeft" align="right" valign="top"><a id="a2c0093bf297735e36f693b8d416b0f57"></a>
+typedef std::unordered_map&lt; <a class="el" href="classmbe_1_1_render_information_component.html#a95bf04c3be90708e7cf77c4d82279478">RenderLayer</a>, std::vector&lt; <a class="el" href="classmbe_1_1_handle_base.html#a9a1d158b0bdd993e082f50c80dab11cc">Entity::HandleID</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>RenderEntityDictionary</b></td></tr>
+<tr class="separator:a2c0093bf297735e36f693b8d416b0f57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5229193955baff3eb3e95bc01b46915b"><td class="memItemLeft" align="right" valign="top"><a id="a5229193955baff3eb3e95bc01b46915b"></a>
+typedef std::unordered_map&lt; <a class="el" href="classmbe_1_1_render_information_component.html#a95bf04c3be90708e7cf77c4d82279478">RenderLayer</a>, ZOrderAssignmentFunction &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>ZOrderAssignmentFunctionDictionary</b></td></tr>
+<tr class="separator:a5229193955baff3eb3e95bc01b46915b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a36b967c9da5fc287dd8b85fc6daea6ad"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_render_system.html#a36b967c9da5fc287dd8b85fc6daea6ad">RenderSystem</a> (sf::RenderWindow &amp;window, <a class="el" href="classmbe_1_1_event_manager.html">EventManager</a> &amp;eventManager)</td></tr>
 <tr class="memdesc:a36b967c9da5fc287dd8b85fc6daea6ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a36b967c9da5fc287dd8b85fc6daea6ad">More...</a><br /></td></tr>
 <tr class="separator:a36b967c9da5fc287dd8b85fc6daea6ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a212397d01658d86366f4c8c1bda331a8"><td class="memItemLeft" align="right" valign="top"><a id="a212397d01658d86366f4c8c1bda331a8"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_render_system.html#a212397d01658d86366f4c8c1bda331a8">~RenderSystem</a> ()</td></tr>
-<tr class="memdesc:a212397d01658d86366f4c8c1bda331a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor. <br /></td></tr>
-<tr class="separator:a212397d01658d86366f4c8c1bda331a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1838cd6142b9ba29bf086fd146d11f38"><td class="memItemLeft" align="right" valign="top"><a id="a1838cd6142b9ba29bf086fd146d11f38"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_render_system.html#a1838cd6142b9ba29bf086fd146d11f38">~RenderSystem</a> ()</td></tr>
+<tr class="memdesc:a1838cd6142b9ba29bf086fd146d11f38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor. <br /></td></tr>
+<tr class="separator:a1838cd6142b9ba29bf086fd146d11f38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d7928baf02742d7d79c7cc244221609"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_render_system.html#a5d7928baf02742d7d79c7cc244221609">Render</a> ()</td></tr>
 <tr class="memdesc:a5d7928baf02742d7d79c7cc244221609"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draws all the registered entites.  <a href="#a5d7928baf02742d7d79c7cc244221609">More...</a><br /></td></tr>
 <tr class="separator:a5d7928baf02742d7d79c7cc244221609"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6761cc318f784492c432c240a67f37c"><td class="memItemLeft" align="right" valign="top"><a id="ac6761cc318f784492c432c240a67f37c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetZOrderAssignmentFunction</b> (<a class="el" href="classmbe_1_1_render_component.html#a37723c7c8175fc6af4d6a18a620d107b">RenderComponent::RenderLayer</a> layer, ZOrderAssignmentFunction function)</td></tr>
-<tr class="separator:ac6761cc318f784492c432c240a67f37c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef4ef0e13849a392a9374997687c75f0"><td class="memItemLeft" align="right" valign="top"><a id="aef4ef0e13849a392a9374997687c75f0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetView</b> (<a class="el" href="classmbe_1_1_render_component.html#a37723c7c8175fc6af4d6a18a620d107b">RenderComponent::RenderLayer</a> renderLayer, const sf::View &amp;view)</td></tr>
-<tr class="separator:aef4ef0e13849a392a9374997687c75f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac14720cab57032d73d2ccd318038dcd2"><td class="memItemLeft" align="right" valign="top"><a id="ac14720cab57032d73d2ccd318038dcd2"></a>
-sf::View &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetView</b> (<a class="el" href="classmbe_1_1_render_component.html#a37723c7c8175fc6af4d6a18a620d107b">RenderComponent::RenderLayer</a> renderLayer)</td></tr>
-<tr class="separator:ac14720cab57032d73d2ccd318038dcd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefdcc61d0228927fbceebb15aebb7a7c"><td class="memItemLeft" align="right" valign="top"><a id="aefdcc61d0228927fbceebb15aebb7a7c"></a>
-const sf::View &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetView</b> (<a class="el" href="classmbe_1_1_render_component.html#a37723c7c8175fc6af4d6a18a620d107b">RenderComponent::RenderLayer</a> renderLayer) const</td></tr>
-<tr class="separator:aefdcc61d0228927fbceebb15aebb7a7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa32b9d07cebc43d4b1f5de03e207c8d6"><td class="memItemLeft" align="right" valign="top"><a id="aa32b9d07cebc43d4b1f5de03e207c8d6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetZOrderAssignmentFunction</b> (<a class="el" href="classmbe_1_1_render_information_component.html#a95bf04c3be90708e7cf77c4d82279478">RenderLayer</a> layer, ZOrderAssignmentFunction function)</td></tr>
+<tr class="separator:aa32b9d07cebc43d4b1f5de03e207c8d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1772059cfb1f5d7d63e470cc9946b09"><td class="memItemLeft" align="right" valign="top"><a id="ac1772059cfb1f5d7d63e470cc9946b09"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SetView</b> (<a class="el" href="classmbe_1_1_render_information_component.html#a95bf04c3be90708e7cf77c4d82279478">RenderLayer</a> renderLayer, const sf::View &amp;view)</td></tr>
+<tr class="separator:ac1772059cfb1f5d7d63e470cc9946b09"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec67a5e33f660b8f12553c94993d7b67"><td class="memItemLeft" align="right" valign="top"><a id="aec67a5e33f660b8f12553c94993d7b67"></a>
+sf::View &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetView</b> (<a class="el" href="classmbe_1_1_render_information_component.html#a95bf04c3be90708e7cf77c4d82279478">RenderLayer</a> renderLayer)</td></tr>
+<tr class="separator:aec67a5e33f660b8f12553c94993d7b67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae1409a47bb7664261d69cde3ff95bc4"><td class="memItemLeft" align="right" valign="top"><a id="aae1409a47bb7664261d69cde3ff95bc4"></a>
+const sf::View &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetView</b> (<a class="el" href="classmbe_1_1_render_information_component.html#a95bf04c3be90708e7cf77c4d82279478">RenderLayer</a> renderLayer) const</td></tr>
+<tr class="separator:aae1409a47bb7664261d69cde3ff95bc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99b1369531803e7de58155293b246fdd"><td class="memItemLeft" align="right" valign="top"><a id="a99b1369531803e7de58155293b246fdd"></a>
 const sf::RenderWindow &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetRenderWindow</b> () const</td></tr>
 <tr class="separator:a99b1369531803e7de58155293b246fdd"><td class="memSeparator" colspan="2">&#160;</td></tr>

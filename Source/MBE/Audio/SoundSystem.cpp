@@ -138,3 +138,6 @@
 //
 //	return position;
 //}
+
+// Calculate the audio position for entities with different components, similar to the clickable system
+// Manage the life span of the sf::Sound / sf::Music instances?

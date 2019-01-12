@@ -91,13 +91,18 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animation_component.html#a1f23f948f4bcf934ddb08e3f396d1345">~AnimationComponent</a> ()=default</td></tr>
 <tr class="memdesc:a1f23f948f4bcf934ddb08e3f396d1345"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor. <br /></td></tr>
 <tr class="separator:a1f23f948f4bcf934ddb08e3f396d1345"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15f3ffc89369d5c2e632bf59b63be5a4"><td class="memTemplParams" colspan="2">template&lt;class TAnimated &gt; </td></tr>
-<tr class="memitem:a15f3ffc89369d5c2e632bf59b63be5a4"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="classmbe_1_1_animator.html">Animator</a>&lt; TAnimated &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animation_component.html#a15f3ffc89369d5c2e632bf59b63be5a4">CreateAnimator</a> (std::string id, TAnimated &amp;animatedObject)</td></tr>
-<tr class="memdesc:a15f3ffc89369d5c2e632bf59b63be5a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an animator and adds it to the list of animators managed by this component.  <a href="#a15f3ffc89369d5c2e632bf59b63be5a4">More...</a><br /></td></tr>
-<tr class="separator:a15f3ffc89369d5c2e632bf59b63be5a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad9dc41461bfdae19fb7498147c352664"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classmbe_1_1_base_animator.html">BaseAnimator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animation_component.html#ad9dc41461bfdae19fb7498147c352664">GetAnimator</a> (std::string id) const</td></tr>
-<tr class="memdesc:ad9dc41461bfdae19fb7498147c352664"><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches for an animator with the given id.  <a href="#ad9dc41461bfdae19fb7498147c352664">More...</a><br /></td></tr>
-<tr class="separator:ad9dc41461bfdae19fb7498147c352664"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87ea74ba942095b02154bbe62b5c0419"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animation_component.html#a87ea74ba942095b02154bbe62b5c0419">Update</a> (sf::Time frameTime) override</td></tr>
+<tr class="memdesc:a87ea74ba942095b02154bbe62b5c0419"><td class="mdescLeft">&#160;</td><td class="mdescRight">The update method that should be called every frame (automatically done by the <a class="el" href="classmbe_1_1_entity_manager.html" title="Keeps track of a list of entities. ">mbe::EntityManager</a>)  <a href="#a87ea74ba942095b02154bbe62b5c0419">More...</a><br /></td></tr>
+<tr class="separator:a87ea74ba942095b02154bbe62b5c0419"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9a4a7ba4b198b11f41863182f879e20"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classmbe_1_1_animator.html">EntityAnimator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animation_component.html#ac9a4a7ba4b198b11f41863182f879e20">CreateAnimator</a> (std::string id)</td></tr>
+<tr class="memdesc:ac9a4a7ba4b198b11f41863182f879e20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an animator and adds it to the list of animators managed by this component.  <a href="#ac9a4a7ba4b198b11f41863182f879e20">More...</a><br /></td></tr>
+<tr class="separator:ac9a4a7ba4b198b11f41863182f879e20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a916544c4c5011f73a32cd72451ba8d1d"><td class="memItemLeft" align="right" valign="top"><a id="a916544c4c5011f73a32cd72451ba8d1d"></a>
+<a class="el" href="classmbe_1_1_animator.html">EntityAnimator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetAnimator</b> (std::string id)</td></tr>
+<tr class="separator:a916544c4c5011f73a32cd72451ba8d1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a108fdfa01dc153903059156e29082eb4"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classmbe_1_1_animator.html">EntityAnimator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animation_component.html#a108fdfa01dc153903059156e29082eb4">GetAnimator</a> (std::string id) const</td></tr>
+<tr class="memdesc:a108fdfa01dc153903059156e29082eb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Searches for an animator with the given id.  <a href="#a108fdfa01dc153903059156e29082eb4">More...</a><br /></td></tr>
+<tr class="separator:a108fdfa01dc153903059156e29082eb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa78997973018ea6634340e04c50e525"><td class="memItemLeft" align="right" valign="top"><a id="afa78997973018ea6634340e04c50e525"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>PlayAnimation</b> (std::string animatorId, const std::string &amp;animationId, bool loop)</td></tr>
 <tr class="separator:afa78997973018ea6634340e04c50e525"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -137,13 +142,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsPaused</b> (std::st
 <tr class="memitem:abdec6a767100dfde611e132dd965fb86"><td class="memItemLeft" align="right" valign="top"><a id="abdec6a767100dfde611e132dd965fb86"></a>
 std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetPlayingAnimations</b> () const</td></tr>
 <tr class="separator:abdec6a767100dfde611e132dd965fb86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34ee989b0b1eff8e64c975d066a3ef56"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animation_component.html#a34ee989b0b1eff8e64c975d066a3ef56">Update</a> (sf::Time frameTime)</td></tr>
-<tr class="memdesc:a34ee989b0b1eff8e64c975d066a3ef56"><td class="mdescLeft">&#160;</td><td class="mdescRight">The update method that should be called every frame (automatically done by the <a class="el" href="classmbe_1_1_entity_manager.html" title="Keeps track of a list of entities. ">mbe::EntityManager</a>)  <a href="#a34ee989b0b1eff8e64c975d066a3ef56">More...</a><br /></td></tr>
-<tr class="separator:a34ee989b0b1eff8e64c975d066a3ef56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classmbe_1_1_component"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classmbe_1_1_component')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classmbe_1_1_component.html">mbe::Component</a></td></tr>
-<tr class="memitem:ad9c48e04e930f700f1ef293588b3527b inherit pub_methods_classmbe_1_1_component"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_component.html#ad9c48e04e930f700f1ef293588b3527b">Component</a> (<a class="el" href="classmbe_1_1_entity.html">Entity</a> &amp;parentEntity)</td></tr>
-<tr class="memdesc:ad9c48e04e930f700f1ef293588b3527b inherit pub_methods_classmbe_1_1_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classmbe_1_1_component.html#ad9c48e04e930f700f1ef293588b3527b">More...</a><br /></td></tr>
-<tr class="separator:ad9c48e04e930f700f1ef293588b3527b inherit pub_methods_classmbe_1_1_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3eb489a43075c453319ffe800b5c7a4 inherit pub_methods_classmbe_1_1_component"><td class="memItemLeft" align="right" valign="top"><a id="ab3eb489a43075c453319ffe800b5c7a4"></a>
 virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_component.html#ab3eb489a43075c453319ffe800b5c7a4">~Component</a> ()=default</td></tr>
 <tr class="memdesc:ab3eb489a43075c453319ffe800b5c7a4 inherit pub_methods_classmbe_1_1_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor. <br /></td></tr>
@@ -164,6 +163,10 @@ typedef std::weak_ptr&lt; <a class="el" href="classmbe_1_1_component.html">Compo
 <tr class="memitem:a7c8921f73844042a81dd00b03cf37610 inherit pub_types_classmbe_1_1_component"><td class="memItemLeft" align="right" valign="top"><a id="a7c8921f73844042a81dd00b03cf37610"></a>
 typedef std::unique_ptr&lt; <a class="el" href="classmbe_1_1_component.html">Component</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>UPtr</b></td></tr>
 <tr class="separator:a7c8921f73844042a81dd00b03cf37610 inherit pub_types_classmbe_1_1_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classmbe_1_1_component"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classmbe_1_1_component')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classmbe_1_1_component.html">mbe::Component</a></td></tr>
+<tr class="memitem:ad9c48e04e930f700f1ef293588b3527b inherit pro_methods_classmbe_1_1_component"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_component.html#ad9c48e04e930f700f1ef293588b3527b">Component</a> (<a class="el" href="classmbe_1_1_entity.html">Entity</a> &amp;parentEntity)</td></tr>
+<tr class="memdesc:ad9c48e04e930f700f1ef293588b3527b inherit pro_methods_classmbe_1_1_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="classmbe_1_1_component.html#ad9c48e04e930f700f1ef293588b3527b">More...</a><br /></td></tr>
+<tr class="separator:ad9c48e04e930f700f1ef293588b3527b inherit pro_methods_classmbe_1_1_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classmbe_1_1_component"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classmbe_1_1_component')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classmbe_1_1_component.html">mbe::Component</a></td></tr>
 <tr class="memitem:a6af84d005d1c0e94f34e010f0f468b0f inherit pro_attribs_classmbe_1_1_component"><td class="memItemLeft" align="right" valign="top"><a id="a6af84d005d1c0e94f34e010f0f468b0f"></a>
 <a class="el" href="classmbe_1_1_entity.html">Entity</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>parentEntity</b></td></tr>
@@ -199,40 +202,20 @@ typedef std::unique_ptr&lt; <a class="el" href="classmbe_1_1_component.html">Com
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a15f3ffc89369d5c2e632bf59b63be5a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a15f3ffc89369d5c2e632bf59b63be5a4">&#9670;&nbsp;</a></span>CreateAnimator()</h2>
+<a id="ac9a4a7ba4b198b11f41863182f879e20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9a4a7ba4b198b11f41863182f879e20">&#9670;&nbsp;</a></span>CreateAnimator()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;class TAnimated &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classmbe_1_1_animator.html">Animator</a>&lt; TAnimated &gt; &amp; mbe::AnimationComponent::CreateAnimator </td>
+          <td class="memname"><a class="el" href="classmbe_1_1_animator.html">AnimationComponent::EntityAnimator</a> &amp; AnimationComponent::CreateAnimator </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
-          <td class="paramname"><em>id</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><em>id</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">TAnimated &amp;&#160;</td>
-          <td class="paramname"><em>animatedObject</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Creates an animator and adds it to the list of animators managed by this component. </p>
@@ -254,14 +237,14 @@ template&lt;class TAnimated &gt; </div>
 
 </div>
 </div>
-<a id="ad9dc41461bfdae19fb7498147c352664"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad9dc41461bfdae19fb7498147c352664">&#9670;&nbsp;</a></span>GetAnimator()</h2>
+<a id="a108fdfa01dc153903059156e29082eb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a108fdfa01dc153903059156e29082eb4">&#9670;&nbsp;</a></span>GetAnimator()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="classmbe_1_1_base_animator.html">BaseAnimator</a> &amp; AnimationComponent::GetAnimator </td>
+          <td class="memname">const <a class="el" href="classmbe_1_1_animator.html">AnimationComponent::EntityAnimator</a> &amp; AnimationComponent::GetAnimator </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>id</em></td><td>)</td>
@@ -287,8 +270,8 @@ template&lt;class TAnimated &gt; </div>
 
 </div>
 </div>
-<a id="a34ee989b0b1eff8e64c975d066a3ef56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34ee989b0b1eff8e64c975d066a3ef56">&#9670;&nbsp;</a></span>Update()</h2>
+<a id="a87ea74ba942095b02154bbe62b5c0419"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87ea74ba942095b02154bbe62b5c0419">&#9670;&nbsp;</a></span>Update()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -306,7 +289,7 @@ template&lt;class TAnimated &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -319,7 +302,7 @@ template&lt;class TAnimated &gt; </div>
   </dd>
 </dl>
 
-<p>Implements <a class="el" href="classmbe_1_1_component.html#a0c75d3234fae7f7fb00808afc68d8517">mbe::Component</a>.</p>
+<p>Reimplemented from <a class="el" href="classmbe_1_1_component.html#a710ebbe46c5ec9712e748abad72c199f">mbe::Component</a>.</p>
 
 </div>
 </div>

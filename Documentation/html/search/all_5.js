@@ -12,7 +12,7 @@ var searchData=
   ['floattext',['FloatText',['../classtinyxml2_1_1_x_m_l_element.html#a45444eb21f99ca46101545992dc2e927',1,'tinyxml2::XMLElement']]],
   ['floatvalue',['FloatValue',['../classtinyxml2_1_1_x_m_l_attribute.html#a27797b45d21c981257720db94f5f8801',1,'tinyxml2::XMLAttribute']]],
   ['fontholder',['FontHolder',['../namespacembe.html#a167f96b414b04104fb9439103c90766b',1,'mbe']]],
-  ['foreground',['Foreground',['../classmbe_1_1_render_component.html#a37723c7c8175fc6af4d6a18a620d107ba169ac37528c611312cc8de374d216c54',1,'mbe::RenderComponent']]],
+  ['foreground',['Foreground',['../classmbe_1_1_render_information_component.html#a95bf04c3be90708e7cf77c4d82279478a45bd1d5b32931106efbf1a82fe6a732f',1,'mbe::RenderInformationComponent']]],
   ['frameanimation',['FrameAnimation',['../classmbe_1_1_frame_animation.html',1,'mbe::FrameAnimation'],['../classmbe_1_1_frame_animation.html#a5774f92ba63d2ed160c0894cc26ba54c',1,'mbe::FrameAnimation::FrameAnimation()']]],
   ['frameanimation_2eh',['FrameAnimation.h',['../_frame_animation_8h.html',1,'']]]
 ];

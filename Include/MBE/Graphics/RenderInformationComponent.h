@@ -61,6 +61,10 @@ namespace mbe
 
 		const sf::RenderWindow * GetRenderWindow() const;
 
+		void ResetViewGetterFunction();
+
+		void ResetWindowGetterFunction();
+
 	private:
 		RenderLayer renderLayer;
 		float zOrder;

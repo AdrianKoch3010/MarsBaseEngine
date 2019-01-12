@@ -73,19 +73,22 @@ $(function() {
 
 <p>The Class <a class="el" href="classmbe_1_1_render_system.html" title="Takes care of drawing all entities with a mbe::RenderComponent in the correct order. ">mbe::RenderSystem</a>.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;SFML/Graphics.hpp&gt;</code><br />
-<code>#include &lt;map&gt;</code><br />
+<div class="textblock"><code>#include &lt;map&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
-<code>#include &lt;array&gt;</code><br />
+<code>#include &lt;unordered_map&gt;</code><br />
 <code>#include &lt;memory&gt;</code><br />
 <code>#include &lt;algorithm&gt;</code><br />
 <code>#include &lt;functional&gt;</code><br />
 <code>#include &lt;cassert&gt;</code><br />
+<code>#include &lt;SFML/Graphics/RenderWindow.hpp&gt;</code><br />
+<code>#include &lt;SFML/Graphics/View.hpp&gt;</code><br />
+<code>#include &lt;MBE/TransformComponent.h&gt;</code><br />
 <code>#include &lt;<a class="el" href="_render_component_8h_source.html">MBE/Graphics/RenderComponent.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="_render_layer_8h_source.html">MBE/Graphics/RenderLayer.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="_render_information_component_8h_source.html">MBE/Graphics/RenderInformationComponent.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="_texture_wrapper_component_8h_source.html">MBE/Graphics/TextureWrapperComponent.h</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="_event_manager_8h_source.html">MBE/Core/EventManager.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="_entity_created_event_8h_source.html">MBE/Core/EntityCreatedEvent.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="_entity_removed_event_8h_source.html">MBE/Core/EntityRemovedEvent.h</a>&gt;</code><br />
-<code>#include &lt;<a class="el" href="_event_manager_8h_source.html">MBE/Core/EventManager.h</a>&gt;</code><br />
 </div>
 <p><a href="_render_system_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">

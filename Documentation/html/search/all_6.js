@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['get',['Get',['../classmbe_1_1_asset_holder.html#a356b0eede1fb60055fd16824aeb7419b',1,'mbe::AssetHolder::Get(const TID &amp;id)'],['../classmbe_1_1_asset_holder.html#a13176db7da85d58b2daeaa939d162661',1,'mbe::AssetHolder::Get(const TID &amp;id) const'],['../classmbe_1_1_asset_holder_3_01std_1_1string_00_01_t_asset_01_4.html#a1344ce6fe3ae96696673b6e53aa7edc3',1,'mbe::AssetHolder&lt; std::string, TAsset &gt;::Get(std::string id)'],['../classmbe_1_1_asset_holder_3_01std_1_1string_00_01_t_asset_01_4.html#a87a1ab7f03e84daa934f1d0bc1c940c3',1,'mbe::AssetHolder&lt; std::string, TAsset &gt;::Get(std::string id) const'],['../classmbe_1_1_file_path_dictionary.html#ae06005d3e72010746cbd08dad14739d9',1,'mbe::FilePathDictionary::Get()'],['../classmbe_1_1_file_path_dictionary_3_01std_1_1string_01_4.html#a739d85e85c7f64f6f8afcc441d7ffb23',1,'mbe::FilePathDictionary&lt; std::string &gt;::Get()']]],
-  ['getanimator',['GetAnimator',['../classmbe_1_1_animation_component.html#ad9dc41461bfdae19fb7498147c352664',1,'mbe::AnimationComponent']]],
+  ['get',['Get',['../classmbe_1_1_asset_holder.html#a356b0eede1fb60055fd16824aeb7419b',1,'mbe::AssetHolder::Get(const TID &amp;id)'],['../classmbe_1_1_asset_holder.html#a13176db7da85d58b2daeaa939d162661',1,'mbe::AssetHolder::Get(const TID &amp;id) const'],['../classmbe_1_1_asset_holder_3_01std_1_1string_00_01_t_asset_01_4.html#a1344ce6fe3ae96696673b6e53aa7edc3',1,'mbe::AssetHolder&lt; std::string, TAsset &gt;::Get(std::string id)'],['../classmbe_1_1_asset_holder_3_01std_1_1string_00_01_t_asset_01_4.html#a87a1ab7f03e84daa934f1d0bc1c940c3',1,'mbe::AssetHolder&lt; std::string, TAsset &gt;::Get(std::string id) const'],['../classmbe_1_1_file_path_dictionary.html#ae06005d3e72010746cbd08dad14739d9',1,'mbe::FilePathDictionary::Get()'],['../classmbe_1_1_file_path_dictionary_3_01std_1_1string_01_4.html#a20418062ce2de097e4d9a9a34851566b',1,'mbe::FilePathDictionary&lt; std::string &gt;::Get()']]],
+  ['getanimator',['GetAnimator',['../classmbe_1_1_animation_component.html#a108fdfa01dc153903059156e29082eb4',1,'mbe::AnimationComponent']]],
   ['getassignedkeys',['GetAssignedKeys',['../classmbe_1_1_input_handler.html#a717bcedd77d289dfa91396d99c5a9987',1,'mbe::InputHandler']]],
-  ['getassignedmousebuttons',['GetAssignedMouseButtons',['../classmbe_1_1_input_handler.html#a563365455ef49bcdf0afc851c40dff37',1,'mbe::InputHandler']]],
+  ['getassignedmousebuttons',['GetAssignedMouseButtons',['../classmbe_1_1_input_handler.html#a9085ba42c6e52d243908fb24f5bca6d7',1,'mbe::InputHandler']]],
+  ['getchildentityidlist',['GetChildEntityIDList',['../classmbe_1_1_entity.html#ae5fdc031840a8f08dcf24814f9199a3e',1,'mbe::Entity']]],
   ['getclickposition',['GetClickPosition',['../classmbe_1_1event_1_1_mouse_button_base_event.html#a189fe5a6458d6b9688631606f4277862',1,'mbe::event::MouseButtonBaseEvent']]],
   ['getcomponent',['GetComponent',['../classmbe_1_1_entity.html#ae24ad54c0116fdcc8b96d457333f5840',1,'mbe::Entity']]],
   ['getcomponentid',['GetComponentID',['../namespacembe_1_1detail.html#a2459fb2ad4a15bb974b732e2b1d06604',1,'mbe::detail']]],
@@ -18,6 +19,7 @@ var searchData=
   ['getnullid',['GetNullID',['../classmbe_1_1_handle_base.html#a80888d292e4ba88a9c6ffc17f39ee8eb',1,'mbe::HandleBase']]],
   ['getobjectfromid',['GetObjectFromID',['../classmbe_1_1_handle_base.html#a6fc6f3f723e6137a293dd7206b5121c3',1,'mbe::HandleBase']]],
   ['getparententity',['GetParentEntity',['../classmbe_1_1_component.html#a40a4144bbb6bf794d8b36b06810befce',1,'mbe::Component']]],
+  ['getparententityid',['GetParentEntityID',['../classmbe_1_1_entity.html#ac81e3ce9ca0e8765d87ce9ce3f345c38',1,'mbe::Entity']]],
   ['getplayinganimation',['GetPlayingAnimation',['../classmbe_1_1_animator.html#a8d47f331da1b79636d5502bbd4e779f1',1,'mbe::Animator::GetPlayingAnimation()'],['../classmbe_1_1_animator_3_01_t_animated_00_01std_1_1string_01_4.html#a042bf25ff7bd2120f571ed3b03e66a59',1,'mbe::Animator&lt; TAnimated, std::string &gt;::GetPlayingAnimation()']]],
   ['getstateid',['GetStateID',['../namespacembe_1_1detail.html#a7476e5afe5516bf3e9dd337852329d70',1,'mbe::detail']]],
   ['getstatetypeid',['GetStateTypeID',['../namespacembe_1_1detail.html#a74040f60f5843ac61338a183928297f2',1,'mbe::detail']]],
@@ -25,5 +27,5 @@ var searchData=
   ['gettypeid',['GetTypeID',['../classmbe_1_1detail_1_1_event_wrapper.html#a786e63d3fbaa95a02a29bdd17a9eeb7a',1,'mbe::detail::EventWrapper']]],
   ['getuserdata',['GetUserData',['../classtinyxml2_1_1_x_m_l_node.html#a7f0687574afa03bc479dc44f29db0afe',1,'tinyxml2::XMLNode']]],
   ['group',['Group',['../classmbe_1_1_entity.html#ac117c78326bff15c0c49cee364483037',1,'mbe::Entity']]],
-  ['gui',['GUI',['../classmbe_1_1_render_component.html#a37723c7c8175fc6af4d6a18a620d107babc7486452385c7ed1659f4e8028014ca',1,'mbe::RenderComponent']]]
+  ['gui',['GUI',['../classmbe_1_1_render_information_component.html#a95bf04c3be90708e7cf77c4d82279478a1e3042b2e2a5550b412b37edd1c36b34',1,'mbe::RenderInformationComponent']]]
 ];
