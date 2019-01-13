@@ -243,9 +243,6 @@
     <ClCompile Include="Source\MBE\Audio\SoundManager.cpp">
       <Filter>Quelldateien\Systems\Audio System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MBE\Audio\SoundSystem.cpp">
-      <Filter>Quelldateien\Systems\Audio System</Filter>
-    </ClCompile>
     <ClCompile Include="Source\MBE\Graphics\Effect.cpp">
       <Filter>Quelldateien\Systems\Render System</Filter>
     </ClCompile>
@@ -290,6 +287,9 @@
     </ClCompile>
     <ClCompile Include="Source\MBE\Graphics\RenderComponent.cpp">
       <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Audio\AudioSystem.cpp">
+      <Filter>Quelldateien\Systems\Audio System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -443,9 +443,6 @@
     <ClInclude Include="Include\MBE\Audio\SoundManager.h">
       <Filter>Headerdateien\Systems\Audio System</Filter>
     </ClInclude>
-    <ClInclude Include="Include\MBE\Audio\SoundSystem.h">
-      <Filter>Headerdateien\Systems\Audio System</Filter>
-    </ClInclude>
     <ClInclude Include="Include\MBE\Animation\RotationAnimation.h">
       <Filter>Headerdateien\Systems\Animation System\Animations</Filter>
     </ClInclude>
@@ -493,6 +490,9 @@
     </ClInclude>
     <ClInclude Include="Include\MBE\Graphics\TextureWrapperComponent.h">
       <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Audio\AudioSystem.h">
+      <Filter>Headerdateien\Systems\Audio System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

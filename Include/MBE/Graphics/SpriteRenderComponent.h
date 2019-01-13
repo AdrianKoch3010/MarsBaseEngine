@@ -25,11 +25,12 @@ namespace mbe
 
 		sf::FloatRect GetLocalBounds() const override;
 
-		void SetColor(const sf::Color & color) { sprite.setColor(color); }
+		inline void SetColor(const sf::Color & color) { sprite.setColor(color); }
 
 		inline const sf::Color & GetColor() const { return sprite.getColor(); }
 
 	private:
 		mutable sf::Sprite sprite;
 	};
+
 } // namespace mbe

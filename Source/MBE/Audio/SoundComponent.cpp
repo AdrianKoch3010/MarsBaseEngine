@@ -13,10 +13,6 @@ SoundComponent::SoundComponent(Entity & parentEntity, const sf::SoundBuffer & so
 
 void SoundComponent::Update(sf::Time frameTime)
 {
-	// Update the sound position
-	const auto position = CalculatePosition();
-	sound.setPosition({ position.x, position.y, 0.f });
-
 	// Delete the sound entity once the sound has finished playing
 	if (sound.getStatus() == sf::Sound::Status::Stopped)
 		this->parentEntity.Destroy();
@@ -26,10 +22,6 @@ void SoundComponent::Play()
 {
 	sound.setBuffer(soundBuffer);
 	sound.play();
-
-	// Set its initial position
-	const auto position = CalculatePosition();
-	sound.setPosition({ position.x, position.y, 0.f });
 }
 
 void SoundComponent::SetPaused(bool value)
@@ -85,37 +77,47 @@ void SoundComponent::SetLooped(bool value)
 	sound.setLoop(value);
 }
 
-float SoundComponent::GetAttenuation()
+void SoundComponent::SetPosition(sf::Vector2f position)
+{
+	sound.setPosition({ position.x, position.y, 0.f });
+}
+
+float SoundComponent::GetAttenuation() const
 {
 	return sound.getAttenuation();
 }
 
-float SoundComponent::GetMinDistance()
+float SoundComponent::GetMinDistance() const
 {
 	return AudioData::Convert3DTo2DMinDistance(sound.getMinDistance());
 }
 
-float SoundComponent::GetVolume()
+float SoundComponent::GetVolume() const
 {
 	return sound.getVolume();
 }
 
-float SoundComponent::GetPitch()
+float SoundComponent::GetPitch() const
 {
 	return sound.getPitch();
 }
 
-sf::Time SoundComponent::GetPlayingOffset()
+sf::Time SoundComponent::GetPlayingOffset() const
 {
 	return sound.getPlayingOffset();
 }
 
-float SoundComponent::IsLooped()
+float SoundComponent::IsLooped() const
 {
 	return sound.getLoop();
 }
 
-AudioData::AudioStatus SoundComponent::GetAudioStatus()
+sf::Vector2f SoundComponent::GetPosition() const
+{
+	return { sound.getPosition().x, sound.getPosition().y };
+}
+
+AudioData::AudioStatus SoundComponent::GetAudioStatus() const
 {
 	switch (sound.getStatus())
 	{

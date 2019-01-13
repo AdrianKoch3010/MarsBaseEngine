@@ -22,7 +22,7 @@ void ClickableComponent::RemoveConnectedClickableEntity(Entity::HandleID entityI
 
 void ClickableComponent::RemoveExpiredConnectedClickableEntities()
 {
-	// Remove deleted entities from the 
+	// Remove deleted entities from the connectedClickableEntityIdList
 	for (auto it = connectedClickableEntityIdList.cbegin(); it != connectedClickableEntityIdList.cend(); )
 	{
 		const auto * entityPtr = Entity::GetObjectFromID(*it);

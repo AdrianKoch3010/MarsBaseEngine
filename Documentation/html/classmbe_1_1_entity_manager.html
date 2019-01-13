@@ -65,7 +65,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classmbe_1_1_entity_manager-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -109,15 +108,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab8c38b668c85eea594d1a8c5bc7a9a3b"><td class="memItemLeft" align="right" valign="top"><a id="ab8c38b668c85eea594d1a8c5bc7a9a3b"></a>
 const std::vector&lt; <a class="el" href="classmbe_1_1_handle_base.html#a9a1d158b0bdd993e082f50c80dab11cc">Entity::HandleID</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetGroup</b> (<a class="el" href="classmbe_1_1_entity.html#ac117c78326bff15c0c49cee364483037">Entity::Group</a> groupId) const</td></tr>
 <tr class="separator:ab8c38b668c85eea594d1a8c5bc7a9a3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:aa4416b84740bf506e49f29517e24ba19"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_entity_manager.html#aa4416b84740bf506e49f29517e24ba19">Refresh</a> ()</td></tr>
-<tr class="memdesc:aa4416b84740bf506e49f29517e24ba19"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes all inactive entities.  <a href="#aa4416b84740bf506e49f29517e24ba19">More...</a><br /></td></tr>
-<tr class="separator:aa4416b84740bf506e49f29517e24ba19"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6fba825ba413cec8dd672041264f01a"><td class="memItemLeft" align="right" valign="top"><a id="ae6fba825ba413cec8dd672041264f01a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>AddEntityToGroup</b> (<a class="el" href="classmbe_1_1_handle_base.html#a9a1d158b0bdd993e082f50c80dab11cc">Entity::HandleID</a> entityId, <a class="el" href="classmbe_1_1_entity.html#ac117c78326bff15c0c49cee364483037">Entity::Group</a> groupId)</td></tr>
-<tr class="separator:ae6fba825ba413cec8dd672041264f01a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b34661acd4caf1f8f5daf240808bd50"><td class="memTemplParams" colspan="2"><a id="a0b34661acd4caf1f8f5daf240808bd50"></a>
+template&lt;class TComponent &gt; </td></tr>
+<tr class="memitem:a0b34661acd4caf1f8f5daf240808bd50"><td class="memTemplItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="classmbe_1_1_handle_base.html#a9a1d158b0bdd993e082f50c80dab11cc">Entity::HandleID</a> &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>GetComponentGroup</b> () const</td></tr>
+<tr class="separator:a0b34661acd4caf1f8f5daf240808bd50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -193,34 +187,6 @@ template&lt;typename TData , typename ... TArguments&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to the base entity. This is sufficient since classes that derive from entity should not add additional methods anyway. </dd></dl>
-
-</div>
-</div>
-<a id="aa4416b84740bf506e49f29517e24ba19"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa4416b84740bf506e49f29517e24ba19">&#9670;&nbsp;</a></span>Refresh()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void EntityManager::Refresh </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Deletes all inactive entities. </p>
-<p>Entities are set inactive when calling the <a class="el" href="classmbe_1_1_entity.html#aa75151fc607686b42d27f8c3ba73143d" title="Flags this entity and all its child entities to be detroyed. ">mbe::Entity::Destroy()</a> method </p>
 
 </div>
 </div>

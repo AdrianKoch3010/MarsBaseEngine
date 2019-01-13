@@ -12,9 +12,6 @@
 #include <MBE/Core/Component.h>
 #include <MBE/Core/Entity.h>
 
-#include <MBE/TransformComponent.h>
-#include <MBE/Graphics/RenderInformationComponent.h>
-
 #include <MBE/Audio/AudioData.h>
 
 namespace mbe
@@ -52,23 +49,23 @@ namespace mbe
 
 		virtual void SetLooped(bool value = true) = 0;
 
-		virtual float GetAttenuation() = 0;
+		virtual void SetPosition(sf::Vector2f position) = 0;
 
-		virtual float GetMinDistance() = 0;
+		virtual float GetAttenuation() const = 0;
 
-		virtual float GetVolume() = 0;
+		virtual float GetMinDistance() const = 0;
 
-		virtual float GetPitch() = 0;
+		virtual float GetVolume() const = 0;
 
-		virtual sf::Time GetPlayingOffset() = 0;
+		virtual float GetPitch() const = 0;
 
-		virtual float IsLooped() = 0;
+		virtual sf::Time GetPlayingOffset() const = 0;
 
-		virtual AudioStatus GetAudioStatus() = 0;
+		virtual float IsLooped() const = 0;
 
-	protected:
-		// Logic that depends on Audio, Transform and RenderInformation / View Components
-		sf::Vector2f CalculatePosition();
+		virtual sf::Vector2f GetPosition() const = 0;
+
+		virtual AudioStatus GetAudioStatus() const = 0;
 	};
 
 } // namespace mbe

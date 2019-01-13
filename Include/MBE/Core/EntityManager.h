@@ -19,6 +19,7 @@ namespace mbe
 {
 	/// @brief Keeps track of a list of entities
 	/// @details There should only be a single EntityManager per State
+	/// @note The mbe::EntityManger's Update() function should always be called last to ensure that entites that have been deleted are not erased to early
 	class EntityManager : private sf::NonCopyable
 	{
 		/// @brief Enables the entity to access the entity managers AddEntityToGroup() method
@@ -60,11 +61,13 @@ namespace mbe
 		template <typename TData, typename... TArguments>
 		Entity & CreateEntity(TArguments&&... arguments);
 
+		// The reference is valid as long as the entitymanager exists (which should be longer than the functions using it)
 		// Returns a list of all entites that have been added to this group
 		// If the group id doesn't exista an empty list is returned
 		// The group id is not case sensitive - ASCII only
 		const std::vector<Entity::HandleID>& GetGroup(Entity::Group groupId) const;
 
+		// The reference is valid as long as the entitymanager exists (which should be longer than the functions using it)
 		// Returns a list of all entities that have component TComponent
 		template <class TComponent>
 		const std::vector<Entity::HandleID>& GetComponentGroup() const;

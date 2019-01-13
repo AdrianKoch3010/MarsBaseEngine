@@ -31,8 +31,8 @@ sf::FloatRect TiledTerrainLayerRenderComponent::GetLocalBounds() const
 {
 	sf::FloatRect rect;
 
-	rect.width = size.x * tileSize.x;
-	rect.height = size.y * tileSize.y;
+	rect.width = static_cast<float>(size.x * tileSize.x);
+	rect.height = static_cast<float>(size.y * tileSize.y);
 
 	return rect;
 }

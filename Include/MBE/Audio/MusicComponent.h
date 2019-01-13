@@ -46,20 +46,24 @@ namespace mbe
 
 		void SetLooped(bool value = true) override;
 
-		float GetAttenuation() override;
+		void SetPosition(sf::Vector2f position) override;
 
-		float GetMinDistance() override;
+		float GetAttenuation() const override;
 
-		float GetVolume() override;
+		float GetMinDistance() const override;
 
-		float GetPitch() override;
+		float GetVolume() const override;
 
-		sf::Time GetPlayingOffset() override;
+		float GetPitch() const override;
 
-		float IsLooped() override;
+		sf::Time GetPlayingOffset() const override;
+
+		float IsLooped() const override;
+
+		sf::Vector2f GetPosition() const override;
 
 		// Is stopped valid?
-		AudioStatus GetAudioStatus() override;
+		AudioStatus GetAudioStatus() const override;
 
 	public:
 		const std::string & GetFilePath() const;

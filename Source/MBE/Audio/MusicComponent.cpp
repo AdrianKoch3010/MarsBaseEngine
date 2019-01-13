@@ -12,10 +12,6 @@ MusicComponent::MusicComponent(Entity & parentEntity, std::string filePath) :
 
 void MusicComponent::Update(sf::Time frameTime)
 {
-	// Update the sound position
-	const auto position = CalculatePosition();
-	music.setPosition({ position.x, position.y, 0.f });
-
 	// Delete the sound entity once the sound has finished playing
 	if (music.getStatus() == sf::Music::Status::Stopped)
 		this->parentEntity.Destroy();
@@ -28,10 +24,6 @@ void MusicComponent::Play()
 
 	// Play the sound
 	music.play();
-
-	// Set its initial position
-	const auto position = CalculatePosition();
-	music.setPosition({ position.x, position.y, 0.f });
 }
 
 void MusicComponent::SetPaused(bool value)
@@ -87,37 +79,47 @@ void MusicComponent::SetLooped(bool value)
 	music.setLoop(value);
 }
 
-float MusicComponent::GetAttenuation()
+void MusicComponent::SetPosition(sf::Vector2f position)
+{
+	music.setPosition({ position.x, position.y, 0.f });
+}
+
+float MusicComponent::GetAttenuation() const
 {
 	return music.getAttenuation();
 }
 
-float MusicComponent::GetMinDistance()
+float MusicComponent::GetMinDistance() const
 {
 	return AudioData::Convert3DTo2DMinDistance(music.getMinDistance());
 }
 
-float MusicComponent::GetVolume()
+float MusicComponent::GetVolume() const
 {
 	return music.getVolume();
 }
 
-float MusicComponent::GetPitch()
+float MusicComponent::GetPitch() const
 {
 	return music.getPitch();
 }
 
-sf::Time MusicComponent::GetPlayingOffset()
+sf::Time MusicComponent::GetPlayingOffset() const
 {
 	return music.getPlayingOffset();
 }
 
-float MusicComponent::IsLooped()
+float MusicComponent::IsLooped() const
 {
 	return music.getLoop();
 }
 
-AudioData::AudioStatus MusicComponent::GetAudioStatus()
+sf::Vector2f MusicComponent::GetPosition() const
+{
+	return { music.getPosition().x, music.getPosition().y };
+}
+
+AudioData::AudioStatus MusicComponent::GetAudioStatus() const
 {
 	switch (music.getStatus())
 	{

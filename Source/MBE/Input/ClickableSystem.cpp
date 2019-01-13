@@ -35,7 +35,7 @@ void ClickableSystem::OnClick(sf::Vector2f clickPosition, sf::Mouse::Button butt
 
 		if (clickableComponent.Contains(CalculatePosition(entity, clickPosition)))
 		{
-			// If the entity has a renderInformationComponent the 'drawing' order must be taken into account
+			// If the entity has a renderInformationComponent the 'drawing' order + clickAbsorbtion must be taken into account
 			if (entity.HasComponent<RenderInformationComponent>())
 				clickedEntityList.push_back(&entity);
 			else
@@ -45,7 +45,7 @@ void ClickableSystem::OnClick(sf::Vector2f clickPosition, sf::Mouse::Button butt
 
 	// Sort the clicked entity list by render order (in decending order)
 	std::sort(clickedEntityList.begin(), clickedEntityList.end(), [](const Entity * a, const Entity * b) {
-		return !b->GetComponent<RenderInformationComponent>().IsAboveOrEqual(b->GetComponent<RenderInformationComponent>());
+		return b->GetComponent<RenderInformationComponent>().IsAboveOrEqual(a->GetComponent<RenderInformationComponent>());
 	});
 
 
@@ -101,3 +101,22 @@ void ClickableSystem::RaiseConnectedClickEvents(const ClickableComponent & click
 		eventManager.RaiseEvent(entityClickedEvent);
 	}
 }
+
+//// A diffent function signature would be required to recursively call the function for parent entities that don't necessarily have a Clickable Component
+//void ClickableSystem::RaiseConnectedClickEvents(const ClickableComponent & clickableComponent, sf::Mouse::Button button)
+//{
+//	const auto parentEntityId = clickableComponent.GetParentEntity().GetParentEntityID();
+//	if (parentEntityId != Entity::GetNullID())
+//	{
+//		// The entity should exist since if the parent is deleted the child entities are deleted as well
+//		assert(Entity::GetObjectFromID(parentEntityId) != nullptr && "Clickable System: The parent entity must exist");
+//
+//		event::EntityClickedEvent entityClickedEvent;
+//		entityClickedEvent.SetEntityID(parentEntityId);
+//		entityClickedEvent.SetMouseButton(button);
+//		eventManager.RaiseEvent(entityClickedEvent);
+//
+//		// Recursive call
+//		RaiseConnectedClickEvents(....);
+//	}
+//}

@@ -10,6 +10,7 @@ Constants::Constants()
 	// Initialise the pointers with null
 	screenWidth = nullptr;
 	screenHeight = nullptr;
+	testTimeMultiplicator = nullptr;
 
 	this->hasLoadedSuccessfully = false;
 	this->hasLoadedSuccessfully = Load("Resources/constants.txt");
@@ -20,9 +21,11 @@ Constants::~Constants()
 {
 	delete screenWidth;
 	delete screenHeight;
+	delete testTimeMultiplicator;
 
 	screenWidth = nullptr;
 	screenHeight = nullptr;
+	testTimeMultiplicator = nullptr;
 }
 
 #pragma endregion

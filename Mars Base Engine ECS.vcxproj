@@ -206,7 +206,7 @@
     <ClCompile Include="Source\MBE\Input\PixelMaskClickableComponent.cpp" />
     <ClCompile Include="Source\MBE\Audio\AudioData.cpp" />
     <ClCompile Include="Source\MBE\Audio\SoundManager.cpp" />
-    <ClCompile Include="Source\MBE\Audio\SoundSystem.cpp" />
+    <ClCompile Include="Source\MBE\Audio\AudioSystem.cpp" />
     <ClCompile Include="Source\MBE\Graphics\SpriteRenderComponent.cpp" />
     <ClCompile Include="Source\MBE\TiledTerrain.cpp" />
     <ClCompile Include="Source\MBE\Core\Component.cpp" />
@@ -260,7 +260,7 @@
     <ClInclude Include="Include\MBE\Input\PixelMaskClickableComponent.h" />
     <ClInclude Include="Include\MBE\Audio\AudioData.h" />
     <ClInclude Include="Include\MBE\Audio\SoundManager.h" />
-    <ClInclude Include="Include\MBE\Audio\SoundSystem.h" />
+    <ClInclude Include="Include\MBE\Audio\AudioSystem.h" />
     <ClInclude Include="Include\MBE\Graphics\SpriteRenderComponent.h" />
     <ClInclude Include="Include\MBE\TiledTerrain.h" />
     <ClInclude Include="Include\MBE\Input\MouseButtonBaseEvent.h" />
