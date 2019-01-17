@@ -291,6 +291,9 @@
     <ClCompile Include="Source\MBE\Audio\AudioSystem.cpp">
       <Filter>Quelldateien\Systems\Audio System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MBE\Graphics\SpriteRenderSystem.cpp">
+      <Filter>Quelldateien\Systems\Render System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\TiledTerrain.h">
@@ -493,6 +496,9 @@
     </ClInclude>
     <ClInclude Include="Include\MBE\Audio\AudioSystem.h">
       <Filter>Headerdateien\Systems\Audio System</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Graphics\SpriteRenderSystem.h">
+      <Filter>Headerdateien\Systems\Render System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

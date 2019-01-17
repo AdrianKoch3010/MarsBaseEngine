@@ -36,6 +36,9 @@ namespace mbe
 
 		void SetMinDistance(float value) override;
 
+		// Volume between 0 and 100
+		// 0 is mute and 100 is full value
+		// The default volume is 100
 		void SetVolume(float value) override;
 
 		void SetPitch(float value) override;
@@ -50,6 +53,9 @@ namespace mbe
 
 		float GetMinDistance() const override;
 
+		// Volume between 0 and 100
+		// 0 is mute and 100 is full value
+		// The default volume is 100
 		float GetVolume() const override;
 
 		float GetPitch() const override;

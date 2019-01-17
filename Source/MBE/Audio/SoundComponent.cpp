@@ -54,7 +54,7 @@ void SoundComponent::SetAttenuation(float value)
 
 void SoundComponent::SetMinDistance(float value)
 {
-	sound.setMinDistance(AudioData::Convert3DTo2DMinDistance(value));
+	sound.setMinDistance(AudioData::Convert2DTo3DMinDistance(value));
 }
 
 void SoundComponent::SetVolume(float value)

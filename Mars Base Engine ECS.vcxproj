@@ -186,6 +186,7 @@
     <ClCompile Include="Source\MBE\Audio\MusicComponent.cpp" />
     <ClCompile Include="Source\MBE\Audio\SoundComponent.cpp" />
     <ClCompile Include="Source\MBE\Audio\BaseAudioComponent.cpp" />
+    <ClCompile Include="Source\MBE\Graphics\SpriteRenderSystem.cpp" />
     <ClCompile Include="Source\MBE\Graphics\TextureWrapperComponent.cpp" />
     <ClCompile Include="Source\MBE\Input\ActionEvents.cpp" />
     <ClCompile Include="Source\MBE\Input\ActionHoldEvent.cpp" />
@@ -237,6 +238,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\Audio\BaseAudioComponent.h" />
+    <ClInclude Include="Include\MBE\Graphics\SpriteRenderSystem.h" />
     <ClInclude Include="Include\MBE\Input\ActionEvents.h" />
     <ClInclude Include="Include\MBE\Input\ActionHoldEvent.h" />
     <ClInclude Include="Include\MBE\Animation\AnimationComponent.h" />

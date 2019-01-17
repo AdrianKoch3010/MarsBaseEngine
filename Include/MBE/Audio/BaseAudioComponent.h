@@ -41,6 +41,9 @@ namespace mbe
 
 		virtual void SetMinDistance(float value) = 0;
 
+		// Volume between 0 and 100
+		// 0 is mute and 100 is full value
+		// The default volume is 100
 		virtual void SetVolume(float value) = 0;
 
 		virtual void SetPitch(float value) = 0;
@@ -55,6 +58,9 @@ namespace mbe
 
 		virtual float GetMinDistance() const = 0;
 
+		// Volume between 0 and 100
+		// 0 is mute and 100 is full value
+		// The default volume is 100
 		virtual float GetVolume() const = 0;
 
 		virtual float GetPitch() const = 0;

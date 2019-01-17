@@ -34,14 +34,19 @@ namespace mbe
 		auto HasLoadedSuccessfully() { return hasLoadedSuccessfully; }
 
 		inline auto GetScreenWidth() { return *screenWidth; }
+
 		inline auto GetScreenHeight() { return *screenHeight; }
+
 		inline auto GetTestTimeMultiplicator() { return *testTimeMultiplicator; }
 
 	protected:
 		bool Load(std::string filePath);
 
-		template <typename TData> bool AddContent(TData** constantToDefine, std::string constantName, detail::RegularExpression expressionToMatch);
+		template <typename TData>
+		bool AddContent(TData** constantToDefine, std::string constantName, detail::RegularExpression expressionToMatch);
+
 		bool ReadFile(std::string filePath);
+
 		std::string FindContent(std::string searchContent, std::string lineToSearch, detail::RegularExpression expressionToMatch);
 
 	private:
