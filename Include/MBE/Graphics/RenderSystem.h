@@ -16,6 +16,7 @@
 
 #include <MBE/TransformComponent.h>
 #include <MBE/Graphics/RenderComponent.h>
+#include <MBE/Graphics/BaseComponentRenderSystem.h>
 #include <MBE/Graphics/RenderInformationComponent.h>
 #include <MBE/Graphics/TextureWrapperComponent.h>
 
@@ -47,6 +48,9 @@ namespace mbe
 		typedef std::unordered_map<RenderLayer, std::vector<Entity::HandleID>> RenderEntityDictionary;
 
 		typedef std::unordered_map<RenderLayer, ZOrderAssignmentFunction> ZOrderAssignmentFunctionDictionary;
+
+		typedef std::vector<BaseComponentRenderSystem::UPtr> ComponentRenderSystemList;
+
 	public:
 		/// @brief Constructor
 		/// @param window A reference to the sf::RenderWindow that will be used to draw in
@@ -60,6 +64,9 @@ namespace mbe
 		/// @brief Draws all the registered entites
 		/// @details Entities are only drawn when visible on screen.
 		void Render();
+
+		template <class TComponentRenderSystem, typename ...TArguments>
+		void AddComponentRenderer(TArguments&&... arguments);
 		
 		void SetZOrderAssignmentFunction(RenderLayer layer, ZOrderAssignmentFunction function);
 
@@ -87,10 +94,10 @@ namespace mbe
 
 	private:
 		sf::RenderWindow & window;
-
 		RenderEntityDictionary renderEntityDictionary;
 		mutable ViewDictionary viewDictionary;
 		ZOrderAssignmentFunctionDictionary zOrderAssignmentFunctionDictionary;
+		ComponentRenderSystemList componentRenderSystemList;
 
 		// Refernce to the event manager
 		EventManager & eventManager;
@@ -99,5 +106,16 @@ namespace mbe
 		EventManager::SubscriptionID renderEntityCreatedSubscription;
 		EventManager::SubscriptionID renderEntityRemovedSubscription;
 	};
+
+#pragma region Template Implementations
+
+	template<class TComponentRenderSystem, typename ...TArguments>
+	inline void RenderSystem::AddComponentRenderer(TArguments && ...arguments)
+	{
+		auto ptr = std::make_unique<TComponentRenderSystem>(std::forward<TArguments>(arguments)...);
+		componentRenderSystemList.emplace_back(std::move(ptr));
+	}
+
+#pragma endregion
 
 } // namespace mbe

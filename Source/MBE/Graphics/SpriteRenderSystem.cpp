@@ -3,7 +3,7 @@
 using namespace mbe;
 
 SpriteRenderSystem::SpriteRenderSystem(const EntityManager & entityManager) :
-	entityManager(entityManager)
+	BaseComponentRenderSystem(entityManager)
 {
 
 }

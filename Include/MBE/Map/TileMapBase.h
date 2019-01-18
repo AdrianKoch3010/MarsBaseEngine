@@ -4,7 +4,7 @@
 #include <SFML/System/Vector2.hpp>
 
 #include <MBE/Core/EventManager.h>
-#include <MBE/TiledTerrain.h>
+#include <MBE/Map/TiledTerrain.h>
 
 namespace mbe
 {

@@ -181,6 +181,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\MBE\Graphics\BaseComponentRenderSystem.cpp" />
     <ClCompile Include="Source\MBE\Graphics\RenderComponent.cpp" />
     <ClCompile Include="Source\MBE\Graphics\RenderInformationComponent.cpp" />
     <ClCompile Include="Source\MBE\Audio\MusicComponent.cpp" />
@@ -209,6 +210,8 @@
     <ClCompile Include="Source\MBE\Audio\SoundManager.cpp" />
     <ClCompile Include="Source\MBE\Audio\AudioSystem.cpp" />
     <ClCompile Include="Source\MBE\Graphics\SpriteRenderComponent.cpp" />
+    <ClCompile Include="Source\MBE\Map\TiledTerrain.cpp" />
+    <ClCompile Include="Source\MBE\Map\TileMapComponent.cpp" />
     <ClCompile Include="Source\MBE\TiledTerrain.cpp" />
     <ClCompile Include="Source\MBE\Core\Component.cpp" />
     <ClCompile Include="Source\MBE\Core\Constants.cpp" />
@@ -226,10 +229,7 @@
     <ClCompile Include="Source\MBE\Core\State.cpp" />
     <ClCompile Include="Source\MBE\Core\StateManager.cpp" />
     <ClCompile Include="Source\MBE\Graphics\TextureWrapper.cpp" />
-    <ClCompile Include="Source\MBE\TiledTerrainLayer.cpp" />
-    <ClCompile Include="Source\MBE\TiledTerrainLayerComponent.cpp" />
     <ClCompile Include="Source\MBE\Graphics\TiledTerrainLayerRenderComponent.cpp" />
-    <ClCompile Include="Source\MBE\TiledTerrainLayerSystem.cpp" />
     <ClCompile Include="Source\MBE\Core\TinyXML.cpp" />
     <ClCompile Include="Source\MBE\Graphics\TopDownInformationComponent.cpp" />
     <ClCompile Include="Source\MBE\Graphics\TopDownZOrderSorter.cpp" />
@@ -238,6 +238,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\Audio\BaseAudioComponent.h" />
+    <ClInclude Include="Include\MBE\Graphics\BaseComponentRenderSystem.h" />
     <ClInclude Include="Include\MBE\Graphics\SpriteRenderSystem.h" />
     <ClInclude Include="Include\MBE\Input\ActionEvents.h" />
     <ClInclude Include="Include\MBE\Input\ActionHoldEvent.h" />
@@ -264,6 +265,10 @@
     <ClInclude Include="Include\MBE\Audio\SoundManager.h" />
     <ClInclude Include="Include\MBE\Audio\AudioSystem.h" />
     <ClInclude Include="Include\MBE\Graphics\SpriteRenderComponent.h" />
+    <ClInclude Include="Include\MBE\Map\GoalReachedEvent.h" />
+    <ClInclude Include="Include\MBE\Map\TiledTerrain.h" />
+    <ClInclude Include="Include\MBE\Map\TileMapBase.h" />
+    <ClInclude Include="Include\MBE\Map\TileMapComponent.h" />
     <ClInclude Include="Include\MBE\TiledTerrain.h" />
     <ClInclude Include="Include\MBE\Input\MouseButtonBaseEvent.h" />
     <ClInclude Include="Include\MBE\Input\MouseButtonEvents.h" />
@@ -291,11 +296,8 @@
     <ClInclude Include="Include\MBE\Core\State.h" />
     <ClInclude Include="Include\MBE\Core\StateManager.h" />
     <ClInclude Include="Include\MBE\Graphics\TextureWrapper.h" />
-    <ClInclude Include="Include\MBE\TiledTerrainLayerComponent.h" />
     <ClInclude Include="Include\MBE\Graphics\TiledTerrainLayerRenderComponent.h" />
-    <ClInclude Include="Include\MBE\TiledTerrainLayerSystem.h" />
     <ClInclude Include="Include\MBE\TileMapBase.h" />
-    <ClInclude Include="Include\MBE\TiledTerrainLayer.h" />
     <ClInclude Include="Include\MBE\Core\TinyXML.h" />
     <ClInclude Include="Include\MBE\Graphics\TopDownInformationComponent.h" />
     <ClInclude Include="Include\MBE\Graphics\TopDownZOrderSorter.h" />

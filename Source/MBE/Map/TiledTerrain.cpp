@@ -1,4 +1,4 @@
-#include <MBE/TiledTerrain.h>
+#include <MBE/Map/TiledTerrain.h>
 
 using namespace mbe;
 

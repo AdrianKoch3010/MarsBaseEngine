@@ -162,9 +162,13 @@ void AudioSystem::Update()
 		// make sure the entity exists
 		assert(Entity::GetObjectFromID(entityId) != nullptr && "AudioSystem: The entity must exists");
 
-		const auto & entity = *Entity::GetObjectFromID(entityId);
-		
+		// Update audio position
+		auto & entity = *Entity::GetObjectFromID(entityId);
 		entity.GetComponent<BaseAudioComponent>().SetPosition(CalculatePosition(entity));
+
+		// Delete audio entities that have finished playing
+		if (entity.GetComponent<BaseAudioComponent>().GetAudioStatus() == AudioData::AudioStatus::Stopped)
+			entity.Destroy();
 	}
 }
 

@@ -3,9 +3,7 @@
 #include <cassert>
 #include <SFML/Graphics/Sprite.hpp>
 
-#include <MBE/TransformComponent.h>
 #include <MBE/Graphics/RenderComponent.h>
-#include <MBE/Graphics/TextureWrapperComponent.h>
 
 namespace mbe
 {
@@ -18,8 +16,6 @@ namespace mbe
 		~SpriteRenderComponent() = default;
 
 	public:
-
-		void Update(sf::Time deltaTime) override;
 
 		void Draw(sf::RenderTarget & target) const override;
 

@@ -10,13 +10,6 @@ MusicComponent::MusicComponent(Entity & parentEntity, std::string filePath) :
 {
 }
 
-void MusicComponent::Update(sf::Time frameTime)
-{
-	// Delete the sound entity once the sound has finished playing
-	if (music.getStatus() == sf::Music::Status::Stopped)
-		this->parentEntity.Destroy();
-}
-
 void MusicComponent::Play()
 {
 	// Open the file path

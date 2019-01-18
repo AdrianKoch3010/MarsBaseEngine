@@ -75,15 +75,15 @@ void RenderSystem::Render()
 
 		for (const auto renderEntityId : renderEntityIdList)
 		{
-			// Get the pointer that corresponds to the id
-			auto * entity = Entity::GetObjectFromID(renderEntityId);
+			// Get the renderComponent of the entity that corresponds to the id
+			const auto & renderComponent = Entity::GetObjectFromID(renderEntityId)->GetComponent<RenderComponent>();
 
 			// Culling - only draw if the entity is visible on screen
-			if (entity->GetComponent<RenderComponent>().IsVisible(viewDictionary[renderLayer]))
+			if (renderComponent.IsVisible(viewDictionary[renderLayer]))
 			{
 				// If the entity still exists
 				// This should always be the case since expired entities are removed in the refresh function
-				entity->GetComponent<RenderComponent>().Draw(window);
+				renderComponent.Draw(window);
 			}
 		}
 	}
@@ -186,6 +186,12 @@ void RenderSystem::Refresh()
 			// The second condition is not checked if the first one is true. So IsActive() is never called on nullptr
 			return entityPtr == nullptr || entityPtr->IsActive() == false;
 		}), entityList.end());
+	}
+
+	// Update the component render systems
+	for (auto & componentRenderSystemPtr : componentRenderSystemList)
+	{
+		componentRenderSystemPtr->Update();
 	}
 }
 

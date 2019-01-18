@@ -135,15 +135,6 @@
     <ClCompile Include="Source\MBE\TransformComponent.cpp">
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MBE\TiledTerrainLayerSystem.cpp">
-      <Filter>Quelldateien\Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\MBE\TiledTerrainLayerComponent.cpp">
-      <Filter>Quelldateien\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\MBE\TiledTerrainLayer.cpp">
-      <Filter>Quelldateien\Map</Filter>
-    </ClCompile>
     <ClCompile Include="Source\MBE\TiledTerrain.cpp">
       <Filter>Quelldateien\Map</Filter>
     </ClCompile>
@@ -294,19 +285,19 @@
     <ClCompile Include="Source\MBE\Graphics\SpriteRenderSystem.cpp">
       <Filter>Quelldateien\Systems\Render System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MBE\Graphics\BaseComponentRenderSystem.cpp">
+      <Filter>Quelldateien\Systems\Render System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Map\TiledTerrain.cpp">
+      <Filter>Quelldateien\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Map\TileMapComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\TiledTerrain.h">
       <Filter>Headerdateien\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\MBE\TiledTerrainLayer.h">
-      <Filter>Headerdateien\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\MBE\TiledTerrainLayerComponent.h">
-      <Filter>Headerdateien\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\MBE\TiledTerrainLayerSystem.h">
-      <Filter>Headerdateien\Systems</Filter>
     </ClInclude>
     <ClInclude Include="Include\MBE\TileMapBase.h">
       <Filter>Headerdateien\Map</Filter>
@@ -499,6 +490,21 @@
     </ClInclude>
     <ClInclude Include="Include\MBE\Graphics\SpriteRenderSystem.h">
       <Filter>Headerdateien\Systems\Render System</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Graphics\BaseComponentRenderSystem.h">
+      <Filter>Headerdateien\Systems\Render System</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Map\TileMapBase.h">
+      <Filter>Headerdateien\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Map\TiledTerrain.h">
+      <Filter>Headerdateien\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Map\TileMapComponent.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Map\GoalReachedEvent.h">
+      <Filter>Headerdateien\Systems\Event System\Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

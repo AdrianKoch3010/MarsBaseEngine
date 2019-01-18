@@ -24,8 +24,6 @@ namespace mbe
 		~SoundComponent() = default;
 
 	public:
-		void Update(sf::Time frameTime) override;
-
 		void Play() override;
 
 		void SetPaused(bool value = true) override;

@@ -9,7 +9,6 @@
 #include <MBE/Core/EventManager.h>
 #include <MBE/Core/EntityManager.h>
 #include <MBE/Core/EntityCreatedEvent.h>
-#include <MBE/TiledTerrainLayer.h>
 
 #include <MBE/TransformComponent.h>
 #include <MBE/Graphics/RenderInformationComponent.h>
@@ -19,6 +18,7 @@ using mbe::event::EntityCreatedEvent;
 
 namespace mbe
 {
+	// The entity that is used for the layer only represents the render part
 	class TiledTerrain
 	{
 	public:
@@ -77,8 +77,7 @@ namespace mbe
 
 		std::vector<Entity::HandleID> renderLayerList;
 		std::vector<std::vector<size_t>> tileMapLayersIndexList;
-		//std::vector<TiledTerrainLayer::UPtr> tileMapLayerList;
-		
+
 		EventManager & eventManager;
 		EntityManager & entityManager;
 	};

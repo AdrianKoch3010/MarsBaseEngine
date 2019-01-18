@@ -37,10 +37,28 @@ namespace mbe
 	{ sf::Mouse::Button::ButtonCount, "Error" }
 	};
 
+	enum class Direction : unsigned short int
+	{
+		Up,
+		Down,
+		Left,
+		Right,
+		DirectionCount
+	};
+
+	static const std::unordered_map < Direction, std::string> directionStringDictionary = {
+		{ Direction::Up, "Up" },
+	{ Direction::Down, "Down" },
+	{ Direction::Left, "Left" },
+	{ Direction::Right, "Right" },
+	{ Direction::DirectionCount, "Error" }
+	};
+
 	void NormaliseIDString(std::string & id);
 
 	std::string NormaliseIDString(const std::string & id);
 
+	unsigned int TwoToOneDVector(unsigned int x, unsigned int y, unsigned int rowLength);
 
 	/// @brief Converts a point in the cartesian coordinate system to the isometric coordinate system
 	/// @param cartesian The point to convert

@@ -11,13 +11,6 @@ SoundComponent::SoundComponent(Entity & parentEntity, const sf::SoundBuffer & so
 {
 }
 
-void SoundComponent::Update(sf::Time frameTime)
-{
-	// Delete the sound entity once the sound has finished playing
-	if (sound.getStatus() == sf::Sound::Status::Stopped)
-		this->parentEntity.Destroy();
-}
-
 void SoundComponent::Play()
 {
 	sound.setBuffer(soundBuffer);

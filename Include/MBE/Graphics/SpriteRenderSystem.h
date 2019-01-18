@@ -5,7 +5,7 @@
 
 #include <cassert>
 
-#include <MBE/Core/EntityManager.h>
+#include <MBE/Graphics/BaseComponentRenderSystem.h>
 
 #include <MBE/Graphics/SpriteRenderComponent.h>
 #include <MBE/Graphics/TextureWrapperComponent.h>
@@ -14,17 +14,19 @@
 namespace mbe
 {
 
-	class SpriteRenderSystem
+	class SpriteRenderSystem : public BaseComponentRenderSystem
 	{
+	public:
+		typedef std::shared_ptr<SpriteRenderSystem> Ptr;
+		typedef std::weak_ptr<SpriteRenderSystem> WPtr;
+		typedef std::unique_ptr<SpriteRenderSystem> UPtr;
+
 	public:
 		SpriteRenderSystem(const EntityManager & entityManager);
 		~SpriteRenderSystem() = default;
 
 	public:
-		void Update();
-
-	private:
-		const EntityManager & entityManager;
+		void Update() override;
 	};
 
 } // namespace mbe
