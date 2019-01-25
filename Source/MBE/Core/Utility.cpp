@@ -1,25 +1,24 @@
 #include <MBE/Core/Utility.h>
 
-using namespace mbe;
 
-void NormaliseIDString(std::string & id)
+void mbe::NormaliseIDString(std::string & id)
 {
 	std::transform(id.begin(), id.end(), id.begin(), ::tolower);
 }
 
-std::string NormaliseIDString(const std::string & id)
+std::string mbe::NormaliseIDString(const std::string & id)
 {
 	std::string lowerCaseId = id;
 	std::transform(lowerCaseId.begin(), lowerCaseId.end(), lowerCaseId.begin(), ::tolower);
 	return lowerCaseId;
 }
 
-unsigned int TwoToOneDVector(unsigned int x, unsigned int y, unsigned int rowLength)
+unsigned int mbe::TwoToOneDVector(unsigned int x, unsigned int y, unsigned int rowLength)
 {
 	return y * rowLength + x;
 }
 
-sf::Vector2f CartesianToIso(sf::Vector2f cartesian)
+sf::Vector2f mbe::CartesianToIso(sf::Vector2f cartesian)
 {
 	sf::Vector2f iso;
 	iso.x = cartesian.x - cartesian.y;
@@ -27,7 +26,7 @@ sf::Vector2f CartesianToIso(sf::Vector2f cartesian)
 	return iso;
 }
 
-sf::Vector2f IsoToCartesian(sf::Vector2f iso)
+sf::Vector2f mbe::IsoToCartesian(sf::Vector2f iso)
 {
 	sf::Vector2f cartesian;
 	cartesian.x = (2 * iso.y + iso.x) / 2;

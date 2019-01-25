@@ -96,12 +96,15 @@ const std::vector<Entity::HandleID>& EntityManager::GetGroup(Entity::Group group
 {
 	NormaliseIDString(groupId);
 
-	const auto & it = entityGroups.find(groupId);
+	//const auto & it = entityGroups.find(groupId);
 
-	// If the group id has not been found, an emtpy list is returned
-	// This is better than using the [] operator since no emtpy vector is inserted into the dictionary for nonsense keys
-	if (it == entityGroups.cend())
-		return std::vector<Entity::HandleID>();
+	// No since then a temporary value is returned
+	//// If the group id has not been found, an emtpy list is returned
+	//// This is better than using the [] operator since no emtpy vector is inserted into the dictionary for nonsense keys
+	//if (it == entityGroups.cend())
+	//	return std::vector<Entity::HandleID>();
 
-	return it->second;
+	//return it->second;
+
+	return entityGroups[groupId];
 }

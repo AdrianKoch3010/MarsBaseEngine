@@ -1,5 +1,6 @@
 #include <MBE/Map/GoalReachedEvent.h>
 
+using namespace mbe;
 using namespace mbe::event;
 
 GoalReachedEvent::GoalReachedEvent() :

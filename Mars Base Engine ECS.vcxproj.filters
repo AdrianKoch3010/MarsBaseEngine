@@ -135,9 +135,6 @@
     <ClCompile Include="Source\MBE\TransformComponent.cpp">
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MBE\TiledTerrain.cpp">
-      <Filter>Quelldateien\Map</Filter>
-    </ClCompile>
     <ClCompile Include="Source\MBE\Core\AStarNode.cpp">
       <Filter>Quelldateien\Map</Filter>
     </ClCompile>
@@ -294,12 +291,12 @@
     <ClCompile Include="Source\MBE\Map\TileMapComponent.cpp">
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MBE\Map\GoalReachedEvent.cpp">
+      <Filter>Quelldateien\Systems\Event System\Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\TiledTerrain.h">
-      <Filter>Headerdateien\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\MBE\TileMapBase.h">
       <Filter>Headerdateien\Map</Filter>
     </ClInclude>
     <ClInclude Include="Include\MBE\TransformComponent.h">

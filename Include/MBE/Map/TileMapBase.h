@@ -22,6 +22,9 @@ namespace mbe
 		virtual sf::Vector2u GetSize() const = 0;
 		virtual mbe::TiledTerrain & GetTileMap() const = 0;
 
+		virtual std::vector<Position> GetReachableTiles(unsigned int x, unsigned int y) const = 0;
+		virtual inline std::vector<Position> GetReachableTiles(Position position) const = 0;
+
 		virtual bool IsTileWalkable(unsigned int x, unsigned int y) const = 0;
 		virtual bool IsTileWalkable(Position position) const /*{ return IsTileWalkable(position.x, position.y); }*/ = 0;
 

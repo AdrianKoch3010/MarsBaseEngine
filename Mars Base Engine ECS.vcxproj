@@ -210,9 +210,9 @@
     <ClCompile Include="Source\MBE\Audio\SoundManager.cpp" />
     <ClCompile Include="Source\MBE\Audio\AudioSystem.cpp" />
     <ClCompile Include="Source\MBE\Graphics\SpriteRenderComponent.cpp" />
+    <ClCompile Include="Source\MBE\Map\GoalReachedEvent.cpp" />
     <ClCompile Include="Source\MBE\Map\TiledTerrain.cpp" />
     <ClCompile Include="Source\MBE\Map\TileMapComponent.cpp" />
-    <ClCompile Include="Source\MBE\TiledTerrain.cpp" />
     <ClCompile Include="Source\MBE\Core\Component.cpp" />
     <ClCompile Include="Source\MBE\Core\Constants.cpp" />
     <ClCompile Include="Source\MBE\Core\Entity.cpp" />
@@ -297,7 +297,6 @@
     <ClInclude Include="Include\MBE\Core\StateManager.h" />
     <ClInclude Include="Include\MBE\Graphics\TextureWrapper.h" />
     <ClInclude Include="Include\MBE\Graphics\TiledTerrainLayerRenderComponent.h" />
-    <ClInclude Include="Include\MBE\TileMapBase.h" />
     <ClInclude Include="Include\MBE\Core\TinyXML.h" />
     <ClInclude Include="Include\MBE\Graphics\TopDownInformationComponent.h" />
     <ClInclude Include="Include\MBE\Graphics\TopDownZOrderSorter.h" />
