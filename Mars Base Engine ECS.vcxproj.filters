@@ -294,6 +294,9 @@
     <ClCompile Include="Source\MBE\Map\GoalReachedEvent.cpp">
       <Filter>Quelldateien\Systems\Event System\Events</Filter>
     </ClCompile>
+    <ClCompile Include="TileMapBase.cpp">
+      <Filter>Quelldateien\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\TiledTerrain.h">

@@ -8,6 +8,7 @@
 #include <algorithm>
 
 #include <SFML/System/Vector2.hpp>
+#include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Mouse.hpp>
 
 /*!
@@ -46,12 +47,26 @@ namespace mbe
 		DirectionCount
 	};
 
-	static const std::unordered_map < Direction, std::string> directionStringDictionary = {
+	static const std::unordered_map<Direction, std::string> directionStringDictionary = {
 		{ Direction::Up, "Up" },
 	{ Direction::Down, "Down" },
 	{ Direction::Left, "Left" },
 	{ Direction::Right, "Right" },
 	{ Direction::DirectionCount, "Error" }
+	};
+
+	static const std::unordered_map<Direction, sf::Vector2i> directionIntVectDictionary = {
+		{ Direction::Up, { 0, -1 }},
+	{ Direction::Down, { 0, 1 }},
+	{ Direction::Left, { -1, 0 }},
+	{ Direction::Right, { 1, 0 }}
+	};
+
+	static const std::unordered_map<Direction, sf::Vector2f> directionFloatVectDictionary = {
+		{ Direction::Up, { 0.f, -1.f }},
+	{ Direction::Down, { 0.f, 1.f }},
+	{ Direction::Left, { -1.f, 0.f }},
+	{ Direction::Right, { 1.f, 0.f }}
 	};
 
 	void NormaliseIDString(std::string & id);
