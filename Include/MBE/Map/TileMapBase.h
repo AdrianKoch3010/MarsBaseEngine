@@ -25,16 +25,16 @@ namespace mbe
 		virtual mbe::TiledTerrain & GetTiledTerrain() const = 0;
 
 		virtual std::vector<Position> GetReachableTiles(unsigned int x, unsigned int y) const = 0;
-		virtual inline std::vector<Position> GetReachableTiles(Position position) const { return std::move(GetReachableTiles(position.x, position.y)); };
+		inline std::vector<Position> GetReachableTiles(Position position) const { return std::move(GetReachableTiles(position.x, position.y)); };
 
 		virtual bool IsTileWalkable(unsigned int x, unsigned int y) const = 0;
-		virtual bool IsTileWalkable(Position position) const { return IsTileWalkable(position.x, position.y); };
+		inline bool IsTileWalkable(Position position) const { return IsTileWalkable(position.x, position.y); };
 
 		virtual float GetTileMovementSpeed(unsigned int x, unsigned int y) const = 0;
-		virtual float GetTileMovementSpeed(Position position) const { return GetTileMovementSpeed(position.x, position.y); };
+		inline float GetTileMovementSpeed(Position position) const { return GetTileMovementSpeed(position.x, position.y); };
 
 		virtual const EntityIdList & GetEntities(unsigned int x, unsigned int y) const = 0;
-		virtual inline const EntityIdList & GetEntities(Position position) const { return GetEntities(position.x, position.y); }
+		inline const EntityIdList & GetEntities(Position position) const { return GetEntities(position.x, position.y); }
 
 	public:
 		// Converts the tile position to a float coordinate position
@@ -43,6 +43,14 @@ namespace mbe
 		// Converts the world coordinate to a tile position
 		// Throws if the coordinate is negative
 		Position MapCoordToTile(sf::Vector2f coordinate) const;
+
+		// Returns the offset from the origin of the tile it is currently on
+		// Throws when MapCoordToTile() throws
+		sf::Vector2f GetOffsetFromTile(sf::Vector2f coordinate) const;
+
+		// Returns true if the coordinate is on the origin of one of the tiles
+		// Throws when GetOffsetFromTile() throws
+		bool IsOffsetFromTile(sf::Vector2f coordinate) const;
 	};
 
 } // namespace mbe
