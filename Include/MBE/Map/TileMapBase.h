@@ -1,5 +1,8 @@
 #pragma once
 
+/// @file
+/// @brief Class mbe::TileMapBase
+
 #include <memory>
 #include <vector>
 #include <SFML/System/Vector2.hpp>
@@ -18,7 +21,7 @@ namespace mbe
 
 	public:
 		TileMapBase() = default;
-		virtual ~TileMapBase() = 0;
+		~TileMapBase() = default;
 
 	public:
 		virtual sf::Vector2u GetSize() const = 0;

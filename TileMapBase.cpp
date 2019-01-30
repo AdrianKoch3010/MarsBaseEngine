@@ -6,8 +6,8 @@ sf::Vector2f TileMapBase::MapTileToCoord(Position tilePostion) const
 {
 	sf::Vector2f coordinate;
 
-	coordinate.x = tilePostion.x * this->GetTiledTerrain().GetTileSize().x;
-	coordinate.y = tilePostion.y * this->GetTiledTerrain().GetTileSize().y;
+	coordinate.x = tilePostion.x * (float)this->GetTiledTerrain().GetTileSize().x;
+	coordinate.y = tilePostion.y * (float)this->GetTiledTerrain().GetTileSize().y + this->GetTiledTerrain().GetTileSize().y;
 
 	return coordinate;
 }
@@ -20,8 +20,8 @@ TileMapBase::Position TileMapBase::MapCoordToTile(sf::Vector2f coordinate) const
 	Position position;
 
 	// automatically floored (stored in unsigend int)
-	position.x = coordinate.x / static_cast<float>(this->GetTiledTerrain().GetTileSize().x);
-	position.y = coordinate.y / static_cast<float>(this->GetTiledTerrain().GetTileSize().y);
+	position.x = static_cast<unsigned int>(coordinate.x) / static_cast<float>(this->GetTiledTerrain().GetTileSize().x);
+	position.y = static_cast<unsigned int>(coordinate.y) / static_cast<float>(this->GetTiledTerrain().GetTileSize().y);
 
 	return position;
 }
@@ -38,5 +38,5 @@ sf::Vector2f TileMapBase::GetOffsetFromTile(sf::Vector2f coordinate) const
 
 bool TileMapBase::IsOffsetFromTile(sf::Vector2f coordinate) const
 {
-	return GetOffsetFromTile(coordinate) == sf::Vector2f(0.f, 0.f);
+	return GetOffsetFromTile(coordinate) != sf::Vector2f(0.f, 0.f);
 }
