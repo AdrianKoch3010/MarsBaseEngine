@@ -4,6 +4,7 @@
 /// @brief Class mbe::TextureComponent
 
 #include <cassert>
+#include <memory>
 
 #include <SFML/Graphics/Rect.hpp>
 
@@ -28,6 +29,8 @@ namespace mbe
 		void SetTextureWrapper(const TextureWrapper & textureWrapper, bool resetTextureRect = true);
 
 		void SetTextureRect(const sf::IntRect & textureRect);
+
+		void SetTextureRect(sf::IntRect && textureRect);
 
 		inline const TextureWrapper & GetTextureWrapper() const { return *textureWrapper; }
 

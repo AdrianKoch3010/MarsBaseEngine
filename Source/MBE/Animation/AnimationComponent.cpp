@@ -69,7 +69,7 @@ void AnimationComponent::PlayAnimation(std::string animatorId, const std::string
 	if (animatorItr == animatorDictionary.cend())
 		throw std::runtime_error("AnimationComponent: No animator exists under this id: " + animatorId);
 
-	animatorItr->second->PlayAnimation(animationId);
+	animatorItr->second->PlayAnimation(animationId, loop);
 }
 
 void AnimationComponent::PlayAnimation(const std::string & animationId, bool loop)

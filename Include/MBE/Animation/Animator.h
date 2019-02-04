@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <string>
 #include <map>
+#include <memory>
 
 #include <MBE/Animation/BaseAnimator.h>
 #include <MBE/Core/Utility.h>
@@ -32,6 +33,10 @@ namespace mbe
 		/// @note This is the definition of an animation. Every animation is seen as a a function altering an object
 		/// of type TAnimated over a progress between 0 and 1.
 		typedef std::function<void(TAnimated &, float)> AnimationFunction;
+
+		typedef std::shared_ptr<Animator<TAnimated, TID>> Ptr;
+		typedef std::weak_ptr<Animator<TAnimated, TID>> WPtr;
+		typedef std::unique_ptr<Animator<TAnimated, TID>> UPtr;
 
 	private:
 		typedef std::pair<AnimationFunction, sf::Time> ScaledAnimation;
@@ -126,6 +131,10 @@ namespace mbe
 		/// @note This is the definition of an animation. Every animation is seen as a a function altering an object
 		/// of type TAnimated over a progress between 0 and 1.
 		typedef std::function<void(TAnimated &, float)> AnimationFunction;
+
+		typedef std::shared_ptr<Animator<TAnimated>> Ptr;
+		typedef std::weak_ptr<Animator<TAnimated>> WPtr;
+		typedef std::unique_ptr<Animator<TAnimated>> UPtr;
 
 	private:
 		typedef std::pair<AnimationFunction, sf::Time> ScaledAnimation;
@@ -231,17 +240,19 @@ namespace mbe
 		// Update progress, scale dt with 1 / current animation duration
 		progress += frameTime.asSeconds() / currentlyPlayingAnimation->second.second.asSeconds();
 
-		// If animation is expired, stop or restart animation at loops
 		if (progress > 1.f)
 		{
 			if (loop)
-				progress -= std::floor(progress); // Store only fractional part
-												  // The seperate progress part may not be final
-												  /*else
-												  StopAnimation();*/
+			{
+				// Store only fractional part
+				progress -= std::floor(progress);
+			}
+			else
+			{
+				StopAnimation();
+				return;
+			}
 		}
-		if (progress > 1.f + frameTime.asSeconds())
-			StopAnimation();
 
 		// If an animation is playing, apply it to the Animated template (e.g. the render object of the parentEntity)
 		if (this->IsPlayingAnimation())
@@ -369,19 +380,23 @@ namespace mbe
 		if (progress > 1.f)
 		{
 			if (loop)
-				progress -= std::floor(progress); // Store only fractional part
-												  // The seperate progress part may not be final
-												  /*else
-												  StopAnimation();*/
+			{
+				// Store only fractional part
+				progress -= std::floor(progress);
+			}
+			else
+			{
+				StopAnimation();
+				return;
+			}
 		}
-		if (progress > 1.f + frameTime.asSeconds())
-			StopAnimation();
 
 		// If an animation is playing, apply it to the Animated template (e.g. the render object of the parentEntity)
 		if (this->IsPlayingAnimation())
 		{
 			auto animatedObjectPtr = TAnimated::GetObjectFromID(animatedObjectId);
 
+			// Is this really needed?
 			// Check if the object still exists
 			if (animatedObjectPtr == nullptr)
 			{

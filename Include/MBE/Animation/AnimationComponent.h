@@ -169,7 +169,7 @@ namespace mbe
 	private:
 		typedef Animator<Entity> EntityAnimator;
 
-		typedef std::map<std::string, EntityAnimator::Ptr> AnimatorDictionary;
+		typedef std::unordered_map<std::string, EntityAnimator::UPtr> AnimatorDictionary;
 
 	public:
 		/// @brief Constructor
@@ -242,12 +242,11 @@ namespace mbe
 
 		bool IsPaused(std::string animatorId) const;
 
-		// Returns string in lowercase
+		// Returns a list of normalised strings
 		std::vector<std::string> GetPlayingAnimations() const;
 
 	private:
-		//AnimatorDictionary animatorDictionary;
-		std::unordered_map<std::string, std::shared_ptr<Animator<Entity>>> animatorDictionary;
+		AnimatorDictionary animatorDictionary;
 	};
 
 } // namespace mbe

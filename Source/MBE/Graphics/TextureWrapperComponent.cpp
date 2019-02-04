@@ -1,3 +1,4 @@
+#include "..\..\..\Include\MBE\Graphics\TextureWrapperComponent.h"
 #include <MBE/Graphics/TextureWrapperComponent.h>
 
 using namespace mbe;
@@ -32,4 +33,19 @@ void TextureWrapperComponent::SetTextureRect(const sf::IntRect & textureRect)
 
 	// Assign the new texture rect
 	this->textureRect = textureRect;
+}
+
+void TextureWrapperComponent::SetTextureRect(sf::IntRect && textureRect)
+{
+	// If the current texture rect is the same as the new one
+	if (textureRect == this->textureRect)
+		return;
+
+	// Make sure that the texture rect is not bigger than the current texture
+	assert(textureRect.left + textureRect.width <= textureWrapper->GetTexture().getSize().x
+		|| textureRect.top + textureRect.height <= textureWrapper->GetTexture().getSize().y
+		&& "TexturedRenderComponent: The texture rect must lie within the current texture");
+
+	// Assign the new texture rect
+	this->textureRect = std::move(textureRect);
 }

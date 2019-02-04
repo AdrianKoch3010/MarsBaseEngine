@@ -18,8 +18,8 @@ namespace mbe
 			typedef std::shared_ptr<AStarNode> Ptr;
 			typedef std::weak_ptr<AStarNode> WPtr;
 
-			/// Change this back to being a local class --> then change Position def to typename TMap::Position Position
-			typedef sf::Vector2u Position;
+			// Change this back to being a local class --> then change Position def to typename TMap::Position Position
+			typedef sf::Vector2i Position;
 
 		public:
 			/// @brief Constructor

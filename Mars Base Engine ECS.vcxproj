@@ -212,6 +212,7 @@
     <ClCompile Include="Source\MBE\Graphics\SpriteRenderComponent.cpp" />
     <ClCompile Include="Source\MBE\Map\GoalReachedEvent.cpp" />
     <ClCompile Include="Source\MBE\Map\TiledTerrain.cpp" />
+    <ClCompile Include="Source\MBE\Map\TileMapBase.cpp" />
     <ClCompile Include="Source\MBE\Map\TileMapComponent.cpp" />
     <ClCompile Include="Source\MBE\Core\Component.cpp" />
     <ClCompile Include="Source\MBE\Core\Constants.cpp" />
@@ -235,7 +236,6 @@
     <ClCompile Include="Source\MBE\Graphics\TopDownZOrderSorter.cpp" />
     <ClCompile Include="Source\MBE\TransformComponent.cpp" />
     <ClCompile Include="Source\MBE\Core\Utility.cpp" />
-    <ClCompile Include="TileMapBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\Audio\BaseAudioComponent.h" />
