@@ -1,6 +1,9 @@
 #include <MBE/Map/TiledTerrain.h>
 
 using namespace mbe;
+using mbe::event::EntityCreatedEvent;
+using TextureChangedEvent = mbe::event::ComponentValueChangedEvent<mbe::TextureWrapperComponent>;
+using IndexListChangedEvent = mbe::event::ComponentValueChangedEvent<mbe::TiledTerrainLayerComponent>;
 
 TiledTerrain::TiledTerrain(EventManager & eventManager, EntityManager & entityManager, sf::Vector2u size, sf::Vector2u tileSize) :
 	eventManager(eventManager),
@@ -20,9 +23,71 @@ TiledTerrain::TiledTerrain(EventManager & eventManager, EntityManager & entityMa
 	for (const auto & layer : mapData->GetTileMapLayersIndexList())
 	{
 		Entity::HandleID layerId = this->AddTileMapLayer(tileMapTextureWrapper);
-		/// Check if exists
-		Entity::GetObjectFromID(layerId)->GetComponent<TiledTerrainLayerRenderComponent>().Create(layer);
+		auto & layerEntity = *Entity::GetObjectFromID(layerId);
+
+		try
+		{
+			// Must exist
+			layerEntity.GetComponent<TiledTerrainLayerRenderComponent>().Create(layer);
+		}
+		catch (const std::runtime_error & error)
+		{
+			std::cerr << std::endl << error.what();
+		}
+
+		// Store the index list in the tiled terrain layer component
+		// This must be called after creating the layer
+		layerEntity.GetComponent<TiledTerrainLayerComponent>().SetIndexList(std::move(layer));
+
 	}
+
+	// Subscribe to texture changed event
+	textureChangedSubscription = eventManager.Subscribe(EventManager::TCallback<TextureChangedEvent>([this](const TextureChangedEvent & event)
+	{
+		if (!event.IsValueChanged("TextureWrapper"))
+			return;
+
+		auto & entity = event.GetComponent().GetParentEntity();
+
+		// Use event Subscription to update the texture
+		if (!entity.HasComponent<TiledTerrainLayerRenderComponent>() || !entity.HasComponent<TiledTerrainLayerComponent>())
+			return;
+
+		// Updat the render states
+		// This is important to ensure that the texture with which the tiled terrain render component is created is up to date
+		auto & renderComponent = entity.GetComponent<TiledTerrainLayerRenderComponent>();
+
+		// Update the texture
+		auto renderStates = renderComponent.GetRenderStates();
+
+		renderStates.texture = &entity.GetComponent<TextureWrapperComponent>().GetTextureWrapper().GetTexture();
+
+		// The move must be in the end
+		renderComponent.SetRenderStates(std::move(renderStates));
+
+		RecalculateLayer(entity);
+	}));
+
+	// Subscribe to index list changed event
+	indexListChangedSubscription = eventManager.Subscribe(EventManager::TCallback<IndexListChangedEvent>([this](const IndexListChangedEvent & event)
+	{
+		if (!event.IsValueChanged("IndexList"))
+			return;
+
+		auto & entity = event.GetComponent().GetParentEntity();
+
+		// Use event Subscription to update the texture
+		if (!entity.HasComponent<TiledTerrainLayerRenderComponent>())
+			return;
+
+		RecalculateLayer(entity);
+	}));
+}
+
+TiledTerrain::~TiledTerrain()
+{
+	eventManager.UnSubscribe<TextureChangedEvent>(textureChangedSubscription);
+	eventManager.UnSubscribe<IndexListChangedEvent>(indexListChangedSubscription);
 }
 
 Entity::HandleID TiledTerrain::AddTileMapLayer(const TextureWrapper & textureWrapper)
@@ -32,8 +97,10 @@ Entity::HandleID TiledTerrain::AddTileMapLayer(const TextureWrapper & textureWra
 	layer.AddComponent<TransformComponent>();
 	layer.AddComponent<RenderInformationComponent>(RenderLayer::Foreground);
 	layer.AddComponent<TextureWrapperComponent>(textureWrapper);
+	layer.AddComponent<TiledTerrainLayerComponent>();
 	layer.AddComponent<TiledTerrainLayerRenderComponent>(size, tileSize);
 	eventManager.RaiseEvent(EntityCreatedEvent(layer.GetHandleID()));
+	eventManager.RaiseEvent(TextureChangedEvent(layer.GetComponent<TextureWrapperComponent>(), "TextureWrapper"));
 
 	// Set the render objects zOrder to the number of tile map layers (not -1 since this layer has not been inserted yet)
 	layer.GetComponent<RenderInformationComponent>().SetZOrder(static_cast<float>(renderLayerList.size()));
@@ -72,6 +139,19 @@ void TiledTerrain::SwopRenderLayerOrder(const size_t first, const size_t second)
 	auto temp = firstRenderInformationComponent.GetZOrder();
 	firstRenderInformationComponent.SetZOrder(secondRenderInformationComponent.GetZOrder());
 	secondRenderInformationComponent.SetZOrder(temp);
+}
+
+void TiledTerrain::RecalculateLayer(Entity & entity)
+{
+	// Recalculate the indecies
+	try
+	{
+		entity.GetComponent<TiledTerrainLayerRenderComponent>().Create(entity.GetComponent<TiledTerrainLayerComponent>().GetIndexList());
+	}
+	catch (const std::runtime_error & error)
+	{
+		std::cerr << std::endl << error.what();
+	}
 }
 
 void TiledTerrain::Data::Load(const std::string filePath)

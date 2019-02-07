@@ -152,6 +152,7 @@
 /// @brief Class mbe::AnimationComponent
 
 #include <string>
+#include <set>
 #include <unordered_map>
 
 #include <MBE/Animation/Animator.h>
@@ -174,7 +175,7 @@ namespace mbe
 	public:
 		/// @brief Constructor
 		/// @param parentEntity A reference to the mbe::Entity in which this class is created (To which it then belongs to)
-		AnimationComponent(Entity & parentEntity);
+		AnimationComponent(EventManager & eventManager, Entity & parentEntity);
 
 		/// @brief Default destructor
 		~AnimationComponent() = default; // Delete the BaseAnimators
@@ -245,8 +246,16 @@ namespace mbe
 		// Returns a list of normalised strings
 		std::vector<std::string> GetPlayingAnimations() const;
 
+		void AddConnectedAnimationEntity(Entity::HandleID entityId);
+
+		void RemoveConnectedAnimationEntity(Entity::HandleID entityId);
+
+	private:
+		void RemoveExpiredConnectedAnimationEntities();
+
 	private:
 		AnimatorDictionary animatorDictionary;
+		std::set<Entity::HandleID> connectedAnimationEntityIdList;
 	};
 
 } // namespace mbe

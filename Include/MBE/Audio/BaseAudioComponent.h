@@ -27,7 +27,7 @@ namespace mbe
 		typedef AudioData::AudioStatus AudioStatus;
 
 	public:
-		BaseAudioComponent(Entity & parentEntity);
+		BaseAudioComponent(EventManager & eventManager, Entity & parentEntity);
 		virtual ~BaseAudioComponent();
 
 	public:

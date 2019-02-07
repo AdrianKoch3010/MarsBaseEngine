@@ -4,8 +4,8 @@ using namespace mbe;
 
 using UnderlyingRenderLayer = std::underlying_type<RenderLayer>::type;
 
-RenderInformationComponent::RenderInformationComponent(Entity & parentEntity, RenderLayer renderLayer, float zOrder) :
-	Component(parentEntity),
+RenderInformationComponent::RenderInformationComponent(EventManager & eventManager, Entity & parentEntity, RenderLayer renderLayer, float zOrder) :
+	Component(eventManager, parentEntity),
 	renderLayer(renderLayer),
 	zOrder(zOrder),
 	// Set the default getter functions

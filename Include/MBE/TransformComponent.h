@@ -11,7 +11,7 @@ namespace mbe
 	class TransformComponent : public Component
 	{
 	public:
-		TransformComponent(Entity & parentEntity, Entity::HandleID parentTransformEntityId = Entity::GetNullID());
+		TransformComponent(EventManager & eventManager, Entity & parentEntity, Entity::HandleID parentTransformEntityId = Entity::GetNullID());
 		~TransformComponent() = default;
 
 	public:

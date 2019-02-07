@@ -17,6 +17,7 @@
 #include <MBE/Core/Component.h>
 #include <MBE/Core/Singleton.h>
 #include <MBE/Core/Utility.h>
+#include <MBE/Core/EventManager.h>
 
 
 namespace mbe
@@ -145,7 +146,7 @@ namespace mbe
 	protected:
 		/// @brief Constructor
 		/// @param entityManager A reference to the mbe::EntityManager in which this component is created
-		Entity(EntityManager & entityManager);
+		Entity(EventManager & eventManager, EntityManager & entityManager);
 
 	public:
 		/// @brief Default destructor
@@ -225,7 +226,7 @@ namespace mbe
 		inline HandleID GetParentEntityID() const { return parentEntityId; }
 
 		/// @breif Returns all child entities
-		/// @returns A list of child entity ids.If this entity has no child entities, an empty list is returned
+		/// @returns A list of child entity ids. If this entity has no child entities, an empty list is returned
 		inline const std::set<HandleID> & GetChildEntityIDList() const { return childEntityIdList; }
 
 	private:
@@ -233,6 +234,7 @@ namespace mbe
 
 	private:
 		EntityManager & entityManager;
+		EventManager & eventManager;
 
 		bool active;
 		std::vector<Component::Ptr> componentList;
@@ -259,7 +261,7 @@ namespace mbe
 		// Make sure that the component doesn't already exist
 		assert(this->HasComponent<TComponent>() == false && "Entity: The component already exists");
 
-		auto component = std::make_shared<TComponent>(*this, std::forward<TArguments>(arguments)...);
+		auto component = std::make_shared<TComponent>(eventManager, *this, std::forward<TArguments>(arguments)...);
 
 		// For debugging
 		std::cout << std::endl << "Entity: Added component with id " << std::to_string(detail::GetComponentTypeID<TComponent>());

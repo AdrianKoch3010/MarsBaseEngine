@@ -21,7 +21,7 @@ namespace mbe
 		typedef std::unique_ptr<PixelMaskClickableComponent> UPtr;
 
 	public:
-		PixelMaskClickableComponent(Entity & parentEntity);
+		PixelMaskClickableComponent(EventManager & eventManager, Entity & parentEntity);
 		~PixelMaskClickableComponent() = default;
 
 	public:

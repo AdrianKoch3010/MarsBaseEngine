@@ -4,7 +4,8 @@
 using namespace mbe;
 
 
-Entity::Entity(EntityManager & entityManager) :
+Entity::Entity(EventManager & eventManager, EntityManager & entityManager) :
+	eventManager(eventManager),
 	entityManager(entityManager),
 	active(true),
 	parentEntityId(GetNullID())

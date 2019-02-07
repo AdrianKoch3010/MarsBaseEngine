@@ -4,8 +4,8 @@ using namespace mbe;
 
 MBE_ENABLE_COMPONENT_POLYMORPHISM(SpriteRenderComponent, RenderComponent)
 
-SpriteRenderComponent::SpriteRenderComponent(Entity & parentEntity) :
-	RenderComponent(parentEntity),
+SpriteRenderComponent::SpriteRenderComponent(EventManager & eventManager, Entity & parentEntity) :
+	RenderComponent(eventManager, parentEntity),
 	transform(sf::Transform::Identity)
 {
 }

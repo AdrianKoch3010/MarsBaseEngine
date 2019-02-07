@@ -8,6 +8,9 @@
 #include <SFML/System/Time.hpp>
 #include <SFML/System/NonCopyable.hpp>
 
+#include <MBE/Core/EventManager.h>
+#include <MBE/Core/ComponentValueChangedEvent.h>
+
 namespace mbe
 {
 
@@ -34,7 +37,7 @@ namespace mbe
 	protected:
 		/// @brief Constructor
 		/// @param parentEntity A reference to the mbe::Entity in which this class is created (To which it then belongs to)
-		Component(Entity & parentEntity);
+		Component(EventManager & eventManager, Entity & parentEntity);
 
 	public:
 		/// @brief Default destructor
@@ -51,6 +54,7 @@ namespace mbe
 		Entity & GetParentEntity() const { return parentEntity; }
 
 	protected:
+		EventManager & eventManager;
 		Entity & parentEntity;
 	};
 }

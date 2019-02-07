@@ -19,7 +19,7 @@ namespace mbe
 		typedef std::unique_ptr<SoundComponent> UPtr;
 
 	public:
-		SoundComponent(Entity & parentEntity, const sf::SoundBuffer & soundBuffer);
+		SoundComponent(EventManager & eventManager, Entity & parentEntity, const sf::SoundBuffer & soundBuffer);
 
 		~SoundComponent() = default;
 

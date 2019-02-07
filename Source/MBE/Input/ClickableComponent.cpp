@@ -2,7 +2,8 @@
 
 using namespace mbe;
 
-ClickableComponent::ClickableComponent(Entity & parentEntity) : Component(parentEntity),
+ClickableComponent::ClickableComponent(EventManager & eventManager, Entity & parentEntity)
+	: Component(eventManager, parentEntity),
 	absorbeClick(false)
 {
 	connectedClickableEntityIdList.insert(parentEntity.GetHandleID());

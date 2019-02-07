@@ -2,6 +2,11 @@
 
 using namespace mbe;
 
+EntityManager::EntityManager(EventManager & eventManager) :
+	eventManager(eventManager)
+{
+}
+
 void EntityManager::Update(sf::Time frameTime)
 {
 	this->Refresh();
@@ -66,7 +71,7 @@ void EntityManager::Refresh()
 Entity & EntityManager::CreateEntity()
 {
 	// The raw new is needed for the entity manager to access the entities protected constructor
-	Entity * rawEntity = new Entity(*this);
+	Entity * rawEntity = new Entity(eventManager, *this);
 	// Make a new unique pointer
 	std::unique_ptr<Entity> entity(rawEntity);
 

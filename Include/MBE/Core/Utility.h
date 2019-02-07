@@ -73,6 +73,8 @@ namespace mbe
 
 	std::string NormaliseIDString(const std::string & id);
 
+	std::string NormaliseIDString(std::string && id);
+
 	unsigned int TwoToOneDVector(unsigned int x, unsigned int y, unsigned int rowLength);
 
 	/// @brief Converts a point in the cartesian coordinate system to the isometric coordinate system

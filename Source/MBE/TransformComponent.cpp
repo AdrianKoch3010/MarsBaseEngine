@@ -2,8 +2,8 @@
 
 using namespace mbe;
 
-TransformComponent::TransformComponent(Entity & parentEntity, Entity::HandleID parentTransformEntityId) :
-	Component(parentEntity)
+TransformComponent::TransformComponent(EventManager & eventManager, Entity & parentEntity, Entity::HandleID parentTransformEntityId) :
+	Component(eventManager, parentEntity)
 {
 	this->SetRelativeTo(parentTransformEntityId);
 }

@@ -11,6 +11,7 @@
 #include <MBE/Core/Component.h>
 #include <MBE/Graphics/TextureWrapper.h>
 
+
 namespace mbe
 {
 
@@ -22,7 +23,7 @@ namespace mbe
 		typedef std::unique_ptr<TextureWrapperComponent> UPtr;
 
 	public:
-		TextureWrapperComponent(Entity & parentEntity, const TextureWrapper & textureWrapper);
+		TextureWrapperComponent(EventManager & eventManager, Entity & parentEntity, const TextureWrapper & textureWrapper);
 		~TextureWrapperComponent() = default;
 
 	public:

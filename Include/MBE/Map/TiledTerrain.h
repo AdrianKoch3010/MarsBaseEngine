@@ -9,12 +9,14 @@
 #include <MBE/Core/EventManager.h>
 #include <MBE/Core/EntityManager.h>
 #include <MBE/Core/EntityCreatedEvent.h>
+#include <MBE/Core/ComponentValueChangedEvent.h>
 
 #include <MBE/TransformComponent.h>
+#include <MBE/Graphics/TextureWrapperComponent.h>
 #include <MBE/Graphics/RenderInformationComponent.h>
 #include <MBE/Graphics/TiledTerrainLayerRenderComponent.h>
+#include <MBE/Map/TiledTerrainLayerComponent.h>
 
-using mbe::event::EntityCreatedEvent;
 
 namespace mbe
 {
@@ -56,7 +58,9 @@ namespace mbe
 	public:
 		TiledTerrain(EventManager & eventManager, EntityManager & entityManager, sf::Vector2u size, sf::Vector2u tileSize);
 		TiledTerrain(EventManager & eventManager, EntityManager & entityManager, Data::Ptr mapData, const TextureWrapper & tileMapTextureWrapper);
-		~TiledTerrain() = default;
+
+		// Unsubscribe from event
+		~TiledTerrain();
 
 	public:
 
@@ -70,6 +74,8 @@ namespace mbe
 
 		inline Entity::HandleID operator[](const size_t layerIndex) { return GetLayer(layerIndex); }
 
+	private:
+		void RecalculateLayer(Entity & entity);
 
 	private:
 		const sf::Vector2u size;
@@ -78,8 +84,10 @@ namespace mbe
 		std::vector<Entity::HandleID> renderLayerList;
 		std::vector<std::vector<size_t>> tileMapLayersIndexList;
 
-		EventManager & eventManager;
 		EntityManager & entityManager;
+		EventManager & eventManager;
+		EventManager::SubscriptionID textureChangedSubscription;
+		EventManager::SubscriptionID indexListChangedSubscription;
 	};
 
 } // namespace mbe

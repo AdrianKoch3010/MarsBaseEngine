@@ -12,6 +12,7 @@
 #include <SFML/System/Time.hpp>
 #include <SFML/System/NonCopyable.hpp>
 
+#include <MBE/Core/EventManager.h>
 #include <MBE/Core/Entity.h>
 
 
@@ -29,8 +30,9 @@ namespace mbe
 		typedef std::map<detail::ComponentTypeID, std::vector<Entity::HandleID>> EntityGroupDictionary;
 
 	public:
-		/// @brief Default constructor
-		EntityManager() = default;
+		/// @brief Constructor
+		/// @param eventManager A reference to the mbe::EventManager that is passed on to the entities
+		EntityManager(EventManager & eventManager);
 
 		/// @brief Default Destructor
 		~EntityManager() = default;
@@ -89,6 +91,8 @@ namespace mbe
 		std::vector<std::unique_ptr<Entity>> entityList;
 		mutable std::map<Entity::Group, std::vector<Entity::HandleID>> entityGroups;
 		mutable EntityGroupDictionary entityGroupDictionary;
+
+		EventManager & eventManager;
 	};
 
 #pragma region Template Implementations

@@ -297,11 +297,17 @@
     <ClCompile Include="Source\MBE\Map\TileMapBase.cpp">
       <Filter>Quelldateien\Map</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MBE\Graphics\TiledTerrainLayerRenderSystem.cpp">
+      <Filter>Quelldateien\Systems\Render System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Core\ComponentValueChangedEvent.cpp">
+      <Filter>Quelldateien\Systems\Event System\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Map\TiledTerrainLayerComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\MBE\TiledTerrain.h">
-      <Filter>Headerdateien\Map</Filter>
-    </ClInclude>
     <ClInclude Include="Include\MBE\TransformComponent.h">
       <Filter>Headerdateien\Components</Filter>
     </ClInclude>
@@ -505,6 +511,15 @@
     </ClInclude>
     <ClInclude Include="Include\MBE\Map\GoalReachedEvent.h">
       <Filter>Headerdateien\Systems\Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Graphics\TiledTerrainLayerRenderSystem.h">
+      <Filter>Headerdateien\Systems\Render System</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Core\ComponentValueChangedEvent.h">
+      <Filter>Headerdateien\Systems\Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Map\TiledTerrainLayerComponent.h">
+      <Filter>Headerdateien\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

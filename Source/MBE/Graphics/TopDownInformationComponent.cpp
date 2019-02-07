@@ -2,8 +2,8 @@
 
 using namespace mbe;
 
-TopDownInformationComponent::TopDownInformationComponent(Entity & parentEntity, float logicalBottomOffset) :
-	Component(parentEntity),
+TopDownInformationComponent::TopDownInformationComponent(EventManager & eventManager, Entity & parentEntity, float logicalBottomOffset) :
+	Component(eventManager, parentEntity),
 	logicalBottomOffset(logicalBottomOffset)
 {
 }

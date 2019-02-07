@@ -21,7 +21,7 @@ namespace mbe
 		typedef std::unique_ptr<MusicComponent> UPtr;
 
 	public:
-		explicit MusicComponent(Entity & parentEntity, std::string filePath);
+		explicit MusicComponent(EventManager & eventManager, Entity & parentEntity, std::string filePath);
 
 		~MusicComponent() = default;
 

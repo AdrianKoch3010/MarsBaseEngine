@@ -2,7 +2,8 @@
 
 using namespace mbe;
 
-Component::Component(Entity & parentEntity) :
+Component::Component(EventManager & eventManager, Entity & parentEntity) :
+	eventManager(eventManager),
 	parentEntity(parentEntity)
 {
 }

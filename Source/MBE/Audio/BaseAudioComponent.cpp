@@ -2,7 +2,8 @@
 
 using namespace mbe;
 
-BaseAudioComponent::BaseAudioComponent(Entity & parentEntity) : Component(parentEntity)
+BaseAudioComponent::BaseAudioComponent(EventManager & eventManager, Entity & parentEntity)
+	: Component(eventManager, parentEntity)
 {
 	AudioData::IncrementNumberOfSounds();
 }

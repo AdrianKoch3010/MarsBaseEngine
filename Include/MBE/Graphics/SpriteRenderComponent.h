@@ -12,7 +12,7 @@ namespace mbe
 	{
 	public:
 		// Add constructor overloads
-		SpriteRenderComponent(Entity & parentEntity);
+		SpriteRenderComponent(EventManager & eventManager, Entity & parentEntity);
 		~SpriteRenderComponent() = default;
 
 	public:

@@ -19,7 +19,7 @@ namespace mbe
 	public:
 		/// @brief Constructor
 		/// @param parentEntity A reference to the mbe::Entity in which this class is created (To which it then belongs to)
-		ClickableComponent(Entity & parentEntity);
+		ClickableComponent(EventManager & eventManager, Entity & parentEntity);
 
 		/// @brief  Default destructor
 		virtual ~ClickableComponent() = default;

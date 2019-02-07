@@ -2,8 +2,8 @@
 
 using namespace mbe;
 
-AnimationComponent::AnimationComponent(Entity & parentEntity) :
-	Component(parentEntity)
+AnimationComponent::AnimationComponent(EventManager & eventManager, Entity & parentEntity) :
+	Component(eventManager, parentEntity)
 {
 }
 
@@ -70,6 +70,19 @@ void AnimationComponent::PlayAnimation(std::string animatorId, const std::string
 		throw std::runtime_error("AnimationComponent: No animator exists under this id: " + animatorId);
 
 	animatorItr->second->PlayAnimation(animationId, loop);
+
+	//// Recursivly call play Animation for the child entities
+	//for (const auto childEntityId : this->GetParentEntity().GetChildEntityIDList())
+	//{
+	//	assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
+
+	//	/// This will throw if the child entity does not have the animator
+	//	auto & childEntity = *Entity::GetObjectFromID(childEntityId);
+	//	if (childEntity.HasComponent<mbe::AnimationComponent>())
+	//	{
+	//		childEntity.GetComponent<mbe::AnimationComponent>().PlayAnimation(animationId, loop);
+	//	}
+	//}
 }
 
 void AnimationComponent::PlayAnimation(const std::string & animationId, bool loop)

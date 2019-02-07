@@ -181,6 +181,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\MBE\Core\ComponentValueChangedEvent.cpp" />
     <ClCompile Include="Source\MBE\Graphics\BaseComponentRenderSystem.cpp" />
     <ClCompile Include="Source\MBE\Graphics\RenderComponent.cpp" />
     <ClCompile Include="Source\MBE\Graphics\RenderInformationComponent.cpp" />
@@ -189,6 +190,7 @@
     <ClCompile Include="Source\MBE\Audio\BaseAudioComponent.cpp" />
     <ClCompile Include="Source\MBE\Graphics\SpriteRenderSystem.cpp" />
     <ClCompile Include="Source\MBE\Graphics\TextureWrapperComponent.cpp" />
+    <ClCompile Include="Source\MBE\Graphics\TiledTerrainLayerRenderSystem.cpp" />
     <ClCompile Include="Source\MBE\Input\ActionEvents.cpp" />
     <ClCompile Include="Source\MBE\Input\ActionHoldEvent.cpp" />
     <ClCompile Include="Source\MBE\Animation\AnimationComponent.cpp" />
@@ -212,6 +214,7 @@
     <ClCompile Include="Source\MBE\Graphics\SpriteRenderComponent.cpp" />
     <ClCompile Include="Source\MBE\Map\GoalReachedEvent.cpp" />
     <ClCompile Include="Source\MBE\Map\TiledTerrain.cpp" />
+    <ClCompile Include="Source\MBE\Map\TiledTerrainLayerComponent.cpp" />
     <ClCompile Include="Source\MBE\Map\TileMapBase.cpp" />
     <ClCompile Include="Source\MBE\Map\TileMapComponent.cpp" />
     <ClCompile Include="Source\MBE\Core\Component.cpp" />
@@ -239,8 +242,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\Audio\BaseAudioComponent.h" />
+    <ClInclude Include="Include\MBE\Core\ComponentValueChangedEvent.h" />
     <ClInclude Include="Include\MBE\Graphics\BaseComponentRenderSystem.h" />
     <ClInclude Include="Include\MBE\Graphics\SpriteRenderSystem.h" />
+    <ClInclude Include="Include\MBE\Graphics\TiledTerrainLayerRenderSystem.h" />
     <ClInclude Include="Include\MBE\Input\ActionEvents.h" />
     <ClInclude Include="Include\MBE\Input\ActionHoldEvent.h" />
     <ClInclude Include="Include\MBE\Animation\AnimationComponent.h" />
@@ -268,9 +273,9 @@
     <ClInclude Include="Include\MBE\Graphics\SpriteRenderComponent.h" />
     <ClInclude Include="Include\MBE\Map\GoalReachedEvent.h" />
     <ClInclude Include="Include\MBE\Map\TiledTerrain.h" />
+    <ClInclude Include="Include\MBE\Map\TiledTerrainLayerComponent.h" />
     <ClInclude Include="Include\MBE\Map\TileMapBase.h" />
     <ClInclude Include="Include\MBE\Map\TileMapComponent.h" />
-    <ClInclude Include="Include\MBE\TiledTerrain.h" />
     <ClInclude Include="Include\MBE\Input\MouseButtonBaseEvent.h" />
     <ClInclude Include="Include\MBE\Input\MouseButtonEvents.h" />
     <ClInclude Include="Include\MBE\Core\Component.h" />

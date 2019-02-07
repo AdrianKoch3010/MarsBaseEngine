@@ -13,6 +13,12 @@ std::string mbe::NormaliseIDString(const std::string & id)
 	return lowerCaseId;
 }
 
+std::string mbe::NormaliseIDString(std::string && id)
+{
+	std::transform(id.begin(), id.end(), id.begin(), ::tolower);
+	return std::move(id);
+}
+
 unsigned int mbe::TwoToOneDVector(unsigned int x, unsigned int y, unsigned int rowLength)
 {
 	return y * rowLength + x;

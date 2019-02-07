@@ -10,9 +10,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Clock.hpp>
 
-#include <MBE/TransformComponent.h>
 #include <MBE/Graphics/RenderComponent.h>
-#include <MBE/Graphics/TextureWrapperComponent.h>
 
 
 namespace mbe
@@ -22,7 +20,7 @@ namespace mbe
 	class TiledTerrainLayerRenderComponent : public RenderComponent
 	{
 	public:
-		TiledTerrainLayerRenderComponent(Entity & parentEntity, sf::Vector2u size, sf::Vector2u tileSize);
+		TiledTerrainLayerRenderComponent(EventManager & eventManager, Entity & parentEntity, sf::Vector2u size, sf::Vector2u tileSize);
 		~TiledTerrainLayerRenderComponent() = default;
 
 	public:
@@ -33,17 +31,23 @@ namespace mbe
 	public:
 		void Create(std::vector<size_t> tileIndexList);
 
+		// Throws if no texture is set
+		// Cannot calculate the texture coordinates for the tile
 		void SetTile(sf::Vector2u position, size_t tileIndex);
+
+		inline void SetRenderStates(const sf::RenderStates & states) { renderStates = states; }
+
+		inline void SetRenderStates(sf::RenderStates && states) { renderStates = std::move(states); }
 
 		inline bool IsCreated() const { return isCreated; }
 
 		inline sf::VertexArray & GetVertices() { return vertices; }
 
-		// Throws
-		//size_t GetTile(sf::Vector2u position) const;
-
 		inline const sf::Vector2u & GetSize() const { return size; }
+
 		inline const sf::Vector2u & GetTileSize() const { return tileSize; }
+
+		inline const sf::RenderStates & GetRenderStates() const{ return renderStates; }
 
 	public:
 		/// @brief A constant defining an empty tile. This is a transparrent tile that has no texture associated with it.
@@ -51,6 +55,7 @@ namespace mbe
 
 	private:
 		sf::VertexArray vertices;
+		sf::RenderStates renderStates;
 
 		bool isCreated;
 		const sf::Vector2u size;

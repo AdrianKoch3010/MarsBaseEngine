@@ -4,14 +4,13 @@ using namespace mbe;
 
 MBE_ENABLE_COMPONENT_POLYMORPHISM(TiledTerrainLayerRenderComponent, RenderComponent)
 
-TiledTerrainLayerRenderComponent::TiledTerrainLayerRenderComponent(Entity & parentEntity, sf::Vector2u size, sf::Vector2u tileSize) :
-	RenderComponent(parentEntity),
+TiledTerrainLayerRenderComponent::TiledTerrainLayerRenderComponent(EventManager & eventManager, Entity & parentEntity, sf::Vector2u size, sf::Vector2u tileSize) :
+	RenderComponent(eventManager, parentEntity),
 	size(size),
 	tileSize(tileSize),
 	isCreated(false)
 {
-	assert(parentEntity.HasComponent<TransformComponent>() && "TiledTerrainLayerRenderComponent: The parent entity must have a mbe::TransformComponent");
-	assert(parentEntity.HasComponent<TextureWrapperComponent>() && "TiledTerrainLayerRenderComponent: The parent entity must have a mbe::TextureWrapperComponent");
+
 }
 
 void TiledTerrainLayerRenderComponent::Draw(sf::RenderTarget & target) const
@@ -20,11 +19,7 @@ void TiledTerrainLayerRenderComponent::Draw(sf::RenderTarget & target) const
 	if (this->IsCreated() == false)
 		return;
 
-	sf::RenderStates states;
-	states.texture = &parentEntity.GetComponent<TextureWrapperComponent>().GetTextureWrapper().GetTexture();
-	states.transform = parentEntity.GetComponent<TransformComponent>().GetWorldTransform();
-
-	target.draw(vertices, states);
+	target.draw(vertices, renderStates);
 }
 
 sf::FloatRect TiledTerrainLayerRenderComponent::GetLocalBounds() const
@@ -71,9 +66,13 @@ void TiledTerrainLayerRenderComponent::SetTile(sf::Vector2u pos, size_t tileInde
 {
 	// Find the tiles position in the tileset texture
 	sf::Vector2u texPos;
-	const auto & tilesetTexture = parentEntity.GetComponent<TextureWrapperComponent>().GetTextureWrapper().GetTexture();
-	texPos.x = tileIndex % (tilesetTexture.getSize().x / tileSize.x);
-	texPos.y = tileIndex / (tilesetTexture.getSize().x / tileSize.x); // integer division
+	const auto * tilesetTexture = renderStates.texture;
+
+	if (tilesetTexture == nullptr)
+		throw std::runtime_error("TiledTerrainLayerRenderComponent: A texture is needed to calculate the tile's vertex texture coordinates");
+
+	texPos.x = tileIndex % (tilesetTexture->getSize().x / tileSize.x);
+	texPos.y = tileIndex / (tilesetTexture->getSize().x / tileSize.x); // integer division
 
 	// Get a pointer to the current tile's quad
 	sf::Vertex * quad = &vertices[(pos.x + pos.y * size.x) * 4]; // The 4 because of the quads
@@ -99,14 +98,3 @@ void TiledTerrainLayerRenderComponent::SetTile(sf::Vector2u pos, size_t tileInde
 	quad[2].texCoords = static_cast<sf::Vector2f>(sf::Vector2u((texPos.x + 1u) * tileSize.x, (texPos.y + 1u) * tileSize.y));
 	quad[3].texCoords = static_cast<sf::Vector2f>(sf::Vector2u(texPos.x * tileSize.x, (texPos.y + 1u) * tileSize.y));
 }
-
-//size_t TiledTerrainLayerRenderComponent::GetTile(sf::Vector2u position) const
-//{
-//	// This should never be the case
-//	assert(position.x * position.y < tileIndexList.size() && "TiledTerrainLayerComponent: There are less tiles registered than required by the map size");
-//
-//	if (position.x >= this->size.x || position.y >= this->size.y)
-//		throw std::out_of_range("TiledTerrainLayerComponent: The map is smaller than the requested tile");
-//
-//	return tileIndexList[position.y * size.x + position.x];
-//}

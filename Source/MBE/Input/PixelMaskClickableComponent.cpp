@@ -4,8 +4,8 @@ using namespace mbe;
 
 MBE_ENABLE_COMPONENT_POLYMORPHISM(PixelMaskClickableComponent, ClickableComponent)
 
-PixelMaskClickableComponent::PixelMaskClickableComponent(Entity & parentEntity) :
-	ClickableComponent(parentEntity)
+PixelMaskClickableComponent::PixelMaskClickableComponent(EventManager & eventManager, Entity & parentEntity) :
+	ClickableComponent(eventManager, parentEntity)
 {
 	// This requires the mbe::TexturedRenderComponent to be added first
 	assert(parentEntity.HasComponent<TextureWrapperComponent>() && "PixelMaskClickableComponent: The parent entity must have a mbe::TexturedClickableComponent");

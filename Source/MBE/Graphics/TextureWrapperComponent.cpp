@@ -2,9 +2,10 @@
 #include <MBE/Graphics/TextureWrapperComponent.h>
 
 using namespace mbe;
+using TextureWrapperChangedEvent = mbe::event::ComponentValueChangedEvent<mbe::TextureWrapperComponent>;
 
-TextureWrapperComponent::TextureWrapperComponent(Entity & parentEntity, const TextureWrapper & textureWrapper) :
-	Component(parentEntity),
+TextureWrapperComponent::TextureWrapperComponent(EventManager & eventManager, Entity & parentEntity, const TextureWrapper & textureWrapper) :
+	Component(eventManager, parentEntity),
 	textureWrapper(&textureWrapper),
 	textureRect({ 0, 0 }, static_cast<sf::Vector2i>(textureWrapper.GetTexture().getSize()))
 {
@@ -16,8 +17,13 @@ void TextureWrapperComponent::SetTextureWrapper(const TextureWrapper & textureWr
 	if (resetTextureRect)
 		textureRect = { {0, 0}, {static_cast<sf::Vector2i>(textureWrapper.GetTexture().getSize())} };
 
+	if (this->textureWrapper == &textureWrapper)
+		return;
+
 	// Assign the new texture wrapper
 	this->textureWrapper = &textureWrapper;
+
+	eventManager.RaiseEvent(TextureWrapperChangedEvent(*this, MBE_NAME_OF(textureWrapper)));
 }
 
 void TextureWrapperComponent::SetTextureRect(const sf::IntRect & textureRect)
@@ -33,6 +39,8 @@ void TextureWrapperComponent::SetTextureRect(const sf::IntRect & textureRect)
 
 	// Assign the new texture rect
 	this->textureRect = textureRect;
+
+	eventManager.RaiseEvent(TextureWrapperChangedEvent(*this, MBE_NAME_OF(textureRect)));
 }
 
 void TextureWrapperComponent::SetTextureRect(sf::IntRect && textureRect)
@@ -48,4 +56,6 @@ void TextureWrapperComponent::SetTextureRect(sf::IntRect && textureRect)
 
 	// Assign the new texture rect
 	this->textureRect = std::move(textureRect);
+
+	eventManager.RaiseEvent(TextureWrapperChangedEvent(*this, MBE_NAME_OF(textureRect)));
 }

@@ -3,7 +3,8 @@
 using namespace mbe;
 
 
-RenderComponent::RenderComponent(Entity & parentEntity) : Component(parentEntity)
+RenderComponent::RenderComponent(EventManager & eventManager, Entity & parentEntity)
+	: Component(eventManager, parentEntity)
 {
 }
 

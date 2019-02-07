@@ -4,8 +4,8 @@ using namespace mbe;
 
 MBE_ENABLE_COMPONENT_POLYMORPHISM(MusicComponent, BaseAudioComponent)
 
-MusicComponent::MusicComponent(Entity & parentEntity, std::string filePath) :
-	BaseAudioComponent(parentEntity),
+MusicComponent::MusicComponent(EventManager & eventManager, Entity & parentEntity, std::string filePath) :
+	BaseAudioComponent(eventManager, parentEntity),
 	filePath(filePath)
 {
 }

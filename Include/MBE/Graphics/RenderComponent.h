@@ -24,7 +24,7 @@ namespace mbe
 		/// @brief Constructor
 		/// @param parentEntity A reference to the mbe::Entity in which this class is created (To which it then belongs to)
 		/// @param renderLayer The renderLayer in which this render object will be drawn
-		explicit RenderComponent(Entity & parentEntity);
+		explicit RenderComponent(EventManager & eventManager, Entity & parentEntity);
 
 		/// @brief Default destructor
 		virtual ~RenderComponent() = default;

@@ -32,7 +32,7 @@ namespace mbe
 		typedef std::vector<std::vector<float>> MovementSpeedShape;
 
 	public:
-		TileMapComponent(Entity & parentEntity);
+		TileMapComponent(EventManager & eventManager, Entity & parentEntity);
 		~TileMapComponent() = default;
 
 		inline const Position & GetPosition() const { return position; }

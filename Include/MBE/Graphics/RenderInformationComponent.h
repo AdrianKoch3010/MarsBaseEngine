@@ -41,7 +41,7 @@ namespace mbe
 		typedef std::function<const sf::RenderWindow *()> WindowGetterFunction;
 
 	public:
-		RenderInformationComponent(Entity & parentEntity, RenderLayer renderLayer = RenderLayer::GUI, float zOrder = 0.f);
+		RenderInformationComponent(EventManager & eventManager, Entity & parentEntity, RenderLayer renderLayer = RenderLayer::GUI, float zOrder = 0.f);
 		~RenderInformationComponent() = default;
 
 	public:

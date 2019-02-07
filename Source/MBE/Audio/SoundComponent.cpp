@@ -4,8 +4,8 @@ using namespace mbe;
 
 MBE_ENABLE_COMPONENT_POLYMORPHISM(SoundComponent, BaseAudioComponent)
 
-SoundComponent::SoundComponent(Entity & parentEntity, const sf::SoundBuffer & soundBuffer) :
-	BaseAudioComponent(parentEntity),
+SoundComponent::SoundComponent(EventManager & eventManager, Entity & parentEntity, const sf::SoundBuffer & soundBuffer) :
+	BaseAudioComponent(eventManager, parentEntity),
 	soundBuffer(soundBuffer),
 	sound(soundBuffer)
 {
