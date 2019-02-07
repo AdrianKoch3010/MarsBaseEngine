@@ -198,6 +198,7 @@ namespace mbe
 		/// For this reason animations should only be added when creating the animator. If for some reason a reference must be kept, use Animator<TAnimated>::GetHandleID().
 		EntityAnimator & CreateAnimator(std::string id);
 
+		// Only returns a refernce to this entities animator so the recursive functions are not supported
 		EntityAnimator & GetAnimator(std::string id);
 
 		// Const overload
@@ -208,6 +209,12 @@ namespace mbe
 		/// @returns A reference of the requested animator.
 		/// @throws if no animator could be found
 		const EntityAnimator & GetAnimator(std::string id) const;
+
+		// Returns true if an animator with this id has been registered
+		bool HasAnimator(std::string id) const;
+
+		// Returns true if any of the registerd animators has an animation with this id
+		bool HasAnimation(std::string id) const;
 
 		//template <class TAnimated>
 		//const Animator<TAnimated>::HandleID GetAnimator(std::string id) const;
@@ -224,7 +231,7 @@ namespace mbe
 
 		void StopAnimation(std::string animatorId, std::string animationId);
 
-		void StopAnimation(std::string animationId);
+		void StopAnimation(std::string animatorId);
 
 		void StopAnimation();
 
@@ -245,13 +252,6 @@ namespace mbe
 
 		// Returns a list of normalised strings
 		std::vector<std::string> GetPlayingAnimations() const;
-
-		void AddConnectedAnimationEntity(Entity::HandleID entityId);
-
-		void RemoveConnectedAnimationEntity(Entity::HandleID entityId);
-
-	private:
-		void RemoveExpiredConnectedAnimationEntities();
 
 	private:
 		AnimatorDictionary animatorDictionary;

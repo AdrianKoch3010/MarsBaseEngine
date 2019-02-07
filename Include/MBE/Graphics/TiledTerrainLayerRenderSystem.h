@@ -10,6 +10,7 @@
 
 #include <MBE/Graphics/BaseComponentRenderSystem.h>
 #include <MBE/Core/EventManager.h>
+#include <MBE/Core/EntityCreatedEvent.h>
 #include <MBE/Core/ComponentValueChangedEvent.h>
 
 #include <MBE/Graphics/TiledTerrainLayerRenderComponent.h>
@@ -37,13 +38,16 @@ namespace mbe
 		void Update() override;
 
 	private:
+		// This function is subscribed in the tiled terrain
 		// The tile map does the same thing
 		// Maybe make this the responsibility of the tile map
-		void OnTextureChangedEvent(const TextureWrapperComponent & component);
+		//void OnTextureChangedEvent(const TextureWrapperComponent & component);
+
+		void OnEntityCreatedEvent(Entity & entity);
 
 	private:
 		EventManager & eventManager;
-		EventManager::SubscriptionID textureChangedSubscription;
+		EventManager::SubscriptionID entityCreatedSubscription;
 	};
 
 } // namespace mbe

@@ -19,6 +19,49 @@ TiledTerrain::TiledTerrain(EventManager & eventManager, EntityManager & entityMa
 	size(mapData->GetMapSize()),
 	tileSize(mapData->GetTileSize())
 {
+	// Subscribe to texture changed event
+	textureChangedSubscription = eventManager.Subscribe(EventManager::TCallback<TextureChangedEvent>([this](const TextureChangedEvent & event)
+	{
+		if (!event.IsValueChanged("TextureWrapper"))
+			return;
+
+		auto & entity = event.GetComponent().GetParentEntity();
+
+		// Use event Subscription to update the texture
+		if (!entity.HasComponent<TiledTerrainLayerRenderComponent>())
+			return;
+
+		// Update the render states
+		// This is important to ensure that the texture with which the tiled terrain render component is created is up to date
+		auto & renderComponent = entity.GetComponent<TiledTerrainLayerRenderComponent>();
+
+		// Update the texture
+		auto renderStates = renderComponent.GetRenderStates();
+
+		renderStates.texture = &entity.GetComponent<TextureWrapperComponent>().GetTextureWrapper().GetTexture();
+
+		// The move must be in the end
+		renderComponent.SetRenderStates(std::move(renderStates));
+
+		if (entity.HasComponent<TiledTerrainLayerComponent>())
+			RecalculateLayer(entity);
+	}));
+
+	// Subscribe to index list changed event
+	indexListChangedSubscription = eventManager.Subscribe(EventManager::TCallback<IndexListChangedEvent>([this](const IndexListChangedEvent & event)
+	{
+		if (!event.IsValueChanged("IndexList"))
+			return;
+
+		auto & entity = event.GetComponent().GetParentEntity();
+
+		// Use event Subscription to update the texture
+		if (!entity.HasComponent<TiledTerrainLayerRenderComponent>())
+			return;
+
+		RecalculateLayer(entity);
+	}));
+
 	// Add layers
 	for (const auto & layer : mapData->GetTileMapLayersIndexList())
 	{
@@ -40,48 +83,6 @@ TiledTerrain::TiledTerrain(EventManager & eventManager, EntityManager & entityMa
 		layerEntity.GetComponent<TiledTerrainLayerComponent>().SetIndexList(std::move(layer));
 
 	}
-
-	// Subscribe to texture changed event
-	textureChangedSubscription = eventManager.Subscribe(EventManager::TCallback<TextureChangedEvent>([this](const TextureChangedEvent & event)
-	{
-		if (!event.IsValueChanged("TextureWrapper"))
-			return;
-
-		auto & entity = event.GetComponent().GetParentEntity();
-
-		// Use event Subscription to update the texture
-		if (!entity.HasComponent<TiledTerrainLayerRenderComponent>() || !entity.HasComponent<TiledTerrainLayerComponent>())
-			return;
-
-		// Updat the render states
-		// This is important to ensure that the texture with which the tiled terrain render component is created is up to date
-		auto & renderComponent = entity.GetComponent<TiledTerrainLayerRenderComponent>();
-
-		// Update the texture
-		auto renderStates = renderComponent.GetRenderStates();
-
-		renderStates.texture = &entity.GetComponent<TextureWrapperComponent>().GetTextureWrapper().GetTexture();
-
-		// The move must be in the end
-		renderComponent.SetRenderStates(std::move(renderStates));
-
-		RecalculateLayer(entity);
-	}));
-
-	// Subscribe to index list changed event
-	indexListChangedSubscription = eventManager.Subscribe(EventManager::TCallback<IndexListChangedEvent>([this](const IndexListChangedEvent & event)
-	{
-		if (!event.IsValueChanged("IndexList"))
-			return;
-
-		auto & entity = event.GetComponent().GetParentEntity();
-
-		// Use event Subscription to update the texture
-		if (!entity.HasComponent<TiledTerrainLayerRenderComponent>())
-			return;
-
-		RecalculateLayer(entity);
-	}));
 }
 
 TiledTerrain::~TiledTerrain()
@@ -100,7 +101,6 @@ Entity::HandleID TiledTerrain::AddTileMapLayer(const TextureWrapper & textureWra
 	layer.AddComponent<TiledTerrainLayerComponent>();
 	layer.AddComponent<TiledTerrainLayerRenderComponent>(size, tileSize);
 	eventManager.RaiseEvent(EntityCreatedEvent(layer.GetHandleID()));
-	eventManager.RaiseEvent(TextureChangedEvent(layer.GetComponent<TextureWrapperComponent>(), "TextureWrapper"));
 
 	// Set the render objects zOrder to the number of tile map layers (not -1 since this layer has not been inserted yet)
 	layer.GetComponent<RenderInformationComponent>().SetZOrder(static_cast<float>(renderLayerList.size()));

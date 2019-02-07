@@ -1,24 +1,32 @@
 #include<MBE/Graphics/TiledTerrainLayerRenderSystem.h>
 
 using namespace mbe;
+using mbe::event::EntityCreatedEvent;
 using TextureWrapperChangedEvent = mbe::event::ComponentValueChangedEvent<TextureWrapperComponent>;
 
 TiledTerrainLayerRenderSystem::TiledTerrainLayerRenderSystem(EventManager & eventManager, const EntityManager & entityManager) :
 	eventManager(eventManager),
 	BaseComponentRenderSystem(entityManager)
 {
-	textureChangedSubscription = eventManager.Subscribe(EventManager::TCallback<TextureWrapperChangedEvent>([this](const TextureWrapperChangedEvent & event) {
+	/*textureChangedSubscription = eventManager.Subscribe(EventManager::TCallback<TextureWrapperChangedEvent>([this](const TextureWrapperChangedEvent & event) {
 		if (event.IsValueChanged("TextureWrapper"))
 		{
 			OnTextureChangedEvent(event.GetComponent());
 		}
+	}));*/
+
+	entityCreatedSubscription = eventManager.Subscribe(EventManager::TCallback<EntityCreatedEvent>([this](const EntityCreatedEvent & event)
+	{
+		assert(Entity::GetObjectFromID(event.GetEntityID()) != nullptr && "TiledTerrain: The entity must exist");
+
+		OnEntityCreatedEvent(*Entity::GetObjectFromID(event.GetEntityID()));
 	}));
 
 }
 
 TiledTerrainLayerRenderSystem::~TiledTerrainLayerRenderSystem()
 {
-	eventManager.UnSubscribe<TextureWrapperChangedEvent>(textureChangedSubscription);
+	eventManager.UnSubscribe<TextureWrapperChangedEvent>(entityCreatedSubscription);
 }
 
 void TiledTerrainLayerRenderSystem::Update()
@@ -40,12 +48,28 @@ void TiledTerrainLayerRenderSystem::Update()
 	}
 }
 
-void TiledTerrainLayerRenderSystem::OnTextureChangedEvent(const TextureWrapperComponent & textureWrapperComponent)
-{
-	auto & entity = textureWrapperComponent.GetParentEntity();
+//void TiledTerrainLayerRenderSystem::OnTextureChangedEvent(const TextureWrapperComponent & textureWrapperComponent)
+//{
+//	auto & entity = textureWrapperComponent.GetParentEntity();
+//
+//	// Use event Subscription to update the texture
+//	if (!entity.HasComponent<TiledTerrainLayerRenderComponent>())
+//		return;
+//
+//	auto & renderComponent = entity.GetComponent<TiledTerrainLayerRenderComponent>();
+//
+//	// Update the texture
+//	auto renderStates = renderComponent.GetRenderStates();
+//
+//	renderStates.texture = &entity.GetComponent<TextureWrapperComponent>().GetTextureWrapper().GetTexture();
+//
+//	// The move must be in the end
+//	renderComponent.SetRenderStates(std::move(renderStates));
+//}
 
-	// Use event Subscription to update the texture
-	if (!entity.HasComponent<TiledTerrainLayerRenderComponent>())
+void TiledTerrainLayerRenderSystem::OnEntityCreatedEvent(Entity & entity)
+{
+	if (!entity.HasComponent<TextureWrapperComponent>() || !entity.HasComponent<TiledTerrainLayerRenderComponent>())
 		return;
 
 	auto & renderComponent = entity.GetComponent<TiledTerrainLayerRenderComponent>();
