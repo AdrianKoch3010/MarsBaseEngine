@@ -39,7 +39,7 @@ void ClickableSystem::OnClick(sf::Vector2f clickPosition, sf::Mouse::Button butt
 			if (entity.HasComponent<RenderInformationComponent>())
 				clickedEntityList.push_back(&entity);
 			else
-				RaiseConnectedClickEvents(clickableComponent, button);
+				RaiseClickEvents(clickableComponent, button);
 		}
 	}
 
@@ -54,7 +54,7 @@ void ClickableSystem::OnClick(sf::Vector2f clickPosition, sf::Mouse::Button butt
 	{
 		const auto & clickableComponent = entityPtr->GetComponent<ClickableComponent>();
 		
-		RaiseConnectedClickEvents(clickableComponent, button);
+		RaiseClickEvents(clickableComponent, button);
 
 		if (clickableComponent.IsClickAbsorebd())
 			return;
@@ -85,20 +85,41 @@ sf::Vector2f ClickableSystem::CalculatePosition(const Entity & entity, sf::Vecto
 	return clickPosition;
 }
 
-void ClickableSystem::RaiseConnectedClickEvents(const ClickableComponent & clickableComponent, sf::Mouse::Button button)
+void ClickableSystem::RaiseClickEvents(const ClickableComponent & clickableComponent, sf::Mouse::Button button)
 {
-	for (const auto & clickedEntityId : clickableComponent.GetConnectedClickableIdList())
+	//for (const auto & clickedEntityId : clickableComponent.GetConnectedClickableIdList())
+	//{
+	//	const auto * clickedEntityPtr = Entity::GetObjectFromID(clickedEntityId);
+
+	//	// Only raise an entity clicked event for entities that exist
+	//	if (clickedEntityPtr == nullptr)
+	//		continue;
+
+	//	event::EntityClickedEvent entityClickedEvent;
+	//	entityClickedEvent.SetEntityID(clickedEntityPtr->GetHandleID());
+	//	entityClickedEvent.SetMouseButton(button);
+	//	eventManager.RaiseEvent(entityClickedEvent);
+	//}
+
+	if (clickableComponent.DoesBubbleUp() == false)
 	{
-		const auto * clickedEntityPtr = Entity::GetObjectFromID(clickedEntityId);
-
-		// Only raise an entity clicked event for entities that exist
-		if (clickedEntityPtr == nullptr)
-			continue;
-
 		event::EntityClickedEvent entityClickedEvent;
-		entityClickedEvent.SetEntityID(clickedEntityPtr->GetHandleID());
+		entityClickedEvent.SetEntityID(clickableComponent.GetParentEntity().GetHandleID());
 		entityClickedEvent.SetMouseButton(button);
 		eventManager.RaiseEvent(entityClickedEvent);
+		return;
+	}
+
+	for (auto entityId = clickableComponent.GetParentEntity().GetHandleID(); Entity::GetObjectFromID(entityId) != nullptr; )
+	{
+		const auto & clickedEntity = *Entity::GetObjectFromID(entityId);
+		
+		event::EntityClickedEvent entityClickedEvent;
+		entityClickedEvent.SetEntityID(clickedEntity.GetHandleID());
+		entityClickedEvent.SetMouseButton(button);
+		eventManager.RaiseEvent(entityClickedEvent);
+
+		entityId = clickedEntity.GetParentEntityID();
 	}
 }
 

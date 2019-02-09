@@ -11,7 +11,7 @@ namespace mbe
 	class TransformComponent : public Component
 	{
 	public:
-		TransformComponent(EventManager & eventManager, Entity & parentEntity, Entity::HandleID parentTransformEntityId = Entity::GetNullID());
+		TransformComponent(EventManager & eventManager, Entity & parentEntity);
 		~TransformComponent() = default;
 
 	public:
@@ -20,7 +20,7 @@ namespace mbe
 		// Makes this entity relative to the transform component of another entity
 		// Passing in mbe::Entity::GetNullID() sets this makes this entity absolute again so calling
 		// this->GetWorldTransform() will return the same as this->GetTransform()
-		void SetRelativeTo(Entity::HandleID parentTransformEntityId);
+		//void SetRelativeTo(Entity::HandleID parentTransformEntityId);
 
 		inline void SetPosition(const sf::Vector2f & position) { transformable.setPosition(position); }
 

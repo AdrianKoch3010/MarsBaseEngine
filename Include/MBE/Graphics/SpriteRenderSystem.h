@@ -6,6 +6,8 @@
 #include <cassert>
 
 #include <MBE/Graphics/BaseComponentRenderSystem.h>
+#include <MBE/Core/EventManager.h>
+#include <MBE/Core/EntityCreatedEvent.h>
 
 #include <MBE/Graphics/SpriteRenderComponent.h>
 #include <MBE/Graphics/TextureWrapperComponent.h>
@@ -22,11 +24,20 @@ namespace mbe
 		typedef std::unique_ptr<SpriteRenderSystem> UPtr;
 
 	public:
-		SpriteRenderSystem(const EntityManager & entityManager);
-		~SpriteRenderSystem() = default;
+		SpriteRenderSystem(EventManager & eventManager, const EntityManager & entityManager);
+
+		// Unsubscribe from events
+		~SpriteRenderSystem();
 
 	public:
 		void Update() override;
+
+	private:
+		void OnEntityCreatedEvent(Entity & entity);
+
+	private:
+		EventManager & eventManager;
+		EventManager::SubscriptionID entityCreatedSubscription;
 	};
 
 } // namespace mbe
