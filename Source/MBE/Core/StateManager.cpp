@@ -75,7 +75,7 @@ void StateManager::ApplyPendingChanges()
 			auto it = factoryFunctionDictionary.find(pendingChangeQueue.front().stateTypeId);
 
 			// Make sure a factory function has been registered (this should always be the case)
-			assert(it != factoryFunctionDictionary.end() && "No factory function has been registered for this id");
+			assert(it != factoryFunctionDictionary.end() && "StateManager: No factory function has been registered for this id");
 
 			// Call the factory function
 			it->second(nullptr); // nullptr --> no data is required
@@ -88,10 +88,10 @@ void StateManager::ApplyPendingChanges()
 			auto it = factoryFunctionDictionary.find(pendingChangeQueue.front().stateTypeId);
 
 			// Make sure a factory function has been registered (this should always be the case)
-			assert(it != factoryFunctionDictionary.end() && "No factory function has been registered for this id");
+			assert(it != factoryFunctionDictionary.end() && "StateManager: No factory function has been registered for this id");
 
 			// Make sure that the data exists
-			assert(dataToBePushed.empty() == false && "No data exists that could be pushed");
+			assert(dataToBePushed.empty() == false && "StateManager: No data exists that could be pushed");
 
 			// Get the data
 			std::shared_ptr<void> data = dataToBePushed.front();

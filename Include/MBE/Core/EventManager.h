@@ -132,7 +132,7 @@ namespace mbe
 	{
 		// Get the key of the callback list this callback will be added to
 		//DerivedEvent::TypeID typeId = DerivedEvent::GetTypeID();
-		detail::EventWrapper<TEvent>::TypeID typeId = detail::EventWrapper<TEvent>::GetTypeID();
+		typename detail::EventWrapper<TEvent>::TypeID typeId = detail::EventWrapper<TEvent>::GetTypeID();
 
 		// Create a new CallbackWrapper
 		BaseCallbackWrapper * baseCallbackPtr = new CallbackWrapper<TEvent>(callback);
@@ -161,7 +161,7 @@ namespace mbe
 	{
 		// Get the type of the event and therefore the index in the callbackListList
 		//DerivedEvent::TypeID typeId = DerivedEvent::GetTypeID();
-		detail::EventWrapper<TEvent>::TypeID typeId = detail::EventWrapper<TEvent>::GetTypeID();
+		typename detail::EventWrapper<TEvent>::TypeID typeId = detail::EventWrapper<TEvent>::GetTypeID();
 
 		// This is needed since the [] operator (unlike the std::map) does not
 		// create a new item automatically. To achieve that, push_back would have
@@ -188,7 +188,7 @@ namespace mbe
 	{
 		// Get the type id of the callback list from which the callback shall be unsubscribed
 		//DerivedEvent::TypeID typeId = DerivedEvent::GetTypeID();
-		detail::EventWrapper<TEvent>::TypeID typeId = detail::EventWrapper<TEvent>::GetTypeID();
+		typename detail::EventWrapper<TEvent>::TypeID typeId = detail::EventWrapper<TEvent>::GetTypeID();
 
 		// Erase by key
 		callbackDictionaryDictionary[typeId].erase(subscriptionId);
