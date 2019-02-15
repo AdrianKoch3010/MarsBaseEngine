@@ -12,5 +12,7 @@ void ParallelTask::Execute()
 	this->completed = false;
 
 	// Launch the thread
+	//sf::Clock clock;
 	this->thread = std::thread(threadFunction);
+	//std::cout << std::endl << "The pathfinder insertion took " << clock.restart().asMicroseconds() << " us";
 }

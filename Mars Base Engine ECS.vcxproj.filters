@@ -521,6 +521,12 @@
     <ClInclude Include="Include\MBE\Map\TiledTerrainLayerComponent.h">
       <Filter>Headerdateien\Components</Filter>
     </ClInclude>
+    <ClInclude Include="Include\MBE\Core\PathfindingParallelTask.h">
+      <Filter>Headerdateien\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Core\SafeQueue.h">
+      <Filter>Headerdateien\Framework\Helpers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Namespace Documentation.txt">

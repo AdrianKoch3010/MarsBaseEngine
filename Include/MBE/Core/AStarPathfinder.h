@@ -124,7 +124,9 @@ namespace mbe
 		// Check whether the tile is in bound
 		assert(nodePosition.x >= 0 && nodePosition.x < map.GetSize().x && nodePosition.y >= 0 && nodePosition.y< map.GetSize().y && "AStartPathfinder: The tile lyes outside the map");
 
-		std::vector<Position> neighbourPositions = std::move(map.GetReachableTiles(nodePosition));
+		// Doesn't work because of mutex
+		//std::vector<Position> neighbourPositions = std::move(map.GetReachableTiles(nodePosition));
+		auto neighbourPositions = map.GetReachableTiles(nodePosition);
 		std::vector<detail::AStarNode::Ptr> neighbours;
 
 		for (const auto & neighbourPosition : neighbourPositions)

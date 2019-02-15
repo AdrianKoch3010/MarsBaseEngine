@@ -7,8 +7,12 @@
 #include <thread>
 #include <mutex>
 
+#include <iostream>
+#include <SFML/System/Clock.hpp>
+
 namespace mbe
 {
+	// When this->completed is set to true by an inheriting class
 	class ParallelTask
 	{
 	public:

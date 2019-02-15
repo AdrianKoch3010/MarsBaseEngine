@@ -243,6 +243,8 @@
   <ItemGroup>
     <ClInclude Include="Include\MBE\Audio\BaseAudioComponent.h" />
     <ClInclude Include="Include\MBE\Core\ComponentValueChangedEvent.h" />
+    <ClInclude Include="Include\MBE\Core\PathfindingParallelTask.h" />
+    <ClInclude Include="Include\MBE\Core\SafeQueue.h" />
     <ClInclude Include="Include\MBE\Graphics\BaseComponentRenderSystem.h" />
     <ClInclude Include="Include\MBE\Graphics\SpriteRenderSystem.h" />
     <ClInclude Include="Include\MBE\Graphics\TiledTerrainLayerRenderSystem.h" />
