@@ -306,6 +306,9 @@
     <ClCompile Include="Source\MBE\Map\TiledTerrainLayerComponent.cpp">
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MBE\pch.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\TransformComponent.h">
@@ -521,11 +524,11 @@
     <ClInclude Include="Include\MBE\Map\TiledTerrainLayerComponent.h">
       <Filter>Headerdateien\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Include\MBE\Core\PathfindingParallelTask.h">
-      <Filter>Headerdateien\Map</Filter>
-    </ClInclude>
     <ClInclude Include="Include\MBE\Core\SafeQueue.h">
       <Filter>Headerdateien\Framework\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\pch.h">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

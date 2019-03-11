@@ -105,6 +105,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>MBE\pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>D:\C++ Libs\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -127,6 +129,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories>D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>MBE\pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -146,6 +150,8 @@
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>MBE\pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -237,13 +243,17 @@
     <ClCompile Include="Source\MBE\Core\TinyXML.cpp" />
     <ClCompile Include="Source\MBE\Graphics\TopDownInformationComponent.cpp" />
     <ClCompile Include="Source\MBE\Graphics\TopDownZOrderSorter.cpp" />
+    <ClCompile Include="Source\MBE\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDebugInfo|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="Source\MBE\TransformComponent.cpp" />
     <ClCompile Include="Source\MBE\Core\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\Audio\BaseAudioComponent.h" />
     <ClInclude Include="Include\MBE\Core\ComponentValueChangedEvent.h" />
-    <ClInclude Include="Include\MBE\Core\PathfindingParallelTask.h" />
     <ClInclude Include="Include\MBE\Core\SafeQueue.h" />
     <ClInclude Include="Include\MBE\Graphics\BaseComponentRenderSystem.h" />
     <ClInclude Include="Include\MBE\Graphics\SpriteRenderSystem.h" />
@@ -308,6 +318,7 @@
     <ClInclude Include="Include\MBE\Core\TinyXML.h" />
     <ClInclude Include="Include\MBE\Graphics\TopDownInformationComponent.h" />
     <ClInclude Include="Include\MBE\Graphics\TopDownZOrderSorter.h" />
+    <ClInclude Include="Include\MBE\pch.h" />
     <ClInclude Include="Include\MBE\TransformComponent.h" />
     <ClInclude Include="Include\MBE\Core\Utility.h" />
     <ClInclude Include="Include\MBE\Audio\SoundComponent.h" />
