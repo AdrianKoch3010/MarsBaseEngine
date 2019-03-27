@@ -13,7 +13,7 @@ Constants::Constants()
 	testTimeMultiplicator = nullptr;
 
 	this->hasLoadedSuccessfully = false;
-	this->hasLoadedSuccessfully = Load("Resources/constants.txt");
+	this->hasLoadedSuccessfully = Load("Config/constants.txt");
 }
 
 

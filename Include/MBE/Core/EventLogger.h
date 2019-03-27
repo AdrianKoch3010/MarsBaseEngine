@@ -44,7 +44,7 @@ namespace mbe
 		/// @brief Constructor
 		/// @param eventManager A reference of the mbe::EventManager the logging will monitor
 		/// @param filePath The file path to which the loging file is saved to
-		EventLogger(EventManager & eventManager, std::string filePath = "Resources/LogFile.txt");
+		EventLogger(EventManager & eventManager, std::string filePath = "Config/LogFile.txt");
 
 		/// @brief Destructor
 		/// @details When the mbe::EventLogger is destroyed the log file is saved and all log functions are unsubscribed

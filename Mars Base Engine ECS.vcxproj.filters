@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Headerdateien\Components">
-      <UniqueIdentifier>{e225f7d0-eb73-4cd5-bbd8-5816ef0573e6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Quelldateien\Components">
       <UniqueIdentifier>{bfea674d-509b-4af2-aca5-82afde1a1d33}</UniqueIdentifier>
     </Filter>
@@ -129,6 +126,9 @@
     </Filter>
     <Filter Include="Headerdateien\Map">
       <UniqueIdentifier>{e582bd5e-15c5-42c4-ad63-37f90671cda2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Components">
+      <UniqueIdentifier>{e225f7d0-eb73-4cd5-bbd8-5816ef0573e6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

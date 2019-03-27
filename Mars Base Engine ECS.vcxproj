@@ -103,10 +103,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\adria\Desktop\Visual Studio\C++ Libs\Includes;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>MBE\pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>D:\C++ Libs\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -127,10 +128,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\adria\Desktop\Visual Studio\C++ Libs\Includes;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>MBE\pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -146,12 +148,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\adria\Desktop\Visual Studio\C++ Libs\Includes;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>MBE\pch.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -244,9 +247,9 @@
     <ClCompile Include="Source\MBE\Graphics\TopDownInformationComponent.cpp" />
     <ClCompile Include="Source\MBE\Graphics\TopDownZOrderSorter.cpp" />
     <ClCompile Include="Source\MBE\pch.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDebugInfo|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDebugInfo|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\MBE\TransformComponent.cpp" />
     <ClCompile Include="Source\MBE\Core\Utility.cpp" />
