@@ -19,3 +19,6 @@ The engine makes use of a number of open source libraries.
 
 - SFML
 - TinyXML2
+
+## Documentation
+The source code is documented via doxigen and can be found in the docs folder. It also hosted online under [this link](https://adriankoch3010.github.io/MarsBaseEngine/index.html "Mars Base Project Documentation").
