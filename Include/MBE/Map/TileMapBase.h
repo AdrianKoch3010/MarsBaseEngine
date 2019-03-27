@@ -9,6 +9,7 @@
 
 #include <MBE/Core/EventManager.h>
 #include <MBE/Map/TiledTerrain.h>
+#include <MBE/Core/Entity.h>
 
 namespace mbe
 {
