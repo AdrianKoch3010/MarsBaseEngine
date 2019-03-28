@@ -130,6 +130,12 @@
     <Filter Include="Headerdateien\Components">
       <UniqueIdentifier>{e225f7d0-eb73-4cd5-bbd8-5816ef0573e6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Systems\AI System">
+      <UniqueIdentifier>{c24b45a9-db6b-40b5-a465-9b090451e897}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\AI System">
+      <UniqueIdentifier>{64546994-32f0-40a2-a97e-3a253d1b6ea6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\MBE\TransformComponent.cpp">
@@ -228,9 +234,6 @@
     <ClCompile Include="Source\MBE\Audio\AudioData.cpp">
       <Filter>Quelldateien\Systems\Audio System</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MBE\Audio\SoundManager.cpp">
-      <Filter>Quelldateien\Systems\Audio System</Filter>
-    </ClCompile>
     <ClCompile Include="Source\MBE\Graphics\Effect.cpp">
       <Filter>Quelldateien\Systems\Render System</Filter>
     </ClCompile>
@@ -308,6 +311,9 @@
     </ClCompile>
     <ClCompile Include="Source\MBE\pch.cpp">
       <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\AI\AIState.cpp">
+      <Filter>Quelldateien\Systems\AI System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -443,9 +449,6 @@
     <ClInclude Include="Include\MBE\Audio\AudioData.h">
       <Filter>Headerdateien\Systems\Audio System</Filter>
     </ClInclude>
-    <ClInclude Include="Include\MBE\Audio\SoundManager.h">
-      <Filter>Headerdateien\Systems\Audio System</Filter>
-    </ClInclude>
     <ClInclude Include="Include\MBE\Animation\RotationAnimation.h">
       <Filter>Headerdateien\Systems\Animation System\Animations</Filter>
     </ClInclude>
@@ -529,6 +532,9 @@
     </ClInclude>
     <ClInclude Include="Include\MBE\pch.h">
       <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\AI\AIState.h">
+      <Filter>Headerdateien\Systems\AI System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

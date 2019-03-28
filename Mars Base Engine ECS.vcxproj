@@ -190,6 +190,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\MBE\AI\AIState.cpp" />
     <ClCompile Include="Source\MBE\Core\ComponentValueChangedEvent.cpp" />
     <ClCompile Include="Source\MBE\Graphics\BaseComponentRenderSystem.cpp" />
     <ClCompile Include="Source\MBE\Graphics\RenderComponent.cpp" />
@@ -218,7 +219,6 @@
     <ClCompile Include="Source\MBE\Animation\PitchAnimation.cpp" />
     <ClCompile Include="Source\MBE\Input\PixelMaskClickableComponent.cpp" />
     <ClCompile Include="Source\MBE\Audio\AudioData.cpp" />
-    <ClCompile Include="Source\MBE\Audio\SoundManager.cpp" />
     <ClCompile Include="Source\MBE\Audio\AudioSystem.cpp" />
     <ClCompile Include="Source\MBE\Graphics\SpriteRenderComponent.cpp" />
     <ClCompile Include="Source\MBE\Map\GoalReachedEvent.cpp" />
@@ -255,6 +255,7 @@
     <ClCompile Include="Source\MBE\Core\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\MBE\AI\AIState.h" />
     <ClInclude Include="Include\MBE\Audio\BaseAudioComponent.h" />
     <ClInclude Include="Include\MBE\Core\ComponentValueChangedEvent.h" />
     <ClInclude Include="Include\MBE\Core\SafeQueue.h" />
@@ -283,7 +284,6 @@
     <ClInclude Include="Include\MBE\Animation\PitchAnimation.h" />
     <ClInclude Include="Include\MBE\Input\PixelMaskClickableComponent.h" />
     <ClInclude Include="Include\MBE\Audio\AudioData.h" />
-    <ClInclude Include="Include\MBE\Audio\SoundManager.h" />
     <ClInclude Include="Include\MBE\Audio\AudioSystem.h" />
     <ClInclude Include="Include\MBE\Graphics\SpriteRenderComponent.h" />
     <ClInclude Include="Include\MBE\Map\GoalReachedEvent.h" />
