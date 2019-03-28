@@ -6,6 +6,7 @@
 #include <memory>
 #include <vector>
 #include <SFML/System/Vector2.hpp>
+#include <SFML/System/NonCopyable.hpp>
 
 #include <MBE/Core/EventManager.h>
 #include <MBE/Map/TiledTerrain.h>
@@ -13,7 +14,9 @@
 
 namespace mbe
 {
-	class TileMapBase
+	///@brief Base class for tile maps
+	////@details
+	class TileMapBase : sf::NonCopyable
 	{
 	public:
 		typedef std::unique_ptr<TileMapBase> Ptr;
@@ -41,20 +44,30 @@ namespace mbe
 		inline const EntityIdList & GetEntities(Position position) const { return GetEntities(position.x, position.y); }
 
 	public:
-		// Converts the tile position to a float coordinate position
+		///@brief Converts from the tile to the game coordinate system
+		///@details This will be the bottom left corner of the tile. The function also converts the int to a float coordinate.
+		///@param tilePosition The position in the tile map coordinate system
+		///@returns The position in the game coordinate system
 		sf::Vector2f MapTileToCoord(Position tilePostion) const;
 
-		// Converts the world coordinate to a tile position
-		// Throws if the coordinate is negative
-		// Not unsigned since it can be used for offsets
+		///@brief Converts from the game to the time coordinate system
+		///@details The position on the tile is ignored. The function only reurns which tile the coordinate is on.
+		///@param coordinate The position in the game coordinate system
+		///@returns The tile of which the game coordinate is part of
+		///@note If the game coordinate position is exactly at the border, it is still part of the above tile
 		Position MapCoordToTile(sf::Vector2f coordinate) const;
 
-		// Returns the offset from the origin of the tile it is currently on
-		// Throws when MapCoordToTile() throws
+		///@brief Returns the offset from a tile 
+		///@details This function calls MapCoordToTile() to find the tile the coordinate is on.
+		/// Therefore, the origin of the tile is at the bottom left corner of the tile.
+		/// The offset uses the standard SFML coordinate syste; i.e. The positive y-direction is down.
+		///@param coordinate The position in the game coordinate system
+		///@returns The offset from the origin of the tile the coordinate is on
 		sf::Vector2f GetOffsetFromTile(sf::Vector2f coordinate) const;
 
-		// Returns true if the coordinate is on the origin of one of the tiles
-		// Throws when GetOffsetFromTile() throws
+		///@Checks whether the coordinate is offset from a tile
+		///@details The function calls GetOffsetFromTile() and compares the return value withe a zero offset.
+		///@returns False if the coordinate is on the origin of one of the tiles, true otherwise
 		bool IsOffsetFromTile(sf::Vector2f coordinate) const;
 	};
 

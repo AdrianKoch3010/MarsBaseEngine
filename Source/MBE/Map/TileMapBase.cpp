@@ -14,12 +14,9 @@ sf::Vector2f TileMapBase::MapTileToCoord(Position tilePostion) const
 
 TileMapBase::Position TileMapBase::MapCoordToTile(sf::Vector2f coordinate) const
 {
-	//if (coordinate.x < 0 || coordinate.y <= 0)
-	//	throw std::runtime_error("TileMapBase: The coordinate must be positive");
-
 	Position position;
 
-	// automatically floored (stored in unsigend int)
+	// automatically floored (stored in int)
 	position.x = std::floor(coordinate.x / this->GetTiledTerrain().GetTileSize().x);
 	position.y = std::floor(coordinate.y / this->GetTiledTerrain().GetTileSize().y);
 
