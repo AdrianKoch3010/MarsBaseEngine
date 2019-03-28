@@ -18,6 +18,7 @@ var searchData=
   ['getnextid',['GetNextID',['../classmbe_1_1detail_1_1_base_event.html#a4afdc7ec9af7480905d850be13918071',1,'mbe::detail::BaseEvent']]],
   ['getnullid',['GetNullID',['../classmbe_1_1_handle_base.html#a80888d292e4ba88a9c6ffc17f39ee8eb',1,'mbe::HandleBase']]],
   ['getobjectfromid',['GetObjectFromID',['../classmbe_1_1_handle_base.html#a6fc6f3f723e6137a293dd7206b5121c3',1,'mbe::HandleBase']]],
+  ['getoffsetfromtile',['GetOffsetFromTile',['../classmbe_1_1_tile_map_base.html#acbce8a3799033be88281e7111ae7447b',1,'mbe::TileMapBase']]],
   ['getparententity',['GetParentEntity',['../classmbe_1_1_component.html#a40a4144bbb6bf794d8b36b06810befce',1,'mbe::Component']]],
   ['getparententityid',['GetParentEntityID',['../classmbe_1_1_entity.html#ac81e3ce9ca0e8765d87ce9ce3f345c38',1,'mbe::Entity']]],
   ['getplayinganimation',['GetPlayingAnimation',['../classmbe_1_1_animator.html#a8d47f331da1b79636d5502bbd4e779f1',1,'mbe::Animator::GetPlayingAnimation()'],['../classmbe_1_1_animator_3_01_t_animated_00_01std_1_1string_01_4.html#a042bf25ff7bd2120f571ed3b03e66a59',1,'mbe::Animator&lt; TAnimated, std::string &gt;::GetPlayingAnimation()']]],

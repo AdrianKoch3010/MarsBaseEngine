@@ -5,6 +5,7 @@ var searchData=
   ['component',['Component',['../classmbe_1_1_component.html',1,'mbe']]],
   ['componentpolyimorphismadder',['ComponentPolyimorphismAdder',['../structmbe_1_1_component_polyimorphism_adder.html',1,'mbe']]],
   ['componentpolyimorphismadderstatic',['ComponentPolyimorphismAdderStatic',['../structmbe_1_1detail_1_1_component_polyimorphism_adder_static.html',1,'mbe::detail']]],
+  ['componentvaluechangedevent',['ComponentValueChangedEvent',['../classmbe_1_1event_1_1_component_value_changed_event.html',1,'mbe::event']]],
   ['constants',['Constants',['../classmbe_1_1_constants.html',1,'mbe']]],
   ['context',['Context',['../structmbe_1_1_state_1_1_context.html',1,'mbe::State']]]
 ];

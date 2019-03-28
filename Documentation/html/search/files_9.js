@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['paralleltask_2eh',['ParallelTask.h',['../_parallel_task_8h.html',1,'']]],
-  ['pitchanimation_2eh',['PitchAnimation.h',['../_pitch_animation_8h.html',1,'']]],
-  ['pixelmask_2eh',['PixelMask.h',['../_pixel_mask_8h.html',1,'']]],
-  ['pixelmaskclickablecomponent_2eh',['PixelMaskClickableComponent.h',['../_pixel_mask_clickable_component_8h.html',1,'']]]
+  ['namespace_20documentation_2etxt',['Namespace Documentation.txt',['../_namespace_01_documentation_8txt.html',1,'']]]
 ];

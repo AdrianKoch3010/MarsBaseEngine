@@ -8,6 +8,7 @@ var searchData=
   ['_7ebaseevent',['~BaseEvent',['../classmbe_1_1detail_1_1_base_event.html#a67ca1aae179c6c3382deb6c28a804db6',1,'mbe::detail::BaseEvent']]],
   ['_7eclickablecomponent',['~ClickableComponent',['../classmbe_1_1_clickable_component.html#aab40932170f8c250c626fd137478d15b',1,'mbe::ClickableComponent']]],
   ['_7ecomponent',['~Component',['../classmbe_1_1_component.html#ab3eb489a43075c453319ffe800b5c7a4',1,'mbe::Component']]],
+  ['_7ecomponentvaluechangedevent',['~ComponentValueChangedEvent',['../classmbe_1_1event_1_1_component_value_changed_event.html#a004ab68f0b00c4fa4ff9ba8d372f5aeb',1,'mbe::event::ComponentValueChangedEvent']]],
   ['_7eentity',['~Entity',['../classmbe_1_1_entity.html#ad5a23332059614c0f176eb9002493616',1,'mbe::Entity']]],
   ['_7eentityclickedevent',['~EntityClickedEvent',['../classmbe_1_1event_1_1_entity_clicked_event.html#af20026e7bb2f478c7c529c4008c9673d',1,'mbe::event::EntityClickedEvent']]],
   ['_7eentitycreatedevent',['~EntityCreatedEvent',['../classmbe_1_1event_1_1_entity_created_event.html#a3cde7b113d9f340f0563e17af702ad28',1,'mbe::event::EntityCreatedEvent']]],
