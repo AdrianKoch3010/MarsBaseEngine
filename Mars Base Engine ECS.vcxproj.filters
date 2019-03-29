@@ -315,6 +315,9 @@
     <ClCompile Include="Source\MBE\AI\AIState.cpp">
       <Filter>Quelldateien\Systems\AI System</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MBE\AI\AIComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\TransformComponent.h">
@@ -535,6 +538,9 @@
     </ClInclude>
     <ClInclude Include="Include\MBE\AI\AIState.h">
       <Filter>Headerdateien\Systems\AI System</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\AI\AIComponent.h">
+      <Filter>Headerdateien\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

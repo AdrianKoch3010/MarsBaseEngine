@@ -1,5 +1,8 @@
 #pragma once
 
+///@file
+///@brief Class mbe::AIState
+
 #include <string>
 #include <memory>
 

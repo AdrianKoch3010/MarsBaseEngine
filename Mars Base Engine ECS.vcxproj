@@ -190,6 +190,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\MBE\AI\AIComponent.cpp" />
     <ClCompile Include="Source\MBE\AI\AIState.cpp" />
     <ClCompile Include="Source\MBE\Core\ComponentValueChangedEvent.cpp" />
     <ClCompile Include="Source\MBE\Graphics\BaseComponentRenderSystem.cpp" />
@@ -255,6 +256,7 @@
     <ClCompile Include="Source\MBE\Core\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\MBE\AI\AIComponent.h" />
     <ClInclude Include="Include\MBE\AI\AIState.h" />
     <ClInclude Include="Include\MBE\Audio\BaseAudioComponent.h" />
     <ClInclude Include="Include\MBE\Core\ComponentValueChangedEvent.h" />
