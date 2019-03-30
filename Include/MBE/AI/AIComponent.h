@@ -7,17 +7,21 @@
 #include <memory>
 #include <map>
 #include <vector>
+#include <algorithm>
 
+#include <MBE/Core/Utility.h>
 #include <MBE/Core/Component.h>
 #include <MBE/AI/AIState.h>
 
 namespace mbe
 {
+	// DEPRICATED
 	// States should be light-weight objects that basically only contain references and methods
 	// The can be created on the fly
 	// Some other system (probably inheriting from AISystem will determine the transitions between states
 	// The AIComponent manages a list of states that are currently active
 	/// Maybe use string id instead of type --> makes it easier to switch to scripting / loading later on
+	// States contain data on the action performed by the entity
 	class AIComponent : public Component
 	{
 	public:
@@ -25,7 +29,7 @@ namespace mbe
 		typedef std::weak_ptr<AIComponent> WPtr;
 		typedef std::unique_ptr<AIComponent> UPtr;
 
-		typedef size_t StateID;
+		typedef typename AIState::StateID StateID;
 		typedef std::map<StateID, typename AIState::UPtr> StateDictionary;
 
 	public:
@@ -33,19 +37,17 @@ namespace mbe
 		~AIComponent() = default;
 
 	public:
-		// This method should be moved to an appropreate system
-		void Update(sf::Time frameTime) override;
-
 		// Create and add a new AIState
 		template<class TState, typename ...TArguments>
-		TState & AddState(TArguments... arguments);
+		TState & AddState(StateID stateId, TArguments... arguments);
 
 		// Throws if the state doesn't exist
-		template<class TState>
-		void RemoveState();
+		void RemoveState(StateID stateId);
 
+		// Note that the ids are normalised
 		std::vector<StateID> GetActiveStates() const;
 
+		// Automatically normalises the id string
 		bool IsStateActive(const StateID & id) const;
 
 	private:
@@ -54,17 +56,16 @@ namespace mbe
 
 #pragma region Template Implementations
 
+	template<class TState, typename ...TArguments>
+	inline TState & AIComponent::AddState(StateID stateId, TArguments ...arguments)
+	{
+		NormaliseIDString(stateId);
+		auto statePtr = std::make_unique<TState>(std::forward<TArguments>(arguments)...);
+		stateDictionary.insert(std::make_pair(stateId, std::move(statePtr)));
 
+		return *stateDictionary.at(stateId);
+	}
 
 #pragma endregion
 
-	template<class TState, typename ...TArguments>
-	inline TState & AIComponent::AddState(TArguments ...arguments)
-	{
-		// TODO: hier Rückgabeanweisung eingeben
-	}
-	template<class TState>
-	inline void AIComponent::RemoveState()
-	{
-	}
 } //namespace mbe

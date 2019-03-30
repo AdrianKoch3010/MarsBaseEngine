@@ -8,11 +8,26 @@ AIComponent::AIComponent(EventManager & eventManager, Entity & parentEntity) :
 
 }
 
-void AIComponent::Update(sf::Time frameTime)
+void AIComponent::RemoveState(StateID stateId)
 {
-	for (auto & pair : stateDictionary)
+	NormaliseIDString(stateId);
+	std::remove_if(stateDictionary.begin(), stateDictionary.end(), [&](const decltype(*stateDictionary.begin()) & pair)
 	{
-		auto & state = *pair.second;
-		state.Update();
-	}
+		return pair.first == stateId;
+	});
+}
+
+std::vector<AIComponent::StateID> AIComponent::GetActiveStates() const
+{
+	std::vector<StateID> activeStates;
+	for (const auto & pair : stateDictionary)
+		activeStates.push_back(pair.first);
+
+	return activeStates;
+}
+
+bool AIComponent::IsStateActive(const StateID & id) const
+{
+	auto it = std::find(stateDictionary.cbegin(), stateDictionary.cend(), NormaliseIDString(id));
+	return it != stateDictionary.cend();
 }

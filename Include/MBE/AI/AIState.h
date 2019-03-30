@@ -8,6 +8,9 @@
 
 namespace mbe
 {
+
+	///@brief Base class for AIStates managed by the mbe::AIComponent
+	///@details An mbe::AIState contains the information on an action performed by the an mbe::Entity
 	class AIState
 	{
 	public:
@@ -18,15 +21,21 @@ namespace mbe
 		typedef std::string StateID;
 
 	public:
-		AIState();
-		virtual ~AIState();
+		///@brief Default Constructor
+		AIState() = default;
+
+		///@brief Default Destructor
+		virtual ~AIState() = default;
 
 	public:
-		virtual void EnterState() = 0;
+		/*virtual void EnterState() = 0;
 
-		virtual void Update() = 0;
+		virtual void Update() = 0;*/
 	
 	protected:
-		StateID nextState;
+		// Is this really necessary
+		// Where is the state id kept (if here, add it to constructor and getter)
+		// StateID id;
 	};
+
 } // namespace mbe
