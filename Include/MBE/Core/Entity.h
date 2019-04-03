@@ -300,7 +300,7 @@ namespace mbe
 	template <class TComponent, typename TTuple>
 	inline void Entity::AddComponentUnpack(TTuple && tuple)
 	{
-		std::apply([](auto&&... args) {
+		std::apply([this](auto&&... args) {
 			AddComponent<TComponent>(std::forward<decltype(args)>(args)...);
 		}, std::forward<TTuple>(tuple));
 	}
