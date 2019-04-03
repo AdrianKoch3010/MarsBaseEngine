@@ -318,6 +318,9 @@
     <ClCompile Include="Source\MBE\AI\AIComponent.cpp">
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MBE\Core\ComponentsChangedEvent.cpp">
+      <Filter>Quelldateien\Systems\Event System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\TransformComponent.h">
@@ -541,6 +544,9 @@
     </ClInclude>
     <ClInclude Include="Include\MBE\AI\AIComponent.h">
       <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Core\ComponentsChangedEvent.h">
+      <Filter>Headerdateien\Systems\Event System\Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,7 @@
 
 #include <string>
 #include <vector>
+#include <tuple>
 #include <set>
 #include <algorithm>
 #include <unordered_map>
@@ -18,6 +19,7 @@
 #include <MBE/Core/Singleton.h>
 #include <MBE/Core/Utility.h>
 #include <MBE/Core/EventManager.h>
+#include <MBE/Core/ComponentsChangedEvent.h>
 
 
 namespace mbe
@@ -175,12 +177,23 @@ namespace mbe
 		template <class TComponent, typename... TArguments>
 		TComponent & AddComponent(TArguments&&... arguments);
 
+		template <typename... TComponents, typename... TTuples>
+		void AddComponents(TTuples&&... tuples);
+
+		// Fix remove polymorphism
+		///@brief Removes a component from the entity's component list
+		/// @throws std::runntime_error if this entity does not have the requested component.
+		/// Therefore, before calling this function, the HasComponent() function should be called
+		///  to make sure that this entity actually has the requested component.
+		template <class TComponent>
+		void RemoveComponent();
+
 		/// @brief Returns a refernce to the requested component
 		/// @tparam T The type of the requested component
 		/// @throws std::runntime_error if this entity does not have the requested component.
 		/// Therefore, before calling this function, the HasComponent() function should be called
 		///  to make sure that this entity actually has the requested component.
-		template<class TComponent>
+		template <class TComponent>
 		TComponent & GetComponent() const;
 
 		/// @brief Returns true if the Entity has the requested component, flase otherwise
@@ -231,6 +244,12 @@ namespace mbe
 
 	private:
 		void AddPolymorphism(detail::ComponentTypeID typeId, Component::Ptr component);
+		// The polymorphic component dictionary must be updated to support this
+		void RemovePolymorphism(detail::ComponentTypeID typeId);
+
+		// Template method to unpack the tules passed to the AddComponents() method
+		template <class TComponent, typename TTuple>
+		void AddComponentUnpack(TTuple && tuple);
 
 	private:
 		EntityManager & entityManager;
@@ -264,7 +283,7 @@ namespace mbe
 		auto component = std::make_shared<TComponent>(eventManager, *this, std::forward<TArguments>(arguments)...);
 
 		// For debugging
-		std::cout << std::endl << "Entity: Added component with id " << std::to_string(detail::GetComponentTypeID<TComponent>());
+		std::cout << std::endl << "Entity: Added component with id " << std::to_string(typeId);
 
 		componentList.push_back(component);
 		componentDictionary.insert(std::make_pair(typeId, component));
@@ -272,16 +291,57 @@ namespace mbe
 		entityManager.AddEntityToGroup(*this, typeId);
 
 		this->AddPolymorphism(typeId, component);
+		// Tell the engine that the entity's component composition has changed
+		eventManager.RaiseEvent(mbe::event::ComponentsChangedEvent(*this));
 
 		return *component;
 	}
 
-	template<class TComponent>
+	template <class TComponent, typename TTuple>
+	inline void Entity::AddComponentUnpack(TTuple && tuple)
+	{
+		std::apply([](auto&&... args) {
+			AddComponent<TComponent>(std::forward<decltype(args)>(args)...);
+		}, std::forward<TTuple>(tuple));
+	}
+
+	template <typename... TComponents, typename... TTuples>
+	inline void Entity::AddComponents(TTuples&&... tuples)
+	{
+		(AddComponentUnpack<TComponents, TTuples>(std::forward<TTuples>(tuples)), ...);
+	}
+
+	template <class TComponent>
+	inline void Entity::RemoveComponent()
+	{
+		// Needed since std::is_base_of<T, T> == true
+		static_assert(std::is_base_of<Component, TComponent>::value, "Entity: TComponent must inherit from Component");
+		static_assert(std::is_same<Component, TComponent>::value == false, "Entity: TComponent must inherit from Component");
+
+		auto typeId = detail::GetComponentTypeID<TComponent>();
+
+		if (!this->HasComponent<TComponent>())
+			throw std::runtime_error("Enity: This entity does not have the requested component Id: " + std::to_string(typeId));
+
+		this->RemovePolymorphism(typeId);
+
+		componentList.erase(std::remove(componentList.begin(), componentList.end(), componentDictionary.at(typeId).lock()), componentList.end());
+		componentDictionary.erase(typeId);
+		// Tell the engine that the entity's component composition has changed
+		eventManager.RaiseEvent(mbe::event::ComponentsChangedEvent(*this));
+	}
+
+	template <class TComponent>
 	inline TComponent & Entity::GetComponent() const
 	{
+		// Needed since std::is_base_of<T, T> == true
+		static_assert(std::is_base_of<Component, TComponent>::value, "Entity: TComponent must inherit from Component");
+		static_assert(std::is_same<Component, TComponent>::value == false, "Entity: TComponent must inherit from Component");
+
 		const auto it = componentDictionary.find(detail::GetComponentTypeID<TComponent>());
 
-		// Don't use has component to avoid unnecessary lookup
+		// Make sure the component exists
+		// Don't use HasComponent() to avoid unnecessary lookup
 		if (it == componentDictionary.cend())
 			throw std::runtime_error("Enity: This entity does not have the requested component Id: " + std::to_string(detail::GetComponentTypeID<TComponent>()));
 
@@ -291,6 +351,10 @@ namespace mbe
 	template <class TComponent>
 	inline bool Entity::HasComponent() const
 	{
+		// Needed since std::is_base_of<T, T> == true
+		static_assert(std::is_base_of<Component, TComponent>::value, "Entity: TComponent must inherit from Component");
+		static_assert(std::is_same<Component, TComponent>::value == false, "Entity: TComponent must inherit from Component");
+
 		return componentDictionary.find(detail::GetComponentTypeID<TComponent>()) != componentDictionary.end();
 	}
 

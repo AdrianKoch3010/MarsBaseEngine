@@ -137,3 +137,30 @@ void Entity::AddPolymorphism(detail::ComponentTypeID typeId, Component::Ptr comp
 		entityManager.AddEntityToGroup(*this, baseComponentTypeId);
 	}
 }
+
+void Entity::RemovePolymorphism(detail::ComponentTypeID typeId)
+{
+	// Find the list of base component ids
+	auto it = detail::PolyimorphicComponentDictionary::Instance().polimorphismDictionary.find(typeId);
+
+	// if no base components have been found
+	if (it == detail::PolyimorphicComponentDictionary::Instance().polimorphismDictionary.end())
+		return;
+
+	// For each base component type id in the list of base component type ids for this component
+	for (const auto baseComponentTypeId : it->second)
+	{
+		// Remove polymorphism for the base component's base components
+		RemovePolymorphism(baseComponentTypeId);
+
+		// Make sure that the base component exists.
+		// This should never be the case as the AddPolymorphism function permits it
+		// However, in a corrupted case where another component with the same base component exists, this may be possible
+		assert(componentDictionary.find(baseComponentTypeId) != componentDictionary.end() && "Entity: The base component doesn't exists");
+		componentDictionary.erase(baseComponentTypeId);
+
+		/////////////////////////////////////////////////////////////// Remove from entity Group?
+		// Add it to the entity group for this component type
+		//entityManager.AddEntityToGroup(*this, baseComponentTypeId);
+	}
+}

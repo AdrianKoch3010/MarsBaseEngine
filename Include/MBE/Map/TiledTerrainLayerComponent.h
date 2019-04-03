@@ -19,7 +19,7 @@ namespace mbe
 		~TiledTerrainLayerComponent() = default;
 
 	public:
-		inline void SetIndexList(const std::vector<size_t> indexList) { this->indexList = indexList; }
+		inline void SetIndexList(const std::vector<size_t> & indexList) { this->indexList = indexList; }
 
 		inline void SetIndexList(std::vector<size_t> && indexList) { this->indexList = std::move(indexList); }
 

@@ -11,10 +11,7 @@ AIComponent::AIComponent(EventManager & eventManager, Entity & parentEntity) :
 void AIComponent::RemoveState(StateID stateId)
 {
 	NormaliseIDString(stateId);
-	std::remove_if(stateDictionary.begin(), stateDictionary.end(), [&](const decltype(*stateDictionary.begin()) & pair)
-	{
-		return pair.first == stateId;
-	});
+	stateDictionary.erase(stateId);
 }
 
 std::vector<AIComponent::StateID> AIComponent::GetActiveStates() const
@@ -28,6 +25,6 @@ std::vector<AIComponent::StateID> AIComponent::GetActiveStates() const
 
 bool AIComponent::IsStateActive(const StateID & id) const
 {
-	auto it = std::find(stateDictionary.cbegin(), stateDictionary.cend(), NormaliseIDString(id));
+	auto it = stateDictionary.find(id);
 	return it != stateDictionary.cend();
 }
