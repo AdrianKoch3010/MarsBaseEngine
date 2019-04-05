@@ -34,6 +34,25 @@ entity.AddComponent<mbe::AnimationComponent>();
 eventManager.RaiseEvent(mbe::event::EntityCreatedEvent(entity.GetHandleID()));
 ```
 
+There is another way which allows adding multiple components as once. 
+```c++
+auto & tree = entityManager.CreateEntity();
+tree3.AddComponents<
+    mbe::TransformComponent,
+    mbe::RenderInformationComponent,
+    mbe::TextureWrapperComponent,
+    mbe::SpriteRenderComponent,
+    mbe::TopDownInformationComponent>(
+        std::forward_as_tuple(),
+        std::forward_as_tuple(RenderLayer::Objects),
+        std::forward_as_tuple(context.textureWrappers["Tree"]),
+        std::forward_as_tuple(),
+        std::forward_as_tuple()
+        );
+eventManager.RaiseEvent(EntityCreatedEvent(tree.GetHandleID()));
+tree.GetComponent<mbe::TransformComponent>().SetPosition({ 300.f, 100.f });
+```
+
 ## An alternative - Child Entities
 
 In order to compensate for the loss in flexibility caused by the lack of dynamic entity types, entities can be organised in a tree structure. Making an entity a child of another can have multiple effects.

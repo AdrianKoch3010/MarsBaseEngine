@@ -14,10 +14,8 @@ Entity::Entity(EventManager & eventManager, EntityManager & entityManager) :
 
 void Entity::Update(sf::Time frameTime)
 {
-	for each (auto & component in componentList)
-	{
-		component->Update(frameTime);
-	}
+	for (auto & pair : actualComponentDictionary)
+		pair.second->Update(frameTime);
 }
 
 void Entity::Destroy()
@@ -116,10 +114,10 @@ void Entity::SetParentEntityID(HandleID parentEntityId)
 void Entity::AddPolymorphism(detail::ComponentTypeID typeId, Component::Ptr component)
 {
 	// Find the list of base component ids
-	auto it = detail::PolyimorphicComponentDictionary::Instance().polimorphismDictionary.find(typeId);
+	auto it = detail::PolyimorphicComponentDictionary::Instance().baseComponentDictionary.find(typeId);
 
 	// if no base components have been found
-	if (it == detail::PolyimorphicComponentDictionary::Instance().polimorphismDictionary.end())
+	if (it == detail::PolyimorphicComponentDictionary::Instance().baseComponentDictionary.end())
 		return;
 
 	// For each base component type id in the list of base component type ids for this component
@@ -138,29 +136,64 @@ void Entity::AddPolymorphism(detail::ComponentTypeID typeId, Component::Ptr comp
 	}
 }
 
-void Entity::RemovePolymorphism(detail::ComponentTypeID typeId)
-{
-	// Find the list of base component ids
-	auto it = detail::PolyimorphicComponentDictionary::Instance().polimorphismDictionary.find(typeId);
-
-	// if no base components have been found
-	if (it == detail::PolyimorphicComponentDictionary::Instance().polimorphismDictionary.end())
-		return;
-
-	// For each base component type id in the list of base component type ids for this component
-	for (const auto baseComponentTypeId : it->second)
-	{
-		// Remove polymorphism for the base component's base components
-		RemovePolymorphism(baseComponentTypeId);
-
-		// Make sure that the base component exists.
-		// This should never be the case as the AddPolymorphism function permits it
-		// However, in a corrupted case where another component with the same base component exists, this may be possible
-		assert(componentDictionary.find(baseComponentTypeId) != componentDictionary.end() && "Entity: The base component doesn't exists");
-		componentDictionary.erase(baseComponentTypeId);
-
-		/////////////////////////////////////////////////////////////// Remove from entity Group?
-		// Add it to the entity group for this component type
-		//entityManager.AddEntityToGroup(*this, baseComponentTypeId);
-	}
-}
+//void Entity::RemovePolymorphism(detail::ComponentTypeID typeId)
+//{
+//	RemoveDerivedComponents(typeId);
+//	RemoveBaseComponents(typeId);
+//}
+//
+//void Entity::RemoveDerivedComponents(detail::ComponentTypeID typeId)
+//{
+//	// Find the list of derived component ids
+//	auto it = detail::PolyimorphicComponentDictionary::Instance().derivedComponentDictionary.find(typeId);
+//
+//	// if no derived components have been found
+//	if (it == detail::PolyimorphicComponentDictionary::Instance().derivedComponentDictionary.end())
+//		return;
+//
+//	// By definition there can only be one derived component
+//	bool found = false;
+//	const auto & derivedComponentList = it->second;
+//	// The derived component (if any) that is part of this entity
+//	for (auto derivedIt = derivedComponentList.begin(); derivedIt != derivedComponentList.end() && !found; ++derivedIt)
+//	{
+//		auto derivedTypeId = *derivedIt;
+//		if (componentDictionary.count(derivedTypeId))
+//		{
+//			RemoveDerivedComponents(derivedTypeId);
+//			componentDictionary.erase(derivedTypeId);
+//			found = true;
+//		}
+//	}
+//
+//	/////////////////////////////////////////////////////////////// Remove from entity Group?
+//	// Add it to the entity group for this component type
+//	//entityManager.AddEntityToGroup(*this, baseComponentTypeId);
+//}
+//
+//void Entity::RemoveBaseComponents(detail::ComponentTypeID typeId)
+//{
+//	// Find the list of base component ids
+//	auto it = detail::PolyimorphicComponentDictionary::Instance().baseComponentDictionary.find(typeId);
+//
+//	// if no base components have been found
+//	if (it == detail::PolyimorphicComponentDictionary::Instance().baseComponentDictionary.end())
+//		return;
+//
+//	// For each base component type id in the list of base component type ids for this component
+//	for (const auto baseComponentTypeId : it->second)
+//	{
+//		// Remove polymorphism for the base component's base components
+//		RemoveBaseComponents(baseComponentTypeId);
+//
+//		// Make sure that the base component exists.
+//		// This should never be the case as the AddPolymorphism function permits it
+//		// However, in a corrupted case where another component with the same base component exists, this may be possible
+//		assert(componentDictionary.find(baseComponentTypeId) != componentDictionary.end() && "Entity: The base component doesn't exists");
+//		componentDictionary.erase(baseComponentTypeId);
+//
+//		/////////////////////////////////////////////////////////////// Remove from entity Group?
+//		// Add it to the entity group for this component type
+//		//entityManager.AddEntityToGroup(*this, baseComponentTypeId);
+//	}
+//}

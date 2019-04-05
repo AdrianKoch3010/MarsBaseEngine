@@ -312,14 +312,20 @@
     <ClCompile Include="Source\MBE\pch.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MBE\AI\AIState.cpp">
-      <Filter>Quelldateien\Systems\AI System</Filter>
-    </ClCompile>
     <ClCompile Include="Source\MBE\AI\AIComponent.cpp">
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
     <ClCompile Include="Source\MBE\Core\ComponentsChangedEvent.cpp">
       <Filter>Quelldateien\Systems\Event System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\AI\AITask.cpp">
+      <Filter>Quelldateien\Systems\AI System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\AI\AIAction.cpp">
+      <Filter>Quelldateien\Systems\AI System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\AI\AISystem.cpp">
+      <Filter>Quelldateien\Systems\AI System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -539,14 +545,20 @@
     <ClInclude Include="Include\MBE\pch.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Include\MBE\AI\AIState.h">
-      <Filter>Headerdateien\Systems\AI System</Filter>
-    </ClInclude>
     <ClInclude Include="Include\MBE\AI\AIComponent.h">
       <Filter>Headerdateien\Components</Filter>
     </ClInclude>
     <ClInclude Include="Include\MBE\Core\ComponentsChangedEvent.h">
       <Filter>Headerdateien\Systems\Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\AI\AITask.h">
+      <Filter>Headerdateien\Systems\AI System</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\AI\AIAction.h">
+      <Filter>Headerdateien\Systems\AI System</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\AI\AISystem.h">
+      <Filter>Headerdateien\Systems\AI System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

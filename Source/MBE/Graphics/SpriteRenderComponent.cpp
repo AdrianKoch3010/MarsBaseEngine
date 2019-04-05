@@ -13,7 +13,6 @@ SpriteRenderComponent::SpriteRenderComponent(EventManager & eventManager, Entity
 void SpriteRenderComponent::Draw(sf::RenderTarget & target) const
 {
 	// Add effects maybe get from an effects component
-	
 	target.draw(sprite, transform);
 }
 

@@ -191,8 +191,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\MBE\AI\AIAction.cpp" />
     <ClCompile Include="Source\MBE\AI\AIComponent.cpp" />
-    <ClCompile Include="Source\MBE\AI\AIState.cpp" />
+    <ClCompile Include="Source\MBE\AI\AISystem.cpp" />
+    <ClCompile Include="Source\MBE\AI\AITask.cpp" />
     <ClCompile Include="Source\MBE\Core\ComponentsChangedEvent.cpp" />
     <ClCompile Include="Source\MBE\Core\ComponentValueChangedEvent.cpp" />
     <ClCompile Include="Source\MBE\Graphics\BaseComponentRenderSystem.cpp" />
@@ -258,8 +260,10 @@
     <ClCompile Include="Source\MBE\Core\Utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\MBE\AI\AIAction.h" />
     <ClInclude Include="Include\MBE\AI\AIComponent.h" />
-    <ClInclude Include="Include\MBE\AI\AIState.h" />
+    <ClInclude Include="Include\MBE\AI\AISystem.h" />
+    <ClInclude Include="Include\MBE\AI\AITask.h" />
     <ClInclude Include="Include\MBE\Audio\BaseAudioComponent.h" />
     <ClInclude Include="Include\MBE\Core\ComponentsChangedEvent.h" />
     <ClInclude Include="Include\MBE\Core\ComponentValueChangedEvent.h" />

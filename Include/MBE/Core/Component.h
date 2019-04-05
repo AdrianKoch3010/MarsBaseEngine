@@ -24,18 +24,18 @@ namespace mbe
 	/// it cannot be guaranteed that their Update() methods will be called correctly
 	class Component : private sf::NonCopyable
 	{
-		/// @brief Enables an entity to use the components constructor
-		/// @details Making the constructor protected is necessarry to ensure that the
-		/// mbe::Entity class (mbe::Entity::CreateComponentis the only place where components can be created.
-		friend class Entity;
-
 	public:
 		typedef std::shared_ptr<Component> Ptr;
 		typedef std::weak_ptr<Component> WPtr;
 		typedef std::unique_ptr<Component> UPtr;
+		
+		/// @brief Enables an entity to use the components constructor.
+		/// @details Making the constructor protected is necessarry to ensure
+		/// that the mbe::Entity class (mbe::Entity::CreateComponentis the only place where components can be created.
+		friend class Entity;
 
 	protected:
-		/// @brief Constructor
+		/// @brief Protected Constructor
 		/// @param parentEntity A reference to the mbe::Entity in which this class is created (To which it then belongs to)
 		Component(EventManager & eventManager, Entity & parentEntity);
 

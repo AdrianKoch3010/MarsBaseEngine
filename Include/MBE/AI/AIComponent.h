@@ -6,22 +6,42 @@
 
 #include <memory>
 #include <map>
-#include <vector>
-#include <algorithm>
+//#include <list>
 
-#include <MBE/Core/Utility.h>
 #include <MBE/Core/Component.h>
-#include <MBE/AI/AIState.h>
+#include <MBE/AI/AITask.h>
 
 namespace mbe
 {
-	// DEPRICATED
-	// States should be light-weight objects that basically only contain references and methods
-	// The can be created on the fly
-	// Some other system (probably inheriting from AISystem will determine the transitions between states
-	// The AIComponent manages a list of states that are currently active
-	/// Maybe use string id instead of type --> makes it easier to switch to scripting / loading later on
-	// States contain data on the action performed by the entity
+	namespace detail
+	{
+		typedef std::size_t AITaskTypeID;
+
+		inline AITaskTypeID GetAITaskID() noexcept
+		{
+			// This will only be initialised once
+			static AITaskTypeID lastId = 0;
+
+			// After the first initialisation a new number will be returned for every function call
+			return lastId++;
+		}
+
+		template <typename T>
+		inline AITaskTypeID GetAITaskTypeID() noexcept
+		{
+			// There will be only one static variable for each template type
+			static AITaskTypeID typeId = GetAITaskID();
+			return typeId;
+		}
+	} //namespace detail
+
+	// Some other system (probably inheriting from AISystem will determine the currently active task)
+	// The AIComponent stores the queued tasks and the currently active task
+	// Tasks contain data on the action performed by the entity
+	////////////////////////////////////////////////////////////////////////// Possible redesigns
+	/// Make it possible to remove tasks whoes types are not known
+	/// Use handle id to store active task and make the task dictionary use unique ptr
+	/// Makes sense depending on how the type based stuff is implemented
 	class AIComponent : public Component
 	{
 	public:
@@ -29,41 +49,151 @@ namespace mbe
 		typedef std::weak_ptr<AIComponent> WPtr;
 		typedef std::unique_ptr<AIComponent> UPtr;
 
-		typedef typename AIState::StateID StateID;
-		typedef std::map<StateID, typename AIState::UPtr> StateDictionary;
+		// Dictionary of all tasks of one type
+		template <class TTask>
+		using TaskOfOneTypeDictionary = std::map<typename TTask::HandleID, std::shared_ptr<TTask>>;
+
+		// Dictionary of all tasks
+		typedef std::map<detail::AITaskTypeID, TaskOfOneTypeDictionary<AITask>> TaskDictionaryList;
 
 	public:
 		AIComponent(EventManager & eventManager, Entity & parentEntity);
 		~AIComponent() = default;
 
 	public:
-		// Create and add a new AIState
-		template<class TState, typename ...TArguments>
-		TState & AddState(StateID stateId, TArguments... arguments);
+		// Removes empty dictionaries
+		void Refresh();
+
+		// Returns nullptr if no taska are registred
+		AITask::Ptr GetHighstUtilityTask();
+
+		// Create and add a new AITask
+		// Get the id by using get handle id on the task
+		template<class TTask, typename... TArguments>
+		TTask & AddTask(TArguments&&... arguments);
 
 		// Throws if the state doesn't exist
-		void RemoveState(StateID stateId);
+		template <class TTask>
+		void RemoveTask(AITask::HandleID taskID);
 
-		// Note that the ids are normalised
-		std::vector<StateID> GetActiveStates() const;
+		// Returns true if any task of this type is queued
+		template <class TTask>
+		bool HasTaskType() const;
 
-		// Automatically normalises the id string
-		bool IsStateActive(const StateID & id) const;
+		template <class TTask>
+		bool HasTask(AITask::HandleID taskId) const;
+
+		// Inefficient (has to search linearly) shouldn't be used
+		bool HasTask(AITask::HandleID taskId) const;
+
+		// Either takes handle id or AITast::Ptr
+		void SetActiveTask(AITask::Ptr taskPtr);
+
+		// nullptr if no task is active
+		template <class TTask>
+		std::shared_ptr<TTask> GetActiveTask();
+
+		// Const overload
+		template <class TTask>
+		const std::shared_ptr<TTask> GetActiveTask() const;
+
+		inline AITask::Ptr GetActiveTask() { return activeTask; }
+
+		// Const overload
+		const AITask::Ptr GetActiveTask() const { return activeTask; }
+
+		// Throws if no task of this type is registered
+		// Use HasTaskType to check
+		// Get all the tasks of one type
+		template <class TTask>
+		TaskOfOneTypeDictionary<TTask> & GetTaskDictionary();
+
+		// Const overload
+		template <class TTask>
+		const TaskOfOneTypeDictionary<TTask> & GetTaskDictionary() const;
 
 	private:
-		StateDictionary stateDictionary;
+		TaskDictionaryList taskDictionaryList;
+		AITask::Ptr activeTask;
 	};
 
 #pragma region Template Implementations
 
-	template<class TState, typename ...TArguments>
-	inline TState & AIComponent::AddState(StateID stateId, TArguments ...arguments)
+	template<class TTask, typename ...TArguments>
+	inline TTask & AIComponent::AddTask(TArguments && ...arguments)
 	{
-		NormaliseIDString(stateId);
-		auto statePtr = std::make_unique<TState>(std::forward<TArguments>(arguments)...);
-		stateDictionary.insert(std::make_pair(stateId, std::move(statePtr)));
+		auto typeId = detail::GetAITaskTypeID<TTask>();
+		auto taskPtr = std::make_shared<TTask>(std::forward<TArguments>(arguments)...);
+		// Creates new dictionary if needed
+		auto taskId = taskPtr->GetHandleID(); // This is guaranteed to be unique
+		taskDictionaryList[typeId].insert(std::make_pair(taskId, taskPtr));
 
-		return *stateDictionary.at(stateId);
+		return *taskDictionaryList.at(typeId).at(taskId);
+	}
+
+	template<class TTask>
+	inline void AIComponent::RemoveTask(AITask::HandleID taskId)
+	{
+		auto it = taskDictionaryList.find(detail::GetAITaskTypeID<TTask>());
+		if (it == taskDictionaryList.end())
+			throw std::runtime_error("AIComponent: This entity does not have the requested task type");
+		
+		auto & typeDictonary = it->second;
+		if (typeDictonary.count(taskId) == 0)
+			throw std::runtime_error("AIComponent: This entity does not have the requested task");
+
+		typeDictonary.erase(taskId);
+	}
+
+	template<class TTask>
+	inline bool AIComponent::HasTaskType() const
+	{
+		return taskDictionaryList.count(detail::GetAITaskTypeID<TTask>());
+	}
+
+	template<class TTask>
+	inline bool AIComponent::HasTask(AITask::HandleID taskId) const
+	{
+		// Find the low type dictionary
+		auto it = taskDictionaryList.find(detail::GetAITaskTypeID<TTask>());
+		if (it != taskDictionaryList.end())
+			return it->second.count(taskId);
+
+		return false;
+	}
+
+	template<class TTask>
+	inline std::shared_ptr<TTask> AIComponent::GetActiveTask()
+	{
+		return std::static_pointer_cast<TTask>(activeTask);
+	}
+
+	template<class TTask>
+	inline const std::shared_ptr<TTask> AIComponent::GetActiveTask() const
+	{
+		return std::static_pointer_cast<TTask>(activeTask);
+	}
+
+	template<class TTask>
+	inline typename AIComponent::TaskOfOneTypeDictionary<TTask>& AIComponent::GetTaskDictionary()
+	{
+		// Don't create a new dictionary for this type if it doesn't exist
+		auto typeId = detail::GetAITaskTypeID<TTask>();
+		if (taskDictionaryList.count(typeId) == 0)
+			throw std::runtime_error("AIComponent: This entity does not have the requested task type");
+		
+		return taskDictionaryList.at(typeId);
+	}
+
+	template<class TTask>
+	inline const typename AIComponent::TaskOfOneTypeDictionary<TTask>& AIComponent::GetTaskDictionary() const
+	{
+		// Don't create a new dictionary for this type if it doesn't exist
+		auto typeId = detail::GetAITaskTypeID<TTask>();
+		if (taskDictionaryList.count(typeId) == 0)
+			throw std::runtime_error("AIComponent: This entity does not have the requested task type");
+
+		return taskDictionaryList.at(typeId);
 	}
 
 #pragma endregion

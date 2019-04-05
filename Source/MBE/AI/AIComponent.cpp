@@ -8,23 +8,24 @@ AIComponent::AIComponent(EventManager & eventManager, Entity & parentEntity) :
 
 }
 
-void AIComponent::RemoveState(StateID stateId)
+void AIComponent::Refresh()
 {
-	NormaliseIDString(stateId);
-	stateDictionary.erase(stateId);
+	for (auto it = taskDictionaryList.begin(); it != taskDictionaryList.end(); )
+	{
+		if (it->second.empty())
+			it = taskDictionaryList.erase(it);
+		else
+			++it;
+	}
 }
 
-std::vector<AIComponent::StateID> AIComponent::GetActiveStates() const
+bool AIComponent::HasTask(AITask::HandleID taskId) const
 {
-	std::vector<StateID> activeStates;
-	for (const auto & pair : stateDictionary)
-		activeStates.push_back(pair.first);
+	for (const auto & pair : taskDictionaryList)
+	{
+		if (pair.second.count(taskId))
+			return true;
+	}
 
-	return activeStates;
-}
-
-bool AIComponent::IsStateActive(const StateID & id) const
-{
-	auto it = stateDictionary.find(id);
-	return it != stateDictionary.cend();
+	return false;
 }
