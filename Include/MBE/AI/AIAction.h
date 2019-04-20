@@ -17,7 +17,7 @@ namespace mbe
 
 		inline bool IsCompleted() const { return completed; }
 
-	private:
+	protected:
 		bool completed;
 	};
 

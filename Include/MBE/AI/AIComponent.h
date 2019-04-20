@@ -75,7 +75,7 @@ namespace mbe
 		// Throws if the state doesn't exist
 		template <class TTask>
 		void RemoveTask(AITask::HandleID taskID);
-
+		
 		// Returns true if any task of this type is queued
 		template <class TTask>
 		bool HasTaskType() const;
@@ -88,6 +88,9 @@ namespace mbe
 
 		// Either takes handle id or AITast::Ptr
 		void SetActiveTask(AITask::Ptr taskPtr);
+
+		template <class TTask>
+		bool IsTaskTypeActive();
 
 		// nullptr if no task is active
 		template <class TTask>

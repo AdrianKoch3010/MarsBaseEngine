@@ -5,7 +5,7 @@ using namespace mbe;
 
 AITask::AITask(float utility) :
 	utility(utility),
-	isAborting(false)
+	aborting(false)
 {
 
 }

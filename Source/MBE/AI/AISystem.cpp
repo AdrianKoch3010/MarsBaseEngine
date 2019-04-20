@@ -41,15 +41,5 @@ void AISystem::Update()
 			//aiComponent.RemoveTask(currentlyActiveTask->GetHandleID());
 			aiComponent.SetActiveTask(highestUtilityTask);
 		}
-
-		/// If going with the more OOP stype approach 
-		// Update the currently active task
-		if (aiComponent.GetActiveTask() != nullptr)
-		{
-			if (aiComponent.GetActiveTask()->IsAborting())
-				aiComponent.GetActiveTask()->Abort();
-			else
-				aiComponent.GetActiveTask()->Update();
-		}
 	}
 }

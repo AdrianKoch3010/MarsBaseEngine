@@ -29,21 +29,22 @@ namespace mbe
 		virtual ~AITask() = default;
 
 	public:
-		virtual void Update() = 0;
-
-		virtual void Abort() = 0;
-
 		inline float GetUtility() const { return utility; }
 
-		inline bool IsAborting() const { return isAborting; }
+		inline bool IsAborting() const { return aborting; }
+
+		inline bool IsCompleted() const { return completed; }
 
 		inline void SetUtilty(float value) { utility = value; }
 
-		inline void SetAborting(bool value = true) { isAborting = value; }
+		inline void SetAborting(bool value = true) { aborting = value; }
+
+		inline void SetCompleted(bool value = true) { completed = value; }
 	
 	protected:
 		float utility;
-		bool isAborting;
+		bool aborting;
+		bool completed;
 	};
 
 } // namespace mbe
