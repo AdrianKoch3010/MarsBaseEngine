@@ -5,6 +5,8 @@
 
 #include <string>
 #include <memory>
+#include <queue>
+#include <map>
 
 #include <MBE/Core/HandleBase.h>
 #include <MBE/AI/AIAction.h>
@@ -45,6 +47,29 @@ namespace mbe
 		float utility;
 		bool aborting;
 		bool completed;
+	};
+
+	// Sequences task
+	// Has a queue of actions with a corresponding state
+	// Progresses from one state to another
+	class SequencedAITask : public AITask
+	{
+	public:
+		typedef std::shared_ptr<SequencedAITask> Ptr;
+		typedef std::weak_ptr<SequencedAITask> WPtr;
+		typedef std::unique_ptr<SequencedAITask> UPtr;
+
+		// How about type?
+		typedef std::queue<typename AIAction::Ptr> ActionQueue;
+
+	public:
+		SequencedAITask(float utility) : AITask(utility) {};
+		~SequencedAITask() = default;
+
+	public:
+
+	private:
+		ActionQueue actionQueue;
 	};
 
 } // namespace mbe

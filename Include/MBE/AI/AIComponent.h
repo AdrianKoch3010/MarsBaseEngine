@@ -33,6 +33,25 @@ namespace mbe
 			static AITaskTypeID typeId = GetAITaskID();
 			return typeId;
 		}
+
+		typedef std::size_t AIActionTypeID;
+
+		inline AIActionTypeID GetAIActionID() noexcept
+		{
+			// This will only be initialised once
+			static AIActionTypeID lastId = 0;
+
+			// After the first initialisation a new number will be returned for every function call
+			return lastId++;
+		}
+
+		template <typename T>
+		inline AIActionTypeID GetAIActionTypeID() noexcept
+		{
+			// There will be only one static variable for each template type
+			static AIActionTypeID typeId = GetAIActionID();
+			return typeId;
+		}
 	} //namespace detail
 
 	// Some other system (probably inheriting from AISystem will determine the currently active task)
@@ -54,7 +73,7 @@ namespace mbe
 		using TaskOfOneTypeDictionary = std::map<typename TTask::HandleID, std::shared_ptr<TTask>>;
 
 		// Dictionary of all tasks
-		typedef std::map<detail::AITaskTypeID, TaskOfOneTypeDictionary<AITask>> TaskDictionaryList;
+		typedef std::map<detail::AITaskTypeID, TaskOfOneTypeDictionary<AITask>> TaskDictionary;
 
 	public:
 		AIComponent(EventManager & eventManager, Entity & parentEntity);
@@ -116,8 +135,74 @@ namespace mbe
 		const TaskOfOneTypeDictionary<TTask> & GetTaskDictionary() const;
 
 	private:
-		TaskDictionaryList taskDictionaryList;
+		TaskDictionary taskDictionaryList;
 		AITask::Ptr activeTask;
+	};
+
+	// There is never more than one task / action active at a time
+	// The exception is when a task is aborting, the next task must wait until the aborted task is completed
+	class UtilityAIComponent : public Component
+	{
+	public:
+		typedef std::shared_ptr<UtilityAIComponent> Ptr;
+		typedef std::weak_ptr<UtilityAIComponent> WPtr;
+		typedef std::unique_ptr<UtilityAIComponent> UPtr;
+
+	public:
+		UtilityAIComponent(EventManager & eventManager, Entity & parentEntity);
+		~UtilityAIComponent() = default;
+
+	public:
+		// Sets the current task aborting (if existing)
+		// Creates the new task
+		template<class TTask, typename... TArguments>
+		void AddTask(TArguments && ...arguments);
+
+		// Check whether there is a next task using IsTaskQueued
+		// Moves the next task 
+		void MakeNextTaskActive();
+
+		template<class TAction, typename... TArguments>
+		void ReplaceAction(TArguments && ...arguments);
+
+		template<class TTask>
+		bool IsTaskActive() const;
+
+		template<class TTask>
+		bool IsTaskQueued() const;
+
+		template<class TAction>
+		bool IsActionActive() const;
+
+		// Use IsTaskActive before
+		// Throws if the task is not active
+		template<class TTask>
+		TTask & GetActiveTask();
+		template<class TTask>
+		const TTask & GetActiveTask() const;
+
+		// Use IsTaskQueued before
+		// Throws if the task is not queued
+		template<class TTask>
+		TTask & GetQueuedTask();
+		template<class TTask>
+		const TTask & GetQueuedTask() const;
+
+		// Use IsActionActive before
+		// Throws if the action is not active
+		template<class AIAction>
+		AIAction & GetActiveAction();
+		template<class AIAction>
+		const AIAction & GetActiveAction() const;
+
+		void ResetActiveTask();
+		void ResetQueuedTask();
+		void ResetActiveAction();
+
+	private:
+		std::pair<AITask::UPtr, detail::AITaskTypeID> currentTask;
+		std::pair<AITask::UPtr, detail::AITaskTypeID> nextTask;
+		std::pair<AIAction::UPtr, detail::AIActionTypeID> currentAction;
 	};
 
 #pragma region Template Implementations
