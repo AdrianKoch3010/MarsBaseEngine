@@ -4,6 +4,7 @@
 /// @brief Class mbe::detail::AStarNode
 
 #include <memory>
+#include <cmath>
 
 #include <SFML/System/Vector2.hpp>
 
