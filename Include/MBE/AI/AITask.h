@@ -1,7 +1,7 @@
 #pragma once
 
-///@file
-///@brief Class mbe::AIState
+/// @file
+/// @brief Class mbe::AITask
 
 #include <string>
 #include <memory>

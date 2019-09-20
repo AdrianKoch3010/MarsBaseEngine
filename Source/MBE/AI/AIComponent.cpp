@@ -29,3 +29,9 @@ bool AIComponent::HasTask(AITask::HandleID taskId) const
 
 	return false;
 }
+
+mbe::UtilityAIComponent::UtilityAIComponent(EventManager& eventManager, Entity& parentEntity) :
+	Component(eventManager, parentEntity)
+{
+
+}

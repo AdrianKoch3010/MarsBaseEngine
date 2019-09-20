@@ -205,7 +205,7 @@ namespace mbe
 		std::pair<AIAction::UPtr, detail::AIActionTypeID> currentAction;
 	};
 
-#pragma region Template Implementations
+#pragma region AI Component Template Implementations
 
 	template<class TTask, typename ...TArguments>
 	inline TTask & AIComponent::AddTask(TArguments && ...arguments)
@@ -285,5 +285,12 @@ namespace mbe
 	}
 
 #pragma endregion
+
+#pragma region Utility AI Component Template Implementations
+
+
+
+#pragma endregion
+
 
 } //namespace mbe

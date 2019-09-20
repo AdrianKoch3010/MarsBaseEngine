@@ -1,5 +1,8 @@
 #pragma once
 
+///@file
+///@brief Classes mbe::AISystem and mbe::BaseAISystem
+
 #include <MBE/Core/EntityManager.h>
 #include <MBE/Core/EventManager.h>
 #include <MBE/AI/AIComponent.h>

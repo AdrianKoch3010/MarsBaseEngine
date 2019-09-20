@@ -1,5 +1,10 @@
 #pragma once
 
+/// @file
+/// @brief Class mbe::AIAction
+
+// An action is the simplest type of AI behaviour. Its performed by an mbe::Entity and, therefore, lives in its mbe::AIComponent
+
 #include <memory>
 
 namespace mbe
@@ -18,6 +23,8 @@ namespace mbe
 
 	public:
 		virtual void InitialActions() = 0;
+
+		// Maybe add virtual custom update method. The actual update method calls initial actions the first time it is called
 
 		virtual void Update() = 0;
 
