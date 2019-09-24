@@ -76,7 +76,7 @@ namespace mbe
 		typedef std::map<detail::AITaskTypeID, TaskOfOneTypeDictionary<AITask>> TaskDictionary;
 
 	public:
-		AIComponent(EventManager & eventManager, Entity & parentEntity);
+		AIComponent(EventManager& eventManager, Entity& parentEntity);
 		~AIComponent() = default;
 
 	public:
@@ -89,12 +89,12 @@ namespace mbe
 		// Create and add a new AITask
 		// Get the id by using get handle id on the task
 		template<class TTask, typename... TArguments>
-		TTask & AddTask(TArguments&&... arguments);
+		TTask& AddTask(TArguments&& ... arguments);
 
 		// Throws if the state doesn't exist
 		template <class TTask>
 		void RemoveTask(AITask::HandleID taskID);
-		
+
 		// Returns true if any task of this type is queued
 		template <class TTask>
 		bool HasTaskType() const;
@@ -128,11 +128,11 @@ namespace mbe
 		// Use HasTaskType to check
 		// Get all the tasks of one type
 		template <class TTask>
-		TaskOfOneTypeDictionary<TTask> & GetTaskDictionary();
+		TaskOfOneTypeDictionary<TTask>& GetTaskDictionary();
 
 		// Const overload
 		template <class TTask>
-		const TaskOfOneTypeDictionary<TTask> & GetTaskDictionary() const;
+		const TaskOfOneTypeDictionary<TTask>& GetTaskDictionary() const;
 
 	private:
 		TaskDictionary taskDictionaryList;
@@ -149,21 +149,21 @@ namespace mbe
 		typedef std::unique_ptr<UtilityAIComponent> UPtr;
 
 	public:
-		UtilityAIComponent(EventManager & eventManager, Entity & parentEntity);
+		UtilityAIComponent(EventManager& eventManager, Entity& parentEntity);
 		~UtilityAIComponent() = default;
 
 	public:
 		// Sets the current task aborting (if existing)
 		// Creates the new task
 		template<class TTask, typename... TArguments>
-		void AddTask(TArguments && ...arguments);
+		void AddTask(TArguments&& ...arguments);
 
 		// Check whether there is a next task using IsTaskQueued
 		// Moves the next task 
 		void MakeNextTaskActive();
 
 		template<class TAction, typename... TArguments>
-		void ReplaceAction(TArguments && ...arguments);
+		void ReplaceAction(TArguments&& ...arguments);
 
 		template<class TTask>
 		bool IsTaskActive() const;
@@ -177,23 +177,25 @@ namespace mbe
 		// Use IsTaskActive before
 		// Throws if the task is not active
 		template<class TTask>
-		TTask & GetActiveTask();
+		TTask& GetActiveTask();
+
 		template<class TTask>
-		const TTask & GetActiveTask() const;
+		const TTask& GetActiveTask() const;
 
 		// Use IsTaskQueued before
 		// Throws if the task is not queued
 		template<class TTask>
-		TTask & GetQueuedTask();
+		TTask& GetQueuedTask();
 		template<class TTask>
-		const TTask & GetQueuedTask() const;
+		const TTask& GetQueuedTask() const;
 
 		// Use IsActionActive before
 		// Throws if the action is not active
+		/// Maybe return handle id
 		template<class AIAction>
-		AIAction & GetActiveAction();
+		AIAction& GetActiveAction();
 		template<class AIAction>
-		const AIAction & GetActiveAction() const;
+		const AIAction& GetActiveAction() const;
 
 		void ResetActiveTask();
 		void ResetQueuedTask();
@@ -208,7 +210,7 @@ namespace mbe
 #pragma region AI Component Template Implementations
 
 	template<class TTask, typename ...TArguments>
-	inline TTask & AIComponent::AddTask(TArguments && ...arguments)
+	inline TTask& AIComponent::AddTask(TArguments&& ...arguments)
 	{
 		auto typeId = detail::GetAITaskTypeID<TTask>();
 		auto taskPtr = std::make_shared<TTask>(std::forward<TArguments>(arguments)...);
@@ -225,8 +227,8 @@ namespace mbe
 		auto it = taskDictionaryList.find(detail::GetAITaskTypeID<TTask>());
 		if (it == taskDictionaryList.end())
 			throw std::runtime_error("AIComponent: This entity does not have the requested task type");
-		
-		auto & typeDictonary = it->second;
+
+		auto& typeDictonary = it->second;
 		if (typeDictonary.count(taskId) == 0)
 			throw std::runtime_error("AIComponent: This entity does not have the requested task");
 
@@ -269,7 +271,7 @@ namespace mbe
 		auto typeId = detail::GetAITaskTypeID<TTask>();
 		if (taskDictionaryList.count(typeId) == 0)
 			throw std::runtime_error("AIComponent: This entity does not have the requested task type");
-		
+
 		return taskDictionaryList.at(typeId);
 	}
 
@@ -288,7 +290,46 @@ namespace mbe
 
 #pragma region Utility AI Component Template Implementations
 
+	template<class TTask, typename ...TArguments>
+	inline void UtilityAIComponent::AddTask(TArguments&& ...arguments)
+	{
+		auto taskPtr = std::make_unique<TTask>(std::forward<TArguments>(arguments)...);
 
+		// Where does the task live? 
+
+	}
+
+	template<class TTask>
+	inline bool UtilityAIComponent::IsTaskActive() const
+	{
+		// Return true if a task of that type is active
+		auto taskTypeId = detail::GetAITaskTypeID<TTask>();
+		return currentTask.second == taskTypeId;
+	}
+
+	template<class TTask>
+	inline TTask& UtilityAIComponent::GetActiveTask()
+	{
+		// Throw if the task doesn't exist
+		if (IsTaskActive<TTask>() == false)
+			throw std::runtime_error();
+
+		assert(currentTask.first != nullptr && "UtilityAIComponent: Currently there is no task active");
+
+		return *currentTask.first;
+	}
+
+	template<class TTask>
+	inline const TTask& UtilityAIComponent::GetActiveTask() const
+	{
+		// Throw if the task doesn't exist
+		if (IsTaskActive<TTask>() == false)
+			throw std::runtime_error();
+
+		assert(currentTask.first != nullptr && "UtilityAIComponent: Currently there is no task active");
+
+		return *currentTask.first;
+	}
 
 #pragma endregion
 
