@@ -1,7 +1,7 @@
 #pragma once
 
-///@file
-///@brief Classes mbe::AISystem and mbe::BaseAISystem
+/// @file
+/// @brief Classes mbe::AISystem and mbe::BaseAISystem
 
 #include <MBE/Core/EntityManager.h>
 #include <MBE/Core/EventManager.h>
@@ -13,9 +13,7 @@ namespace mbe
 	class BaseAISystem
 	{
 	public:
-		BaseAISystem(EntityManager & entityManager, EventManager & eventManager) :
-			entityManager(entityManager),
-			eventManager(eventManager) {};
+		BaseAISystem(EntityManager& entityManager, EventManager& eventManager);
 		~BaseAISystem() = default;
 
 	public:
