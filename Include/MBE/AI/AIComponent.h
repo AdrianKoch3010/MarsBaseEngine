@@ -341,22 +341,17 @@ namespace mbe
 		return nextTask.second == taskTypeId;
 	}
 
-	template<class TTask>
-	inline bool UtilityAIComponent::IsTaskQueued() const
-	{
-		return false;
-	}
 
 	template<class TTask>
 	inline TTask& UtilityAIComponent::GetActiveTask()
 	{
 		// Throw if the task doesn't exist
 		if (IsTaskActive<TTask>() == false)
-			throw std::runtime_error();
+			throw std::runtime_error("UtilityAIComponent: Currently there is no task active");
 
 		assert(currentTask.first != nullptr && "UtilityAIComponent: Currently there is no task active");
 
-		return *currentTask.first;
+		return *static_cast<TTask*>(currentTask.first.get());
 	}
 
 	template<class TTask>
@@ -364,11 +359,11 @@ namespace mbe
 	{
 		// Throw if the task doesn't exist
 		if (IsTaskActive<TTask>() == false)
-			throw std::runtime_error();
+			throw std::runtime_error("UtilityAIComponent: Currently there is no task active");
 
 		assert(currentTask.first != nullptr && "UtilityAIComponent: Currently there is no task active");
 
-		return *currentTask.first;
+		return *static_cast<TTask*>(currentTask.first.get());
 	}
 
 	template<class TTask>
@@ -376,7 +371,7 @@ namespace mbe
 	{
 		// Throw if the task doesn't exist
 		if (IsTaskQueued<TTask>() == false)
-			throw std::runtime_error();
+			throw std::runtime_error("UtilityAIComponent: Currently there is no task queued");
 
 		assert(nextTask.first != nullptr && "UtilityAIComponent: Currently there is no task queued");
 
@@ -388,7 +383,7 @@ namespace mbe
 	{
 		// Throw if the task doesn't exist
 		if (IsTaskQueued<TTask>() == false)
-			throw std::runtime_error();
+			throw std::runtime_error("UtilityAIComponent: Currently there is no task queued");
 
 		assert(nextTask.first != nullptr && "UtilityAIComponent: Currently there is no task queued");
 
