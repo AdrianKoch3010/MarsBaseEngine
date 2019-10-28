@@ -10,6 +10,7 @@ The tutorial below provides some worked examples of how to use the Mars Base Eng
 alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 
 # Tutorials
+A few quick words on the structure of the following tutorials. The aim is to give an easy to understand reference point for users starting to learn the engine. It is further intended to give an overview of the functionality provided together with a short explanation and pieces of code showing how to use them in principle. This is by no means exhaustive; an (almost) complete documentation of the API can be found [here](Doxygen/index.html). Note, however, that this does not include explanation and should, therefore, be used as a reference only.
 
 ## Setup
 - Download and Compilation
@@ -21,10 +22,10 @@ alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 
 # Modules
 
-- [AI]()
-- [Animation]()
-- [Audio]()
-- [Core]()
+- [AI](Tutorials/GameAI.md)
+- [Animation](Tutorials/Animation.md)
+- [Audio](Tutorials/Audio.md)
+- [Core](Tutorials/Audio.md)
 - [Graphics]()
-- [Input]()
+- [Input](Tutorials/InputHandler.md)
 - [Map]()
