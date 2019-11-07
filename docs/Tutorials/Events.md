@@ -59,7 +59,7 @@ eventManager.RaiseEvent(mbe::event::EntityCreatedEvent(entity.GetHandleID()));
 
 ### EntityClickedEvent
 
-This event will be raised when an entity has been clicked given that it has a clcikable component. Depending on the bubbeling behaviour, it will be raised for the entity's parents as well. Unless specified otherwise, the click will pass through object (ie. it won't be absorbed by the object drawn on top) and it'll bubble up, meaning that there will be an EntityClickedEvent raised for all the parents recursively.
+This event will be raised when an entity has been clicked given that it has a clcikable component. Depending on the bubbeling behaviour, it will be raised for the entity's parents as well. Unless specified otherwise, the click will pass through object (ie. it won't be absorbed by the object drawn on top) and it'll bubble up, meaning that there will be an EntityClickedEvent raised for all the parents recursively. Note that this does not require the parent entities to have a ClickableComponent.
 
 ### Input Events
 There is a range of events that are raised when user input occurs. These are
