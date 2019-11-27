@@ -6,9 +6,17 @@ At the core of the engine lies the entity component system. Contrary to an objec
 
 ## Comparison to Object Oriented Approach
 
-### Object Oriented design
+### Object Oriented Design
 
-In a classic OO design all game objects inherit from a central
+<!-- Maybe find a better example that illustrates the problem -->
+
+In a classic OOP design all game objects inherit from a common super class. From there on, a sort of tree structure is used to progressivly add more behaviour and data to the derived components. For example, there might be two classes StaticGameObject and DynamicGameObject that inherit from GameObject. A Building might then inherit from StaticGameObject which might further have a StorageBarn inherit from it wheras a Character is likely to inherit from DynamicGameObject.
+
+There are manifold problems related with this design. The main one comes down to flexibility. Let's say we want to create a movable storage. This should clearly inherit from StorageBarn as it will have the same data and functionality but should also be a DynamicGameObject. In C++ it is possible to do so. However, it is very error prone and the programmer is likely to end up with a diamond of death problem.
+
+### ECS Design
+
+In contrast, in an entity component system the entities (or game objects) are comprised of a number of components. Relating to the above example, there could be a MovementComponent, BuildingComponent and StorageComponent that can be combined in any way. The behaviour will then be determined by the systems acting on those entities and their components. This has another advantage; since systems are essentially independent functions (that may be implemented as classes) that should only communicate with other systems via data i.e. the components, they can be added or removed (enabled or disabled) at will without breaking other parts of the code. This is something very hard to realise in the OOP approach.
 
 
 ## Dynamic Entity Types
@@ -53,7 +61,7 @@ eventManager.RaiseEvent(EntityCreatedEvent(tree.GetHandleID()));
 tree.GetComponent<mbe::TransformComponent>().SetPosition({ 300.f, 100.f });
 ```
 
-## An alternative - Child Entities
+## Parent and Child Entities
 
 In order to compensate for the loss in flexibility caused by the lack of dynamic entity types, entities can be organised in a tree structure. Making an entity a child of another can have multiple effects.
 
@@ -64,6 +72,8 @@ In order to compensate for the loss in flexibility caused by the lack of dynamic
 - The child can be accessed through its parent and vice versa
 
 This provides a neat way to compose a game obejct, dynamically add and remove state and behavour as well as organise the game world in a scene graph mannor.
+
+<!-- Ellaborate on the example -->
 
 > Example
 

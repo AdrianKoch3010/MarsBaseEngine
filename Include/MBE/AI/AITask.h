@@ -31,16 +31,26 @@ namespace mbe
 		virtual ~AITask() = default;
 
 	public:
+		/// @brief Returns the utility of the task
+		/// @details The utility is a meassure of how important this task currently is.
+		/// This is a float value between 0 and 1
 		inline float GetUtility() const { return utility; }
 
+		/// @brief Returns true if the task is currently aborting, false otherwise
 		inline bool IsAborting() const { return aborting; }
 
+		/// @brief Returns true if the task is completed, false otherwise
 		inline bool IsCompleted() const { return completed; }
 
+		/// @brief Set the utility of the task
+		// @details The utility is a meassure of how important this task currently is.
+		/// This is a float value between 0 and 1
 		inline void SetUtilty(float value) { utility = value; }
 
+		/// @brief Flags the task as aborting
 		inline void SetAborting(bool value = true) { aborting = value; }
 
+		/// @brief Flags the class as completed
 		inline void SetCompleted(bool value = true) { completed = value; }
 	
 	protected:
