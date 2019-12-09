@@ -9,12 +9,6 @@ BaseAISystem::BaseAISystem(EntityManager& entityManager, EventManager& eventMana
 
 }
 
-AISystem::AISystem(EntityManager & entityManager) :
-	entityManager(entityManager)
-{
-
-}
-
 // The update function below is deprecated
 // In the scenario currently planned, all the task will be evaluated newly each frame
 

@@ -5,6 +5,7 @@ using mbe::event::EntityCreatedEvent;
 using TextureChangedEvent = mbe::event::ComponentValueChangedEvent<mbe::TextureWrapperComponent>;
 using IndexListChangedEvent = mbe::event::ComponentValueChangedEvent<mbe::TiledTerrainLayerComponent>;
 
+// Remember to add subscriptions for the textureChangedEvent and indexListChangedEvent
 TiledTerrain::TiledTerrain(EventManager & eventManager, EntityManager & entityManager, sf::Vector2u size, sf::Vector2u tileSize) :
 	eventManager(eventManager),
 	entityManager(entityManager),
@@ -80,7 +81,7 @@ TiledTerrain::TiledTerrain(EventManager & eventManager, EntityManager & entityMa
 
 		// Store the index list in the tiled terrain layer component
 		// This must be called after creating the layer
-		layerEntity.GetComponent<TiledTerrainLayerComponent>().SetIndexList(std::move(layer));
+		layerEntity.GetComponent<TiledTerrainLayerComponent>().SetIndexList(layer);
 
 	}
 }

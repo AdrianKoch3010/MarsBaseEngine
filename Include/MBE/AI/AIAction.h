@@ -7,6 +7,8 @@
 
 #include <memory>
 
+#include <MBE/Core/Entity.h>
+
 namespace mbe
 {
 
@@ -27,6 +29,9 @@ namespace mbe
 		// Maybe add virtual custom update method. The actual update method calls initial actions the first time it is called
 
 		virtual void Update() = 0;
+
+		// Get the handle id of the entity the action belongs to
+		virtual Entity::HandleID GetHandleID() const = 0;
 
 		inline bool IsCompleted() const { return completed; }
 

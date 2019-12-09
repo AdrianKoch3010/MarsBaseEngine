@@ -2,34 +2,6 @@
 
 using namespace mbe;
 
-//AIComponent::AIComponent(EventManager & eventManager, Entity & parentEntity) :
-//	Component(eventManager, parentEntity)
-//{
-//
-//}
-//
-//void AIComponent::Refresh()
-//{
-//	for (auto it = taskDictionaryList.begin(); it != taskDictionaryList.end(); )
-//	{
-//		if (it->second.empty())
-//			it = taskDictionaryList.erase(it);
-//		else
-//			++it;
-//	}
-//}
-//
-//bool AIComponent::HasTask(AITask::HandleID taskId) const
-//{
-//	for (const auto & pair : taskDictionaryList)
-//	{
-//		if (pair.second.count(taskId))
-//			return true;
-//	}
-//
-//	return false;
-//}
-
 UtilityAIComponent::UtilityAIComponent(EventManager& eventManager, Entity& parentEntity) :
 	Component(eventManager, parentEntity)
 {
@@ -39,7 +11,7 @@ UtilityAIComponent::UtilityAIComponent(EventManager& eventManager, Entity& paren
 bool UtilityAIComponent::IsTaskActive() const
 {
 	bool active = true;
-	if (currentTask.first == nullptr || currentTask.second == std::numeric_limits<detail::AITaskTypeID>::max())
+	if (currentTask.first == nullptr || currentTask.second == detail::UnspecifiedAITaskTypeID)
 		active = false;
 
 	return active;
@@ -48,7 +20,7 @@ bool UtilityAIComponent::IsTaskActive() const
 bool UtilityAIComponent::IsTaskQueued() const
 {
 	bool active = true;
-	if (nextTask.first == nullptr || nextTask.second == std::numeric_limits<detail::AITaskTypeID>::max())
+	if (nextTask.first == nullptr || nextTask.second == detail::UnspecifiedAITaskTypeID)
 		active = false;
 
 	return active;
@@ -69,7 +41,7 @@ void UtilityAIComponent::ResetQueuedTask()
 void UtilityAIComponent::MakeNextTaskActive()
 {
 	if (IsTaskQueued() == false)
-		throw std::runtime_error("The current task cannot be replaced since no task is currently queued");
+		throw std::runtime_error("UtilityAITask: The current task cannot be replaced since no task is currently queued");
 
 	// Copy the task data
 	currentTask.first = std::move(nextTask.first);
