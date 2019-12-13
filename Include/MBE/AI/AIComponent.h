@@ -46,15 +46,24 @@ namespace mbe
 		typedef std::weak_ptr<UtilityAIComponent> WPtr;
 		typedef std::unique_ptr<UtilityAIComponent> UPtr;
 
+		typedef typename detail::AITaskTypeID AITaskTypeID;
+
 	public:
 		UtilityAIComponent(EventManager& eventManager, Entity& parentEntity);
 		~UtilityAIComponent() = default;
 
 	public:
 		// Sets the current task aborting (if existing)
-		// Creates the new task
+		// The task is added as the queued task
+		// Creates a new task
 		template<class TTask, typename... TArguments>
 		void AddTask(TArguments&& ...arguments);
+
+		// Sets the current task aborting (if existing)
+		// The task is added as the queued task
+		// Adds an existing task
+		template<class TTask>
+		void AddTask(typename TTask::Ptr taskPtr);
 
 		// Check whether there is a next task using IsTaskQueued
 		// Throws if no task is queued
@@ -86,6 +95,20 @@ namespace mbe
 		template<class TTask>
 		const TTask& GetActiveTask() const;
 
+		// Throws if no task is active
+		AITask& GetActiveTask();
+		const AITask& GetActiveTask() const;
+
+		// Nullptr is returned if there is active task
+		template<class TTask>
+		typename TTask::Ptr GetActiveTaskPtr();
+
+		// Nullptr is returned if there is active task
+		AITask::Ptr GetActiveTaskPtr();
+
+		// Throws if no task is active
+		AITaskTypeID GetActiveTaskTypeID() const;
+
 		// Use IsTaskQueued before
 		// Throws if the task is not queued
 		template<class TTask>
@@ -95,16 +118,33 @@ namespace mbe
 		template<class TTask>
 		const TTask& GetQueuedTask() const;
 
+		// Throws if no task is queued
+		AITask& GetQueuedTask();
+		const AITask& GetQueuedTask() const;
+
+		// Nullptr is returned if there is queued task
+		template<class TTask>
+		typename TTask::Ptr GetQueuedTaskPtr();
+
+		// Nullptr is returned if there is queued task
+		AITask::Ptr GetQueuedTaskPtr();
+
+		// Throws if no task is active
+		AITaskTypeID GetQueuedTaskTypeID() const;
+
 		// Sets the task pointer to nullptr and the task type id to unspecified
 		void ResetActiveTask();
 
 		// Sets the task pointer to nullptr and the task type id to unspecified
 		void ResetQueuedTask();
 
+		template<class TTask>
+		static AITaskTypeID GetAITaskTypeID();
+
 	private:
 		// If no task is assigned, the task pointer = nullptr and task type id = max value
-		std::pair<AITask::UPtr, detail::AITaskTypeID> currentTask;
-		std::pair<AITask::UPtr, detail::AITaskTypeID> nextTask;
+		std::pair<AITask::Ptr, detail::AITaskTypeID> currentTask;
+		std::pair<AITask::Ptr, detail::AITaskTypeID> nextTask;
 	};
 
 
@@ -113,7 +153,25 @@ namespace mbe
 	template<class TTask, typename ...TArguments>
 	inline void UtilityAIComponent::AddTask(TArguments&& ...arguments)
 	{
-		auto taskPtr = std::make_unique<TTask>(std::forward<TArguments>(arguments)...);
+		auto taskPtr = std::make_shared<TTask>(std::forward<TArguments>(arguments)...);
+		// Just for now
+		nextTask.first = taskPtr;
+		nextTask.second = detail::GetAITaskTypeID<TTask>();
+		
+		// Set the current task aborting
+		if (IsTaskActive())
+			currentTask.first->SetAborting();
+	}
+
+	template<class TTask>
+	inline void UtilityAIComponent::AddTask(typename TTask::Ptr taskPtr)
+	{
+		nextTask.first = taskPtr;
+		nextTask.second = detail::GetAITaskTypeID<TTask>();
+
+		// Set the current task aborting
+		if (IsTaskActive())
+			currentTask.first->SetAborting();
 	}
 
 	template<class TTask>
@@ -142,7 +200,7 @@ namespace mbe
 
 		assert(currentTask.first != nullptr && "UtilityAIComponent: Currently there is no task active");
 
-		return *static_cast<TTask*>(currentTask.first.get());
+		return *std::dynamic_pointer_cast<TTask>(currentTask.first);
 	}
 
 	template<class TTask>
@@ -154,7 +212,13 @@ namespace mbe
 
 		assert(currentTask.first != nullptr && "UtilityAIComponent: Currently there is no task active");
 
-		return *static_cast<TTask*>(currentTask.first.get());
+		return *std::dynamic_pointer_cast<TTask::Ptr>(currentTask.first);
+	}
+
+	template<class TTask>
+	inline typename TTask::Ptr UtilityAIComponent::GetActiveTaskPtr()
+	{
+		return std::dynamic_pointer_cast<TTask::Ptr>(currentTask.first);
 	}
 
 	template<class TTask>
@@ -166,7 +230,7 @@ namespace mbe
 
 		assert(nextTask.first != nullptr && "UtilityAIComponent: Currently there is no task queued");
 
-		return *nextTask.first;
+		return *std::dynamic_pointer_cast<TTask::Ptr>(nextTask.first);
 	}
 
 	template<class TTask>
@@ -178,7 +242,19 @@ namespace mbe
 
 		assert(nextTask.first != nullptr && "UtilityAIComponent: Currently there is no task queued");
 
-		return *nextTask.first;
+		return *std::dynamic_pointer_cast<TTask::Ptr>(nextTask.first);
+	}
+
+	template<class TTask>
+	inline typename TTask::Ptr UtilityAIComponent::GetQueuedTaskPtr()
+	{
+		return std::dynamic_pointer_cast<TTask::Ptr>(nextTask.first);
+	}
+
+	template<class TTask>
+	inline typename UtilityAIComponent::AITaskTypeID UtilityAIComponent::GetAITaskTypeID()
+	{
+		return detail::GetAITaskTypeID<TTask>();
 	}
 
 #pragma endregion
