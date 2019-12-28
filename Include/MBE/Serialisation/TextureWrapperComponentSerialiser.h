@@ -6,6 +6,7 @@
 #include <memory>
 
 #include <MBE/Serialisation/ComponentSerialiser.h>
+#include <MBE/Core/AssetHolder.h>
 
 namespace mbe
 {
@@ -14,7 +15,13 @@ namespace mbe
 	/// @details XML format
 	/// @code
 	/// <Component type="TextureWrapperComponent">
-	///
+	///		<TextureRect>
+	///			<Top>int</Top>
+	///			<Left>int</Left>
+	///			<Width>int</Width>
+	///			<Height>int</Height>
+	///		</TextureRect>
+	///		<TextureWrapper>string</TextureWrapper>
 	/// </Component>
 	/// @endcode
 	class TextureWrapperComponentSerialiser : public ComponentSerialser
@@ -25,7 +32,7 @@ namespace mbe
 		typedef std::unique_ptr<TextureWrapperComponentSerialiser> UPtr;
 
 	public:
-		TextureWrapperComponentSerialiser() = default;
+		TextureWrapperComponentSerialiser(const TextureWrapperHolder<std::string>& textureWrapperHolder);
 		~TextureWrapperComponentSerialiser() = default;
 
 	public:
@@ -33,6 +40,8 @@ namespace mbe
 
 		void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) override;
 
+	private:
+		const TextureWrapperHolder<std::string>& textureWrapperHolder;
 	};
 
 

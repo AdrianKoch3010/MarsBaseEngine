@@ -10,6 +10,10 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Mouse.hpp>
+#include <SFML/Graphics/Rect.hpp>
+
+#include <MBE/Core/TinyXML.h>
+#include <MBE\Core\Component.h>
 
 /*!
 \def MBE_NAME_OF(x)
@@ -28,6 +32,7 @@ ensure uniqueness always the full type name is used. This includes e.g. namespac
 
 namespace mbe
 {
+
 	/// @brief Dictionary for string representations of the sf::Mouse::Button enum
 	static const std::unordered_map<sf::Mouse::Button, std::string> mouseButtonStringDictionary = {
 		{ sf::Mouse::Button::Left, "Left" },
@@ -69,12 +74,32 @@ namespace mbe
 	{ Direction::Right, { 1.f, 0.f }}
 	};
 
-	void NormaliseIDString(std::string & id);
+	/// @brief Standard method for normalising a string
+	/// @details This method is used by most classes within the Mars Base Engine that use string ids such as the mbe::AssetHolder.
+	/// Normalisation will make all letters lowercase.
+	/// @param id The string to be normalised
+	void NormaliseIDString(std::string& id);
 
-	std::string NormaliseIDString(const std::string & id);
+	/// @brief Standard method for normalising a string
+	/// @details This method is used by most classes within the Mars Base Engine that use string ids such as the mbe::AssetHolder.
+	/// Normalisation will make all letters lowercase.
+	/// @param id The string to be normalised
+	/// @returns The normalised id string
+	std::string NormaliseIDString(const std::string& id);
 
-	std::string NormaliseIDString(std::string && id);
+	/// @brief Standard method for normalising a string
+	/// @details This method is used by most classes within the Mars Base Engine that use string ids such as the mbe::AssetHolder.
+	/// Normalisation will make all letters lowercase.
+	/// @param id The string to be normalised
+	/// @returns The normalised id string
+	std::string NormaliseIDString(std::string&& id);
 
+	/// @brief Function for mapping from 2D to 1D vector
+	/// @details Calculates the index in a one dimensional vector that is used to represent two dimensional data.
+	/// @param x The x position in the imaginary 2D vector
+	/// @param y The y position in the imaginary 2D vector
+	/// @param rowLength The length of each row in the imaginary 2D vector
+	/// @returns The resulting index in the one dimensional vector
 	unsigned int TwoToOneDVector(unsigned int x, unsigned int y, unsigned int rowLength);
 
 	/// @brief Converts a point in the cartesian coordinate system to the isometric coordinate system
@@ -84,4 +109,38 @@ namespace mbe
 	/// @brief Converts a point in the isometric coordinate system to the cartesian coordinate system
 	/// @param cartesian The point to convert
 	sf::Vector2f IsoToCartesian(sf::Vector2f iso);
-}
+
+	/// @brief Class providing methods for loading and storing an sf::IntRect
+	/// @details XML format
+	/// @code
+	/// <RectName>
+	///		<Top>int</Top>
+	///		<Left>int</Left>
+	///		<Width>int</Width>
+	///		<Height>int</Height>
+	/// </RectName>
+	/// @endcode
+	class IntRectSerialiser
+	{
+	public:
+		/// @brief Default constructor
+		IntRectSerialiser() = default;
+
+		/// @brief Default destructor
+		~IntRectSerialiser() = default;
+
+	public:
+		/// @brief Load an sf::IntRect from an XML element
+		/// @param rectData The XML element that is parsed
+		/// @returns An sf::IntRect with the loaded values
+		/// @throws If the parsing fails
+		static sf::IntRect Load(const tinyxml2::XMLElement& rectData);
+
+		/// @brief Store an sf::IntRect to an XML element
+		/// @param rect The sf::IntRect to be stored
+		/// @param document The XML document to which the rect is stored to
+		/// @param rectData The XML element to which the rect data is stored to
+		static void Store(const sf::IntRect& rect, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& rectData);
+	};
+
+} // namespace

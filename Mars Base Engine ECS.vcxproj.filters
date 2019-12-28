@@ -351,6 +351,15 @@
     <ClCompile Include="Source\MBE\Serialisation\AIComponentSerialiser.cpp">
       <Filter>Quelldateien\ComponentSerialisers</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MBE\Serialisation\TopDownInformationComponentSerialiser.cpp">
+      <Filter>Quelldateien\ComponentSerialisers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Serialisation\RenderInformationComponentSerialiser.cpp">
+      <Filter>Quelldateien\ComponentSerialisers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Serialisation\TextureWrapperComponentSerialiser.cpp">
+      <Filter>Quelldateien\ComponentSerialisers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\TransformComponent.h">
@@ -609,6 +618,15 @@
       <Filter>Headerdateien\ComponentSerialisers</Filter>
     </ClInclude>
     <ClInclude Include="Include\MBE\Serialisation\AIComponentSerialiser.h">
+      <Filter>Headerdateien\ComponentSerialisers</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Serialisation\TopDownInformationComponentSerialiser.h">
+      <Filter>Headerdateien\ComponentSerialisers</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Serialisation\RenderInformationComponentSerialiser.h">
+      <Filter>Headerdateien\ComponentSerialisers</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Serialisation\TextureWrapperComponentSerialiser.h">
       <Filter>Headerdateien\ComponentSerialisers</Filter>
     </ClInclude>
   </ItemGroup>

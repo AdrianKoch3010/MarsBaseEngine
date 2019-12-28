@@ -12,7 +12,7 @@ void RenderInformationComponentSerialiser::LoadComponent(Entity& entity, const t
 
 	float zOrder;
 
-	// Get absorbe click
+	// Get the render layer
 	const auto renderLayerElement = componentData.FirstChildElement("RenderLayer");
 	if (renderLayerElement == nullptr)
 		throw std::runtime_error("Load render information component: Failed to parse RenderLayer");
@@ -21,6 +21,7 @@ void RenderInformationComponentSerialiser::LoadComponent(Entity& entity, const t
 		throw std::runtime_error("Load render information component: Failed to parese RenderLayer text");
 	std::string renderLayerString{ renderLayerText };
 
+	// Get the z order
 	const auto zOrderElement = componentData.FirstChildElement("ZOrder");
 	if (zOrderElement == nullptr)
 		throw std::runtime_error("Load render information component: Failed to parse ZOrder");
@@ -40,10 +41,12 @@ void RenderInformationComponentSerialiser::StoreComponent(const Entity& entity, 
 		throw std::runtime_error("Store render information component: The entity must have an mbe::RenderInformationComponent");
 	const auto& renderInformationComponent = entity.GetComponent<mbe::RenderInformationComponent>();
 
+	// Store the render layer
 	auto renderLayerElement = document.NewElement("RenderLayer");
 	renderLayerElement->SetText(RenderLayerToString(renderInformationComponent.GetRenderLayer()).c_str());
 	componentData.InsertEndChild(renderLayerElement);
 
+	// Store the z order
 	auto zOrderElement = document.NewElement("ZOrder");
 	zOrderElement->SetText(renderInformationComponent.GetZOrder());
 	componentData.InsertEndChild(zOrderElement);

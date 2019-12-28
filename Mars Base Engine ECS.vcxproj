@@ -261,6 +261,9 @@
     <ClCompile Include="Source\MBE\Serialisation\ClickableComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\EntitySerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\PixelMaskClickableComponentSerialiser.cpp" />
+    <ClCompile Include="Source\MBE\Serialisation\RenderInformationComponentSerialiser.cpp" />
+    <ClCompile Include="Source\MBE\Serialisation\TextureWrapperComponentSerialiser.cpp" />
+    <ClCompile Include="Source\MBE\Serialisation\TopDownInformationComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\TransformComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\TransformComponent.cpp" />
     <ClCompile Include="Source\MBE\Core\Utility.cpp" />
@@ -345,6 +348,9 @@
     <ClInclude Include="Include\MBE\Serialisation\ComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\EntitySerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\PixelMaskClickableComponentSerialiser.h" />
+    <ClInclude Include="Include\MBE\Serialisation\RenderInformationComponentSerialiser.h" />
+    <ClInclude Include="Include\MBE\Serialisation\TextureWrapperComponentSerialiser.h" />
+    <ClInclude Include="Include\MBE\Serialisation\TopDownInformationComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\TransformComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\TransformComponent.h" />
     <ClInclude Include="Include\MBE\Core\Utility.h" />

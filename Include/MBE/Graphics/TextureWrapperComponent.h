@@ -4,12 +4,14 @@
 /// @brief Class mbe::TextureComponent
 
 #include <cassert>
+#include <string>
 #include <memory>
 
 #include <SFML/Graphics/Rect.hpp>
 
 #include <MBE/Core/Component.h>
 #include <MBE/Graphics/TextureWrapper.h>
+#include <MBE/Core/AssetHolder.h>
 
 
 namespace mbe
@@ -23,22 +25,27 @@ namespace mbe
 		typedef std::unique_ptr<TextureWrapperComponent> UPtr;
 
 	public:
-		TextureWrapperComponent(EventManager & eventManager, Entity & parentEntity, const TextureWrapper & textureWrapper);
+		TextureWrapperComponent(EventManager & eventManager, Entity & parentEntity, const TextureWrapperHolder<std::string>& textureWrapperHolder, const std::string& textureWrapperName);
 		~TextureWrapperComponent() = default;
 
 	public:
-		void SetTextureWrapper(const TextureWrapper & textureWrapper, bool resetTextureRect = true);
+		void SetTextureWrapper(const std::string & textureWrapperName, bool resetTextureRect = true);
 
 		void SetTextureRect(const sf::IntRect & textureRect);
 
 		void SetTextureRect(sf::IntRect && textureRect);
 
-		inline const TextureWrapper & GetTextureWrapper() const { return *textureWrapper; }
+		const TextureWrapper& GetTextureWrapper() const;
+
+		inline const std::string& GetTextureWrapperName() const { return textureWrapperName; }
+
+		inline const TextureWrapperHolder<std::string>& GetTextureWrapperHolder() const { return textureWrapperHolder; }
 
 		inline const sf::IntRect & GetTextureRect() const { return textureRect; }
 
 	private:
-		const TextureWrapper * textureWrapper;
+		const TextureWrapperHolder<std::string>& textureWrapperHolder;
+		std::string textureWrapperName;
 		sf::IntRect textureRect;
 	};
 
