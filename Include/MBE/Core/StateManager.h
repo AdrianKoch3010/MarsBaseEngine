@@ -67,7 +67,7 @@ namespace mbe
 	public:
 		/// @brief Constructor
 		/// @param context The context that will be passed to every state
-		explicit StateManager(State::Context context);
+		explicit StateManager(State::Context& context);
 
 		/// @brief Default destructor
 		~StateManager() = default;
@@ -148,7 +148,7 @@ namespace mbe
 		std::queue<std::shared_ptr<void>> dataToBePushed;
 		std::unordered_map<detail::StateTypeID, FactoryFunction> factoryFunctionDictionary;
 
-		State::Context context;
+		State::Context& context;
 	};
 
 #pragma region Template Implementations

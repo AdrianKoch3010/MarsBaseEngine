@@ -2,7 +2,7 @@
 
 using namespace mbe;
 
-StateManager::StateManager(State::Context context) :
+StateManager::StateManager(State::Context& context) :
 	context(context),
 	stateStack(),
 	pendingChangeQueue()

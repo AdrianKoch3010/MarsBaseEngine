@@ -136,6 +136,14 @@ void Entity::AddPolymorphism(detail::ComponentTypeID typeId, Component::Ptr comp
 	}
 }
 
+std::vector<detail::ComponentTypeID> Entity::GetComponentTypeIDList() const
+{
+	std::vector<detail::ComponentTypeID> componentTypeIdList;
+	for (auto pair : actualComponentDictionary)
+		componentTypeIdList.push_back(pair.first);
+	return componentTypeIdList;
+}
+
 //void Entity::RemovePolymorphism(detail::ComponentTypeID typeId)
 //{
 //	RemoveDerivedComponents(typeId);

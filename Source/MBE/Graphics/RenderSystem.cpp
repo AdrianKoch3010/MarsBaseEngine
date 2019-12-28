@@ -2,13 +2,13 @@
 
 using namespace mbe;
 
-RenderSystem::RenderSystem(sf::RenderWindow & window, EventManager & eventManager) :
-	window(window),
+RenderSystem::RenderSystem(std::unique_ptr<sf::RenderWindow>& windowPtr, EventManager & eventManager) :
+	windowPtr(windowPtr),
 	eventManager(eventManager)
 {
 	// Set the default views
 	for (auto renderLayer = RenderLayer::Background; renderLayer != RenderLayer::LayerCount; ++renderLayer)
-		viewDictionary[renderLayer] = window.getDefaultView();
+		viewDictionary[renderLayer] = windowPtr->getDefaultView();
 
 	// Subscribe to the events
 	std::function<void(const EntityCreatedEvent &)> onRenderEntityCreatedFunction = [this](const EntityCreatedEvent & event)
@@ -62,7 +62,7 @@ void RenderSystem::Render()
 	for (auto renderLayer = RenderLayer::Background; renderLayer != RenderLayer::LayerCount; ++renderLayer)
 	{
 		// Draw all the render nodes in the current layer
-		window.setView(viewDictionary[renderLayer]);
+		windowPtr->setView(viewDictionary[renderLayer]);
 		auto & renderEntityIdList = renderEntityDictionary[renderLayer];
 
 		// Assign the z-order based on the sorting method
@@ -83,7 +83,7 @@ void RenderSystem::Render()
 			{
 				// If the entity still exists
 				// This should always be the case since expired entities are removed in the refresh function
-				renderComponent.Draw(window);
+				renderComponent.Draw(*windowPtr);
 			}
 		}
 	}

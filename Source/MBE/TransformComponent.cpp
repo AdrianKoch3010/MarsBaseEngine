@@ -5,23 +5,7 @@ using namespace mbe;
 TransformComponent::TransformComponent(EventManager & eventManager, Entity & parentEntity) :
 	Component(eventManager, parentEntity)
 {
-	//this->SetRelativeTo(parentTransformEntityId);
 }
-
-//void TransformComponent::SetRelativeTo(Entity::HandleID parentTransformEntityId)
-//{
-//	// Make sure that the parent transform is different from this entity to avoid infinite loops when getting the world transform
-//	assert(parentTransformEntityId != parentEntity.GetHandleID() && "TransformComponent: This entity transform cannot be relative to itself");
-//
-//	const auto * entityPtr = Entity::GetObjectFromID(parentTransformEntityId);
-//
-//	// If the entity is not null (Entity::GetNullID()), make sure that it has a transform component
-//	if (entityPtr != nullptr)
-//		assert(entityPtr->HasComponent<TransformComponent>() && "TransformComponent: The entity must have a mbe::TransformComponent");
-//
-//	// Assign the parent transform entity
-//	this->parentTransformEntityId = parentTransformEntityId;
-//}
 
 sf::Vector2f TransformComponent::GetWorldPosition() const
 {

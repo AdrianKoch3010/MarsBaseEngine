@@ -1,3 +1,6 @@
+#include <MBE/Graphics/TextureWrapperComponent.h>
+#include <MBE/Core/PixelMask.h>
+
 #include <MBE/Input/PixelMaskClickableComponent.h>
 
 using namespace mbe;
@@ -8,7 +11,7 @@ PixelMaskClickableComponent::PixelMaskClickableComponent(EventManager & eventMan
 	ClickableComponent(eventManager, parentEntity)
 {
 	// This requires the mbe::TexturedRenderComponent to be added first
-	assert(parentEntity.HasComponent<TextureWrapperComponent>() && "PixelMaskClickableComponent: The parent entity must have a mbe::TexturedClickableComponent");
+	assert(parentEntity.HasComponent<TextureWrapperComponent>() && "PixelMaskClickableComponent: The parent entity must have a mbe::TextureWrapperComponent");
 }
 
 bool PixelMaskClickableComponent::Contains(const sf::Vector2f & position) const

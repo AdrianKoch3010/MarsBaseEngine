@@ -17,6 +17,17 @@ void EntityManager::Update(sf::Time frameTime)
 	}
 }
 
+std::vector<Entity::HandleID> EntityManager::GetEntityList() const
+{
+	std::vector<Entity::HandleID> entityList;
+	for (const auto& pair : entityGroupDictionary)
+	{
+		for (auto entityId : pair.second)
+			entityList.push_back(entityId);
+	}
+	return entityList;
+}
+
 void EntityManager::Refresh()
 {
 	// Loops through group

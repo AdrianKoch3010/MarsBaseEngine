@@ -3,7 +3,9 @@
 /// @file
 /// @brief Class mbe::RenderInformationComponent
 
+#include <string>
 #include <functional>
+#include <unordered_map>
 
 #include <SFML/Graphics/View.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -37,11 +39,11 @@ namespace mbe
 		typedef std::unique_ptr<RenderInformationComponent> UPtr;
 
 		// A pointer is returned since the value may be null if this entity is not been rendered
-		typedef std::function<const sf::View *(const Entity &)> ViewGetterFunction;
-		typedef std::function<const sf::RenderWindow *()> WindowGetterFunction;
+		typedef std::function<const sf::View * (const Entity&)> ViewGetterFunction;
+		typedef std::function<const sf::RenderWindow * ()> WindowGetterFunction;
 
 	public:
-		RenderInformationComponent(EventManager & eventManager, Entity & parentEntity, RenderLayer renderLayer = RenderLayer::GUI, float zOrder = 0.f);
+		RenderInformationComponent(EventManager& eventManager, Entity& parentEntity, RenderLayer renderLayer = RenderLayer::GUI, float zOrder = 0.f);
 		~RenderInformationComponent() = default;
 
 	public:
@@ -57,20 +59,20 @@ namespace mbe
 
 		inline float GetZOrder() const { return zOrder; }
 
-		const sf::View * GetView() const;
+		const sf::View* GetView() const;
 
-		const sf::RenderWindow * GetRenderWindow() const;
+		const sf::RenderWindow* GetRenderWindow() const;
 
 		void ResetViewGetterFunction();
 
 		void ResetWindowGetterFunction();
 
 		// Returns true if the passed in render information component would be drawn above this
-		bool IsAboveOrEqual(const RenderInformationComponent & renderInformationComponent) const;
+		bool IsAboveOrEqual(const RenderInformationComponent& renderInformationComponent) const;
 
 	public:
 		// Returns true if is a is above or equal b
-		static bool IsAboveOrEqual(const RenderInformationComponent & a, const RenderInformationComponent & b);
+		static bool IsAboveOrEqual(const RenderInformationComponent& a, const RenderInformationComponent& b);
 
 	private:
 		RenderLayer renderLayer;
@@ -81,7 +83,7 @@ namespace mbe
 
 	using RenderLayer = RenderInformationComponent::RenderLayer;
 
-	RenderLayer operator++ (RenderLayer & renderLayer);
+	RenderLayer operator++ (RenderLayer& renderLayer);
 
 	bool operator == (RenderLayer a, RenderLayer b);
 

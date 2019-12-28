@@ -7,12 +7,12 @@
 #include <cassert>
 
 #include <MBE/Input/ClickableComponent.h>
-#include <MBE/Graphics/TextureWrapperComponent.h>
-#include <MBE/Core/PixelMask.h>
 
 namespace mbe
 {
 
+	/// @brief Provides a method Contains() to check whether the entity has been clicked
+	/// @attention The component requires an mbe::TextureWrapperComponent to be added first
 	class PixelMaskClickableComponent : public ClickableComponent
 	{
 	public:
@@ -21,7 +21,12 @@ namespace mbe
 		typedef std::unique_ptr<PixelMaskClickableComponent> UPtr;
 
 	public:
+		/// @brief Constructor
+		/// @param eventManager A reference to the mbe::EventManager
+		/// @parem parentEntity A reference to the mbe::Entity this component belongs to
 		PixelMaskClickableComponent(EventManager & eventManager, Entity & parentEntity);
+
+		/// @brief Default destructor
 		~PixelMaskClickableComponent() = default;
 
 	public:

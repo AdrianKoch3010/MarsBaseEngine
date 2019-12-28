@@ -256,6 +256,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='ReleaseWithDebugInfo|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Source\MBE\Serialisation\AIComponentSerialiser.cpp" />
+    <ClCompile Include="Source\MBE\Serialisation\AnimationComponentSerialser.cpp" />
+    <ClCompile Include="Source\MBE\Serialisation\ClickableComponentSerialiser.cpp" />
+    <ClCompile Include="Source\MBE\Serialisation\EntitySerialiser.cpp" />
+    <ClCompile Include="Source\MBE\Serialisation\PixelMaskClickableComponentSerialiser.cpp" />
+    <ClCompile Include="Source\MBE\Serialisation\TransformComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\TransformComponent.cpp" />
     <ClCompile Include="Source\MBE\Core\Utility.cpp" />
   </ItemGroup>
@@ -331,6 +337,15 @@
     <ClInclude Include="Include\MBE\Graphics\TopDownInformationComponent.h" />
     <ClInclude Include="Include\MBE\Graphics\TopDownZOrderSorter.h" />
     <ClInclude Include="Include\MBE\pch.h" />
+    <ClInclude Include="Include\MBE\Serialisation\AIComponentSerialiser.h" />
+    <ClInclude Include="Include\MBE\Serialisation\AITaskSerialser.h" />
+    <ClInclude Include="Include\MBE\Serialisation\AnimationComponentSerialser.h" />
+    <ClInclude Include="Include\MBE\Serialisation\AnimationSerialiser.h" />
+    <ClInclude Include="Include\MBE\Serialisation\ClickableComponentSerialiser.h" />
+    <ClInclude Include="Include\MBE\Serialisation\ComponentSerialiser.h" />
+    <ClInclude Include="Include\MBE\Serialisation\EntitySerialiser.h" />
+    <ClInclude Include="Include\MBE\Serialisation\PixelMaskClickableComponentSerialiser.h" />
+    <ClInclude Include="Include\MBE\Serialisation\TransformComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\TransformComponent.h" />
     <ClInclude Include="Include\MBE\Core\Utility.h" />
     <ClInclude Include="Include\MBE\Audio\SoundComponent.h" />

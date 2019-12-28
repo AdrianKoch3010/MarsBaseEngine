@@ -39,7 +39,7 @@ namespace mbe
 	{
 	public:
 		// The signature of the function that is used to assign the zOrder to a layer of render entities
-		typedef std::function<void(std::vector<Entity::HandleID> &)> ZOrderAssignmentFunction;
+		typedef std::function<void(std::vector<Entity::HandleID>&)> ZOrderAssignmentFunction;
 
 		// When using the std::unordered_map operator[] the a default sf::View instance is created
 		typedef std::unordered_map<RenderLayer, sf::View> ViewDictionary;
@@ -56,7 +56,7 @@ namespace mbe
 		/// @param window A reference to the sf::RenderWindow that will be used to draw in
 		/// @param eventManager A reference to the mbe::EventManager that will be used to listen out
 		/// for a mbe::event::EntityCreatedEvent and mbe::event::RenderNodeRemovedEvent.
-		RenderSystem(sf::RenderWindow & window, EventManager & eventManager);
+		RenderSystem(std::unique_ptr<sf::RenderWindow>& windowPtr, EventManager& eventManager);
 
 		/// @brief Default destructor
 		~RenderSystem();
@@ -67,16 +67,19 @@ namespace mbe
 
 		template <class TComponentRenderSystem, typename ...TArguments>
 		void AddComponentRenderer(TArguments&&... arguments);
-		
+
 		void SetZOrderAssignmentFunction(RenderLayer layer, ZOrderAssignmentFunction function);
 
-		void SetView(RenderLayer renderLayer, const sf::View & view);
+		void SetView(RenderLayer renderLayer, const sf::View& view);
 		// This function should be prefered over SetView() since the existsing view can be modified
-		sf::View & GetView(RenderLayer renderLayer);
+		sf::View& GetView(RenderLayer renderLayer);
 		// Const overload
-		const sf::View & GetView(RenderLayer renderLayer) const;
+		const sf::View& GetView(RenderLayer renderLayer) const;
 
-		inline const sf::RenderWindow & GetRenderWindow() const { return window; }
+		inline sf::RenderWindow& GetRenderWindow() { return *windowPtr; }
+		inline const sf::RenderWindow& GetRenderWindow() const { return *windowPtr; }
+		inline std::unique_ptr<sf::RenderWindow>& GetRenderWindowPtr(){ return windowPtr; }
+		inline const std::unique_ptr<sf::RenderWindow>& GetRenderWindowPtr() const { return windowPtr; }
 
 	private:
 		void AddRenderEntity(Entity::HandleID entityId);
@@ -86,21 +89,22 @@ namespace mbe
 		void Refresh();
 
 		// Culling
-		bool IsVisible(const Entity & entity, const sf::View & view);
+		bool IsVisible(const Entity& entity, const sf::View& view);
 
 		// Performs an insertion sort
 		// Assumes that render nodes exist for all render node ids
-		static void SortByZOrder(std::vector<Entity::HandleID> & renderNodeIdList);
+		static void SortByZOrder(std::vector<Entity::HandleID>& renderNodeIdList);
 
 	private:
-		sf::RenderWindow & window;
+		// A reference to the pointer is stored so that when a new window is created the correct pointer is referenced
+		std::unique_ptr<sf::RenderWindow>& windowPtr;
 		RenderEntityDictionary renderEntityDictionary;
 		mutable ViewDictionary viewDictionary;
 		ZOrderAssignmentFunctionDictionary zOrderAssignmentFunctionDictionary;
 		ComponentRenderSystemList componentRenderSystemList;
 
 		// Refernce to the event manager
-		EventManager & eventManager;
+		EventManager& eventManager;
 
 		// SubscriptionId to unsubscribe the subscribed events
 		EventManager::SubscriptionID renderEntityCreatedSubscription;
@@ -110,7 +114,7 @@ namespace mbe
 #pragma region Template Implementations
 
 	template<class TComponentRenderSystem, typename ...TArguments>
-	inline void RenderSystem::AddComponentRenderer(TArguments && ...arguments)
+	inline void RenderSystem::AddComponentRenderer(TArguments&& ...arguments)
 	{
 		auto ptr = std::make_unique<TComponentRenderSystem>(std::forward<TArguments>(arguments)...);
 		componentRenderSystemList.emplace_back(std::move(ptr));

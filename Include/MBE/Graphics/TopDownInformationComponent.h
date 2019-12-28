@@ -17,8 +17,6 @@ namespace mbe
 		~TopDownInformationComponent() = default;
 
 	public:
-		inline void Update(sf::Time frameTime) override {}
-
 		inline void SetLogicalBottomOffset(float value) { logicalBottomOffset = value; }
 
 		inline float GetLogicalBottomOffset() const { return logicalBottomOffset; }

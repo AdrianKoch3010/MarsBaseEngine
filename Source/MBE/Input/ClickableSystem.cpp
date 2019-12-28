@@ -87,20 +87,6 @@ sf::Vector2f ClickableSystem::CalculatePosition(const Entity & entity, sf::Vecto
 
 void ClickableSystem::RaiseClickEvents(const ClickableComponent & clickableComponent, sf::Mouse::Button button)
 {
-	//for (const auto & clickedEntityId : clickableComponent.GetConnectedClickableIdList())
-	//{
-	//	const auto * clickedEntityPtr = Entity::GetObjectFromID(clickedEntityId);
-
-	//	// Only raise an entity clicked event for entities that exist
-	//	if (clickedEntityPtr == nullptr)
-	//		continue;
-
-	//	event::EntityClickedEvent entityClickedEvent;
-	//	entityClickedEvent.SetEntityID(clickedEntityPtr->GetHandleID());
-	//	entityClickedEvent.SetMouseButton(button);
-	//	eventManager.RaiseEvent(entityClickedEvent);
-	//}
-
 	if (clickableComponent.DoesBubbleUp() == false)
 	{
 		event::EntityClickedEvent entityClickedEvent;
@@ -122,22 +108,3 @@ void ClickableSystem::RaiseClickEvents(const ClickableComponent & clickableCompo
 		entityId = clickedEntity.GetParentEntityID();
 	}
 }
-
-//// A diffent function signature would be required to recursively call the function for parent entities that don't necessarily have a Clickable Component
-//void ClickableSystem::RaiseConnectedClickEvents(const ClickableComponent & clickableComponent, sf::Mouse::Button button)
-//{
-//	const auto parentEntityId = clickableComponent.GetParentEntity().GetParentEntityID();
-//	if (parentEntityId != Entity::GetNullID())
-//	{
-//		// The entity should exist since if the parent is deleted the child entities are deleted as well
-//		assert(Entity::GetObjectFromID(parentEntityId) != nullptr && "Clickable System: The parent entity must exist");
-//
-//		event::EntityClickedEvent entityClickedEvent;
-//		entityClickedEvent.SetEntityID(parentEntityId);
-//		entityClickedEvent.SetMouseButton(button);
-//		eventManager.RaiseEvent(entityClickedEvent);
-//
-//		// Recursive call
-//		RaiseConnectedClickEvents(....);
-//	}
-//}

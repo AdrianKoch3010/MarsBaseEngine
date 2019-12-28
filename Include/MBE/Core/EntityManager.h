@@ -74,6 +74,11 @@ namespace mbe
 		template <class TComponent>
 		const std::vector<Entity::HandleID>& GetComponentGroup() const;
 
+		/// @brief Returns a list of all entity ids
+		/// @details This function coppies all entity id from the entity group dictionary and should, therefore, be avoided.
+		/// @returns List of all components
+		std::vector<Entity::HandleID> GetEntityList() const;
+
 	private:
 		/// @brief Deletes all inactive entities
 		/// @details Entities are set inactive when calling the mbe::Entity::Destroy() method

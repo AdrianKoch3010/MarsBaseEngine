@@ -147,6 +147,11 @@ namespace mbe
 		/// mbe::EntityManager is the only place where entities can be created.
 		friend class EntityManager;
 
+		/// @brief Enables the mbe::EntitySerialser to access the GetComponentTypeIDList() method
+		/// @details This method is private as it exposes the internal type id used for the components.
+		/// This functionality is required by the serialisation.
+		friend class EntitySerialiser;
+
 	public:
 		/// @brief The type of the id used to access a group
 		typedef std::string Group;
@@ -265,6 +270,11 @@ namespace mbe
 		//// Add component that has been constructed outside the entiy
 		//template <class TComponent>
 		//void AddConstructedComponent(std::shared_ptr<TComponent> component);
+
+		// Returns a list of the type ids for all the components of this entity
+		// This olny returns derived components
+		std::vector<detail::ComponentTypeID> GetComponentTypeIDList() const;
+
 
 	private:
 		EntityManager & entityManager;

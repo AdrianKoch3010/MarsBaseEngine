@@ -165,9 +165,9 @@ void TiledTerrain::Data::Load(const std::string filePath)
 		throw std::runtime_error("Tile map data: The file could not be loaded");
 
 	// Get the root node
-	const XMLNode * rootNode = xmlDocument.FirstChild();
+	const XMLNode * const rootNode = xmlDocument.FirstChild();
 	if (rootNode == nullptr)
-		throw std::runtime_error("Tile map data: No root node could be found");
+		throw std::runtime_error("Tile map data: The root node could not be found");
 
 	// Get the map size and tile size (They are stored as attributes of the map node)
 	//const XMLElement * mapElement = rootNode->ToElement();
@@ -186,7 +186,7 @@ void TiledTerrain::Data::Load(const std::string filePath)
 
 	// Get the tile map layers
 	//const XMLElement * tileMapLayerListElement = rootNode->ToElement(); // Does not work for some reason
-	const XMLElement * tileMapLayerListElement = xmlDocument.FirstChildElement("map");
+	const XMLElement * const tileMapLayerListElement = xmlDocument.FirstChildElement("map");
 	const XMLElement * layerElement = tileMapLayerListElement->FirstChildElement("layer");
 
 	// For each tile map layer

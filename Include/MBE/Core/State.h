@@ -22,6 +22,8 @@ namespace mbe
 {
 	class StateManager;
 
+	// The context must live as long as the state
+	// This should be the case as the Application creates the context
 	class State : private sf::NonCopyable
 	{
 		friend class StateManager;
@@ -37,11 +39,18 @@ namespace mbe
 		// Use refernces for the context --> so that it generates a copy constructor.....
 		struct Context
 		{
+			typedef std::shared_ptr<Context> Ptr;
+			typedef std::weak_ptr<Context> WPtr;
+			typedef std::unique_ptr<Context> UPtr;
+
 			// Constructor
-			explicit Context(sf::RenderWindow & window, TextureWrapperHolder<std::string> & textures, SoundBufferHolder<std::string> & sounds, FontHolder<std::string> & fonts, FilePathDictionary<std::string> & musicFilePaths);
+			explicit Context(std::unique_ptr<sf::RenderWindow> windowPtr, TextureWrapperHolder<std::string> & textures, SoundBufferHolder<std::string> & sounds, FontHolder<std::string> & fonts, FilePathDictionary<std::string> & musicFilePaths);
 			Context(const Context & context) = default;
 
-			sf::RenderWindow & window;
+			//inline sf::RenderWindow& GetWindow() { return *windowPtr; }
+			//inline const sf::RenderWindow& GetWindow() const { return *windowPtr; }
+
+			std::unique_ptr<sf::RenderWindow> windowPtr;
 			TextureWrapperHolder<std::string> & textureWrappers;
 			SoundBufferHolder<std::string> & sounds;
 			FontHolder<std::string> & fonts;
@@ -53,7 +62,7 @@ namespace mbe
 		/// @brief Constructor
 		/// @param stateManager A reference to the mbe::StateManager that is used to push onto, pop from or clear the state stack
 		/// @param context The Context containing global information that can be used by all states
-		explicit State(StateManager & stateManager, Context context);
+		explicit State(StateManager & stateManager, Context& context);
 
 	public:
 		/// @brief Virtual default destructor
@@ -65,7 +74,7 @@ namespace mbe
 
 	protected:
 		StateManager & stateManager;
-		Context context;
+		Context& context;
 	};
 
 } // namespace mbe

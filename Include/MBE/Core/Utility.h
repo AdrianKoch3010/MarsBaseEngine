@@ -1,7 +1,7 @@
 #pragma once
 
 /// @file
-//// @brief Contains helper functions
+/// @brief Contains helper functions
 
 #include <string>
 #include <unordered_map>

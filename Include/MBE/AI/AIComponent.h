@@ -57,13 +57,13 @@ namespace mbe
 		// The task is added as the queued task
 		// Creates a new task
 		template<class TTask, typename... TArguments>
-		void AddTask(TArguments&& ...arguments);
+		void AssignTask(TArguments&& ...arguments);
 
 		// Sets the current task aborting (if existing)
 		// The task is added as the queued task
 		// Adds an existing task
 		template<class TTask>
-		void AddTask(typename TTask::Ptr taskPtr);
+		void AssignTask(typename TTask::Ptr taskPtr);
 
 		// Check whether there is a next task using IsTaskQueued
 		// Throws if no task is queued
@@ -151,7 +151,7 @@ namespace mbe
 #pragma region Utility AI Component Template Implementations
 
 	template<class TTask, typename ...TArguments>
-	inline void UtilityAIComponent::AddTask(TArguments&& ...arguments)
+	inline void UtilityAIComponent::AssignTask(TArguments&& ...arguments)
 	{
 		auto taskPtr = std::make_shared<TTask>(std::forward<TArguments>(arguments)...);
 		// Just for now
@@ -164,7 +164,7 @@ namespace mbe
 	}
 
 	template<class TTask>
-	inline void UtilityAIComponent::AddTask(typename TTask::Ptr taskPtr)
+	inline void UtilityAIComponent::AssignTask(typename TTask::Ptr taskPtr)
 	{
 		nextTask.first = taskPtr;
 		nextTask.second = detail::GetAITaskTypeID<TTask>();
