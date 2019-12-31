@@ -2,39 +2,23 @@
 
 using namespace mbe;
 
-AnimationComponent::AnimationComponent(EventManager & eventManager, Entity & parentEntity) :
+AnimationComponent::AnimationComponent(EventManager& eventManager, Entity& parentEntity) :
 	Component(eventManager, parentEntity)
 {
 }
 
-void AnimationComponent::Update(sf::Time frameTime)
-{
-	// Delete inactive animators
-	for (auto it = animatorDictionary.cbegin(); it != animatorDictionary.cend();)
-	{
-		if (it->second->IsActive() == false)
-			it = animatorDictionary.erase(it);
-		else
-			++it;
-	}
-
-	// Update all animators
-	for (auto & pair : animatorDictionary)
-		pair.second->Update(frameTime);
-}
-
-typename AnimationComponent::EntityAnimator & AnimationComponent::CreateAnimator(std::string id)
+EntityAnimator& AnimationComponent::CreateAnimator(std::string id)
 {
 	// Convert id string to lower case
 	NormaliseIDString(id);
 
 	auto animatorPtr = std::make_unique<EntityAnimator>(this->parentEntity);
-	auto & animator = *animatorPtr;
+	auto& animator = *animatorPtr;
 	animatorDictionary.insert(std::make_pair(id, std::move(animatorPtr)));
 	return animator;
 }
 
-typename AnimationComponent::EntityAnimator & AnimationComponent::GetAnimator(std::string id)
+EntityAnimator& AnimationComponent::GetAnimator(std::string id)
 {
 	NormaliseIDString(id);
 
@@ -47,7 +31,7 @@ typename AnimationComponent::EntityAnimator & AnimationComponent::GetAnimator(st
 	return *it->second;
 }
 
-const typename AnimationComponent::EntityAnimator & AnimationComponent::GetAnimator(std::string id) const
+const EntityAnimator& AnimationComponent::GetAnimator(std::string id) const
 {
 	NormaliseIDString(id);
 
@@ -73,7 +57,7 @@ bool AnimationComponent::HasAnimator(std::string id) const
 	{
 		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
 
-		auto & childEntity = *Entity::GetObjectFromID(childEntityId);
+		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
 		if (childEntity.HasComponent<AnimationComponent>())
 		{
 			if (childEntity.GetComponent<AnimationComponent>().HasAnimator(id))
@@ -86,7 +70,7 @@ bool AnimationComponent::HasAnimator(std::string id) const
 
 bool AnimationComponent::HasAnimation(std::string id) const
 {
-	for (auto & pair : animatorDictionary)
+	for (auto& pair : animatorDictionary)
 	{
 		if (pair.second->HasAnimation(id))
 			return true;
@@ -97,7 +81,7 @@ bool AnimationComponent::HasAnimation(std::string id) const
 	{
 		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
 
-		auto & childEntity = *Entity::GetObjectFromID(childEntityId);
+		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
 		if (childEntity.HasComponent<AnimationComponent>())
 		{
 			if (childEntity.GetComponent<AnimationComponent>().HasAnimation(id))
@@ -108,7 +92,7 @@ bool AnimationComponent::HasAnimation(std::string id) const
 	return false;
 }
 
-void AnimationComponent::PlayAnimation(std::string animatorId, const std::string & animationId, bool loop)
+void AnimationComponent::PlayAnimation(std::string animatorId, const std::string& animationId, bool loop)
 {
 	NormaliseIDString(animatorId);
 
@@ -123,15 +107,15 @@ void AnimationComponent::PlayAnimation(std::string animatorId, const std::string
 	{
 		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
 
-		auto & childEntity = *Entity::GetObjectFromID(childEntityId);
+		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
 		if (childEntity.HasComponent<mbe::AnimationComponent>())
 			childEntity.GetComponent<AnimationComponent>().PlayAnimation(animatorId, animationId, loop);
 	}
 }
 
-void AnimationComponent::PlayAnimation(const std::string & animationId, bool loop)
+void AnimationComponent::PlayAnimation(const std::string& animationId, bool loop)
 {
-	for (auto & pair : animatorDictionary)
+	for (auto& pair : animatorDictionary)
 	{
 		// Only play animations that have been registered
 		if (pair.second->HasAnimation(animationId))
@@ -143,7 +127,7 @@ void AnimationComponent::PlayAnimation(const std::string & animationId, bool loo
 	{
 		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
 
-		auto & childEntity = *Entity::GetObjectFromID(childEntityId);
+		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
 		if (childEntity.HasComponent<AnimationComponent>())
 			childEntity.GetComponent<AnimationComponent>().PlayAnimation(animationId, loop);
 	}
@@ -159,7 +143,7 @@ void AnimationComponent::StopAnimation(std::string animatorId, std::string anima
 	// Only stop the animation if the animator exists and its playing the animation to stop
 	if (animatorItr != animatorDictionary.cend())
 	{
-		auto & animator = animatorItr->second;
+		auto& animator = animatorItr->second;
 		if (animator->IsPlayingAnimation())
 		{
 			if (animator->GetPlayingAnimation() == animationId)
@@ -172,7 +156,7 @@ void AnimationComponent::StopAnimation(std::string animatorId, std::string anima
 	{
 		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
 
-		auto & childEntity = *Entity::GetObjectFromID(childEntityId);
+		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
 		if (childEntity.HasComponent<AnimationComponent>())
 			childEntity.GetComponent<AnimationComponent>().StopAnimation(animatorId, animationId);
 	}
@@ -187,7 +171,7 @@ void AnimationComponent::StopAnimation(std::string animatorId)
 	// Only stop the animation if the animator exists and its playing the animation to stop
 	if (animatorItr != animatorDictionary.cend())
 	{
-		auto & animator = animatorItr->second;
+		auto& animator = animatorItr->second;
 		if (animator->IsPlayingAnimation())
 		{
 			animator->StopAnimation();
@@ -198,7 +182,7 @@ void AnimationComponent::StopAnimation(std::string animatorId)
 	{
 		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
 
-		auto & childEntity = *Entity::GetObjectFromID(childEntityId);
+		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
 		if (childEntity.HasComponent<AnimationComponent>())
 			childEntity.GetComponent<AnimationComponent>().StopAnimation(animatorId);
 	}
@@ -206,7 +190,7 @@ void AnimationComponent::StopAnimation(std::string animatorId)
 
 void AnimationComponent::StopAnimation()
 {
-	for (auto & pair : animatorDictionary)
+	for (auto& pair : animatorDictionary)
 		pair.second->StopAnimation();
 
 	// Recursivly call stop animation for the child entities
@@ -214,7 +198,7 @@ void AnimationComponent::StopAnimation()
 	{
 		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
 
-		auto & childEntity = *Entity::GetObjectFromID(childEntityId);
+		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
 		if (childEntity.HasComponent<AnimationComponent>())
 			childEntity.GetComponent<AnimationComponent>().StopAnimation();
 	}
@@ -230,7 +214,7 @@ void AnimationComponent::SetPaused(std::string animatorId, std::string animation
 	if (animatorItr != animatorDictionary.cend())
 	{
 		// If the animation is playing, pause it
-		auto & animator = *animatorItr->second;
+		auto& animator = *animatorItr->second;
 		if (animator.IsPlayingAnimation())
 		{
 			if (animator.GetPlayingAnimation() == animationId)
@@ -243,7 +227,7 @@ void AnimationComponent::SetPaused(std::string animatorId, std::string animation
 	{
 		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
 
-		auto & childEntity = *Entity::GetObjectFromID(childEntityId);
+		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
 		if (childEntity.HasComponent<AnimationComponent>())
 			childEntity.GetComponent<AnimationComponent>().SetPaused(animatorId, animationId, value);
 	}
@@ -263,7 +247,7 @@ void AnimationComponent::SetPaused(std::string animatorId, bool value)
 	{
 		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
 
-		auto & childEntity = *Entity::GetObjectFromID(childEntityId);
+		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
 		if (childEntity.HasComponent<AnimationComponent>())
 			childEntity.GetComponent<AnimationComponent>().SetPaused(animatorId, value);
 	}
@@ -287,7 +271,7 @@ bool AnimationComponent::IsPlayingAnimation(std::string animatorId, std::string 
 	{
 		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
 
-		auto & childEntity = *Entity::GetObjectFromID(childEntityId);
+		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
 		if (childEntity.HasComponent<AnimationComponent>())
 		{
 			if (childEntity.GetComponent<AnimationComponent>().IsPlayingAnimation(animatorId, animationId))
@@ -313,7 +297,7 @@ bool AnimationComponent::IsPlayingAnimation(std::string animatorId) const
 	{
 		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
 
-		auto & childEntity = *Entity::GetObjectFromID(childEntityId);
+		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
 		if (childEntity.HasComponent<AnimationComponent>())
 		{
 			if (childEntity.GetComponent<AnimationComponent>().IsPlayingAnimation(animatorId))
@@ -326,7 +310,7 @@ bool AnimationComponent::IsPlayingAnimation(std::string animatorId) const
 
 bool AnimationComponent::IsPlayingAnimation() const
 {
-	for (const auto & pair : animatorDictionary)
+	for (const auto& pair : animatorDictionary)
 	{
 		if (pair.second->IsPlayingAnimation())
 			return true;
@@ -337,7 +321,7 @@ bool AnimationComponent::IsPlayingAnimation() const
 	{
 		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
 
-		auto & childEntity = *Entity::GetObjectFromID(childEntityId);
+		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
 		if (childEntity.HasComponent<AnimationComponent>())
 		{
 			if (childEntity.GetComponent<AnimationComponent>().IsPlayingAnimation())
@@ -356,7 +340,7 @@ bool AnimationComponent::IsPaused(std::string animatorId, std::string animationI
 	const auto animatorItr = animatorDictionary.find(animatorId);
 	if (animatorItr != animatorDictionary.cend())
 	{
-		auto & animator = *animatorItr->second;
+		auto& animator = *animatorItr->second;
 		if (animator.IsPlayingAnimation())
 		{
 			if (animator.GetPlayingAnimation() == animationId && animator.IsPaused())
@@ -369,7 +353,7 @@ bool AnimationComponent::IsPaused(std::string animatorId, std::string animationI
 	{
 		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
 
-		auto & childEntity = *Entity::GetObjectFromID(childEntityId);
+		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
 		if (childEntity.HasComponent<AnimationComponent>())
 		{
 			if (childEntity.GetComponent<AnimationComponent>().IsPaused(animatorId, animationId))
@@ -396,7 +380,7 @@ bool AnimationComponent::IsPaused(std::string animatorId) const
 	{
 		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
 
-		auto & childEntity = *Entity::GetObjectFromID(childEntityId);
+		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
 		if (childEntity.HasComponent<AnimationComponent>())
 		{
 			if (childEntity.GetComponent<AnimationComponent>().IsPaused(animatorId))
@@ -410,9 +394,9 @@ bool AnimationComponent::IsPaused(std::string animatorId) const
 std::vector<std::string> AnimationComponent::GetPlayingAnimations() const
 {
 	std::vector<std::string> playingAnimations;
-	for (const auto & pair : animatorDictionary)
+	for (const auto& pair : animatorDictionary)
 	{
-		const auto & animator = pair.second;
+		const auto& animator = pair.second;
 		if (animator->IsPlayingAnimation())
 		{
 			playingAnimations.push_back(animator->GetPlayingAnimation());

@@ -7,7 +7,7 @@
 #include <set>
 #include <unordered_map>
 
-#include <MBE/Animation/Animator.h>
+#include <MBE/Animation/EntityAnimator.h>
 #include <MBE/Core/Component.h>
 #include <MBE/Core/Entity.h>
 #include <MBE/Core/Utility.h>
@@ -20,8 +20,6 @@ namespace mbe
 	class AnimationComponent : public Component
 	{
 	private:
-		typedef Animator<Entity> EntityAnimator;
-
 		typedef std::unordered_map<std::string, EntityAnimator::UPtr> AnimatorDictionary;
 
 	public:
@@ -34,11 +32,6 @@ namespace mbe
 		~AnimationComponent() = default; // Delete the BaseAnimators
 
 	public:
-
-		/// @brief The update method that should be called every frame (automatically done by the mbe::EntityManager)
-		/// @param frameTime The delta time between two successive frames
-		void Update(sf::Time frameTime) override;
-
 		// Add the templated id later on
 		/// @brief Creates an animator and adds it to the list of animators managed by this component
 		/// @tparam TAnimated The type of object being animated. This will determine the type of the animator that is created
@@ -125,6 +118,10 @@ namespace mbe
 
 		// Returns a list of normalised strings
 		std::vector<std::string> GetPlayingAnimations() const;
+
+		inline AnimatorDictionary& GetAnimatorDictionary() { return animatorDictionary; }
+
+		inline const AnimatorDictionary& GetAnimatorDictionary() const { return animatorDictionary; }
 
 	private:
 		AnimatorDictionary animatorDictionary;

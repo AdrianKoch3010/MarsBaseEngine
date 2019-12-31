@@ -71,7 +71,7 @@ namespace mbe
 
 		// The reference is valid as long as the entitymanager exists (which should be longer than the functions using it)
 		// Returns a list of all entities that have component TComponent
-		template <class TComponent>
+		template <class TComponentSerialiser>
 		const std::vector<Entity::HandleID>& GetComponentGroup() const;
 
 		/// @brief Returns a list of all entity ids
@@ -121,15 +121,15 @@ namespace mbe
 		// Implicetly delete the obsolete/empty unique pointer
 	}
 
-	template<class TComponent>
+	template<class TComponentSerialiser>
 	inline const std::vector<Entity::HandleID>& EntityManager::GetComponentGroup() const
 	{
 		// Make sure that only Components are added as type id keys for the dictionary
-		static_assert(std::is_base_of<Component, TComponent>::value, "EntityManager: TComponent must inherit from mbe::Component");
-		static_assert(std::is_same<Component, TComponent>::value == false, "EntityManager: TComponent must inherit from mbe::Component");
+		static_assert(std::is_base_of<Component, TComponentSerialiser>::value, "EntityManager: TComponent must inherit from mbe::Component");
+		static_assert(std::is_same<Component, TComponentSerialiser>::value == false, "EntityManager: TComponent must inherit from mbe::Component");
 
 		// If no entity with this component has been added, the does not exist and an empty std::vector is inserted and returned for that key
-		return entityGroupDictionary[detail::GetComponentTypeID<TComponent>()];
+		return entityGroupDictionary[detail::GetComponentTypeID<TComponentSerialiser>()];
 	}
 
 #pragma endregion

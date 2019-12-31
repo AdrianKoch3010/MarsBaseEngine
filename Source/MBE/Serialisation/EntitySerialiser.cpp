@@ -1,12 +1,34 @@
+// Component serialisers
+#include <MBE/Serialisation/TransformComponentSerialiser.h>
+#include <MBE/Serialisation/AIComponentSerialiser.h>
+#include <MBE/Serialisation/AnimationComponentSerialser.h>
+#include <MBE/Serialisation/PixelMaskClickableComponentSerialiser.h>
+#include <MBE/Serialisation/TopDownInformationComponentSerialiser.h>
+#include <MBE/Serialisation/TextureWrapperComponentSerialiser.h>
+
+// Components
+#include <MBE/TransformComponent.h>
+#include <MBE/AI/AIComponent.h>
+#include <MBE/Animation/AnimationComponent.h>
+#include <MBE/Input/PixelMaskClickableComponent.h>
+#include <MBE/Graphics/TopDownInformationComponent.h>
+#include <MBE/Graphics/TextureWrapperComponent.h>
+
 #include <MBE/Serialisation/EntitySerialiser.h>
 
 using namespace mbe;
 
-EntitySerialiser::EntitySerialiser(EntityManager& entityManager, EventManager& eventManager) :
+EntitySerialiser::EntitySerialiser(EntityManager& entityManager, EventManager& eventManager, Context context) :
 	entityManager(entityManager),
-	eventManager(eventManager)
+	eventManager(eventManager),
+	context(context)
 {
-
+	AddComponentSerialiser<TransformComponentSerialser, TransformComponent>("TransformComponent");
+	AddComponentSerialiser<AIComponentSerialser, UtilityAIComponent>("AIComponent");
+	AddComponentSerialiser<AnimationComponentSerialiser, AnimationComponent>("AnimationComponent");
+	AddComponentSerialiser<PixelMaskClickableComponentSerialiser, PixelMaskClickableComponent>("PixelMaskClickableComponent");
+	AddComponentSerialiser<TopDownInformationComponentSerialiser, TopDownInformationComponent>("TopDownInformationComponent");
+	AddComponentSerialiser<TextureWrapperComponentSerialiser, TextureWrapperComponent>("TextureWrapperComponent", context.textureWrappers);
 }
 
 void EntitySerialiser::LoadEntites(const std::string& filePath)

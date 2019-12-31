@@ -8,8 +8,6 @@
 
 #include <MBE/Core/EventManager.h>
 #include <MBE/Core/EntityManager.h>
-#include <MBE/Core/EntityCreatedEvent.h>
-#include <MBE/Core/ComponentValueChangedEvent.h>
 
 #include <MBE/TransformComponent.h>
 #include <MBE/Graphics/TextureWrapperComponent.h>
@@ -76,6 +74,9 @@ namespace mbe
 
 	private:
 		void RecalculateLayer(Entity & entity);
+
+		void OnTextureWrapperChangedEvent(TextureWrapperComponent& textureWraapperComponent);
+		void OnIndexListChangedEvent(TiledTerrainLayerComponent& tiledTerrainLayerComponent);
 
 	private:
 		const sf::Vector2u size;

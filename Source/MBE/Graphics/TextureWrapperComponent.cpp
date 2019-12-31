@@ -1,28 +1,26 @@
-#include "..\..\..\Include\MBE\Graphics\TextureWrapperComponent.h"
 #include <MBE/Graphics/TextureWrapperComponent.h>
 
 using namespace mbe;
 using TextureWrapperChangedEvent = mbe::event::ComponentValueChangedEvent<mbe::TextureWrapperComponent>;
 
-TextureWrapperComponent::TextureWrapperComponent(EventManager & eventManager, Entity & parentEntity, const TextureWrapperHolder<std::string>& textureWrapperHolder, const std::string& textureWrapperName) :
-	Component(eventManager, parentEntity),
-	textureWrapperHolder(textureWrapperHolder),
-	textureWrapperName(textureWrapperName),
-	textureRect({ 0, 0 }, static_cast<sf::Vector2i>(GetTextureWrapper().GetTexture().getSize()))
+TextureWrapperComponent::TextureWrapperComponent(EventManager & eventManager, Entity & parentEntity, const std::string& textureWrapperId) :
+	Component(eventManager, parentEntity)
 {
+	// Make sure the component value changed event is raised first so that the textue wrapper is assigned
+	SetTextureWrapper(textureWrapperId, true);
 }
 
-void TextureWrapperComponent::SetTextureWrapper(const std::string& textureWrapperName, bool resetTextureRect)
+void TextureWrapperComponent::SetTextureWrapper(const std::string& textureWrapperId, bool resetTextureRect)
 {
 	// Recompute the texture rect if required
 	if (resetTextureRect)
 		textureRect = { {0, 0}, {static_cast<sf::Vector2i>(GetTextureWrapper().GetTexture().getSize())} };
 
-	if (this->textureWrapperName == textureWrapperName)
+	if (this->textureWrapperId == textureWrapperId)
 		return;
 
 	// Assign the new texture wrapper
-	this->textureWrapperName = textureWrapperName;
+	this->textureWrapperId = textureWrapperId;
 
 	eventManager.RaiseEvent(TextureWrapperChangedEvent(*this, MBE_NAME_OF(textureWrapper)));
 }
@@ -63,7 +61,10 @@ void TextureWrapperComponent::SetTextureRect(sf::IntRect && textureRect)
 
 const TextureWrapper& TextureWrapperComponent::GetTextureWrapper() const
 {
-	return textureWrapperHolder[textureWrapperName];
+	if (textureWrapper == nullptr)
+		throw std::runtime_error("TextureWrapperComponent: No texture wrapper exists");
+
+	return *textureWrapper;
 }
 
 

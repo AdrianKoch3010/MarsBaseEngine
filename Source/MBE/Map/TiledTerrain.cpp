@@ -1,3 +1,6 @@
+#include <MBE/Core/EntityCreatedEvent.h>
+#include <MBE/Core/ComponentValueChangedEvent.h>
+
 #include <MBE/Map/TiledTerrain.h>
 
 using namespace mbe;
@@ -6,7 +9,7 @@ using TextureChangedEvent = mbe::event::ComponentValueChangedEvent<mbe::TextureW
 using IndexListChangedEvent = mbe::event::ComponentValueChangedEvent<mbe::TiledTerrainLayerComponent>;
 
 // Remember to add subscriptions for the textureChangedEvent and indexListChangedEvent
-TiledTerrain::TiledTerrain(EventManager & eventManager, EntityManager & entityManager, sf::Vector2u size, sf::Vector2u tileSize) :
+TiledTerrain::TiledTerrain(EventManager& eventManager, EntityManager& entityManager, sf::Vector2u size, sf::Vector2u tileSize) :
 	eventManager(eventManager),
 	entityManager(entityManager),
 	size(size),
@@ -14,60 +17,31 @@ TiledTerrain::TiledTerrain(EventManager & eventManager, EntityManager & entityMa
 {
 }
 
-TiledTerrain::TiledTerrain(EventManager & eventManager, EntityManager & entityManager, Data::Ptr mapData, const TextureWrapper & tileMapTextureWrapper) :
+TiledTerrain::TiledTerrain(EventManager& eventManager, EntityManager& entityManager, Data::Ptr mapData, const TextureWrapper& tileMapTextureWrapper) :
 	eventManager(eventManager),
 	entityManager(entityManager),
 	size(mapData->GetMapSize()),
 	tileSize(mapData->GetTileSize())
 {
 	// Subscribe to texture changed event
-	textureChangedSubscription = eventManager.Subscribe(EventManager::TCallback<TextureChangedEvent>([this](const TextureChangedEvent & event)
-	{
-		if (!event.IsValueChanged("TextureWrapper"))
-			return;
-
-		auto & entity = event.GetComponent().GetParentEntity();
-
-		// Use event Subscription to update the texture
-		if (!entity.HasComponent<TiledTerrainLayerRenderComponent>())
-			return;
-
-		// Update the render states
-		// This is important to ensure that the texture with which the tiled terrain render component is created is up to date
-		auto & renderComponent = entity.GetComponent<TiledTerrainLayerRenderComponent>();
-
-		// Update the texture
-		auto renderStates = renderComponent.GetRenderStates();
-
-		renderStates.texture = &entity.GetComponent<TextureWrapperComponent>().GetTextureWrapper().GetTexture();
-
-		// The move must be in the end
-		renderComponent.SetRenderStates(std::move(renderStates));
-
-		if (entity.HasComponent<TiledTerrainLayerComponent>())
-			RecalculateLayer(entity);
-	}));
+	textureChangedSubscription = eventManager.Subscribe(EventManager::TCallback<TextureChangedEvent>([this](const TextureChangedEvent& event)
+		{
+			if (!event.IsValueChanged("TextureWrapper"))
+				return;
+		}));
 
 	// Subscribe to index list changed event
-	indexListChangedSubscription = eventManager.Subscribe(EventManager::TCallback<IndexListChangedEvent>([this](const IndexListChangedEvent & event)
-	{
-		if (!event.IsValueChanged("IndexList"))
-			return;
-
-		auto & entity = event.GetComponent().GetParentEntity();
-
-		// Use event Subscription to update the texture
-		if (!entity.HasComponent<TiledTerrainLayerRenderComponent>())
-			return;
-
-		RecalculateLayer(entity);
-	}));
+	indexListChangedSubscription = eventManager.Subscribe(EventManager::TCallback<IndexListChangedEvent>([this](const IndexListChangedEvent& event)
+		{
+			if (!event.IsValueChanged("IndexList"))
+				return;
+		}));
 
 	// Add layers
-	for (const auto & layer : mapData->GetTileMapLayersIndexList())
+	for (const auto& layer : mapData->GetTileMapLayersIndexList())
 	{
 		Entity::HandleID layerId = this->AddTileMapLayer(tileMapTextureWrapper);
-		auto & layerEntity = *Entity::GetObjectFromID(layerId);
+		auto& layerEntity = *Entity::GetObjectFromID(layerId);
 
 		try
 		{
@@ -92,10 +66,10 @@ TiledTerrain::~TiledTerrain()
 	eventManager.UnSubscribe<IndexListChangedEvent>(indexListChangedSubscription);
 }
 
-Entity::HandleID TiledTerrain::AddTileMapLayer(const TextureWrapper & textureWrapper)
+Entity::HandleID TiledTerrain::AddTileMapLayer(const TextureWrapper& textureWrapper)
 {
 	// Create the layer entity and add the according components
-	auto & layer = entityManager.CreateEntity();
+	auto& layer = entityManager.CreateEntity();
 	layer.AddComponent<TransformComponent>();
 	layer.AddComponent<RenderInformationComponent>(RenderLayer::Foreground);
 	layer.AddComponent<TextureWrapperComponent>(textureWrapper);
@@ -133,8 +107,8 @@ void TiledTerrain::SwopRenderLayerOrder(const size_t first, const size_t second)
 	assert(Entity::GetObjectFromID(renderLayerList[first]) != nullptr && "TiledTerrain: The layer entity must exists");
 	assert(Entity::GetObjectFromID(renderLayerList[second]) != nullptr && "TiledTerrain: The layer entity must exists");
 
-	auto & firstRenderInformationComponent = Entity::GetObjectFromID(renderLayerList[first])->GetComponent<RenderInformationComponent>();
-	auto & secondRenderInformationComponent = Entity::GetObjectFromID(renderLayerList[second])->GetComponent<RenderInformationComponent>();
+	auto& firstRenderInformationComponent = Entity::GetObjectFromID(renderLayerList[first])->GetComponent<RenderInformationComponent>();
+	auto& secondRenderInformationComponent = Entity::GetObjectFromID(renderLayerList[second])->GetComponent<RenderInformationComponent>();
 
 	// swop the zOrder
 	auto temp = firstRenderInformationComponent.GetZOrder();
@@ -142,7 +116,7 @@ void TiledTerrain::SwopRenderLayerOrder(const size_t first, const size_t second)
 	secondRenderInformationComponent.SetZOrder(temp);
 }
 
-void TiledTerrain::RecalculateLayer(Entity & entity)
+void TiledTerrain::RecalculateLayer(Entity& entity)
 {
 	// Recalculate the indecies
 	try
@@ -155,6 +129,41 @@ void TiledTerrain::RecalculateLayer(Entity & entity)
 	}
 }
 
+void TiledTerrain::OnTextureWrapperChangedEvent(TextureWrapperComponent& textureWraapperComponent)
+{
+	auto& entity = textureWraapperComponent.GetParentEntity();
+
+	// Use event Subscription to update the texture
+	if (!entity.HasComponent<TiledTerrainLayerRenderComponent>())
+		return;
+
+	// Update the render states
+	// This is important to ensure that the texture with which the tiled terrain render component is created is up to date
+	auto& renderComponent = entity.GetComponent<TiledTerrainLayerRenderComponent>();
+
+	// Update the texture
+	auto renderStates = renderComponent.GetRenderStates();
+
+	renderStates.texture = &entity.GetComponent<TextureWrapperComponent>().GetTextureWrapper().GetTexture();
+
+	// The move must be in the end
+	renderComponent.SetRenderStates(std::move(renderStates));
+
+	if (entity.HasComponent<TiledTerrainLayerComponent>())
+		RecalculateLayer(entity);
+}
+
+void TiledTerrain::OnIndexListChangedEvent(TiledTerrainLayerComponent& tiledTerrainLayerComponent)
+{
+	auto& entity = tiledTerrainLayerComponent.GetParentEntity();
+
+	// Use event Subscription to update the texture
+	if (!entity.HasComponent<TiledTerrainLayerRenderComponent>())
+		return;
+
+	RecalculateLayer(entity);
+}
+
 void TiledTerrain::Data::Load(const std::string filePath)
 {
 	using namespace tinyxml2;
@@ -165,13 +174,13 @@ void TiledTerrain::Data::Load(const std::string filePath)
 		throw std::runtime_error("Tile map data: The file could not be loaded");
 
 	// Get the root node
-	const XMLNode * const rootNode = xmlDocument.FirstChild();
+	const XMLNode* const rootNode = xmlDocument.FirstChild();
 	if (rootNode == nullptr)
 		throw std::runtime_error("Tile map data: The root node could not be found");
 
 	// Get the map size and tile size (They are stored as attributes of the map node)
 	//const XMLElement * mapElement = rootNode->ToElement();
-	const XMLElement * mapElement = xmlDocument.FirstChildElement("map");
+	const XMLElement* mapElement = xmlDocument.FirstChildElement("map");
 	if (mapElement->QueryUnsignedAttribute("width", &this->mapSize.x) != XML_SUCCESS)
 		throw std::runtime_error("Tile map data: The map width could not be parsed");
 
@@ -186,18 +195,18 @@ void TiledTerrain::Data::Load(const std::string filePath)
 
 	// Get the tile map layers
 	//const XMLElement * tileMapLayerListElement = rootNode->ToElement(); // Does not work for some reason
-	const XMLElement * const tileMapLayerListElement = xmlDocument.FirstChildElement("map");
-	const XMLElement * layerElement = tileMapLayerListElement->FirstChildElement("layer");
+	const XMLElement* const tileMapLayerListElement = xmlDocument.FirstChildElement("map");
+	const XMLElement* layerElement = tileMapLayerListElement->FirstChildElement("layer");
 
 	// For each tile map layer
 	while (layerElement != nullptr)
 	{
 		// Get the data
-		const XMLElement * layerDataElement = layerElement->FirstChildElement("data");
+		const XMLElement* layerDataElement = layerElement->FirstChildElement("data");
 		if (layerDataElement == nullptr)
 			throw std::runtime_error("Tile map data: The layer's data element could not be found");
 
-		const char * layerData = layerDataElement->GetText();
+		const char* layerData = layerDataElement->GetText();
 		if (layerData == nullptr)
 			throw std::runtime_error("Tile map data: The layer's data element must contain a list of tile indices");
 

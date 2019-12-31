@@ -19,6 +19,7 @@
 #include <MBE/Graphics/BaseComponentRenderSystem.h>
 #include <MBE/Graphics/RenderInformationComponent.h>
 #include <MBE/Graphics/TextureWrapperComponent.h>
+#include <MBE/Core/AssetHolder.h>
 
 #include <MBE/Core/EventManager.h>
 #include <MBE/Core/EntityCreatedEvent.h>
@@ -32,6 +33,9 @@ namespace mbe
 	/// @brief Takes care of drawing all entities with a mbe::RenderComponent in the correct order
 	/// @details A mbe::Entity can be registered by raising the mbe::event::EntityCreatedEvent.
 	/// Similarly, it can be unregistered by raising the mbe::event::RenderNodeRemovedEvent.
+	/// @n The render system already has component renderers for the
+	/// - SpriteRenderComponent
+	/// - TiledTerrainLayerRenderComponent
 	/// @note Deleted entities will be removed automatically. Therefore, manually raising the
 	/// mbe::event::EntityRemovedEvent is only necessary when the mbe::Entity should not be drawn but stay alive
 	/// e.g. in order to add it again later.
@@ -56,7 +60,8 @@ namespace mbe
 		/// @param window A reference to the sf::RenderWindow that will be used to draw in
 		/// @param eventManager A reference to the mbe::EventManager that will be used to listen out
 		/// for a mbe::event::EntityCreatedEvent and mbe::event::RenderNodeRemovedEvent.
-		RenderSystem(std::unique_ptr<sf::RenderWindow>& windowPtr, EventManager& eventManager);
+		/// @param textureWrapperHolder The texture wrapper holder that holds the textures indexed by the id in the mbe::TextureWrapperComponent
+		RenderSystem(std::unique_ptr<sf::RenderWindow>& windowPtr, EventManager& eventManager, TextureWrapperHolder<>& textureWrapperHolder);
 
 		/// @brief Default destructor
 		~RenderSystem();
@@ -85,6 +90,10 @@ namespace mbe
 		void AddRenderEntity(Entity::HandleID entityId);
 		void RemoveRenderEntity(Entity::HandleID entityId);
 
+		// Sets the correct texture wrapper based on the context
+		// Throws when the id has not been registerd
+		void OnTextureWrapperComponentChangedEvent(TextureWrapperComponent& textureWrapperComponent);
+
 		// Removes expires render entities
 		void Refresh();
 
@@ -98,6 +107,8 @@ namespace mbe
 	private:
 		// A reference to the pointer is stored so that when a new window is created the correct pointer is referenced
 		std::unique_ptr<sf::RenderWindow>& windowPtr;
+		TextureWrapperHolder<>& textureWrapperHolder;
+
 		RenderEntityDictionary renderEntityDictionary;
 		mutable ViewDictionary viewDictionary;
 		ZOrderAssignmentFunctionDictionary zOrderAssignmentFunctionDictionary;
@@ -109,6 +120,7 @@ namespace mbe
 		// SubscriptionId to unsubscribe the subscribed events
 		EventManager::SubscriptionID renderEntityCreatedSubscription;
 		EventManager::SubscriptionID renderEntityRemovedSubscription;
+		EventManager::SubscriptionID textureWrapperChangedSubscription;
 	};
 
 #pragma region Template Implementations

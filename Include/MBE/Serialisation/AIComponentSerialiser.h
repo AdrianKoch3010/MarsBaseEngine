@@ -57,7 +57,7 @@ namespace mbe
 		static_assert(std::is_base_of<AITaskSerialiser, TAITaskSerialiser>::value, "The ai task serialiser must inherit from mbe::AITaskSerialser");
 
 		// Remember the typeId for this ai task type for the serialiser store function
-		aiTaskTypeDictionary.insert({ detail::GetAITaskTypeID<TComponent>(), aiTaskType });
+		aiTaskTypeDictionary.insert({ detail::GetAITaskTypeID<TAITask>(), aiTaskType });
 
 		// Throw if a component serialiser for this type already exists
 		if (aiTaskSerialiserDictionary.find(aiTaskType) == aiTaskSerialiserDictionary.end())

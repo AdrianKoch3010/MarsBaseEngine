@@ -244,23 +244,23 @@ namespace mbe
 #pragma region Specialisation Typedefs
 
 	/// @brief A mbe::AssetHolder that holds mbe::TextureWrappers
-	template <typename TID>
+	template <typename TID = std::string>
 	using TextureWrapperHolder = AssetHolder<TID, TextureWrapper>;
 
 	/// @brief A mbe::AssetHolder that holds sf::Textures
-	template <typename TID>
+	template <typename TID = std::string>
 	using TextureHolder = AssetHolder<TID, sf::Texture>;
 
 	/// @brief A mbe::AssetHolder that hold sf::Fonts
-	template <typename TID>
+	template <typename TID = std::string>
 	using FontHolder = AssetHolder<TID, sf::Font>;
 
 	/// @brief A mbe::AssetHolder that holds sf::Shaders
-	template <typename TID>
+	template <typename TID = std::string>
 	using ShaderHolder = AssetHolder<TID, sf::Shader>;
 
 	/// @brief A mbe::AssetHolder that holds sf::SoundBuffers
-	template <typename TID>
+	template <typename TID = std::string>
 	using SoundBufferHolder = AssetHolder<TID, sf::SoundBuffer>;
 
 #pragma endregion

@@ -195,6 +195,8 @@
     <ClCompile Include="Source\MBE\AI\AIComponent.cpp" />
     <ClCompile Include="Source\MBE\AI\AISystem.cpp" />
     <ClCompile Include="Source\MBE\AI\AITask.cpp" />
+    <ClCompile Include="Source\MBE\Animation\AnimationSystem.cpp" />
+    <ClCompile Include="Source\MBE\Animation\EntityAnimator.cpp" />
     <ClCompile Include="Source\MBE\Core\ComponentsChangedEvent.cpp" />
     <ClCompile Include="Source\MBE\Core\ComponentValueChangedEvent.cpp" />
     <ClCompile Include="Source\MBE\Graphics\BaseComponentRenderSystem.cpp" />
@@ -273,6 +275,8 @@
     <ClInclude Include="Include\MBE\AI\AIComponent.h" />
     <ClInclude Include="Include\MBE\AI\AISystem.h" />
     <ClInclude Include="Include\MBE\AI\AITask.h" />
+    <ClInclude Include="Include\MBE\Animation\AnimationSystem.h" />
+    <ClInclude Include="Include\MBE\Animation\EntityAnimator.h" />
     <ClInclude Include="Include\MBE\Audio\BaseAudioComponent.h" />
     <ClInclude Include="Include\MBE\Core\ComponentsChangedEvent.h" />
     <ClInclude Include="Include\MBE\Core\ComponentValueChangedEvent.h" />

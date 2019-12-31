@@ -40,6 +40,7 @@ void TiledTerrainLayerRenderSystem::Update()
 
 		auto renderStates = renderComponent.GetRenderStates();
 		
+		// Set the transform if the entity has a transform component
 		if (entity.HasComponent<TransformComponent>())
 			renderStates.transform = entity.GetComponent<TransformComponent>().GetWorldTransform();
 

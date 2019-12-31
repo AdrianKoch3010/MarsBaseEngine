@@ -43,12 +43,6 @@ namespace mbe
 		/// @brief Default destructor
 		virtual ~Component() = default;
 
-		/// @brief Virtual function to update the component that should be called every frame
-		/// @detail This method can but does not have to be overwritten in derived components
-		/// and is guaranteed to be called once each frame.
-		/// @param frameTime The delta time between two successive frames
-		virtual void Update(sf::Time frameTime) {};
-
 		/// @brief Gets the entity to which this component belongs
 		/// @returns A reference to its parent Enity
 		Entity & GetParentEntity() const { return parentEntity; }

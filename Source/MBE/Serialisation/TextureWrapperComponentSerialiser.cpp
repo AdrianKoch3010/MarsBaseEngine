@@ -48,6 +48,6 @@ void TextureWrapperComponentSerialiser::StoreComponent(const Entity& entity, tin
 
 	// Store the texture wrapper
 	auto textureWrapperElement = document.NewElement("TextureWrapper");
-	textureWrapperElement->SetText(textureWrapperComponent.GetTextureWrapperName().c_str());
+	textureWrapperElement->SetText(textureWrapperComponent.GetTextureWrapperID().c_str());
 	componentData.InsertEndChild(textureWrapperElement);
 }

@@ -38,6 +38,9 @@ void AIComponentSerialser::LoadComponent(Entity& entity, const tinyxml2::XMLElem
 
 void AIComponentSerialser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData)
 {
+	// The entity must have an ai component (this should be the case when this function is called from the EntitySerialiser
+	if (entity.HasComponent<UtilityAIComponent>() == false)
+		throw std::runtime_error("Store ai component: The entity must have an mbe::UtilityAIComponent");
 	const auto& aiComponent = entity.GetComponent<UtilityAIComponent>();
 
 	// Add the active task, if present

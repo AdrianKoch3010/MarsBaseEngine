@@ -360,6 +360,12 @@
     <ClCompile Include="Source\MBE\Serialisation\TextureWrapperComponentSerialiser.cpp">
       <Filter>Quelldateien\ComponentSerialisers</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MBE\Animation\EntityAnimator.cpp">
+      <Filter>Quelldateien\Systems\Animation System</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Animation\AnimationSystem.cpp">
+      <Filter>Quelldateien\Systems\Animation System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\TransformComponent.h">
@@ -628,6 +634,12 @@
     </ClInclude>
     <ClInclude Include="Include\MBE\Serialisation\TextureWrapperComponentSerialiser.h">
       <Filter>Headerdateien\ComponentSerialisers</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Animation\EntityAnimator.h">
+      <Filter>Headerdateien\Systems\Animation System</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Animation\AnimationSystem.h">
+      <Filter>Headerdateien\Systems\Animation System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -24,7 +24,7 @@ namespace mbe
 			/// @brief Constructor
 			/// @param component A reference to the component whose value has been changed
 			/// @param value The name of the property that has been changed
-			ComponentValueChangedEvent(TComponent & component, std::string value = "Default");
+			ComponentValueChangedEvent(TComponent& component, std::string value = "Default");
 
 			/// @brief Default Destructor
 			~ComponentValueChangedEvent() = default;
@@ -45,21 +45,21 @@ namespace mbe
 			bool IsValueChanged(std::string && value) const;
 
 			// const overload
-			const TComponent & GetComponent() const { return component; };
+			const TComponentSerialiser & GetComponent() const { return component; };
 
 			///// @brief Allows this class to be written to an out stream
 			///// @details This may be used to output the event's data to the console or a log file
 			//friend std::ostream & operator << (std::ostream & stream, const ComponentValueChangedEvent & event);
 
 		private:
-			TComponent & component;
+			TComponentSerialiser & component;
 			std::string value;
 		};
 
 #pragma region Template Implementations
 
 			template<class TComponent>
-			inline ComponentValueChangedEvent<TComponent>::ComponentValueChangedEvent(TComponent & component, std::string value) :
+			inline ComponentValueChangedEvent<TComponent>::ComponentValueChangedEvent(TComponent& component, std::string value) :
 				component(component),
 				value(NormaliseIDString(std::move(value)))
 			{
