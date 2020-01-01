@@ -38,10 +38,10 @@ namespace mbe
 			{
 			}
 
-			mutable float			duration;
-			sf::IntRect				subrect;
-			sf::Vector2f			origin;
-			bool					applyOrigin;
+			mutable float	duration;
+			sf::IntRect		subrect;
+			sf::Vector2f	origin;
+			const bool		applyOrigin;
 		};
 
 	public:
@@ -92,8 +92,8 @@ namespace mbe
 	template<class TAnimated>
 	inline void FrameAnimation::operator()(TAnimated & target, float progress) const
 	{
-		assert(!frameList.empty() && "No frames exist that could be appied");
-		assert(progress >= 0.f && progress <= 1.f && "The progress must be a float between 0 and 1");
+		assert(!frameList.empty() && "FrameAnimation: No frames exist that could be appied");
+		assert(progress >= 0.f && progress <= 1.f && "FrameAnimation: The progress must be a float between 0 and 1");
 
 		EnsureNormalized();
 		for (const auto & frame : frameList)

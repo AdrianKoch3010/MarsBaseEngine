@@ -12,10 +12,6 @@ TextureWrapperComponent::TextureWrapperComponent(EventManager & eventManager, En
 
 void TextureWrapperComponent::SetTextureWrapper(const std::string& textureWrapperId, bool resetTextureRect)
 {
-	// Recompute the texture rect if required
-	if (resetTextureRect)
-		textureRect = { {0, 0}, {static_cast<sf::Vector2i>(GetTextureWrapper().GetTexture().getSize())} };
-
 	if (this->textureWrapperId == textureWrapperId)
 		return;
 
@@ -23,6 +19,10 @@ void TextureWrapperComponent::SetTextureWrapper(const std::string& textureWrappe
 	this->textureWrapperId = textureWrapperId;
 
 	eventManager.RaiseEvent(TextureWrapperChangedEvent(*this, MBE_NAME_OF(textureWrapper)));
+
+	// Recompute the texture rect if required
+	if (resetTextureRect)
+		textureRect = { {0, 0}, {static_cast<sf::Vector2i>(GetTextureWrapper().GetTexture().getSize())} };
 }
 
 void TextureWrapperComponent::SetTextureRect(const sf::IntRect & textureRect)

@@ -7,14 +7,9 @@ EntityManager::EntityManager(EventManager & eventManager) :
 {
 }
 
-void EntityManager::Update(sf::Time frameTime)
+void EntityManager::Update()
 {
 	this->Refresh();
-
-	for (auto & entity : entityList)
-	{
-		entity->Update(frameTime);
-	}
 }
 
 std::vector<Entity::HandleID> EntityManager::GetEntityList() const

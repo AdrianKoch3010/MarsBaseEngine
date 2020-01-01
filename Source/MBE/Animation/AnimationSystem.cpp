@@ -26,17 +26,16 @@ void AnimationSystem::Update(sf::Time frameTime)
 
 			// If no animation playing, do nothing
 			if (animator.IsPlayingAnimation() == false)
-				return;
+				continue;
 
 			// If the animation is paused, do nothing
 			if (animator.IsPaused())
-				return;
+				continue;
 
 			// Update progress, scale dt with 1 / current animation duration
 			auto progress = animator.GetProgress();
 			auto& currentlyPlayingAnimation = animator.GetAnimationDictionary().at(animator.GetPlayingAnimation());
 			progress += frameTime.asSeconds() / currentlyPlayingAnimation.second.asSeconds();
-			animator.SetProgress(progress);
 
 			// If animation is expired, stop or restart animation at loops
 			if (progress > 1.f)
@@ -49,9 +48,11 @@ void AnimationSystem::Update(sf::Time frameTime)
 				else
 				{
 					animator.StopAnimation();
-					return;
+					continue;
 				}
 			}
+
+			animator.SetProgress(progress);
 
 			// If an animation is playing, apply it to the Animated template (e.g. the render object of the parentEntity)
 			if (animator.IsPlayingAnimation())
@@ -60,7 +61,7 @@ void AnimationSystem::Update(sf::Time frameTime)
 
 				auto& currentlyPlayingAnimation = animator.GetAnimationDictionary().at(animator.GetPlayingAnimation());
 				auto& animationFunction = currentlyPlayingAnimation.first;
-				animationFunction(*animatedObjectPtr, progress);
+				animationFunction(*animatedObjectPtr, animator.GetProgress());
 			}
 		}
 	}

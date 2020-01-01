@@ -28,7 +28,7 @@ namespace mbe
 		void Update(sf::Time frameTime);
 
 	private:
-		EntityManager& entityManager
+		EntityManager& entityManager;
 	};
 
 

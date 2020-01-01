@@ -32,16 +32,13 @@ namespace mbe
 		typedef std::unique_ptr<TextureWrapperComponentSerialiser> UPtr;
 
 	public:
-		TextureWrapperComponentSerialiser(const TextureWrapperHolder<std::string>& textureWrapperHolder);
+		TextureWrapperComponentSerialiser();
 		~TextureWrapperComponentSerialiser() = default;
 
 	public:
 		void LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) override;
 
 		void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) override;
-
-	private:
-		const TextureWrapperHolder<std::string>& textureWrapperHolder;
 	};
 
 

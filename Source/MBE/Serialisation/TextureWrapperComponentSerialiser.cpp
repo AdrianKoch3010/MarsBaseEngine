@@ -5,9 +5,8 @@
 
 using namespace mbe;
 
-TextureWrapperComponentSerialiser::TextureWrapperComponentSerialiser(const TextureWrapperHolder<std::string>& textureWrapperHolder) :
-	ComponentSerialser(),
-	textureWrapperHolder(textureWrapperHolder)
+TextureWrapperComponentSerialiser::TextureWrapperComponentSerialiser() :
+	ComponentSerialser()
 {
 }
 
@@ -31,7 +30,7 @@ void TextureWrapperComponentSerialiser::LoadComponent(Entity& entity, const tiny
 	std::string textureWrapperString{ textureWrapperText };
 
 	// Create the component and set the value
-	entity.AddComponent<TextureWrapperComponent>(textureWrapperHolder, textureWrapperString).SetTextureRect(textureRect);
+	entity.AddComponent<TextureWrapperComponent>(textureWrapperString).SetTextureRect(textureRect);
 }
 
 void TextureWrapperComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData)

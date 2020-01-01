@@ -170,11 +170,6 @@ namespace mbe
 
 
 	public:
-		/// @brief Updates all attached Components
-		/// @details this function is called by the update function of the EntityManager
-		/// @param frameTime The delta time between two successive frames
-		void Update(sf::Time frameTime);
-
 		/// @brief Returns whether this enity is still active
 		/// @details If it is not active, it is flagged to be deleted and should not be used
 		bool IsActive() const { return active; }

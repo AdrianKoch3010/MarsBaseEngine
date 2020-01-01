@@ -180,7 +180,7 @@ namespace mbe
 		auto componentSerialiserPtr = std::make_shared<TComponentSerialiser>(std::forward<TArguments>(arguments)...);
 
 		// Remember it under this type so that it can be accessed later
-		componentSerialiserDictionary.insert(detail::GetComponentSerialiserTypeID<TComponentSerialiser>(), componentSerialiserPtr);
+		componentSerialiserTypeDictionary.insert({ detail::GetComponentSerialiserTypeID<TComponentSerialiser>(), componentSerialiserPtr });
 	
 		// Add the component serialiser to the dictionary
 		componentSerialiserDictionary.insert({ componentType, std::move(componentSerialiserPtr) });

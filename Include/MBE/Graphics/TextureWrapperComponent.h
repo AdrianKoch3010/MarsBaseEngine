@@ -32,10 +32,13 @@ namespace mbe
 		~TextureWrapperComponent() = default;
 
 	public:
+		// Raises mbe::event::ComponentValueChangedEvent (value = textureWrapper)
 		void SetTextureWrapper(const std::string & textureWrapperId, bool resetTextureRect = true);
 
+		// Raises mbe::event::ComponentValueChangedEvent (value = textureRect)
 		void SetTextureRect(const sf::IntRect & textureRect);
 
+		// Raises mbe::event::ComponentValueChangedEvent (value = textureRect)
 		void SetTextureRect(sf::IntRect && textureRect);
 
 		// Throws if no texture wrapper is assigned

@@ -11,7 +11,6 @@
 #include <memory>
 
 #include <MBE/Core/Entity.h>
-#include <MBE/Core/Utility.h>
 
 //namespace mbe
 //{
@@ -157,7 +156,7 @@ namespace mbe
 
 		// throws std::runntime_error if no animation has been registed under the given id. Therefore, you have to make sure
 		// by a preceding call to HasAnimation() that an animation with this id exists.
-		AnimationTypeID GetAnimationTypeID(const std::string& animationId) const;
+		AnimationTypeID GetAnimationTypeID(const std::string& id) const;
 
 	private:
 		const Entity::HandleID entityId;

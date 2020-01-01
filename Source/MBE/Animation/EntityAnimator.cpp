@@ -1,3 +1,5 @@
+#include <MBE/Core/Utility.h>
+
 #include <MBE/Animation/EntityAnimator.h>
 
 using namespace mbe;
@@ -14,11 +16,9 @@ EntityAnimator::EntityAnimator(Entity& entity) :
 
 void EntityAnimator::PlayAnimation(const std::string& id, bool loop)
 {
-	// Convert id to lower case
-	auto lowerCaseId = id; // Needed since id is const and function must override mbe::BaseAnimator::PlayAnimation()
-	std::transform(lowerCaseId.begin(), lowerCaseId.end(), lowerCaseId.begin(), ::tolower);
+	auto normalisedId = NormaliseIDString(id);
 
-	AnimationDictionaryIterator it = animationDictionary.find(lowerCaseId);
+	AnimationDictionaryIterator it = animationDictionary.find(normalisedId);
 
 	if (it == animationDictionary.end())
 		throw std::runtime_error("EntityAnimator: No animation has been registered under this id: " + id);
@@ -68,17 +68,17 @@ const std::string& EntityAnimator::GetPlayingAnimation() const
 
 bool EntityAnimator::HasAnimation(const std::string& id) const
 {
-	// Convert id string to lower case
-	auto lowerCaseId = id; // Needed since id is const
-	std::transform(lowerCaseId.begin(), lowerCaseId.end(), lowerCaseId.begin(), ::tolower);
+	auto normalisedId = NormaliseIDString(id);
 
-	return animationDictionary.find(lowerCaseId) != animationDictionary.end();
+	return animationDictionary.find(normalisedId) != animationDictionary.end();
 }
 
-EntityAnimator::AnimationTypeID EntityAnimator::GetAnimationTypeID(const std::string& animationId) const
+EntityAnimator::AnimationTypeID EntityAnimator::GetAnimationTypeID(const std::string& id) const
 {
-	if (animationTypeDictionary.find(animationId) == animationTypeDictionary.end())
-		throw std::runtime_error("EntityAnimator: No animation has been registered under this id: " + animationId);
+	auto normalisedId = NormaliseIDString(id);
 
-	return animationTypeDictionary.at(animationId);
+	if (animationTypeDictionary.find(normalisedId) == animationTypeDictionary.end())
+		throw std::runtime_error("EntityAnimator: No animation has been registered under this id: " + id);
+
+	return animationTypeDictionary.at(normalisedId);
 }

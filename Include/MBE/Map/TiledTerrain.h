@@ -37,7 +37,7 @@ namespace mbe
 			void Load(const std::string filePath);
 
 			// Automatically converts the std::vector<int> to a c-style int array (int *)
-			inline const std::vector<std::vector<size_t>> & GetTileMapLayersIndexList() const { return tileMapLayersIndexList; }
+			inline const std::vector<std::vector<size_t>>& GetTileMapLayersIndexList() const { return tileMapLayersIndexList; }
 			inline sf::Vector2u GetTileSize() const { return tileSize; }
 			inline sf::Vector2u GetMapSize() const { return mapSize; }
 
@@ -52,29 +52,30 @@ namespace mbe
 			sf::Vector2u mapSize{ 0u, 0u };
 		};
 #pragma endregion
-		
+
 	public:
-		TiledTerrain(EventManager & eventManager, EntityManager & entityManager, sf::Vector2u size, sf::Vector2u tileSize);
-		TiledTerrain(EventManager & eventManager, EntityManager & entityManager, Data::Ptr mapData, const TextureWrapper & tileMapTextureWrapper);
+		TiledTerrain(EventManager& eventManager, EntityManager& entityManager, sf::Vector2u size, sf::Vector2u tileSize);
+		TiledTerrain(EventManager& eventManager, EntityManager& entityManager, Data::Ptr mapData, const std::string& tileMapTextureWrapperId);
 
 		// Unsubscribe from event
 		~TiledTerrain();
 
 	public:
 
-		inline const sf::Vector2u & GetSize() const { return size; }
-		inline const sf::Vector2u & GetTileSize() const { return tileSize; }
+		inline const sf::Vector2u& GetSize() const { return size; }
+		inline const sf::Vector2u& GetTileSize() const { return tileSize; }
 
 		// The zOrder Of the layer is automatically set to last
-		Entity::HandleID AddTileMapLayer(const TextureWrapper & textureWrapper);
+		Entity::HandleID AddTileMapLayer(const std::string& textureWrapperId);
 		Entity::HandleID GetLayer(const size_t layerIndex);
 		void SwopRenderLayerOrder(const size_t first, const size_t second);
 
 		inline Entity::HandleID operator[](const size_t layerIndex) { return GetLayer(layerIndex); }
 
 	private:
-		void RecalculateLayer(Entity & entity);
+		void RecalculateLayer(Entity& entity);
 
+		void SubscribeEvents();
 		void OnTextureWrapperChangedEvent(TextureWrapperComponent& textureWraapperComponent);
 		void OnIndexListChangedEvent(TiledTerrainLayerComponent& tiledTerrainLayerComponent);
 
@@ -85,8 +86,8 @@ namespace mbe
 		std::vector<Entity::HandleID> renderLayerList;
 		std::vector<std::vector<size_t>> tileMapLayersIndexList;
 
-		EntityManager & entityManager;
-		EventManager & eventManager;
+		EntityManager& entityManager;
+		EventManager& eventManager;
 		EventManager::SubscriptionID textureChangedSubscription;
 		EventManager::SubscriptionID indexListChangedSubscription;
 	};

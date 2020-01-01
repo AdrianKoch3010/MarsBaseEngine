@@ -40,8 +40,7 @@ namespace mbe
 	public:
 		/// @brief Updates all managed entities
 		/// @details Should be called once each frame
-		/// @param frameTime The delta time between two successive frames
-		void Update(sf::Time frameTime);
+		void Update();
 
 		/// @brief Creates a default entity
 		/// @details Components can be added later on.

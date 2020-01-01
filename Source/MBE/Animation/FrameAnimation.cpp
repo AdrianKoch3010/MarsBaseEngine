@@ -8,19 +8,19 @@ FrameAnimation::FrameAnimation() :
 {
 }
 
-void mbe::FrameAnimation::AddFrame(const sf::IntRect & subrect, float relativeDuration)
+void FrameAnimation::AddFrame(const sf::IntRect & subrect, float relativeDuration)
 {
 	frameList.push_back(FrameAnimation::Frame(relativeDuration, subrect));
 	normalized = false;
 }
 
-void mbe::FrameAnimation::AddFrame(const sf::IntRect & subrect, sf::Vector2f origin, float relativeDuration)
+void FrameAnimation::AddFrame(const sf::IntRect & subrect, sf::Vector2f origin, float relativeDuration)
 {
 	frameList.push_back(FrameAnimation::Frame(relativeDuration, subrect, origin));
 	normalized = false;
 }
 
-void mbe::FrameAnimation::AddFrames(sf::Vector2u size, sf::Vector2u first, unsigned short int numberOfFrames)
+void FrameAnimation::AddFrames(sf::Vector2u size, sf::Vector2u first, unsigned short int numberOfFrames)
 {
 	// for the number of frames to add
 	for (size_t i = 0; i < numberOfFrames; i++)
@@ -29,7 +29,7 @@ void mbe::FrameAnimation::AddFrames(sf::Vector2u size, sf::Vector2u first, unsig
 	}
 }
 
-void mbe::FrameAnimation::EnsureNormalized() const
+void FrameAnimation::EnsureNormalized() const
 {
 	if (normalized)
 		return;

@@ -44,15 +44,15 @@ namespace mbe
 			// Prefered over GetValue since the passed in value is always normalised
 			bool IsValueChanged(std::string && value) const;
 
-			// const overload
-			const TComponentSerialiser & GetComponent() const { return component; };
+			// const correctnis is broken here in order to be able to change the component itself
+			inline /*const*/ TComponent& GetComponent() const { return component; };
 
 			///// @brief Allows this class to be written to an out stream
 			///// @details This may be used to output the event's data to the console or a log file
 			//friend std::ostream & operator << (std::ostream & stream, const ComponentValueChangedEvent & event);
 
 		private:
-			TComponentSerialiser & component;
+			TComponent& component;
 			std::string value;
 		};
 

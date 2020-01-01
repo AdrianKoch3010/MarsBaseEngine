@@ -1,3 +1,4 @@
+#include "..\..\..\Include\MBE\Map\TiledTerrain.h"
 #include <MBE/Core/EntityCreatedEvent.h>
 #include <MBE/Core/ComponentValueChangedEvent.h>
 
@@ -15,32 +16,21 @@ TiledTerrain::TiledTerrain(EventManager& eventManager, EntityManager& entityMana
 	size(size),
 	tileSize(tileSize)
 {
+	SubscribeEvents();
 }
 
-TiledTerrain::TiledTerrain(EventManager& eventManager, EntityManager& entityManager, Data::Ptr mapData, const TextureWrapper& tileMapTextureWrapper) :
+TiledTerrain::TiledTerrain(EventManager& eventManager, EntityManager& entityManager, Data::Ptr mapData, const std::string& tileMapTextureWrapperId) :
 	eventManager(eventManager),
 	entityManager(entityManager),
 	size(mapData->GetMapSize()),
 	tileSize(mapData->GetTileSize())
 {
-	// Subscribe to texture changed event
-	textureChangedSubscription = eventManager.Subscribe(EventManager::TCallback<TextureChangedEvent>([this](const TextureChangedEvent& event)
-		{
-			if (!event.IsValueChanged("TextureWrapper"))
-				return;
-		}));
-
-	// Subscribe to index list changed event
-	indexListChangedSubscription = eventManager.Subscribe(EventManager::TCallback<IndexListChangedEvent>([this](const IndexListChangedEvent& event)
-		{
-			if (!event.IsValueChanged("IndexList"))
-				return;
-		}));
+	SubscribeEvents();
 
 	// Add layers
 	for (const auto& layer : mapData->GetTileMapLayersIndexList())
 	{
-		Entity::HandleID layerId = this->AddTileMapLayer(tileMapTextureWrapper);
+		Entity::HandleID layerId = this->AddTileMapLayer(tileMapTextureWrapperId);
 		auto& layerEntity = *Entity::GetObjectFromID(layerId);
 
 		try
@@ -66,13 +56,13 @@ TiledTerrain::~TiledTerrain()
 	eventManager.UnSubscribe<IndexListChangedEvent>(indexListChangedSubscription);
 }
 
-Entity::HandleID TiledTerrain::AddTileMapLayer(const TextureWrapper& textureWrapper)
+Entity::HandleID TiledTerrain::AddTileMapLayer(const std::string& textureWrapperId)
 {
 	// Create the layer entity and add the according components
 	auto& layer = entityManager.CreateEntity();
 	layer.AddComponent<TransformComponent>();
 	layer.AddComponent<RenderInformationComponent>(RenderLayer::Foreground);
-	layer.AddComponent<TextureWrapperComponent>(textureWrapper);
+	layer.AddComponent<TextureWrapperComponent>(textureWrapperId);
 	layer.AddComponent<TiledTerrainLayerComponent>();
 	layer.AddComponent<TiledTerrainLayerRenderComponent>(size, tileSize);
 	eventManager.RaiseEvent(EntityCreatedEvent(layer.GetHandleID()));
@@ -127,6 +117,23 @@ void TiledTerrain::RecalculateLayer(Entity& entity)
 	{
 		std::cerr << std::endl << error.what();
 	}
+}
+
+void TiledTerrain::SubscribeEvents()
+{
+	// Subscribe to texture changed event
+	textureChangedSubscription = eventManager.Subscribe(EventManager::TCallback<TextureChangedEvent>([this](const TextureChangedEvent& event)
+		{
+			if (!event.IsValueChanged("TextureWrapper"))
+				return;
+		}));
+
+	// Subscribe to index list changed event
+	indexListChangedSubscription = eventManager.Subscribe(EventManager::TCallback<IndexListChangedEvent>([this](const IndexListChangedEvent& event)
+		{
+			if (!event.IsValueChanged("IndexList"))
+				return;
+		}));
 }
 
 void TiledTerrain::OnTextureWrapperChangedEvent(TextureWrapperComponent& textureWraapperComponent)

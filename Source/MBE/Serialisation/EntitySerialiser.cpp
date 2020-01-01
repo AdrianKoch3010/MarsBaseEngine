@@ -28,7 +28,7 @@ EntitySerialiser::EntitySerialiser(EntityManager& entityManager, EventManager& e
 	AddComponentSerialiser<AnimationComponentSerialiser, AnimationComponent>("AnimationComponent");
 	AddComponentSerialiser<PixelMaskClickableComponentSerialiser, PixelMaskClickableComponent>("PixelMaskClickableComponent");
 	AddComponentSerialiser<TopDownInformationComponentSerialiser, TopDownInformationComponent>("TopDownInformationComponent");
-	AddComponentSerialiser<TextureWrapperComponentSerialiser, TextureWrapperComponent>("TextureWrapperComponent", context.textureWrappers);
+	AddComponentSerialiser<TextureWrapperComponentSerialiser, TextureWrapperComponent>("TextureWrapperComponent");
 }
 
 void EntitySerialiser::LoadEntites(const std::string& filePath)

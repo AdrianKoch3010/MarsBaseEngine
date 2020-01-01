@@ -12,12 +12,6 @@ Entity::Entity(EventManager & eventManager, EntityManager & entityManager) :
 {
 }
 
-void Entity::Update(sf::Time frameTime)
-{
-	for (auto & pair : actualComponentDictionary)
-		pair.second->Update(frameTime);
-}
-
 void Entity::Destroy()
 {
 	this->active = false;
