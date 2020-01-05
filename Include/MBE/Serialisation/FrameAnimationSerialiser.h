@@ -40,7 +40,7 @@ namespace mbe
 	public:
 		void Load(EntityAnimator& entityAnimator, const tinyxml2::XMLElement& animationData, const std::string& animationId, sf::Time duration) override;
 
-		void Store(const EntityAnimator& entityAnimator, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& animationData) override;
+		void Store(const EntityAnimator& entityAnimator, const std::string& animationId, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& animationData) override;
 	};
 
 

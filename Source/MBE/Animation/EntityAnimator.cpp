@@ -73,6 +73,14 @@ bool EntityAnimator::HasAnimation(const std::string& id) const
 	return animationDictionary.find(normalisedId) != animationDictionary.end();
 }
 
+sf::Time EntityAnimator::GetAnimationDuration(const std::string& id) const
+{
+	if (HasAnimation(id) == false)
+		throw std::runtime_error("Entity animator: No animation has been added under this id (" + id + ")");
+
+	return animationDictionary.at(id).second;
+}
+
 EntityAnimator::AnimationTypeID EntityAnimator::GetAnimationTypeID(const std::string& id) const
 {
 	auto normalisedId = NormaliseIDString(id);

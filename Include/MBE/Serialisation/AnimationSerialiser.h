@@ -38,9 +38,10 @@ namespace mbe
 
 		/// @brief Interface for serialising an animation into an XML element
 		/// @param entityAnimator The animator whos animation is stored.
+		/// @param animationId The id of the animation to be stored
 		/// @param document The XML document that the animation is stored to
 		/// @param animationData The XML element to which the animation is stored to
-		virtual void Store(const EntityAnimator& entityAnimator, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& animationData) = 0;
+		virtual void Store(const EntityAnimator& entityAnimator, const std::string& animationId, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& animationData) = 0;
 	};
 
 

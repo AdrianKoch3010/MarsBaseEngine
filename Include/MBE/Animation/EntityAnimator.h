@@ -150,6 +150,13 @@ namespace mbe
 		/// @param id The id of the animation.
 		bool HasAnimation(const std::string& id) const;
 
+		// Throws if the no animation has been added under this id and if the requested animation does not have the required type
+		// Use HasAnimation() to check whether the requested animation has been registered
+		template<typename TAnimation>
+		const TAnimation& GetAnimation(const std::string& id) const;
+
+		sf::Time GetAnimationDuration(const std::string& id) const;
+
 		inline AnimationDictionary& GetAnimationDictionary() { return animationDictionary; }
 
 		inline const AnimationDictionary& GetAnimationDictionary() const { return animationDictionary; }
@@ -179,12 +186,27 @@ namespace mbe
 
 		// Make sure that the id is unique
 		if (animationDictionary.find(id) != animationDictionary.end())
-			throw std::runtime_error("EntityAnimator: An animation with the same id already exists");
+			throw std::runtime_error("EntityAnimator: An animation with the same id already exists (" + id + ")");
 		
 		// Remember the type
 		animationTypeDictionary.insert(std::make_pair(id, detail::GetAnimationTypeID<TAnimationFunction>()));
 
 		animationDictionary.insert(std::make_pair(id, ScaledAnimation(animation, duration)));
+	}
+
+	template<typename TAnimation>
+	inline const TAnimation& EntityAnimator::GetAnimation(const std::string& id) const
+	{
+		if (HasAnimation(id) == false)
+			throw std::runtime_error("Entity animator: No animation has been added under this id (" + id + ")");
+
+		// Try to cast the animaton to the required type
+		auto animationPtr = animationDictionary.at(id).first.target<TAnimation>();
+
+		if (animationPtr == nullptr)
+			throw std::runtime_error("Entity animator: Wrong animation type");
+
+		return *animationPtr;
 	}
 
 #pragma endregion

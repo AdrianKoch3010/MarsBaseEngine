@@ -2,7 +2,7 @@
 
 using namespace mbe;
 
-TileMapComponent::TileMapComponent(EventManager & eventManager, Entity & parentEntity) :
+TileMapComponent::TileMapComponent(EventManager& eventManager, Entity& parentEntity) :
 	Component(eventManager, parentEntity),
 	position({ 0u, 0u })
 {

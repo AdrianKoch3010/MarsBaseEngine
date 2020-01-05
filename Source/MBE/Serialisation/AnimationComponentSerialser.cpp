@@ -165,7 +165,7 @@ void AnimationComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2
 			animationElement->SetAttribute("time", animationTime.asMilliseconds());
 
 			// Call the corresponding animation serialiser
-			animationSerialiserDictionary.at(animationTypeDictionary.at(animator.GetAnimationTypeID(animationId)))->Store(animator, document, *animationElement);
+			animationSerialiserDictionary.at(animationTypeDictionary.at(animator.GetAnimationTypeID(animationId)))->Store(animator, animationId, document, *animationElement);
 
 			animationsElement->InsertEndChild(animationElement);
 		}

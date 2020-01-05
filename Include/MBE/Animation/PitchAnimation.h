@@ -22,6 +22,8 @@ namespace mbe
 		template <class TAnimated>
 		void operator() (TAnimated & target, float progress);
 
+		inline float GetMinimumPitch() const { return minimumPitch; }
+
 	private:
 		float minimumPitch;
 	};

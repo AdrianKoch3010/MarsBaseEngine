@@ -18,7 +18,7 @@ namespace mbe
 	/// The resulting animation consists of a sequence of frames that are drawn one after another.
 	class FrameAnimation
 	{
-	private:
+	public:
 		/// @brief Class that stores a single frame of FrameAnimation
 		struct Frame
 		{
@@ -71,6 +71,9 @@ namespace mbe
 		/// @warning Make sure that the sprite sheet texture (to which the animation is later applied) is big enough!
 		void AddFrames(sf::Vector2u size, sf::Vector2u first, unsigned short int numberOfFrames);
 
+		/// @brief Returns the list of frames
+		inline const std::vector<Frame>& GetFrameList() const { return frameList; }
+
 		/// @brief Applies the animation to the passed in target object
 		/// @details The target object must provide a SetTextureRect(sf::IntRect) and SetOrigin(sf::Vector2f) method
 		/// @tparam Animated The type of the object to apply the animation to
@@ -83,7 +86,7 @@ namespace mbe
 		void EnsureNormalized() const;
 
 	private:
-		std::vector<FrameAnimation::Frame> frameList;
+		std::vector<Frame> frameList;
 		mutable bool normalized;
 	};
 

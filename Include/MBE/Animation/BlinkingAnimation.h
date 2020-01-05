@@ -24,6 +24,8 @@ namespace mbe
 		template <class TAnimated>
 		void operator() (TAnimated & target, float progress);
 
+		inline float GetMinimumBrightness() const { return minimumBrightness; }
+
 	private:
 		float minimumBrightness;
 	};

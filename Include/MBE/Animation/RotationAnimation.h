@@ -3,6 +3,8 @@
 /// @file
 /// @brief Class mbe::RotationAnimation
 
+#include <MBE/TransformComponent.h>
+
 namespace mbe
 {
 	/// @brief A class defining a rotation animation that can be used by the mbe::AnimationComponent
@@ -25,6 +27,10 @@ namespace mbe
 		/// i.e. by how much the object is rotated
 		template <class TAnimated>
 		void operator () (TAnimated & target, float progress) const;
+
+		// @brief Returns the relative maximum rotation
+		// @returns The relative maximum rotation achived. 1 is a full rotation.
+		inline float GetRelativeMaximumRotation() const { return relativeMaximumRotation; }
 
 	private:
 		float relativeMaximumRotation;
