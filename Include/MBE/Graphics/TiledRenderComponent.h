@@ -1,7 +1,7 @@
 #pragma once
 
 /// @file
-/// @brief Class mbe::TiledTerrainLayerRenderComponent
+/// @brief Class mbe::TiledRenderComponent
 
 #include <iostream>
 #include <cassert>
@@ -17,14 +17,14 @@ namespace mbe
 {
 	// Does not store information on the tile index list
 	// Some other system must take care of syncronysing it with the tiled terrain data
-	class TiledTerrainLayerRenderComponent : public RenderComponent
+	class TiledRenderComponent : public RenderComponent
 	{
 	public:
-		TiledTerrainLayerRenderComponent(EventManager & eventManager, Entity & parentEntity, sf::Vector2u size, sf::Vector2u tileSize);
-		~TiledTerrainLayerRenderComponent() = default;
+		TiledRenderComponent(EventManager& eventManager, Entity& parentEntity, const sf::Vector2u& size, const sf::Vector2u& tileSize);
+		~TiledRenderComponent() = default;
 
 	public:
-		void Draw(sf::RenderTarget & target) const override;
+		void Draw(sf::RenderTarget& target) const override;
 
 		sf::FloatRect GetLocalBounds() const override;
 
@@ -35,19 +35,19 @@ namespace mbe
 		// Cannot calculate the texture coordinates for the tile
 		void SetTile(sf::Vector2u position, size_t tileIndex);
 
-		inline void SetRenderStates(const sf::RenderStates & states) { renderStates = states; }
+		inline void SetRenderStates(const sf::RenderStates& states) { renderStates = states; }
 
-		inline void SetRenderStates(sf::RenderStates && states) { renderStates = std::move(states); }
+		inline void SetRenderStates(sf::RenderStates&& states) { renderStates = std::move(states); }
 
 		inline bool IsCreated() const { return isCreated; }
 
-		inline sf::VertexArray & GetVertices() { return vertices; }
+		inline sf::VertexArray& GetVertices() { return vertices; }
 
-		inline const sf::Vector2u & GetSize() const { return size; }
+		inline const sf::Vector2u& GetSize() const { return size; }
 
-		inline const sf::Vector2u & GetTileSize() const { return tileSize; }
+		inline const sf::Vector2u& GetTileSize() const { return tileSize; }
 
-		inline const sf::RenderStates & GetRenderStates() const{ return renderStates; }
+		inline const sf::RenderStates& GetRenderStates() const { return renderStates; }
 
 	public:
 		/// @brief A constant defining an empty tile. This is a transparrent tile that has no texture associated with it.

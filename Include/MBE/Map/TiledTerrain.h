@@ -12,8 +12,8 @@
 #include <MBE/TransformComponent.h>
 #include <MBE/Graphics/TextureWrapperComponent.h>
 #include <MBE/Graphics/RenderInformationComponent.h>
-#include <MBE/Graphics/TiledTerrainLayerRenderComponent.h>
-#include <MBE/Map/TiledTerrainLayerComponent.h>
+#include <MBE/Graphics/TiledRenderComponent.h>
+#include <MBE/Map/TileComponent.h>
 
 
 namespace mbe
@@ -34,7 +34,7 @@ namespace mbe
 
 		public:
 			// Throughs exception
-			void Load(const std::string filePath);
+			void Load(const std::string& filePath);
 
 			// Automatically converts the std::vector<int> to a c-style int array (int *)
 			inline const std::vector<std::vector<size_t>>& GetTileMapLayersIndexList() const { return tileMapLayersIndexList; }
@@ -45,7 +45,7 @@ namespace mbe
 			/// Later void and acces class data (or static)
 			// The passed in string must begin and end with either a '\n' or ',' and all
 			// data items must be seperated by one of these characters
-			void ParseTileIndices(std::string tileMapLayerData);
+			void ParseTileIndices(const std::string& tileMapLayerData);
 
 			std::vector<std::vector<size_t>> tileMapLayersIndexList;
 			sf::Vector2u tileSize{ 0u, 0u };
@@ -77,7 +77,7 @@ namespace mbe
 
 		void SubscribeEvents();
 		void OnTextureWrapperChangedEvent(TextureWrapperComponent& textureWraapperComponent);
-		void OnIndexListChangedEvent(TiledTerrainLayerComponent& tiledTerrainLayerComponent);
+		void OnIndexListChangedEvent(TileComponent& tiledTerrainLayerComponent);
 
 	private:
 		const sf::Vector2u size;

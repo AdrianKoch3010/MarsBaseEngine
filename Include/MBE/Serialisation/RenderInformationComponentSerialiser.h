@@ -5,7 +5,9 @@
 
 #include <memory>
 #include <string>
+#include <unordered_map>
 
+#include <MBE/Graphics/RenderInformationComponent.h>
 #include <MBE/Serialisation/ComponentSerialiser.h>
 
 namespace mbe

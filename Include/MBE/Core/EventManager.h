@@ -31,9 +31,9 @@ namespace mbe
 		/// @tparam The type of event that will be passed as an argument to the callback.
 		/// This can be a mbe::BaseEvent or any derived class
 		template <class TEvent>
-		using TCallback = std::function<void(const TEvent &)>;
+		using TCallback = std::function<void(const TEvent&)>;
 
-	#pragma region Private Local Classes
+#pragma region Private Local Classes
 	private:
 		class BaseCallbackWrapper : public HandleBase<BaseCallbackWrapper>
 		{
@@ -42,7 +42,7 @@ namespace mbe
 			virtual ~BaseCallbackWrapper() = default;
 
 		public:
-			virtual void operator() (const detail::BaseEvent & event) = 0;
+			virtual void operator() (const detail::BaseEvent& event) = 0;
 		};
 
 		template <class TEvent>
@@ -53,7 +53,7 @@ namespace mbe
 			~CallbackWrapper() = default;
 
 		public:
-			void operator() (const detail::BaseEvent & event);
+			void operator() (const detail::BaseEvent& event);
 
 		private:
 			TCallback<TEvent> callback;
@@ -93,7 +93,7 @@ namespace mbe
 		/// @tparam TEvent The type of event that is raised. This can be any class.
 		/// @param event The reference of the event that is raised
 		template <class TEvent>
-		void RaiseEvent(TEvent & event);
+		void RaiseEvent(TEvent& event);
 
 		/// @brief Removes the passed in callback function from the callback dictionary
 		/// @attention Opposite to the render systems render nodes every function that is subscribed must be unsubscribed. Not doing
@@ -122,11 +122,11 @@ namespace mbe
 
 
 	private:
-		std::vector<std::unordered_map<SubscriptionID, BaseCallbackWrapper *>> callbackDictionaryDictionary;
+		std::vector<std::unordered_map<SubscriptionID, BaseCallbackWrapper*>> callbackDictionaryDictionary;
 	};
 
 #pragma region Template Implementations
-	
+
 	template<class TEvent>
 	inline typename EventManager::SubscriptionID EventManager::Subscribe(TCallback<TEvent> callback)
 	{
@@ -135,7 +135,7 @@ namespace mbe
 		typename detail::EventWrapper<TEvent>::TypeID typeId = detail::EventWrapper<TEvent>::GetTypeID();
 
 		// Create a new CallbackWrapper
-		BaseCallbackWrapper * baseCallbackPtr = new CallbackWrapper<TEvent>(callback);
+		BaseCallbackWrapper* baseCallbackPtr = new CallbackWrapper<TEvent>(callback);
 		//std::unique_ptr<BaseCallBackWrapper> auto baseCallbackPtr = std::make_unique<CallbackWrapper<DerivedEvent>>(callback);
 
 		// Get the handle id for this callback (this can be used to unsubscribe this callback)
@@ -157,7 +157,7 @@ namespace mbe
 	}
 
 	template<class TEvent>
-	inline void EventManager::RaiseEvent(TEvent & event)
+	inline void EventManager::RaiseEvent(TEvent& event)
 	{
 		// Get the type of the event and therefore the index in the callbackListList
 		//DerivedEvent::TypeID typeId = DerivedEvent::GetTypeID();
@@ -177,7 +177,7 @@ namespace mbe
 		// use indirection to call the event
 		// The event can't be directly be passed to the BaseCallbackWrapper since TEvent does not inherit from EventWrapper / BaseEvent
 		detail::EventWrapper<TEvent> eventWrapper(event);
-		for (auto & callbackPair : callbackDictionaryDictionary[typeId])
+		for (auto& callbackPair : callbackDictionaryDictionary[typeId])
 		{
 			(*callbackPair.second)(eventWrapper);
 		}
@@ -209,9 +209,9 @@ namespace mbe
 	}
 
 	template<class TEvent>
-	inline void EventManager::CallbackWrapper<TEvent>::operator()(const detail::BaseEvent & event)
+	inline void EventManager::CallbackWrapper<TEvent>::operator()(const detail::BaseEvent& event)
 	{
-		callback(static_cast<const detail::EventWrapper<TEvent> &>(event).event);
+		callback(static_cast<const detail::EventWrapper<TEvent>&>(event).event);
 	}
 
 #pragma endregion

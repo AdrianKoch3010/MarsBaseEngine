@@ -1,4 +1,3 @@
-#include "..\..\..\Include\MBE\Map\TiledTerrain.h"
 #include <MBE/Core/EntityCreatedEvent.h>
 #include <MBE/Core/ComponentValueChangedEvent.h>
 
@@ -7,7 +6,7 @@
 using namespace mbe;
 using mbe::event::EntityCreatedEvent;
 using TextureChangedEvent = mbe::event::ComponentValueChangedEvent<mbe::TextureWrapperComponent>;
-using IndexListChangedEvent = mbe::event::ComponentValueChangedEvent<mbe::TiledTerrainLayerComponent>;
+using IndexListChangedEvent = mbe::event::ComponentValueChangedEvent<mbe::TileComponent>;
 
 // Remember to add subscriptions for the textureChangedEvent and indexListChangedEvent
 TiledTerrain::TiledTerrain(EventManager& eventManager, EntityManager& entityManager, sf::Vector2u size, sf::Vector2u tileSize) :
@@ -36,7 +35,7 @@ TiledTerrain::TiledTerrain(EventManager& eventManager, EntityManager& entityMana
 		try
 		{
 			// Must exist
-			layerEntity.GetComponent<TiledTerrainLayerRenderComponent>().Create(layer);
+			layerEntity.GetComponent<TiledRenderComponent>().Create(layer);
 		}
 		catch (const std::runtime_error & error)
 		{
@@ -45,7 +44,7 @@ TiledTerrain::TiledTerrain(EventManager& eventManager, EntityManager& entityMana
 
 		// Store the index list in the tiled terrain layer component
 		// This must be called after creating the layer
-		layerEntity.GetComponent<TiledTerrainLayerComponent>().SetIndexList(layer);
+		layerEntity.GetComponent<TileComponent>().SetIndexList(layer);
 
 	}
 }
@@ -63,8 +62,8 @@ Entity::HandleID TiledTerrain::AddTileMapLayer(const std::string& textureWrapper
 	layer.AddComponent<TransformComponent>();
 	layer.AddComponent<RenderInformationComponent>(RenderLayer::Foreground);
 	layer.AddComponent<TextureWrapperComponent>(textureWrapperId);
-	layer.AddComponent<TiledTerrainLayerComponent>();
-	layer.AddComponent<TiledTerrainLayerRenderComponent>(size, tileSize);
+	layer.AddComponent<TileComponent>();
+	layer.AddComponent<TiledRenderComponent>(size, tileSize);
 	eventManager.RaiseEvent(EntityCreatedEvent(layer.GetHandleID()));
 
 	// Set the render objects zOrder to the number of tile map layers (not -1 since this layer has not been inserted yet)
@@ -111,7 +110,7 @@ void TiledTerrain::RecalculateLayer(Entity& entity)
 	// Recalculate the indecies
 	try
 	{
-		entity.GetComponent<TiledTerrainLayerRenderComponent>().Create(entity.GetComponent<TiledTerrainLayerComponent>().GetIndexList());
+		entity.GetComponent<TiledRenderComponent>().Create(entity.GetComponent<TileComponent>().GetIndexList());
 	}
 	catch (const std::runtime_error & error)
 	{
@@ -141,12 +140,12 @@ void TiledTerrain::OnTextureWrapperChangedEvent(TextureWrapperComponent& texture
 	auto& entity = textureWraapperComponent.GetParentEntity();
 
 	// Use event Subscription to update the texture
-	if (!entity.HasComponent<TiledTerrainLayerRenderComponent>())
+	if (!entity.HasComponent<TiledRenderComponent>())
 		return;
 
 	// Update the render states
 	// This is important to ensure that the texture with which the tiled terrain render component is created is up to date
-	auto& renderComponent = entity.GetComponent<TiledTerrainLayerRenderComponent>();
+	auto& renderComponent = entity.GetComponent<TiledRenderComponent>();
 
 	// Update the texture
 	auto renderStates = renderComponent.GetRenderStates();
@@ -156,22 +155,22 @@ void TiledTerrain::OnTextureWrapperChangedEvent(TextureWrapperComponent& texture
 	// The move must be in the end
 	renderComponent.SetRenderStates(std::move(renderStates));
 
-	if (entity.HasComponent<TiledTerrainLayerComponent>())
+	if (entity.HasComponent<TileComponent>())
 		RecalculateLayer(entity);
 }
 
-void TiledTerrain::OnIndexListChangedEvent(TiledTerrainLayerComponent& tiledTerrainLayerComponent)
+void TiledTerrain::OnIndexListChangedEvent(TileComponent& tiledTerrainLayerComponent)
 {
 	auto& entity = tiledTerrainLayerComponent.GetParentEntity();
 
 	// Use event Subscription to update the texture
-	if (!entity.HasComponent<TiledTerrainLayerRenderComponent>())
+	if (!entity.HasComponent<TiledRenderComponent>())
 		return;
 
 	RecalculateLayer(entity);
 }
 
-void TiledTerrain::Data::Load(const std::string filePath)
+void TiledTerrain::Data::Load(const std::string& filePath)
 {
 	using namespace tinyxml2;
 
@@ -228,7 +227,7 @@ void TiledTerrain::Data::Load(const std::string filePath)
 	}
 }
 
-void TiledTerrain::Data::ParseTileIndices(std::string tileMapLayerData)
+void TiledTerrain::Data::ParseTileIndices(const std::string& tileMapLayerData)
 {
 	std::vector<size_t> layerIndexList;
 

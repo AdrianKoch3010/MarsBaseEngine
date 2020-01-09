@@ -12,15 +12,15 @@ void EntityManager::Update()
 	this->Refresh();
 }
 
-std::vector<Entity::HandleID> EntityManager::GetEntityList() const
+std::vector<Entity::HandleID> EntityManager::GetEntityIDList() const
 {
-	std::vector<Entity::HandleID> entityList;
-	for (const auto& pair : entityGroupDictionary)
+	std::vector<Entity::HandleID> entityIdList;
+	for (const auto& entityPtr : entityList)
 	{
-		for (auto entityId : pair.second)
-			entityList.push_back(entityId);
+		if (entityPtr != nullptr && entityPtr->IsActive())
+			entityIdList.push_back(entityPtr->GetHandleID());
 	}
-	return entityList;
+	return entityIdList;
 }
 
 void EntityManager::Refresh()

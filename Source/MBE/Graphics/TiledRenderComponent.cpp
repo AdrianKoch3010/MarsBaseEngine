@@ -1,10 +1,10 @@
-#include <MBE/Graphics/TiledTerrainLayerRenderComponent.h>
+#include <MBE/Graphics/TiledRenderComponent.h>
 
 using namespace mbe;
 
-MBE_ENABLE_COMPONENT_POLYMORPHISM(TiledTerrainLayerRenderComponent, RenderComponent)
+MBE_ENABLE_COMPONENT_POLYMORPHISM(TiledRenderComponent, RenderComponent)
 
-TiledTerrainLayerRenderComponent::TiledTerrainLayerRenderComponent(EventManager & eventManager, Entity & parentEntity, sf::Vector2u size, sf::Vector2u tileSize) :
+TiledRenderComponent::TiledRenderComponent(EventManager& eventManager, Entity& parentEntity, const sf::Vector2u& size, const sf::Vector2u& tileSize) :
 	RenderComponent(eventManager, parentEntity),
 	size(size),
 	tileSize(tileSize),
@@ -13,7 +13,7 @@ TiledTerrainLayerRenderComponent::TiledTerrainLayerRenderComponent(EventManager 
 
 }
 
-void TiledTerrainLayerRenderComponent::Draw(sf::RenderTarget & target) const
+void TiledRenderComponent::Draw(sf::RenderTarget& target) const
 {
 	// Only draw the vertices if the tiled terrain layer has been created
 	if (this->IsCreated() == false)
@@ -22,7 +22,7 @@ void TiledTerrainLayerRenderComponent::Draw(sf::RenderTarget & target) const
 	target.draw(vertices, renderStates);
 }
 
-sf::FloatRect TiledTerrainLayerRenderComponent::GetLocalBounds() const
+sf::FloatRect TiledRenderComponent::GetLocalBounds() const
 {
 	sf::FloatRect rect;
 
@@ -32,7 +32,7 @@ sf::FloatRect TiledTerrainLayerRenderComponent::GetLocalBounds() const
 	return rect;
 }
 
-void TiledTerrainLayerRenderComponent::Create(std::vector<size_t> tileIndexList)
+void TiledRenderComponent::Create(std::vector<size_t> tileIndexList)
 {
 	sf::Clock clock;
 	clock.restart();
@@ -62,20 +62,20 @@ void TiledTerrainLayerRenderComponent::Create(std::vector<size_t> tileIndexList)
 	std::cout << std::endl << "The tile map layer creation took: " << clock.getElapsedTime().asMicroseconds() << " microseconds";
 }
 
-void TiledTerrainLayerRenderComponent::SetTile(sf::Vector2u pos, size_t tileIndex)
+void TiledRenderComponent::SetTile(sf::Vector2u pos, size_t tileIndex)
 {
 	// Find the tiles position in the tileset texture
 	sf::Vector2u texPos;
-	const auto * tilesetTexture = renderStates.texture;
+	const auto* tilesetTexture = renderStates.texture;
 
 	if (tilesetTexture == nullptr)
-		throw std::runtime_error("TiledTerrainLayerRenderComponent: A texture is needed to calculate the tile's vertex texture coordinates");
+		throw std::runtime_error("TiledRenderComponent: A texture is needed to calculate the tile's vertex texture coordinates");
 
 	texPos.x = tileIndex % (tilesetTexture->getSize().x / tileSize.x);
 	texPos.y = tileIndex / (tilesetTexture->getSize().x / tileSize.x); // integer division
 
 	// Get a pointer to the current tile's quad
-	sf::Vertex * quad = &vertices[(pos.x + pos.y * size.x) * 4]; // The 4 because of the quads
+	sf::Vertex* quad = &vertices[(pos.x + pos.y * size.x) * 4]; // The 4 because of the quads
 
 	// If the tile is empty (nothing should be drawn on this tile)
 	if (tileIndex == emptyTile)

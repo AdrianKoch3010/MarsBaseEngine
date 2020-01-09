@@ -91,3 +91,55 @@ void mbe::IntRectSerialiser::Store(const sf::IntRect& rect, tinyxml2::XMLDocumen
 	heightElement->SetText(rect.height);
 	rectData.InsertEndChild(heightElement);
 }
+
+sf::Color mbe::ColourSerialiser::Load(const tinyxml2::XMLElement& colourData)
+{
+	using namespace tinyxml2;
+
+	unsigned int r, g, b, a;
+
+	const auto rElement = colourData.FirstChildElement("R");
+	if (rElement == nullptr)
+		throw std::runtime_error("Load colour: Failed to parse R element");
+	if (rElement->QueryUnsignedText(&r) != XML_SUCCESS)
+		throw std::runtime_error("Load int colour: Failed to parse R text");
+
+	const auto gElement = colourData.FirstChildElement("G");
+	if (gElement == nullptr)
+		throw std::runtime_error("Load int colour: Failed to parse G element");
+	if (gElement->QueryUnsignedText(&g) != XML_SUCCESS)
+		throw std::runtime_error("Load int colour: Failed to parse G text");
+
+	const auto bElement = colourData.FirstChildElement("B");
+	if (bElement == nullptr)
+		throw std::runtime_error("Load int colour: Failed to parse B element");
+	if (bElement->QueryUnsignedText(&b) != XML_SUCCESS)
+		throw std::runtime_error("Load int colour: Failed to parse B text");
+
+	const auto aElement = colourData.FirstChildElement("A");
+	if (aElement == nullptr)
+		throw std::runtime_error("Load int colour: Failed to parse A element");
+	if (aElement->QueryUnsignedText(&a) != XML_SUCCESS)
+		throw std::runtime_error("Load int colour: Failed to parse A text");
+
+	return sf::Color{ static_cast<sf::Uint8>(r), static_cast<sf::Uint8>(g), static_cast<sf::Uint8>(b), static_cast<sf::Uint8>(a) };
+}
+
+void mbe::ColourSerialiser::Store(const sf::Color& colour, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& colourData)
+{
+	auto rEement = document.NewElement("R");
+	rEement->SetText(colour.r);
+	colourData.InsertEndChild(rEement);
+
+	auto gElement = document.NewElement("G");
+	gElement->SetText(colour.g);
+	colourData.InsertEndChild(gElement);
+
+	auto bElement = document.NewElement("B");
+	bElement->SetText(colour.b);
+	colourData.InsertEndChild(bElement);
+
+	auto aElement = document.NewElement("A");
+	aElement->SetText(colour.a);
+	colourData.InsertEndChild(aElement);
+}

@@ -45,7 +45,7 @@ void ClickableSystem::OnClick(sf::Vector2f clickPosition, sf::Mouse::Button butt
 
 	// Sort the clicked entity list by render order (in decending order)
 	std::sort(clickedEntityList.begin(), clickedEntityList.end(), [](const Entity * a, const Entity * b) {
-		return b->GetComponent<RenderInformationComponent>().IsAboveOrEqual(a->GetComponent<RenderInformationComponent>());
+		return b->GetComponent<RenderInformationComponent>().IsAbove(a->GetComponent<RenderInformationComponent>());
 	});
 
 

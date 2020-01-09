@@ -4,7 +4,10 @@
 #include <MBE/Serialisation/AnimationComponentSerialser.h>
 #include <MBE/Serialisation/PixelMaskClickableComponentSerialiser.h>
 #include <MBE/Serialisation/TopDownInformationComponentSerialiser.h>
+#include <MBE/Serialisation/RenderInformationComponentSerialiser.h>
 #include <MBE/Serialisation/TextureWrapperComponentSerialiser.h>
+#include <MBE/Serialisation/TiledRenderComponentSerialiser.h>
+#include <MBE/Serialisation/SpriteRenderComponentSerialiser.h>
 
 // Components
 #include <MBE/TransformComponent.h>
@@ -12,28 +15,37 @@
 #include <MBE/Animation/AnimationComponent.h>
 #include <MBE/Input/PixelMaskClickableComponent.h>
 #include <MBE/Graphics/TopDownInformationComponent.h>
+#include <MBE/Graphics/RenderInformationComponent.h>
 #include <MBE/Graphics/TextureWrapperComponent.h>
+#include <MBE/Graphics/TiledRenderComponent.h>
+#include <MBE/Graphics/SpriteRenderComponent.h>
 
 #include <MBE/Serialisation/EntitySerialiser.h>
 
 using namespace mbe;
 
-EntitySerialiser::EntitySerialiser(EntityManager& entityManager, EventManager& eventManager, Context context) :
+EntitySerialiser::EntitySerialiser(EntityManager& entityManager, EventManager& eventManager/*, Context context*/) :
 	entityManager(entityManager),
-	eventManager(eventManager),
-	context(context)
+	eventManager(eventManager)
+	//context(context)
 {
 	AddComponentSerialiser<TransformComponentSerialser, TransformComponent>("TransformComponent");
-	AddComponentSerialiser<AIComponentSerialser, UtilityAIComponent>("AIComponent");
+	AddComponentSerialiser<AIComponentSerialser, AIComponent>("AIComponent");
 	AddComponentSerialiser<AnimationComponentSerialiser, AnimationComponent>("AnimationComponent");
 	AddComponentSerialiser<PixelMaskClickableComponentSerialiser, PixelMaskClickableComponent>("PixelMaskClickableComponent");
 	AddComponentSerialiser<TopDownInformationComponentSerialiser, TopDownInformationComponent>("TopDownInformationComponent");
+	AddComponentSerialiser<RenderInformationComponentSerialiser, RenderInformationComponent>("RenderInformationComponent");
 	AddComponentSerialiser<TextureWrapperComponentSerialiser, TextureWrapperComponent>("TextureWrapperComponent");
+	AddComponentSerialiser<TiledRenderComponentSerialiser, TiledRenderComponent>("TiledRenderComponent");
+	AddComponentSerialiser<SpriteRenderComponentSerialiser, SpriteRenderComponent>("SpriteRenderComponent");
 }
 
 void EntitySerialiser::LoadEntites(const std::string& filePath)
 {
 	using namespace tinyxml2;
+
+	// Remember the entities that have been added
+	std::vector<Entity::HandleID> loadedEntityIdList;
 
 	// Load the XML file
 	XMLDocument document;
@@ -61,6 +73,7 @@ void EntitySerialiser::LoadEntites(const std::string& filePath)
 
 		// Create the entity
 		auto& entity = entityManager.CreateEntity();
+		loadedEntityIdList.push_back(entity.GetHandleID());
 
 		//////////////////////////// TODO:
 		// Maping of new and old entity ids
@@ -88,12 +101,16 @@ void EntitySerialiser::LoadEntites(const std::string& filePath)
 	}
 
 	// Set the parent entities
-	for (auto entityId : entityManager.GetEntityList())
+	for (auto entityId : loadedEntityIdList)
 	{
 		auto& entity = *Entity::GetObjectFromID(entityId);
 		// Get the old parent entity id for this entity
 		// Then map it on the new entity and set it as a parent
-		entity.SetParentEntityID(entityIdMap.at(parentEntityIdMap.at(entityId)));
+
+		// Only set existing parent entities
+		const auto parentEntityId = parentEntityIdMap.at(entityId);
+		if (entityIdMap.find(parentEntityId) != entityIdMap.end())
+			entity.SetParentEntityID(entityIdMap.at(parentEntityId));
 	}
 }
 
@@ -108,7 +125,7 @@ void EntitySerialiser::StoreEntites(const std::string& filePath)
 	auto rootNode = document.NewElement("Entities");
 	document.InsertFirstChild(rootNode);
 
-	for (const auto entityId : entityManager.GetEntityList())
+	for (const auto entityId : entityManager.GetEntityIDList())
 	{
 		// The entity must exists
 		assert(Entity::GetObjectFromID(entityId) != nullptr && "Store entities: The entity must exist");
@@ -117,7 +134,7 @@ void EntitySerialiser::StoreEntites(const std::string& filePath)
 		const auto& entity = *Entity::GetObjectFromID(entityId);
 		auto entityElement = document.NewElement("Entity");
 		entityElement->SetAttribute("id", static_cast<int64_t>(entity.GetHandleID()));
-		entityElement->SetAttribute("parentId", static_cast<int64_t>(entity.GetHandleID()));
+		entityElement->SetAttribute("parentId", static_cast<int64_t>(entity.GetParentEntityID()));
 		rootNode->InsertEndChild(entityElement);
 
 		// Store the components

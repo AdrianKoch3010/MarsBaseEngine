@@ -35,7 +35,7 @@ namespace mbe
 	/// Similarly, it can be unregistered by raising the mbe::event::RenderNodeRemovedEvent.
 	/// @n The render system already has component renderers for the
 	/// - SpriteRenderComponent
-	/// - TiledTerrainLayerRenderComponent
+	/// - TiledRenderComponent
 	/// @note Deleted entities will be removed automatically. Therefore, manually raising the
 	/// mbe::event::EntityRemovedEvent is only necessary when the mbe::Entity should not be drawn but stay alive
 	/// e.g. in order to add it again later.

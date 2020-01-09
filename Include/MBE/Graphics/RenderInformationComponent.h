@@ -68,11 +68,11 @@ namespace mbe
 		void ResetWindowGetterFunction();
 
 		// Returns true if the passed in render information component would be drawn above this
-		bool IsAboveOrEqual(const RenderInformationComponent& renderInformationComponent) const;
+		bool IsAbove(const RenderInformationComponent& renderInformationComponent) const;
 
 	public:
 		// Returns true if is a is above or equal b
-		static bool IsAboveOrEqual(const RenderInformationComponent& a, const RenderInformationComponent& b);
+		static bool IsAbove(const RenderInformationComponent& a, const RenderInformationComponent& b);
 
 	private:
 		RenderLayer renderLayer;

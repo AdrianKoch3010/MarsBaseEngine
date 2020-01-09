@@ -2,7 +2,7 @@
 
 using namespace mbe;
 
-UtilityAIComponent::UtilityAIComponent(EventManager& eventManager, Entity& parentEntity) :
+AIComponent::AIComponent(EventManager& eventManager, Entity& parentEntity) :
 	Component(eventManager, parentEntity),
 	currentTask({ nullptr, detail::UnspecifiedAITaskTypeID }),
 	nextTask({ nullptr, detail::UnspecifiedAITaskTypeID })
@@ -10,7 +10,7 @@ UtilityAIComponent::UtilityAIComponent(EventManager& eventManager, Entity& paren
 
 }
 
-bool UtilityAIComponent::IsTaskActive() const
+bool AIComponent::IsTaskActive() const
 {
 	bool active = true;
 	if (currentTask.first == nullptr || currentTask.second == detail::UnspecifiedAITaskTypeID)
@@ -19,7 +19,7 @@ bool UtilityAIComponent::IsTaskActive() const
 	return active;
 }
 
-bool UtilityAIComponent::IsTaskQueued() const
+bool AIComponent::IsTaskQueued() const
 {
 	bool active = true;
 	if (nextTask.first == nullptr || nextTask.second == detail::UnspecifiedAITaskTypeID)
@@ -28,95 +28,107 @@ bool UtilityAIComponent::IsTaskQueued() const
 	return active;
 }
 
-AITask& UtilityAIComponent::GetActiveTask()
+AITask& AIComponent::GetActiveTask()
 {
 	// Throw if no task is active
 	if (IsTaskActive() == false)
-		throw std::runtime_error("UtilityAIComponent: Currently there is no task active");
+		throw std::runtime_error("AIComponent: Currently there is no task active");
 
-	assert(currentTask.first != nullptr && "UtilityAIComponent: Currently there is no task active");
+	assert(currentTask.first != nullptr && "AIComponent: Currently there is no task active");
 
 	return *currentTask.first;
 }
 
-const AITask& UtilityAIComponent::GetActiveTask() const
+const AITask& AIComponent::GetActiveTask() const
 {
 	// Throw if no task is active
 	if (IsTaskActive() == false)
-		throw std::runtime_error("UtilityAIComponent: Currently there is no task active");
+		throw std::runtime_error("AIComponent: Currently there is no task active");
 
-	assert(currentTask.first != nullptr && "UtilityAIComponent: Currently there is no task active");
+	assert(currentTask.first != nullptr && "AIComponent: Currently there is no task active");
 
 	return *currentTask.first;
 }
 
-AITask::Ptr UtilityAIComponent::GetActiveTaskPtr()
+AITask::Ptr AIComponent::GetActiveTaskPtr()
 {
 	return currentTask.first;
 }
 
-UtilityAIComponent::AITaskTypeID UtilityAIComponent::GetActiveTaskTypeID() const
+AIComponent::AITaskTypeID AIComponent::GetActiveTaskTypeID() const
 {
 	// Throw if no task is active
 	if (IsTaskActive() == false)
-		throw std::runtime_error("UtilityAIComponent: Currently there is no task active");
+		throw std::runtime_error("AIComponent: Currently there is no task active");
 
-	assert(currentTask.second != detail::UnspecifiedAITaskTypeID && "UtilityAIComponent: Currently there is no task active");
+	assert(currentTask.second != detail::UnspecifiedAITaskTypeID && "AIComponent: Currently there is no task active");
 
 	return currentTask.second;
 }
 
-AITask& UtilityAIComponent::GetQueuedTask()
+AITask& AIComponent::GetQueuedTask()
 {
 	// Throw if no task is queued
 	if (IsTaskQueued() == false)
-		throw std::runtime_error("UtilityAIComponent: Currently there is no task queued");
+		throw std::runtime_error("AIComponent: Currently there is no task queued");
 
-	assert(nextTask.first != nullptr && "UtilityAIComponent: Currently there is no task queued");
+	assert(nextTask.first != nullptr && "AIComponent: Currently there is no task queued");
 
 	return *nextTask.first;
 }
 
-const AITask& UtilityAIComponent::GetQueuedTask() const
+const AITask& AIComponent::GetQueuedTask() const
 {
 	// Throw if no task is queued
 	if (IsTaskQueued() == false)
-		throw std::runtime_error("UtilityAIComponent: Currently there is no task queued");
+		throw std::runtime_error("AIComponent: Currently there is no task queued");
 
-	assert(nextTask.first != nullptr && "UtilityAIComponent: Currently there is no task queued");
+	assert(nextTask.first != nullptr && "AIComponent: Currently there is no task queued");
 
 	return *nextTask.first;
 }
 
-AITask::Ptr UtilityAIComponent::GetQueuedTaskPtr()
+AITask::Ptr AIComponent::GetQueuedTaskPtr()
 {
 	return nextTask.first;
 }
 
-UtilityAIComponent::AITaskTypeID UtilityAIComponent::GetQueuedTaskTypeID() const
+AIComponent::AITaskTypeID AIComponent::GetQueuedTaskTypeID() const
 {
 	// Throw if no task is queued
 	if (IsTaskQueued() == false)
-		throw std::runtime_error("UtilityAIComponent: Currently there is no task queued");
+		throw std::runtime_error("AIComponent: Currently there is no task queued");
 
-	assert(nextTask.second != detail::UnspecifiedAITaskTypeID && "UtilityAIComponent: Currently there is no task queued");
+	assert(nextTask.second != detail::UnspecifiedAITaskTypeID && "AIComponent: Currently there is no task queued");
 
 	return nextTask.second;
 }
 
-void UtilityAIComponent::ResetActiveTask()
+void AIComponent::ResetActiveTask()
 {
 	currentTask.first.reset();
 	currentTask.second = detail::UnspecifiedAITaskTypeID;
 }
 
-void UtilityAIComponent::ResetQueuedTask()
+void AIComponent::ResetQueuedTask()
 {
 	nextTask.first.reset();
 	nextTask.second = detail::UnspecifiedAITaskTypeID;
 }
 
-void UtilityAIComponent::MakeNextTaskActive()
+void AIComponent::SetActiveTask(typename AITask::Ptr taskPtr, typename AIComponent::AITaskTypeID typeId)
+{
+	currentTask.first = taskPtr;
+	currentTask.second = typeId;
+}
+
+void AIComponent::SetQueuedTask(typename AITask::Ptr taskPtr, typename AIComponent::AITaskTypeID typeId)
+{
+	nextTask.first = taskPtr;
+	nextTask.second = typeId;
+}
+
+void AIComponent::MakeNextTaskActive()
 {
 	if (IsTaskQueued() == false)
 		throw std::runtime_error("UtilityAITask: The current task cannot be replaced since no task is currently queued");

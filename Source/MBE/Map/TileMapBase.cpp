@@ -25,13 +25,14 @@ sf::Vector2f TileMapBase::MapTileToCoordCenter(const Position& tilePosition) con
 TileMapBase::Position TileMapBase::MapCoordToTile(const sf::Vector2f& coordinate) const
 {
 	Position position;
+	auto tileSize = GetTiledTerrain().GetTileSize();
 
 	// automatically floored (stored in int)
-	position.x = std::floor(coordinate.x / GetTiledTerrain().GetTileSize().x);
-	position.y = std::floor(coordinate.y / GetTiledTerrain().GetTileSize().y);
+	position.x = std::floor(coordinate.x / tileSize.x);
+	position.y = std::floor(coordinate.y / tileSize.y);
 
 	// If its exactly at the border its still part of the above tile
-	if ((coordinate.y / (float)GetTiledTerrain().GetTileSize().y) - static_cast<int>(coordinate.y / (float)GetTiledTerrain().GetTileSize().y) == 0)
+	if ((coordinate.y / (float)tileSize.y) - static_cast<int>(coordinate.y / (float)tileSize.y) == 0)
 		position.y--;
 
 	return position;

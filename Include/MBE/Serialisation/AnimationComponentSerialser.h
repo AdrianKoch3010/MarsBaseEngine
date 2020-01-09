@@ -35,7 +35,8 @@ namespace mbe
 
 	public:
 		// Add mbe animation serialisers
-		AnimationComponentSerialiser() = default;
+		// Add the mbe Animation serialisers
+		AnimationComponentSerialiser();
 		~AnimationComponentSerialiser() = default;
 
 	public:
@@ -59,15 +60,15 @@ namespace mbe
 		// make sure that TAnimationSerialiser inherits from mbe::AnimationSerialiser
 		static_assert(std::is_base_of<AnimationSerialiser, TAnimationSerialiser>::value, "The animation serialiser must inherit from mbe::AnimationSerialiser");
 
-		// Remember the typeId for this animation type for the serialiser store function
-		animationTypeDictionary.insert({ detail::GetComponentTypeID<TAnimation>(), animationType });
-
 		// Throw if a component serialiser for this type already exists
-		if (animationSerialiserDictionary.find(animationType) == animationSerialiserDictionary.end())
+		if (animationSerialiserDictionary.find(animationType) != animationSerialiserDictionary.end())
 			throw std::runtime_error("EntitySerialiser: An animation serialser already exists for this animation type (" + animationType + ")");
 
+		// Remember the typeId for this animation type for the serialiser store function
+		animationTypeDictionary.insert({ detail::GetAnimationTypeID<TAnimation>(), animationType });
+
 		// Make a new component serialser
-		auto animationSerialiserPtr = std::make_shared<TAnimationSerialiser>(std::forward<TArguments>(arguments)...);
+		auto animationSerialiserPtr = std::make_unique<TAnimationSerialiser>(std::forward<TArguments>(arguments)...);
 
 		// Add the component serialiser to the dictionary
 		animationSerialiserDictionary.insert({ animationType, std::move(animationSerialiserPtr) });

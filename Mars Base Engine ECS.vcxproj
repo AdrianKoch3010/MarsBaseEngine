@@ -199,6 +199,7 @@
     <ClCompile Include="Source\MBE\Animation\EntityAnimator.cpp" />
     <ClCompile Include="Source\MBE\Core\ComponentsChangedEvent.cpp" />
     <ClCompile Include="Source\MBE\Core\ComponentValueChangedEvent.cpp" />
+    <ClCompile Include="Source\MBE\Core\Cursor.cpp" />
     <ClCompile Include="Source\MBE\Graphics\BaseComponentRenderSystem.cpp" />
     <ClCompile Include="Source\MBE\Graphics\RenderComponent.cpp" />
     <ClCompile Include="Source\MBE\Graphics\RenderInformationComponent.cpp" />
@@ -230,7 +231,7 @@
     <ClCompile Include="Source\MBE\Graphics\SpriteRenderComponent.cpp" />
     <ClCompile Include="Source\MBE\Map\GoalReachedEvent.cpp" />
     <ClCompile Include="Source\MBE\Map\TiledTerrain.cpp" />
-    <ClCompile Include="Source\MBE\Map\TiledTerrainLayerComponent.cpp" />
+    <ClCompile Include="Source\MBE\Map\TileComponent.cpp" />
     <ClCompile Include="Source\MBE\Map\TileMapBase.cpp" />
     <ClCompile Include="Source\MBE\Map\TileMapComponent.cpp" />
     <ClCompile Include="Source\MBE\Core\Component.cpp" />
@@ -249,7 +250,7 @@
     <ClCompile Include="Source\MBE\Core\State.cpp" />
     <ClCompile Include="Source\MBE\Core\StateManager.cpp" />
     <ClCompile Include="Source\MBE\Graphics\TextureWrapper.cpp" />
-    <ClCompile Include="Source\MBE\Graphics\TiledTerrainLayerRenderComponent.cpp" />
+    <ClCompile Include="Source\MBE\Graphics\TiledRenderComponent.cpp" />
     <ClCompile Include="Source\MBE\Core\TinyXML.cpp" />
     <ClCompile Include="Source\MBE\Graphics\TopDownInformationComponent.cpp" />
     <ClCompile Include="Source\MBE\Graphics\TopDownZOrderSorter.cpp" />
@@ -268,7 +269,9 @@
     <ClCompile Include="Source\MBE\Serialisation\PixelMaskClickableComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\RenderInformationComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\RotationAnimationSerialiser.cpp" />
+    <ClCompile Include="Source\MBE\Serialisation\SpriteRenderComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\TextureWrapperComponentSerialiser.cpp" />
+    <ClCompile Include="Source\MBE\Serialisation\TiledRenderComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\TopDownInformationComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\TransformComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\TransformComponent.cpp" />
@@ -284,6 +287,7 @@
     <ClInclude Include="Include\MBE\Audio\BaseAudioComponent.h" />
     <ClInclude Include="Include\MBE\Core\ComponentsChangedEvent.h" />
     <ClInclude Include="Include\MBE\Core\ComponentValueChangedEvent.h" />
+    <ClInclude Include="Include\MBE\Core\Cursor.h" />
     <ClInclude Include="Include\MBE\Core\SafeQueue.h" />
     <ClInclude Include="Include\MBE\Graphics\BaseComponentRenderSystem.h" />
     <ClInclude Include="Include\MBE\Graphics\SpriteRenderSystem.h" />
@@ -314,7 +318,7 @@
     <ClInclude Include="Include\MBE\Graphics\SpriteRenderComponent.h" />
     <ClInclude Include="Include\MBE\Map\GoalReachedEvent.h" />
     <ClInclude Include="Include\MBE\Map\TiledTerrain.h" />
-    <ClInclude Include="Include\MBE\Map\TiledTerrainLayerComponent.h" />
+    <ClInclude Include="Include\MBE\Map\TileComponent.h" />
     <ClInclude Include="Include\MBE\Map\TileMapBase.h" />
     <ClInclude Include="Include\MBE\Map\TileMapComponent.h" />
     <ClInclude Include="Include\MBE\Input\MouseButtonBaseEvent.h" />
@@ -343,7 +347,7 @@
     <ClInclude Include="Include\MBE\Core\State.h" />
     <ClInclude Include="Include\MBE\Core\StateManager.h" />
     <ClInclude Include="Include\MBE\Graphics\TextureWrapper.h" />
-    <ClInclude Include="Include\MBE\Graphics\TiledTerrainLayerRenderComponent.h" />
+    <ClInclude Include="Include\MBE\Graphics\TiledRenderComponent.h" />
     <ClInclude Include="Include\MBE\Core\TinyXML.h" />
     <ClInclude Include="Include\MBE\Graphics\TopDownInformationComponent.h" />
     <ClInclude Include="Include\MBE\Graphics\TopDownZOrderSorter.h" />
@@ -361,7 +365,9 @@
     <ClInclude Include="Include\MBE\Serialisation\PixelMaskClickableComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\RenderInformationComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\RotationAnimationSerialiser.h" />
+    <ClInclude Include="Include\MBE\Serialisation\SpriteRenderComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\TextureWrapperComponentSerialiser.h" />
+    <ClInclude Include="Include\MBE\Serialisation\TiledRenderComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\TopDownInformationComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\TransformComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\TransformComponent.h" />

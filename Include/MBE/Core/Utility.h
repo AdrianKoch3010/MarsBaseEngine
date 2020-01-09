@@ -11,6 +11,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Graphics/Rect.hpp>
+#include <SFML/Graphics/Color.hpp>
 
 #include <MBE/Core/TinyXML.h>
 #include <MBE\Core\Component.h>
@@ -141,6 +142,39 @@ namespace mbe
 		/// @param document The XML document to which the rect is stored to
 		/// @param rectData The XML element to which the rect data is stored to
 		static void Store(const sf::IntRect& rect, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& rectData);
+	};
+
+	/// @brief Class providing methods for loading and storing sf::Color
+	/// @details XML format
+	/// @code
+	/// <ColourName>
+	///		<R>unsigned int</R>
+	///		<G>unsigned int</G>
+	///		<B>unsigned int</B>
+	///		<A>unsigned int</A>
+	/// </ColourName>
+	/// @endcode
+	class ColourSerialiser
+	{
+	public:
+		/// @brief Default constructor
+		ColourSerialiser() = default;
+
+		/// @brief Default destructor
+		~ColourSerialiser() = default;
+
+	public:
+		/// @brief Load an sf::IntRect from an XML element
+		/// @param colourData The XML element that is parsed
+		/// @returns The sf::Color with the loaded values
+		/// @throws If the parsing fails
+		static sf::Color Load(const tinyxml2::XMLElement& colourData);
+
+		/// @brief Store an sf::Color to an XML element
+		/// @param colour The sf::Color to be stored
+		/// @param document The XML document to which the colour is stored to
+		/// @param colourData The XML element to which the colour data is stored to
+		static void Store(const sf::Color& colour, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& colourData);
 	};
 
 } // namespace

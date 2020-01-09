@@ -1,11 +1,28 @@
 #include <string>
+#include <exception>
 #include <SFML/System/Time.hpp>
 
 #include <MBE/Animation/AnimationComponent.h>
+#include <MBE/Serialisation/FrameAnimationSerialiser.h>
+#include <MBE/Animation/FrameAnimation.h>
+#include <MBE/Serialisation/RotationAnimationSerialiser.h>
+#include <MBE/Animation/RotationAnimation.h>
+#include <MBE/Serialisation/BlinkingAnimationSerialiser.h>
+#include <MBE/Animation/BlinkingAnimation.h>
+#include <MBE/Serialisation/PitchAnimationSerialiser.h>
+#include <MBE/Animation/PitchAnimation.h>
 
 #include <MBE/Serialisation/AnimationComponentSerialser.h>
 
 using namespace mbe;
+
+AnimationComponentSerialiser::AnimationComponentSerialiser()
+{
+	AddAnimationSerialiser<FrameAnimationSerialiser, FrameAnimation>("FrameAnimation");
+	AddAnimationSerialiser<RotationAnimationSerialiser, RotationAnimation>("RotationAnimation");
+	AddAnimationSerialiser<BlinkingAnimationSerialiser, BlinkingAnimation>("BlinkingAnimation");
+	AddAnimationSerialiser<PitchAnimationSerialiser, PitchAnimation>("PitchAnimation");
+}
 
 void AnimationComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData)
 {
@@ -80,14 +97,14 @@ void AnimationComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 			std::string animationTypeString{ animationType };
 
 			// Get the animation id
-			auto animationId = animationsElement->Attribute("id");
+			auto animationId = animationElement->Attribute("id");
 			if (animationId == nullptr)
 				throw std::runtime_error("Load animation component: Failed to parse animation id");
 			std::string animationIdString{ animationId };
 
-			// Get the animation time
+			// Get the animation duration
 			int duration;
-			if (animationElement->QueryAttribute("duration", &duration) != XML_SUCCESS)
+			if (animationElement->QueryIntAttribute("duration", &duration) != XML_SUCCESS)
 				throw std::runtime_error("Load animation component: Failed to parse animation time");
 
 			// Call the appropreate animation serialiser for that animation type
@@ -162,7 +179,7 @@ void AnimationComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2
 			animationElement->SetAttribute("id", animationId.c_str());
 
 			// Store animation time
-			animationElement->SetAttribute("time", animationTime.asMilliseconds());
+			animationElement->SetAttribute("duration", animationTime.asMilliseconds());
 
 			// Call the corresponding animation serialiser
 			animationSerialiserDictionary.at(animationTypeDictionary.at(animator.GetAnimationTypeID(animationId)))->Store(animator, animationId, document, *animationElement);

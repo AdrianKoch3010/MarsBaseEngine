@@ -13,7 +13,7 @@
 #include <MBE/Core/EntityCreatedEvent.h>
 #include <MBE/Core/ComponentValueChangedEvent.h>
 
-#include <MBE/Graphics/TiledTerrainLayerRenderComponent.h>
+#include <MBE/Graphics/TiledRenderComponent.h>
 #include <MBE/Graphics/TextureWrapperComponent.h>
 #include <MBE/TransformComponent.h>
 

@@ -74,11 +74,13 @@ namespace mbe
 	/// @endcode
 	/// The EntitySerialser already has component serialisers for the
 	/// - TransformComponent
-	/// - UtilityAIComponent
+	/// - AIComponent
 	/// - AnimationComponent
 	/// - PixelMaskClickableComponent
 	/// - TopDownInformationComponent
 	/// - TextureWrapperComponent
+	/// - TiledRenderComponent
+	/// - SpriteRenderComponent
 	/// @note The entity ids will be reassigned after loading. However, the parent / child entity relations will be preserved.
 	class EntitySerialiser : private sf::NonCopyable
 	{
@@ -99,12 +101,12 @@ namespace mbe
 		/// - SoundComponentSerialiser
 		/// - MusicComponentSerialiser
 		/// respectively
-		struct Context
+		/*struct Context
 		{
 			TextureWrapperHolder<>& textureWrappers;
 			SoundBufferHolder<>& soundBuffers;
 			FilePathDictionary<>& musicFilePaths;
-		};
+		};*/
 
 	public:
 		/// @brief Constructor
@@ -112,7 +114,7 @@ namespace mbe
 		/// Since the entityIds are reassigned, the entity manager must not be empty
 		/// @param eventManager A refernce to the mbe::EventManager
 		/// @param context The context for the preregistered component serialisers
-		EntitySerialiser(EntityManager& entityManager, EventManager& eventManager, Context context);
+		EntitySerialiser(EntityManager& entityManager, EventManager& eventManager/*, Context context*/);
 
 		/// @brief Default destructor
 		~EntitySerialiser() = default;
@@ -149,7 +151,7 @@ namespace mbe
 	private:
 		EntityManager& entityManager;
 		EventManager& eventManager;
-		Context context;
+		//Context context;
 
 		ComponentSerialiserDictionary componentSerialiserDictionary;
 		ComponentTypeDictionary componentTypeDictionary;
@@ -169,12 +171,12 @@ namespace mbe
 		// make sure that TComponentSerialiser inherits from ComponentSerialiser
 		static_assert(std::is_base_of<ComponentSerialser, TComponentSerialiser>::value, "The component serialiser must inherit from mbe::ComponentSerialiser");
 
+		// Throw if a component serialiser for this type already exists
+		if (componentSerialiserDictionary.find(componentType) != componentSerialiserDictionary.end())
+			throw std::runtime_error("EntitySerialiser: A component serialser already exists for this component type (" + componentType + ")");
+
 		// Remember the typeId for this component type for the serialiser store function
 		componentTypeDictionary.insert({ detail::GetComponentTypeID<TComponent>(), componentType });
-
-		// Throw if a component serialiser for this type already exists
-		if (componentSerialiserDictionary.find(componentType) == componentSerialiserDictionary.end())
-			throw std::runtime_error("EntitySerialiser: A component serialser already exists for this component type (" + componentType + ")");
 
 		// Make a new component serialser
 		auto componentSerialiserPtr = std::make_shared<TComponentSerialiser>(std::forward<TArguments>(arguments)...);

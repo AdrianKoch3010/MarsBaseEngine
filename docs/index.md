@@ -17,7 +17,7 @@ A few quick words on the structure of the following tutorials. The aim is to giv
 - [The entity component system](Tutorials/EntityComponentSystem.md)
 - [Game loop and state system](Tutorials/StateSystem.md)
 - [Working with events](Tutorials/Events.md)
-- [The animation system](Tutorials)
+- [The animation system](Tutorials/Animation.md)
 - [Dealing with user input](Tutorials/InputHandler.md)
 - [Resource management](Tutorials/ResourceManagement.md)
 - [Sound and Music](Tutorials/Audio.md)

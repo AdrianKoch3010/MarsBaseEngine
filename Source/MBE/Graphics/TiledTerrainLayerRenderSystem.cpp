@@ -31,12 +31,12 @@ TiledTerrainLayerRenderSystem::~TiledTerrainLayerRenderSystem()
 
 void TiledTerrainLayerRenderSystem::Update()
 {
-	for (const auto entityId : entityManager.GetComponentGroup<TiledTerrainLayerRenderComponent>())
+	for (const auto entityId : entityManager.GetComponentGroup<TiledRenderComponent>())
 	{
 		assert(Entity::GetObjectFromID(entityId) != nullptr && "TiledTerrainLayerRenderSystem: The entity must exists");
 
 		auto & entity = *Entity::GetObjectFromID(entityId);
-		auto & renderComponent = entity.GetComponent<TiledTerrainLayerRenderComponent>();
+		auto & renderComponent = entity.GetComponent<TiledRenderComponent>();
 
 		auto renderStates = renderComponent.GetRenderStates();
 		
@@ -54,10 +54,10 @@ void TiledTerrainLayerRenderSystem::Update()
 //	auto & entity = textureWrapperComponent.GetParentEntity();
 //
 //	// Use event Subscription to update the texture
-//	if (!entity.HasComponent<TiledTerrainLayerRenderComponent>())
+//	if (!entity.HasComponent<TiledRenderComponent>())
 //		return;
 //
-//	auto & renderComponent = entity.GetComponent<TiledTerrainLayerRenderComponent>();
+//	auto & renderComponent = entity.GetComponent<TiledRenderComponent>();
 //
 //	// Update the texture
 //	auto renderStates = renderComponent.GetRenderStates();
@@ -70,10 +70,10 @@ void TiledTerrainLayerRenderSystem::Update()
 
 void TiledTerrainLayerRenderSystem::OnEntityCreatedEvent(Entity & entity)
 {
-	if (!entity.HasComponent<TextureWrapperComponent>() || !entity.HasComponent<TiledTerrainLayerRenderComponent>())
+	if (!entity.HasComponent<TextureWrapperComponent>() || !entity.HasComponent<TiledRenderComponent>())
 		return;
 
-	auto & renderComponent = entity.GetComponent<TiledTerrainLayerRenderComponent>();
+	auto & renderComponent = entity.GetComponent<TiledRenderComponent>();
 
 	// Update the texture
 	auto renderStates = renderComponent.GetRenderStates();

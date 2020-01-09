@@ -1,7 +1,7 @@
 #pragma once
 
 /// @file
-/// @brief Class mbe::TiledTerrainLayerComponent
+/// @brief Class mbe::TileComponent
 
 #include <vector>
 #include <memory>
@@ -11,12 +11,12 @@
 namespace mbe
 {
 
-	class TiledTerrainLayerComponent : public Component
+	class TileComponent : public Component
 	{
 	public:
-		TiledTerrainLayerComponent(EventManager & eventManager, Entity & parentEntity);
+		TileComponent(EventManager & eventManager, Entity & parentEntity);
 
-		~TiledTerrainLayerComponent() = default;
+		~TileComponent() = default;
 
 	public:
 		inline void SetIndexList(const std::vector<size_t> & indexList) { this->indexList = indexList; }

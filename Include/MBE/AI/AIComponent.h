@@ -2,7 +2,7 @@
 #pragma once
 
 /// @file
-/// @brief Class mbe::UtilityAIComponent
+/// @brief Class mbe::AIComponent
 
 #include <memory>
 #include <map>
@@ -39,18 +39,18 @@ namespace mbe
 	} //namespace detail
 
 
-	class UtilityAIComponent : public Component
+	class AIComponent : public Component
 	{
 	public:
-		typedef std::shared_ptr<UtilityAIComponent> Ptr;
-		typedef std::weak_ptr<UtilityAIComponent> WPtr;
-		typedef std::unique_ptr<UtilityAIComponent> UPtr;
+		typedef std::shared_ptr<AIComponent> Ptr;
+		typedef std::weak_ptr<AIComponent> WPtr;
+		typedef std::unique_ptr<AIComponent> UPtr;
 
 		typedef typename detail::AITaskTypeID AITaskTypeID;
 
 	public:
-		UtilityAIComponent(EventManager& eventManager, Entity& parentEntity);
-		~UtilityAIComponent() = default;
+		AIComponent(EventManager& eventManager, Entity& parentEntity);
+		~AIComponent() = default;
 
 	public:
 		// Sets the current task aborting (if existing)
@@ -64,6 +64,16 @@ namespace mbe
 		// Adds an existing task
 		template<class TTask>
 		void AssignTask(typename TTask::Ptr taskPtr);
+
+		// Overwrites the current task without setting it aborting
+		// This should be used when loading tasks
+		// Adds an existing task by type id
+		void SetActiveTask(typename AITask::Ptr taskPtr, typename AITaskTypeID typeId);
+
+		// Overwrites the queued task
+		// This should be used when loading tasks
+		// Adds an existing task by type id
+		void SetQueuedTask(typename AITask::Ptr taskPtr, typename AITaskTypeID typeId);
 
 		// Check whether there is a next task using IsTaskQueued
 		// Throws if no task is queued
@@ -151,7 +161,7 @@ namespace mbe
 #pragma region Utility AI Component Template Implementations
 
 	template<class TTask, typename ...TArguments>
-	inline void UtilityAIComponent::AssignTask(TArguments&& ...arguments)
+	inline void AIComponent::AssignTask(TArguments&& ...arguments)
 	{
 		auto taskPtr = std::make_shared<TTask>(std::forward<TArguments>(arguments)...);
 		// Just for now
@@ -164,7 +174,7 @@ namespace mbe
 	}
 
 	template<class TTask>
-	inline void UtilityAIComponent::AssignTask(typename TTask::Ptr taskPtr)
+	inline void AIComponent::AssignTask(typename TTask::Ptr taskPtr)
 	{
 		nextTask.first = taskPtr;
 		nextTask.second = detail::GetAITaskTypeID<TTask>();
@@ -175,7 +185,7 @@ namespace mbe
 	}
 
 	template<class TTask>
-	inline bool UtilityAIComponent::IsTaskActive() const
+	inline bool AIComponent::IsTaskActive() const
 	{
 		// Return true if a task of that type is active
 		auto taskTypeId = detail::GetAITaskTypeID<TTask>();
@@ -183,7 +193,7 @@ namespace mbe
 	}
 
 	template<class TTask>
-	inline bool UtilityAIComponent::IsTaskQueued() const
+	inline bool AIComponent::IsTaskQueued() const
 	{
 		// Return true if a task of that type is queued
 		auto taskTypeId = detail::GetAITaskTypeID<TTask>();
@@ -192,67 +202,67 @@ namespace mbe
 
 
 	template<class TTask>
-	inline TTask& UtilityAIComponent::GetActiveTask()
+	inline TTask& AIComponent::GetActiveTask()
 	{
 		// Throw if the task doesn't exist
 		if (IsTaskActive<TTask>() == false)
-			throw std::runtime_error("UtilityAIComponent: Currently there is no task active");
+			throw std::runtime_error("AIComponent: Currently there is no task active");
 
-		assert(currentTask.first != nullptr && "UtilityAIComponent: Currently there is no task active");
+		assert(currentTask.first != nullptr && "AIComponent: Currently there is no task active");
 
 		return *std::dynamic_pointer_cast<TTask>(currentTask.first);
 	}
 
 	template<class TTask>
-	inline const TTask& UtilityAIComponent::GetActiveTask() const
+	inline const TTask& AIComponent::GetActiveTask() const
 	{
 		// Throw if the task doesn't exist
 		if (IsTaskActive<TTask>() == false)
-			throw std::runtime_error("UtilityAIComponent: Currently there is no task active");
+			throw std::runtime_error("AIComponent: Currently there is no task active");
 
-		assert(currentTask.first != nullptr && "UtilityAIComponent: Currently there is no task active");
+		assert(currentTask.first != nullptr && "AIComponent: Currently there is no task active");
 
 		return *std::dynamic_pointer_cast<TTask::Ptr>(currentTask.first);
 	}
 
 	template<class TTask>
-	inline typename TTask::Ptr UtilityAIComponent::GetActiveTaskPtr()
+	inline typename TTask::Ptr AIComponent::GetActiveTaskPtr()
 	{
 		return std::dynamic_pointer_cast<TTask::Ptr>(currentTask.first);
 	}
 
 	template<class TTask>
-	inline TTask& UtilityAIComponent::GetQueuedTask()
+	inline TTask& AIComponent::GetQueuedTask()
 	{
 		// Throw if the task doesn't exist
 		if (IsTaskQueued<TTask>() == false)
-			throw std::runtime_error("UtilityAIComponent: Currently there is no task queued");
+			throw std::runtime_error("AIComponent: Currently there is no task queued");
 
-		assert(nextTask.first != nullptr && "UtilityAIComponent: Currently there is no task queued");
+		assert(nextTask.first != nullptr && "AIComponent: Currently there is no task queued");
 
 		return *std::dynamic_pointer_cast<TTask::Ptr>(nextTask.first);
 	}
 
 	template<class TTask>
-	inline const TTask& UtilityAIComponent::GetQueuedTask() const
+	inline const TTask& AIComponent::GetQueuedTask() const
 	{
 		// Throw if the task doesn't exist
 		if (IsTaskQueued<TTask>() == false)
-			throw std::runtime_error("UtilityAIComponent: Currently there is no task queued");
+			throw std::runtime_error("AIComponent: Currently there is no task queued");
 
-		assert(nextTask.first != nullptr && "UtilityAIComponent: Currently there is no task queued");
+		assert(nextTask.first != nullptr && "AIComponent: Currently there is no task queued");
 
 		return *std::dynamic_pointer_cast<TTask::Ptr>(nextTask.first);
 	}
 
 	template<class TTask>
-	inline typename TTask::Ptr UtilityAIComponent::GetQueuedTaskPtr()
+	inline typename TTask::Ptr AIComponent::GetQueuedTaskPtr()
 	{
 		return std::dynamic_pointer_cast<TTask::Ptr>(nextTask.first);
 	}
 
 	template<class TTask>
-	inline typename UtilityAIComponent::AITaskTypeID UtilityAIComponent::GetAITaskTypeID()
+	inline typename AIComponent::AITaskTypeID AIComponent::GetAITaskTypeID()
 	{
 		return detail::GetAITaskTypeID<TTask>();
 	}

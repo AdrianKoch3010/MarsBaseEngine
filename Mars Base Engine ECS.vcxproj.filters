@@ -261,9 +261,6 @@
     <ClCompile Include="Source\MBE\Graphics\TextureWrapper.cpp">
       <Filter>Quelldateien\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MBE\Graphics\TiledTerrainLayerRenderComponent.cpp">
-      <Filter>Quelldateien\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Source\MBE\Graphics\TopDownInformationComponent.cpp">
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
@@ -317,9 +314,6 @@
     </ClCompile>
     <ClCompile Include="Source\MBE\Core\ComponentValueChangedEvent.cpp">
       <Filter>Quelldateien\Systems\Event System\Events</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\MBE\Map\TiledTerrainLayerComponent.cpp">
-      <Filter>Quelldateien\Components</Filter>
     </ClCompile>
     <ClCompile Include="Source\MBE\pch.cpp">
       <Filter>Quelldateien</Filter>
@@ -383,6 +377,21 @@
     </ClCompile>
     <ClCompile Include="Source\MBE\Serialisation\RotationAnimationSerialiser.cpp">
       <Filter>Quelldateien\Systems\Animation System\AnimationSerialisers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Graphics\TiledRenderComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Serialisation\TiledRenderComponentSerialiser.cpp">
+      <Filter>Quelldateien\ComponentSerialisers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Serialisation\SpriteRenderComponentSerialiser.cpp">
+      <Filter>Quelldateien\ComponentSerialisers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Map\TileComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Core\Cursor.cpp">
+      <Filter>Quelldateien\Framework</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -539,9 +548,6 @@
     <ClInclude Include="Include\MBE\Graphics\TextureWrapper.h">
       <Filter>Headerdateien\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Include\MBE\Graphics\TiledTerrainLayerRenderComponent.h">
-      <Filter>Headerdateien\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Include\MBE\Graphics\TopDownInformationComponent.h">
       <Filter>Headerdateien\Components</Filter>
     </ClInclude>
@@ -592,9 +598,6 @@
     </ClInclude>
     <ClInclude Include="Include\MBE\Core\ComponentValueChangedEvent.h">
       <Filter>Headerdateien\Systems\Event System\Events</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\MBE\Map\TiledTerrainLayerComponent.h">
-      <Filter>Headerdateien\Components</Filter>
     </ClInclude>
     <ClInclude Include="Include\MBE\Core\SafeQueue.h">
       <Filter>Headerdateien\Framework\Helpers</Filter>
@@ -670,6 +673,21 @@
     </ClInclude>
     <ClInclude Include="Include\MBE\Serialisation\RotationAnimationSerialiser.h">
       <Filter>Headerdateien\Systems\Animation System\AnimationSerialisers</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Graphics\TiledRenderComponent.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Serialisation\TiledRenderComponentSerialiser.h">
+      <Filter>Headerdateien\ComponentSerialisers</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Serialisation\SpriteRenderComponentSerialiser.h">
+      <Filter>Headerdateien\ComponentSerialisers</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Map\TileComponent.h">
+      <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Core\Cursor.h">
+      <Filter>Headerdateien\Framework</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
