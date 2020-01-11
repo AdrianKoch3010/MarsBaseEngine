@@ -122,7 +122,13 @@ namespace mbe
 	public:
 		// Thorws runtime_error when loading fails 
 		// The entity ids will be reassigned. However, the mapping of parents and childs will remain.
-		void LoadEntites(const std::string& filePath);
+		// Returns a list of the entities that have been loaded
+		std::vector<Entity::HandleID> LoadEntites(const std::string& filePath);
+
+		// Works the same as LoadEntities but loads from a string rather than a file
+		// Returns a list of the entities that have been loaded
+		// Throws if the string doesn't contain valid xml
+		std::vector<Entity::HandleID> CreateEntitiesFromString(const std::string& xmlString);
 
 		// Throws runtime_error when storing fails
 		void StoreEntites(const std::string& filePath);
@@ -147,6 +153,9 @@ namespace mbe
 		// Const overload
 		template<class TComponentSerialiser>
 		const TComponentSerialiser& GetComponentSerialser() const;
+
+	private:
+		std::vector<Entity::HandleID> Load(const tinyxml2::XMLDocument& document);
 
 	private:
 		EntityManager& entityManager;

@@ -306,7 +306,7 @@ namespace mbe
 		auto component = std::make_shared<TComponentSerialiser>(eventManager, *this, std::forward<TArguments>(arguments)...);
 
 		// For debugging
-		std::cout << std::endl << "Entity: Added component with id " << std::to_string(typeId);
+		//std::cout << std::endl << "Entity: Added component with id " << std::to_string(typeId);
 
 		actualComponentDictionary.insert(std::make_pair(typeId, component));
 		componentDictionary.insert(std::make_pair(typeId, component));

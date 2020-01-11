@@ -393,6 +393,9 @@
     <ClCompile Include="Source\MBE\Core\Cursor.cpp">
       <Filter>Quelldateien\Framework</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MBE\Serialisation\TileMapComponentSerialiser.cpp">
+      <Filter>Quelldateien\ComponentSerialisers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\TransformComponent.h">
@@ -688,6 +691,9 @@
     </ClInclude>
     <ClInclude Include="Include\MBE\Core\Cursor.h">
       <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Serialisation\TileMapComponentSerialiser.h">
+      <Filter>Headerdateien\ComponentSerialisers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

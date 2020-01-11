@@ -1,3 +1,4 @@
+#include "..\..\..\Include\MBE\Map\TileMapComponent.h"
 #include <MBE/Map/TileMapComponent.h>
 
 using namespace mbe;
@@ -15,6 +16,18 @@ float TileMapComponent::GetMovementSpeed(unsigned int x, unsigned int y) const
 		throw std::out_of_range("TileMapComponent: The requested position does not fit within the shape");
 
 	return movementSpeedShape[y][x];
+}
+
+sf::Vector2u mbe::TileMapComponent::GetSize() const
+{
+	sf::Vector2u size;
+	size.y = movementSpeedShape.size();
+
+	// If the height is not 0
+	if (size.y != 0)
+		size.x = movementSpeedShape.front().size();
+
+	return size;
 }
 
 void TileMapComponent::SetMovementSpeed(unsigned int x, unsigned int y, float speed)

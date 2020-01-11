@@ -272,6 +272,7 @@
     <ClCompile Include="Source\MBE\Serialisation\SpriteRenderComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\TextureWrapperComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\TiledRenderComponentSerialiser.cpp" />
+    <ClCompile Include="Source\MBE\Serialisation\TileMapComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\TopDownInformationComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\TransformComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\TransformComponent.cpp" />
@@ -368,6 +369,7 @@
     <ClInclude Include="Include\MBE\Serialisation\SpriteRenderComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\TextureWrapperComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\TiledRenderComponentSerialiser.h" />
+    <ClInclude Include="Include\MBE\Serialisation\TileMapComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\TopDownInformationComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\TransformComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\TransformComponent.h" />
