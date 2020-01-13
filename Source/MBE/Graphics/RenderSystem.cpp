@@ -94,7 +94,7 @@ void RenderSystem::Render()
 			const auto& renderComponent = Entity::GetObjectFromID(renderEntityId)->GetComponent<RenderComponent>();
 
 			// Culling - only draw if the entity is visible on screen
-			if (renderComponent.IsVisible(viewDictionary[renderLayer]))
+			if (renderComponent.IsVisible(viewDictionary[renderLayer]) && renderComponent.IsHidden() == false)
 			{
 				// If the entity still exists
 				// This should always be the case since expired entities are removed in the refresh function
@@ -190,7 +190,10 @@ void RenderSystem::RemoveRenderEntity(Entity::HandleID entityId)
 
 void RenderSystem::OnTextureWrapperComponentChangedEvent(TextureWrapperComponent& textureWrapperComponent)
 {
-	textureWrapperComponent.SetTextureWrapper(&textureWrapperHolder[textureWrapperComponent.GetTextureWrapperID()]);
+	// Reassign all the texture wrappers
+	using TextureID = TextureWrapperComponent::TextureID;
+	for (TextureID textureId = 0; textureId <= textureWrapperComponent.GetHighestTextureID(); textureId++)
+		textureWrapperComponent.SetTextureWrapper(&textureWrapperHolder[textureWrapperComponent.GetTextureWrapperID(textureId)], textureId);
 }
 
 void RenderSystem::Refresh()

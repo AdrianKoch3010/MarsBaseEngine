@@ -116,6 +116,15 @@ std::vector<float> TileMapComponentSerialiser::ParseRow(const std::string& rowSt
 			currentItemString += currentChar;
 		}
 	}
+	// Add last item
+	if (!currentItemString.empty())
+	{
+		/// What does this method return when it fails?
+		int speed = std::stof(currentItemString);
+
+		row.push_back(speed);
+	}
+
 
 	return row;
 }

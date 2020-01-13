@@ -88,8 +88,7 @@ namespace mbe
 
 		EntityManager& entityManager;
 		EventManager& eventManager;
-		EventManager::SubscriptionID textureChangedSubscription;
-		EventManager::SubscriptionID indexListChangedSubscription;
+		EventManager::SubscriptionID componentChangedSubscription;
 	};
 
 } // namespace mbe

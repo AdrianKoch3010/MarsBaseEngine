@@ -24,6 +24,7 @@ namespace mbe
 
 			inline void SetAction(Action action) { this->action = action; }
 			inline Action GetAction() const { return action; }
+			bool IsActionActive(const Action& action) const;
 
 			inline const InputHandler & GetInputHandler() const { return inputHandler; }
 

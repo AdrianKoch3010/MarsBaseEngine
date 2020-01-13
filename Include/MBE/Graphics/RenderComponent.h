@@ -38,6 +38,13 @@ namespace mbe
 		virtual sf::FloatRect GetLocalBounds() const = 0;
 
 		virtual bool IsVisible(const sf::View & view) const;
+
+		void SetHidden(bool value = true);
+
+		bool IsHidden() const;
+
+	private:
+		bool hidden;
 	};
 } // namespace mbe
 

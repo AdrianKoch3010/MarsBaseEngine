@@ -19,7 +19,13 @@ namespace mbe
 		typedef std::string ObjectID;
 
 	public:
+		Cursor();
+		~Cursor() = default;
+
+	public:
 		void AttachObject(const ObjectID& objectId);
+
+		inline void SetOnGUI(bool value = true) { isOnGUI = value; }
 
 		void DetachObject();
 
@@ -29,8 +35,11 @@ namespace mbe
 
 		bool IsObjectAttached() const;
 
+		inline bool IsOnGUI() const { return isOnGUI; }
+
 	private:
 		ObjectID objectId;
+		bool isOnGUI;
 	};
 
 

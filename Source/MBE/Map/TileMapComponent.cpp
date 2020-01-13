@@ -38,3 +38,22 @@ void TileMapComponent::SetMovementSpeed(unsigned int x, unsigned int y, float sp
 	movementSpeedShape[y][x] = speed;
 }
 
+void TileMapComponent::Rotate()
+{
+	auto oldSize = this->GetSize();
+	MovementSpeedShape newShape;
+
+	// Push back enough empty row vectors
+	for (size_t i = 0; i < oldSize.x; i++)
+		newShape.push_back(std::vector<float>());
+
+	int newRowCounter = 0;
+	for (int i = oldSize.x - 1; i >= 0; i--, newRowCounter++)
+	{
+		for (size_t j = 0; j < oldSize.y; j++)
+			newShape.at(newRowCounter).push_back(GetMovementSpeed(i, j));
+	}
+
+	movementSpeedShape = newShape;
+}
+

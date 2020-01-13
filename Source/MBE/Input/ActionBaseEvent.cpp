@@ -1,3 +1,5 @@
+#include <MBE/Core/Utility.h>
+
 #include <MBE/Input/ActionBaseEvent.h>
 
 using mbe::InputHandler;
@@ -7,4 +9,9 @@ ActionBaseEvent::ActionBaseEvent(const InputHandler & inputHandler, Action actio
 	inputHandler(inputHandler),
 	action(action)
 {
+}
+
+bool ActionBaseEvent::IsActionActive(const Action& action) const
+{
+	return this->action == mbe::NormaliseIDString(action);
 }

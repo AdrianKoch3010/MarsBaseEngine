@@ -15,13 +15,18 @@ namespace mbe
 	/// @details XML format
 	/// @code
 	/// <Component type="TextureWrapperComponent">
-	///		<TextureRect>
-	///			<Top>int</Top>
-	///			<Left>int</Left>
-	///			<Width>int</Width>
-	///			<Height>int</Height>
-	///		</TextureRect>
-	///		<TextureWrapper>string</TextureWrapper>
+	///		<ActiveTexture>unsigned int<ActiveTexture>
+	///		<Textures id=unsigned int">
+	///			<!-- optional -->
+	///			<TextureRect>
+	///				<Top>int</Top>
+	///				<Left>int</Left>
+	///				<Width>int</Width>
+	///				<Height>int</Height>
+	///			</TextureRect>
+	///			<TextureWrapper>string</TextureWrapper>
+	///		...
+	///		</Textures>
 	/// </Component>
 	/// @endcode
 	class TextureWrapperComponentSerialiser : public ComponentSerialser

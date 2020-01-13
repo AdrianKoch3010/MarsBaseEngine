@@ -5,7 +5,7 @@
 
 using namespace mbe;
 using mbe::event::EntityCreatedEvent;
-using TextureChangedEvent = mbe::event::ComponentValueChangedEvent<mbe::TextureWrapperComponent>;
+using TextureWrapperChangedEvent = mbe::event::ComponentValueChangedEvent<mbe::TextureWrapperComponent>;
 using IndexListChangedEvent = mbe::event::ComponentValueChangedEvent<mbe::TileComponent>;
 
 // Remember to add subscriptions for the textureChangedEvent and indexListChangedEvent
@@ -51,8 +51,7 @@ TiledTerrain::TiledTerrain(EventManager& eventManager, EntityManager& entityMana
 
 TiledTerrain::~TiledTerrain()
 {
-	eventManager.UnSubscribe<TextureChangedEvent>(textureChangedSubscription);
-	eventManager.UnSubscribe<IndexListChangedEvent>(indexListChangedSubscription);
+	eventManager.UnSubscribe<TextureWrapperChangedEvent>(componentChangedSubscription);
 }
 
 Entity::HandleID TiledTerrain::AddTileMapLayer(const std::string& textureWrapperId)
@@ -120,18 +119,16 @@ void TiledTerrain::RecalculateLayer(Entity& entity)
 
 void TiledTerrain::SubscribeEvents()
 {
-	// Subscribe to texture changed event
-	textureChangedSubscription = eventManager.Subscribe(EventManager::TCallback<TextureChangedEvent>([this](const TextureChangedEvent& event)
+	// Subscribe to texture wrapper component changed event
+	componentChangedSubscription = eventManager.Subscribe(EventManager::TCallback<IndexListChangedEvent>([this](const IndexListChangedEvent& event)
 		{
-			if (!event.IsValueChanged("TextureWrapper"))
-				return;
-		}));
-
-	// Subscribe to index list changed event
-	indexListChangedSubscription = eventManager.Subscribe(EventManager::TCallback<IndexListChangedEvent>([this](const IndexListChangedEvent& event)
-		{
-			if (!event.IsValueChanged("IndexList"))
-				return;
+			if (event.IsValueChanged("TextureWrapper") || event.IsValueChanged("TextureId"))
+			{
+				auto& component = mbe::Entity::GetObjectFromID(event.GetComponent().GetParentEntity().GetHandleID())->GetComponent<TextureWrapperComponent>();
+				OnTextureWrapperChangedEvent(component);
+			}
+			else if (event.IsValueChanged("IndexList"))
+				OnIndexListChangedEvent(event.GetComponent());
 		}));
 }
 

@@ -4,7 +4,8 @@ using namespace mbe;
 
 
 RenderComponent::RenderComponent(EventManager & eventManager, Entity & parentEntity)
-	: Component(eventManager, parentEntity)
+	: Component(eventManager, parentEntity),
+	hidden(false)
 {
 }
 
@@ -28,4 +29,14 @@ bool RenderComponent::IsVisible(const sf::View & view) const
 
 	// Check whether it intersects with the global bounding box of this render component
 	return viewRect.intersects(this->GetGlobalBounds());
+}
+
+void RenderComponent::SetHidden(bool value)
+{
+	hidden = value;
+}
+
+bool RenderComponent::IsHidden() const
+{
+	return hidden;
 }

@@ -4,6 +4,12 @@
 
 using namespace mbe;
 
+Cursor::Cursor() :
+	objectId(""),
+	isOnGUI(false)
+{
+}
+
 void Cursor::AttachObject(const ObjectID& objectId)
 {
 	this->objectId = NormaliseIDString(objectId);
