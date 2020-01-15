@@ -396,6 +396,9 @@
     <ClCompile Include="Source\MBE\Serialisation\TileMapComponentSerialiser.cpp">
       <Filter>Quelldateien\ComponentSerialisers</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MBE\Core\AssetLoader.cpp">
+      <Filter>Quelldateien\Resources Management</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\TransformComponent.h">
@@ -694,6 +697,9 @@
     </ClInclude>
     <ClInclude Include="Include\MBE\Serialisation\TileMapComponentSerialiser.h">
       <Filter>Headerdateien\ComponentSerialisers</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Core\AssetLoader.h">
+      <Filter>Headerdateien\Resources Management</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
