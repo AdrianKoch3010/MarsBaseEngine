@@ -1,7 +1,5 @@
 # Game AI
-
-
-## Basic Components
+The mars base engine doesn't provide any high level ai systems. Instead it focusses on providing an interface for
 
 <table>
     <tr>
@@ -33,4 +31,6 @@
         </ul>
         </td>
     </tr>
-</table> 
+</table>
+
+## Pathfinding

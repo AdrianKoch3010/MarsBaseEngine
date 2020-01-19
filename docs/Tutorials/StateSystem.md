@@ -48,6 +48,10 @@ The simplest way to implement such a system is by making use of some form of fin
 
 A good example of this would be a pause screen. The game is no longer updated and doesn't take any user input but it is still drawn (with the pause screen possibly drawn on top). Most importantly, the game content must not be stored and reloaded.
 
+### The State Stack
+
+
+
 ## State Context
 Every state has a context. The state context is global information that can be used by every state. It consists out of references to the
 

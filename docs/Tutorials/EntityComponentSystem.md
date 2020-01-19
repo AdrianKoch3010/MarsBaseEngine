@@ -21,7 +21,7 @@ In contrast, in an entity component system the entities (or game objects) are co
 
 ## Dynamic Entity Types
 
-The technique of composition outlined above would allow for dynamic creation and removal of entities. I have decided against this as it introduces a whole bunch of new problems.
+The technique of composition outlined above would allow for dynamic creation and removal of components. I have decided against this as it introduces a whole bunch of new problems.
 
 <!-- Give example of problem -->
 
@@ -53,7 +53,7 @@ tree3.AddComponents<
     mbe::TopDownInformationComponent>(
         std::forward_as_tuple(),
         std::forward_as_tuple(RenderLayer::Objects),
-        std::forward_as_tuple(context.textureWrappers["Tree"]),
+        std::forward_as_tuple("Tree"),
         std::forward_as_tuple(),
         std::forward_as_tuple()
         );
@@ -77,4 +77,94 @@ This provides a neat way to compose a game obejct, dynamically add and remove st
 
 > Example
 
-Let's suppose we want to create a character. We might want it to have a position on the map, an inventory, some animations and a sprite. It should be able to put on a hat or play a sound effect that moves with the character should a certain event occur.
+Let's suppose we want to create a character. We might want it to have a position on the map, an inventory, some animations and a sprite. It should be able to play an animation or sound effect that moves with the character should a certain event occur. All of these things can be broken up into seperate entities with their respective components. The above example might look something like this:
+
+``` XML
+<!-- Top-level entity -->
+<Entity id="0" parentId="-1">
+    <Component type="TransformComponent">
+        <Position x="32" y="64"/>
+        <Origin x="0" y="0"/>
+        <Scale x="1" y="1"/>
+        <Rotation>0</Rotation>
+    </Component>
+    <Component type="TileMapComponent">
+        <Position x="1" y="2" />
+        <MovementSpeedShape>
+            <Row>10, 10, 10</Row>
+            <Row>10, 10, 10</Row>
+            <Row>10, 10, 10</Row>
+        </MovementSpeedShape>
+    </Component>
+    <!-- Playing an animation on this entity will attempt to play the same animation on its child render entity -->
+    <Component type="AnimationComponent" />
+</Entity>
+<!-- Render entity set as a child -->
+<Entity id="1" parentId="0">
+    <!-- The transform component will be relative to its parent -->
+    <Component type="TransformComponent">
+        <Position x="0" y="42"/>
+        <Origin x="-11.11" y="0.5"/>
+        <Scale x="1" y="1"/>
+        <Rotation>45.9</Rotation>
+    </Component>
+    <Component type="RenderInformationComponent">
+        <RenderLayer>Objects</RenderLayer>
+        <ZOrder>1000000</ZOrder>
+    </Component>
+    <Component type="TextureWrapperComponent">
+        <ActiveTexture>1</ActiveTexture>
+        <Textures>
+            <Texture><TextureWrapper>Texture1</TextureWrapper></Texture>
+            <Texture><TextureWrapper>Texture2</TextureWrapper></Texture>
+        </Textures>
+    </Component>
+    <Component type="SpriteRenderComponent">
+        <Colour>
+            <R>255</R>
+            <G>255</G>
+            <B>255</B>
+            <A>255</A>
+        </Colour>
+    </Component>
+    <Component type="PixelMaskClickableComponent">
+        <AbsorbeClick>true</AbsorbeClick>
+        <BubbleUp>true</BubbleUp>
+    </Component>
+    <Component type="AnimationComponent">
+        <Animator id="walkanimator">
+            <Progress>0.97901994</Progress>
+            <Loop>true</Loop>
+            <Paused>false</Paused>
+            <Animations>
+                <Animation type="FrameAnimation" id="walkdown" duration="1000">
+                    <Frame>
+                        <Duration>0.5</Duration>
+                        <SubRect>
+                            <Top>128</Top><Left>0</Left><Width>64</Width><Height>64</Height>
+                        </SubRect>
+                    </Frame>
+                    <Frame>
+                        <Duration>0.5</Duration>
+                        <SubRect>
+                            <Top>128</Top><Left>64</Left><Width>64</Width>Height>64</Height>
+                        </SubRect>
+                    </Frame>
+                </Animation>
+            </Animations>
+        </Animator>
+        <Animator id="blinkinganimator">
+            <Progress>0</Progress>
+            <Loop>false</Loop>
+            <Paused>false</Paused>
+            <Animations>
+                <Animation type="BlinkingAnimation" id="blink" duration="2000">
+                    <MinimumBrightness>0.25</MinimumBrightness>
+                </Animation>
+            </Animations>
+        </Animator>
+    </Component>
+</Entity>
+```
+
+>Note how this is the same XML format used by the [entity serialiser](Serialisation.md). Of course the same outcome can be achived by creating the entity and code and adding the required components.

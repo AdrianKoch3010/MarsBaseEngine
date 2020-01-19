@@ -50,12 +50,15 @@ Lastly, actions can be queried directly as described earlier. This is independed
 bool active = inputHandler.IsActionActive("Action");
 ```
 
-## Example
+>Example
 
 Lets suppose we want to place some building when the user holds down the key that has been assigned to the building action and then releases the left mouse button. This will require us to subscribe to the ```mbe::event::MouseButtonReleasedEvent``` and implement the functionality in subscribed function. If you are not sure how the event system works have a look [here](Events.md).
 
 ```c++
 using mbe::event::MouseButtonReleasedEvent;
+
+// Assign the B key to the build action. This isn't a realtime action (false by default)
+inputHandler.AssignKey("Build", sf::Keyboard::Key::B);
 
 mouseButtonReleasedSubscription = eventManager.Subscribe(mbe::EventManager::TCallback<MouseButtonReleasedEvent>([&, this](const MouseButtonReleasedEvent & event)
 {
