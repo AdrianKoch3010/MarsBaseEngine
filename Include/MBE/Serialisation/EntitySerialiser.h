@@ -95,20 +95,6 @@ namespace mbe
 		typedef std::unordered_map<Entity::HandleID, Entity::HandleID> ParentEntityIDMap;
 
 	public:
-		/// @brief The context required by the preregistered component serialisers
-		/// @details The references are passed to the
-		/// - TextureWrapperComponentSerialser
-		/// - SoundComponentSerialiser
-		/// - MusicComponentSerialiser
-		/// respectively
-		/*struct Context
-		{
-			TextureWrapperHolder<>& textureWrappers;
-			SoundBufferHolder<>& soundBuffers;
-			FilePathDictionary<>& musicFilePaths;
-		};*/
-
-	public:
 		/// @brief Constructor
 		/// @param entityManager A reference to the entityManager whoes entity's will be loaded / stored.
 		/// Since the entityIds are reassigned, the entity manager must not be empty
@@ -160,7 +146,6 @@ namespace mbe
 	private:
 		EntityManager& entityManager;
 		EventManager& eventManager;
-		//Context context;
 
 		ComponentSerialiserDictionary componentSerialiserDictionary;
 		ComponentTypeDictionary componentTypeDictionary;

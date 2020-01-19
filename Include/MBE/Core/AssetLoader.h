@@ -27,6 +27,11 @@ namespace mbe
 
 		// Overload for mbe::MusicDictionary
 		static void Load(FilePathDictionary<>& filePathDictionary, const std::string& filePath, const std::string& fileName);
+
+	private:
+		static std::vector<std::vector<std::string>> Tokenise(std::ifstream& file);
+
+		static std::string FindFolder(std::vector<std::vector<std::string>>& lineTokens);
 	};
 
 } // namespace mbe
@@ -42,67 +47,54 @@ inline void mbe::AssetLoader::Load(TAssetHolder& assetHolder, const std::string&
 	if (registerFiler.is_open() == false)
 		throw std::runtime_error("AssetLoader failed to open register file (" + fileName + ")");
 
-	std::string line;
-	size_t lineNumber = 0;
-	std::unordered_map<std::string, std::string> assetDictionary;
-	while (std::getline(registerFiler, line))
+	// Tokenise
+	std::vector<std::vector<std::string>> lineTokens;
+	try
 	{
-		lineNumber++;
-
-		// Tokenise
-		std::vector<std::string> tokens;
-		std::string currentToken;
-		for (char currentChar : line)
-		{
-			if (currentChar == ' ' || currentChar == ':' || currentChar == '=' || currentChar == '\t')
-			{
-				if (!currentToken.empty())
-				{
-					tokens.push_back(currentToken);
-					currentToken.clear();
-				}
-			}
-			else
-				currentToken.push_back(currentChar);
-		}
-		if (!currentToken.empty())
-			tokens.push_back(currentToken);
-
-		// If the line begins with a comment
-		if (tokens.empty() || tokens.front()[0] == '#')
-			continue;
-
-		bool invalidSyntax = false;
-		if (tokens.size() < 2)
-			invalidSyntax = true;
-
-		// The first two tokens must not contain any tokens
-		else if (tokens[0].find('#') != std::string::npos || tokens[1].find('#') != std::string::npos)
-			invalidSyntax = true;
-
-		// If there are more than two tokens, the third must start with a comment
-		else if (tokens.size() > 2 && tokens[2][0] != '#')
-			invalidSyntax = true;
-
-		if (invalidSyntax)
-			std::cerr << "AssetLoader: Failed to parse line " << lineNumber << " (" << fileName << ")" << std::endl;
-		else
-			assetDictionary.insert({ tokens[0], tokens[1] });
+		lineTokens = Tokenise(registerFiler);
+	}
+	catch (const std::runtime_error & error)
+	{
+		throw std::runtime_error(std::string(error.what()) + " (" + fileName + ")");
 	}
 
-	// Attempt to load the assets
-	// Check if the __FOLDER__ has been defined
-	std::string folder;
-	if (assetDictionary.find("__FOLDER__") == assetDictionary.cend())
-		throw std::runtime_error("AssetLoader load: The __FOLDER__ keyword has not been defined (" + fileName + ")");
-	folder = assetDictionary.at("__FOLDER__");
-	assetDictionary.erase("__FOLDER__");
-
-	for (const auto& pair : assetDictionary)
+	// Get the folder
+	std::string folder = "";
+	try
 	{
-		const auto& assetId = pair.first;
-		const auto& file = pair.second;
-		assetHolder.Load(assetId, filePath + folder + file);
+		folder = FindFolder(lineTokens);
+	}
+	catch (const std::runtime_error & error)
+	{
+		throw std::runtime_error(std::string(error.what()) + " (" + fileName + ")");
+	}
+
+	std::string currentSubFolder = "";
+	for (const auto& tokens : lineTokens)
+	{
+		// If this is a subfolder declaration
+		if (tokens.size() == 1 && tokens.front().front() == '[')
+		{
+			currentSubFolder = tokens.front();
+			// Remove the brackets
+			currentSubFolder.erase(0, 1);
+			currentSubFolder.erase(currentSubFolder.size() - 1, 1);
+		}
+		// If this is an asset declaration
+		else if (tokens.size() >= 3)
+		{
+			const auto& assetId = tokens.at(0);
+			const auto& op = tokens.at(1);
+			const auto& fileString = tokens.at(2);
+
+			// Switch on the operator
+			if (op == "=")
+				assetHolder.Load(assetId, filePath + folder + currentSubFolder + fileString);
+			else
+				std::cerr << "AssetLoader load asset: invalid declaration" << "(" << fileName << ")" << std::endl;
+		}
+		else
+			std::cerr << "AssetLoader load asset: invalid declaration" << "(" << fileName << ")" << std::endl;
 	}
 }
 

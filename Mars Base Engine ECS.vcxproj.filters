@@ -399,6 +399,9 @@
     <ClCompile Include="Source\MBE\Core\AssetLoader.cpp">
       <Filter>Quelldateien\Resources Management</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MBE\Graphics\CustomRenderComponent.cpp">
+      <Filter>Quelldateien\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\TransformComponent.h">
@@ -700,6 +703,9 @@
     </ClInclude>
     <ClInclude Include="Include\MBE\Core\AssetLoader.h">
       <Filter>Headerdateien\Resources Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Graphics\CustomRenderComponent.h">
+      <Filter>Headerdateien\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

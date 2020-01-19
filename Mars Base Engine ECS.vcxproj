@@ -202,6 +202,7 @@
     <ClCompile Include="Source\MBE\Core\ComponentValueChangedEvent.cpp" />
     <ClCompile Include="Source\MBE\Core\Cursor.cpp" />
     <ClCompile Include="Source\MBE\Graphics\BaseComponentRenderSystem.cpp" />
+    <ClCompile Include="Source\MBE\Graphics\CustomRenderComponent.cpp" />
     <ClCompile Include="Source\MBE\Graphics\RenderComponent.cpp" />
     <ClCompile Include="Source\MBE\Graphics\RenderInformationComponent.cpp" />
     <ClCompile Include="Source\MBE\Audio\MusicComponent.cpp" />
@@ -293,6 +294,7 @@
     <ClInclude Include="Include\MBE\Core\Cursor.h" />
     <ClInclude Include="Include\MBE\Core\SafeQueue.h" />
     <ClInclude Include="Include\MBE\Graphics\BaseComponentRenderSystem.h" />
+    <ClInclude Include="Include\MBE\Graphics\CustomRenderComponent.h" />
     <ClInclude Include="Include\MBE\Graphics\SpriteRenderSystem.h" />
     <ClInclude Include="Include\MBE\Graphics\TiledTerrainLayerRenderSystem.h" />
     <ClInclude Include="Include\MBE\Input\ActionEvents.h" />

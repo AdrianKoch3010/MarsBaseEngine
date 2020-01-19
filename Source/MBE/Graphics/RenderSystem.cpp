@@ -74,6 +74,12 @@ void RenderSystem::Render()
 	// Remove all expired nodes
 	this->Refresh();
 
+	// Update the component render systems
+	for (auto& componentRenderSystemPtr : componentRenderSystemList)
+	{
+		componentRenderSystemPtr->Update();
+	}
+
 	for (auto renderLayer = RenderLayer::Background; renderLayer != RenderLayer::LayerCount; ++renderLayer)
 	{
 		// Draw all the render nodes in the current layer
@@ -209,12 +215,6 @@ void RenderSystem::Refresh()
 				// The second condition is not checked if the first one is true. So IsActive() is never called on nullptr
 				return entityPtr == nullptr || entityPtr->IsActive() == false;
 			}), entityList.end());
-	}
-
-	// Update the component render systems
-	for (auto& componentRenderSystemPtr : componentRenderSystemList)
-	{
-		componentRenderSystemPtr->Update();
 	}
 }
 
