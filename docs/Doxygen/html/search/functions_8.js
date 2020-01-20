@@ -13,7 +13,7 @@ var searchData=
   ['isoffsetfromtile',['IsOffsetFromTile',['../classmbe_1_1_tile_map_base.html#aed3ff6468699c4fba9a617b8afaae84c',1,'mbe::TileMapBase']]],
   ['isoffsetfromtilecenter',['IsOffsetFromTileCenter',['../classmbe_1_1_tile_map_base.html#a2fa4ec84d43053e3a027caee5bbc9cf9',1,'mbe::TileMapBase']]],
   ['isotocartesian',['IsoToCartesian',['../namespacembe.html#aa757076606ccf162a3d2405837de386b',1,'mbe']]],
-  ['ispaused',['IsPaused',['../classmbe_1_1_entity_animator.html#a8be2d8a4d4347cb22c9cd6cd2a8eb68a',1,'mbe::EntityAnimator']]],
+  ['ispaused',['IsPaused',['../classmbe_1_1_animator.html#a1f40f2cf7926391c0b30bdff657bf94f',1,'mbe::Animator::IsPaused()'],['../classmbe_1_1_animator_3_01_t_animated_00_01std_1_1string_01_4.html#ae557c048d540c203eb0dd9052dd7dddc',1,'mbe::Animator&lt; TAnimated, std::string &gt;::IsPaused()'],['../classmbe_1_1_entity_animator.html#a8be2d8a4d4347cb22c9cd6cd2a8eb68a',1,'mbe::EntityAnimator::IsPaused()']]],
   ['isplayinganimation',['IsPlayingAnimation',['../classmbe_1_1_animator.html#a9a48259ba89c4067db509b08b1966d59',1,'mbe::Animator::IsPlayingAnimation()'],['../classmbe_1_1_animator_3_01_t_animated_00_01std_1_1string_01_4.html#ac69d8ecd40309346b4f1d22ba5c9c1dc',1,'mbe::Animator&lt; TAnimated, std::string &gt;::IsPlayingAnimation()'],['../classmbe_1_1_entity_animator.html#a762e11fd1a6e647b4e1a9fbdeeef432a',1,'mbe::EntityAnimator::IsPlayingAnimation()']]],
   ['isstatestackempty',['IsStateStackEmpty',['../classmbe_1_1_state_manager.html#a5990def1ae26e6578bc81b663c15df9c',1,'mbe::StateManager']]]
 ];

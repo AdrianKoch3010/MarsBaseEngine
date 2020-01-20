@@ -10,7 +10,7 @@ var searchData=
   ['setmousebutton',['SetMouseButton',['../classmbe_1_1event_1_1_entity_clicked_event.html#acc7f9118b4d600acbb2873bae53d5fb0',1,'mbe::event::EntityClickedEvent']]],
   ['setorigin',['SetOrigin',['../classmbe_1_1_transform_component.html#a70d8670faa992b86121e330489084883',1,'mbe::TransformComponent']]],
   ['setparententityid',['SetParentEntityID',['../classmbe_1_1_entity.html#a4037dc3b2a35ab0effe9782f14da6456',1,'mbe::Entity']]],
-  ['setpaused',['SetPaused',['../classmbe_1_1_entity_animator.html#a74988adb6c39fc61b56df94608684c5a',1,'mbe::EntityAnimator']]],
+  ['setpaused',['SetPaused',['../classmbe_1_1_animator.html#ab7b7732f5929592ec809b8b955913909',1,'mbe::Animator::SetPaused()'],['../classmbe_1_1_animator_3_01_t_animated_00_01std_1_1string_01_4.html#a551100c35eb606bce3adc9774d909e5a',1,'mbe::Animator&lt; TAnimated, std::string &gt;::SetPaused()'],['../classmbe_1_1_entity_animator.html#a74988adb6c39fc61b56df94608684c5a',1,'mbe::EntityAnimator::SetPaused()']]],
   ['setposition',['SetPosition',['../classmbe_1_1_transform_component.html#a7186711e8a68e8f6998b8ac6a5253a39',1,'mbe::TransformComponent']]],
   ['setprogress',['SetProgress',['../classmbe_1_1_entity_animator.html#a671e1398e18f545433cda1c587300630',1,'mbe::EntityAnimator']]],
   ['setrotation',['SetRotation',['../classmbe_1_1_transform_component.html#a4c21721bed11140adb46319a1a9c0918',1,'mbe::TransformComponent']]],

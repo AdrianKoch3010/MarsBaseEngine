@@ -92,7 +92,7 @@ Inheritance diagram for mbe::Animator&lt; TAnimated, TID &gt;:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:ae266e6e491835e4dbcd2d431323ff660"><td class="memItemLeft" align="right" valign="top">typedef std::function&lt; void(TAnimated &amp;, float)&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animator.html#ae266e6e491835e4dbcd2d431323ff660">AnimationFunction</a></td></tr>
-<tr class="memdesc:ae266e6e491835e4dbcd2d431323ff660"><td class="mdescLeft">&#160;</td><td class="mdescRight">Functor to animate the objects.  <a href="#ae266e6e491835e4dbcd2d431323ff660">More...</a><br /></td></tr>
+<tr class="memdesc:ae266e6e491835e4dbcd2d431323ff660"><td class="mdescLeft">&#160;</td><td class="mdescRight">The signature of the function type used to animate the object.  <a href="#ae266e6e491835e4dbcd2d431323ff660">More...</a><br /></td></tr>
 <tr class="separator:ae266e6e491835e4dbcd2d431323ff660"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a463faa616561889eb919c74f0e8fbe70"><td class="memItemLeft" align="right" valign="top"><a id="a463faa616561889eb919c74f0e8fbe70"></a>
 typedef std::shared_ptr&lt; <a class="el" href="classmbe_1_1_animator.html">Animator</a>&lt; TAnimated, TID &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Ptr</b></td></tr>
@@ -116,9 +116,8 @@ typedef std::unique_ptr&lt; <a class="el" href="classmbe_1_1_base_animator.html"
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a64ae6bcbebd1eb830945b2a9ff667707"><td class="memItemLeft" align="right" valign="top"><a id="a64ae6bcbebd1eb830945b2a9ff667707"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animator.html#a64ae6bcbebd1eb830945b2a9ff667707">Animator</a> (TAnimated &amp;animatedObject)</td></tr>
-<tr class="memdesc:a64ae6bcbebd1eb830945b2a9ff667707"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
+<tr class="memitem:a64ae6bcbebd1eb830945b2a9ff667707"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animator.html#a64ae6bcbebd1eb830945b2a9ff667707">Animator</a> (TAnimated &amp;animatedObject)</td></tr>
+<tr class="memdesc:a64ae6bcbebd1eb830945b2a9ff667707"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a64ae6bcbebd1eb830945b2a9ff667707">More...</a><br /></td></tr>
 <tr class="separator:a64ae6bcbebd1eb830945b2a9ff667707"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bf8cee5e0e9dfda977aed1cfc72cba9"><td class="memItemLeft" align="right" valign="top"><a id="a1bf8cee5e0e9dfda977aed1cfc72cba9"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animator.html#a1bf8cee5e0e9dfda977aed1cfc72cba9">~Animator</a> ()=default</td></tr>
@@ -133,8 +132,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a92661b2c9d92b7a9b6e0e869f7c61147"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animator.html#a92661b2c9d92b7a9b6e0e869f7c61147">PlayAnimation</a> (const TID &amp;id, bool loop=false) override</td></tr>
 <tr class="memdesc:a92661b2c9d92b7a9b6e0e869f7c61147"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plays the animation with the given id.  <a href="#a92661b2c9d92b7a9b6e0e869f7c61147">More...</a><br /></td></tr>
 <tr class="separator:a92661b2c9d92b7a9b6e0e869f7c61147"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7b7732f5929592ec809b8b955913909"><td class="memItemLeft" align="right" valign="top"><a id="ab7b7732f5929592ec809b8b955913909"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>SetPaused</b> (bool value=true) override</td></tr>
+<tr class="memitem:ab7b7732f5929592ec809b8b955913909"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animator.html#ab7b7732f5929592ec809b8b955913909">SetPaused</a> (bool value=true) override</td></tr>
+<tr class="memdesc:ab7b7732f5929592ec809b8b955913909"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pauses or unpauses the currently playing animation.  <a href="#ab7b7732f5929592ec809b8b955913909">More...</a><br /></td></tr>
 <tr class="separator:ab7b7732f5929592ec809b8b955913909"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ac7f790611cc635a12f8c361720f520"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animator.html#a0ac7f790611cc635a12f8c361720f520">StopAnimation</a> () override</td></tr>
 <tr class="memdesc:a0ac7f790611cc635a12f8c361720f520"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupts the animation that is currently active.  <a href="#a0ac7f790611cc635a12f8c361720f520">More...</a><br /></td></tr>
@@ -142,8 +141,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>SetPaused</b> (bool v
 <tr class="memitem:a9a48259ba89c4067db509b08b1966d59"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animator.html#a9a48259ba89c4067db509b08b1966d59">IsPlayingAnimation</a> () const override</td></tr>
 <tr class="memdesc:a9a48259ba89c4067db509b08b1966d59"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether an animation is currently playing.  <a href="#a9a48259ba89c4067db509b08b1966d59">More...</a><br /></td></tr>
 <tr class="separator:a9a48259ba89c4067db509b08b1966d59"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f40f2cf7926391c0b30bdff657bf94f"><td class="memItemLeft" align="right" valign="top"><a id="a1f40f2cf7926391c0b30bdff657bf94f"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>IsPaused</b> () const override</td></tr>
+<tr class="memitem:a1f40f2cf7926391c0b30bdff657bf94f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animator.html#a1f40f2cf7926391c0b30bdff657bf94f">IsPaused</a> () const override</td></tr>
 <tr class="separator:a1f40f2cf7926391c0b30bdff657bf94f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d47f331da1b79636d5502bbd4e779f1"><td class="memItemLeft" align="right" valign="top">const TID &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animator.html#a8d47f331da1b79636d5502bbd4e779f1">GetPlayingAnimation</a> () const override</td></tr>
 <tr class="memdesc:a8d47f331da1b79636d5502bbd4e779f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the id of the currently playing animation.  <a href="#a8d47f331da1b79636d5502bbd4e779f1">More...</a><br /></td></tr>
@@ -187,9 +185,47 @@ template&lt;class TAnimated , typename TID  = std::string&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Functor to animate the objects. </p>
+<p>The signature of the function type used to animate the object. </p>
 <p>TAnimated is the object being animated. <br />
  The float represents the progress in [0,1] determining the state of the animation </p><dl class="section note"><dt>Note</dt><dd>This is the definition of an animation. Every animation is seen as a a function altering an object of type TAnimated over a progress between 0 and 1. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a64ae6bcbebd1eb830945b2a9ff667707"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64ae6bcbebd1eb830945b2a9ff667707">&#9670;&nbsp;</a></span>Animator()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class TAnimated , typename TID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classmbe_1_1_animator.html">mbe::Animator</a>&lt; TAnimated, TID &gt;::<a class="el" href="classmbe_1_1_animator.html">Animator</a> </td>
+          <td>(</td>
+          <td class="paramtype">TAnimated &amp;&#160;</td>
+          <td class="paramname"><em>animatedObject</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">animatedObject</td><td>A reference to the object being animated.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Internally the object's handle id is stored so it doesn't matter when the reference becomes invalid </p>
 
 </div>
 </div>
@@ -241,7 +277,7 @@ template&lt;class TAnimated , typename TID &gt; </div>
   <table class="params">
     <tr><td class="paramname">id</td><td>The id that will later be used to play the animation </td></tr>
     <tr><td class="paramname">animation</td><td>The animation to be registered. Any functor of the correct signature suffices </td></tr>
-    <tr><td class="paramname">duration</td><td>The absolute duration of the animation in seconds. This parameter can be used to play 'smooth' animations. For a <a class="el" href="classmbe_1_1_frame_animation.html" title="Changes a render component&#39;s subrect over time.">FrameAnimation</a> The duration should be set to (1 / target frame rate) * number of frames </td></tr>
+    <tr><td class="paramname">duration</td><td>The absolute duration of the animation in seconds. This parameter can be used to play 'smooth' animations. For a <a class="el" href="classmbe_1_1_frame_animation.html" title="Changes a texture wrapper component&#39;s subrect over time.">FrameAnimation</a> The duration should be set to (1 / target frame rate) * number of frames </td></tr>
   </table>
   </dd>
 </dl>
@@ -387,6 +423,36 @@ template&lt;class TAnimated , typename TID &gt; </div>
 
 </div>
 </div>
+<a id="a1f40f2cf7926391c0b30bdff657bf94f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f40f2cf7926391c0b30bdff657bf94f">&#9670;&nbsp;</a></span>IsPaused()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class TAnimated , typename TID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classmbe_1_1_animator.html">mbe::Animator</a>&lt; TAnimated, TID &gt;::IsPaused </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>@bríef Returns whether the currently playing animation is paused </p><dl class="section return"><dt>Returns</dt><dd>True if the animation is paused, false otherwise </dd></dl>
+
+<p>Implements <a class="el" href="classmbe_1_1_base_animator.html">mbe::BaseAnimator&lt; TID &gt;</a>.</p>
+
+</div>
+</div>
 <a id="a9a48259ba89c4067db509b08b1966d59"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9a48259ba89c4067db509b08b1966d59">&#9670;&nbsp;</a></span>IsPlayingAnimation()</h2>
 
@@ -474,6 +540,44 @@ template&lt;class TAnimated , typename TID &gt; </div>
 
 </div>
 </div>
+<a id="ab7b7732f5929592ec809b8b955913909"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7b7732f5929592ec809b8b955913909">&#9670;&nbsp;</a></span>SetPaused()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class TAnimated , typename TID &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classmbe_1_1_animator.html">mbe::Animator</a>&lt; TAnimated, TID &gt;::SetPaused </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>value</em> = <code>true</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Pauses or unpauses the currently playing animation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>Pass true to pause, false to unpause </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classmbe_1_1_base_animator.html">mbe::BaseAnimator&lt; TID &gt;</a>.</p>
+
+</div>
+</div>
 <a id="a0ac7f790611cc635a12f8c361720f520"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0ac7f790611cc635a12f8c361720f520">&#9670;&nbsp;</a></span>StopAnimation()</h2>
 
@@ -545,7 +649,7 @@ template&lt;class TAnimated , typename TID &gt; </div>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Users/adria/Desktop/Visual Studio/Mars Base Project/Mars Base Engine ECS/Include/MBE/Animation/<a class="el" href="_animator_8h_source.html">Animator.h</a></li>
+<li>C:/Users/Adrian/Documents/Visual Studio 2017/Projects/Mars Base Project/Mars Base Engine ECS/Include/MBE/Animation/<a class="el" href="_animator_8h_source.html">Animator.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

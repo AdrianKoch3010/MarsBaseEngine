@@ -4,7 +4,7 @@ On an abstract level, animation means changing an entity's state over time in so
 ## Definition of an Animation
 An animation is defined as a function object of the following type: 
 ```c++
-typedef std::function<void(mbe::Entity &, float)> AnimationFunction;
+typedef std::function<void(mbe::Entity&, float)> AnimationFunction;
 ```
 
 The float parameter represents the progress of the animation and is a value between 0 and 1. This means that animations must not be constrained to graphics. It is perfectly valid to define 'animations' acting on pitch or volume of an audio source, for instance.
@@ -79,7 +79,7 @@ for (const auto & animationId : animationList)
 ```
 
 
-## Animation and Child Entities
+## Animations and Child Entities
 The section on the [entity component system](EntityComponentSystem.md) descirbes how a game object may be constructed using multiple entities. This makes it possible for the following scenario to arise:
 
 A game character might be comprised of an entity with components like TileMapComponent, MovementComponent and so on as well as a child entity for rendering with the TransformComponent, SpriteRenderComponent, AnimationComponent etc. needed specifically for displaying it on screen. In fact, it is likely to have multiple child entities for rendering; one for each body part for instance. Now, most of the time we will be dealing with the parent entity as its the main entity describing most of the character. Hence, when we call ```characterEntity.PlayAnimation("AnimationId")``` we expect this to work - despite the animations being stored in a different entity.

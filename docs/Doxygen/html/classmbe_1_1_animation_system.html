@@ -74,6 +74,11 @@ $(function() {
 <div class="title">mbe::AnimationSystem Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Updates the animators and animations of the animation components.  
+ <a href="classmbe_1_1_animation_system.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_animation_system_8h_source.html">AnimationSystem.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -89,15 +94,73 @@ typedef std::unique_ptr&lt; <a class="el" href="classmbe_1_1_animation_system.ht
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abd1037a99b0ff211741f696696154465"><td class="memItemLeft" align="right" valign="top"><a id="abd1037a99b0ff211741f696696154465"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AnimationSystem</b> (<a class="el" href="classmbe_1_1_entity_manager.html">EntityManager</a> &amp;entityManager)</td></tr>
+<tr class="memitem:abd1037a99b0ff211741f696696154465"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animation_system.html#abd1037a99b0ff211741f696696154465">AnimationSystem</a> (<a class="el" href="classmbe_1_1_entity_manager.html">EntityManager</a> &amp;entityManager)</td></tr>
+<tr class="memdesc:abd1037a99b0ff211741f696696154465"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#abd1037a99b0ff211741f696696154465">More...</a><br /></td></tr>
 <tr class="separator:abd1037a99b0ff211741f696696154465"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24ce0c85092c8040771dd26c8bbc6b09"><td class="memItemLeft" align="right" valign="top"><a id="a24ce0c85092c8040771dd26c8bbc6b09"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Update</b> (sf::Time frameTime)</td></tr>
+<tr class="memitem:ac68e5073f3b1695b882b9f0c17a92d12"><td class="memItemLeft" align="right" valign="top"><a id="ac68e5073f3b1695b882b9f0c17a92d12"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animation_system.html#ac68e5073f3b1695b882b9f0c17a92d12">~AnimationSystem</a> ()=default</td></tr>
+<tr class="memdesc:ac68e5073f3b1695b882b9f0c17a92d12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor. <br /></td></tr>
+<tr class="separator:ac68e5073f3b1695b882b9f0c17a92d12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24ce0c85092c8040771dd26c8bbc6b09"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animation_system.html#a24ce0c85092c8040771dd26c8bbc6b09">Update</a> (sf::Time frameTime)</td></tr>
 <tr class="separator:a24ce0c85092c8040771dd26c8bbc6b09"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Updates the animators and animations of the animation components. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="abd1037a99b0ff211741f696696154465"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd1037a99b0ff211741f696696154465">&#9670;&nbsp;</a></span>AnimationSystem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">mbe::AnimationSystem::AnimationSystem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classmbe_1_1_entity_manager.html">EntityManager</a> &amp;&#160;</td>
+          <td class="paramname"><em>entityManager</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entityManager</td><td>A reference to the <a class="el" href="classmbe_1_1_entity_manager.html" title="Keeps track of a list of entities.">mbe::EntityManager</a> whos entities will be updated </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a24ce0c85092c8040771dd26c8bbc6b09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24ce0c85092c8040771dd26c8bbc6b09">&#9670;&nbsp;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void mbe::AnimationSystem::Update </td>
+          <td>(</td>
+          <td class="paramtype">sf::Time&#160;</td>
+          <td class="paramname"><em>frameTime</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>@Acts on all entities with an <a class="el" href="classmbe_1_1_animation_component.html">mbe::AnimationComponent</a></p>
+<p>This function should be called once per frame. The function iterates over the animators of an entity and updates the currently playing animations. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">frameTime</td><td>The time that passed between two consecutive calls </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Users/adria/Desktop/Visual Studio/Mars Base Project/Mars Base Engine ECS/Include/MBE/Animation/<a class="el" href="_animation_system_8h_source.html">AnimationSystem.h</a></li>
+<li>C:/Users/Adrian/Documents/Visual Studio 2017/Projects/Mars Base Project/Mars Base Engine ECS/Include/MBE/Animation/<a class="el" href="_animation_system_8h_source.html">AnimationSystem.h</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
