@@ -13,6 +13,7 @@
 namespace mbe
 {
 
+	/// @brief Updates the animators and animations of the animation components
 	class AnimationSystem
 	{
 	public:
@@ -21,10 +22,18 @@ namespace mbe
 		typedef std::unique_ptr<AnimationSystem> UPtr;
 
 	public:
+		/// @brief Constructor
+		/// @param entityManager A reference to the mbe::EntityManager whos entities will be updated
 		AnimationSystem(EntityManager& entityManager);
+
+		/// @brief Default destructor
 		~AnimationSystem() = default;
 
 	public:
+		/// @Acts on all entities with an mbe::AnimationComponent
+		/// @details This function should be called once per frame. The function iterates over the animators of an entity
+		/// and updates the currently playing animations.
+		/// @param frameTime The time that passed between two consecutive calls
 		void Update(sf::Time frameTime);
 
 	private:

@@ -17,7 +17,7 @@ There is no dedicated GUI module. However, due to the SFML rendering pipeline, t
 ## Learn
 A tutorial can be found [here](https://adriankoch3010.github.io/MarsBaseEngine/ "Mars Base Engine Tutorial").
 
-The source code is documented using [doxigen](http://www.doxygen.nl/ "Doxygen Mainpage") and can be found in the docs folder. It also hosted [online](https://adriankoch3010.github.io/MarsBaseEngine/Doxygen/index.html "Mars Base Project Documentation").
+The source code is documented using [doxigen](http://www.doxygen.nl/ "Doxygen Mainpage") and can be found in the docs folder. It also hosted [online](https://adriankoch3010.github.io/MarsBaseEngine/Doxygen/html/index.html "Mars Base Project Documentation").
 
 ## Libraries
 The engine makes use of a number of open source libraries.

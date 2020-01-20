@@ -75,7 +75,7 @@ This provides a neat way to compose a game obejct, dynamically add and remove st
 
 <!-- Ellaborate on the example -->
 
-> Example
+### Example
 
 Let's suppose we want to create a character. We might want it to have a position on the map, an inventory, some animations and a sprite. It should be able to play an animation or sound effect that moves with the character should a certain event occur. All of these things can be broken up into seperate entities with their respective components. The above example might look something like this:
 
@@ -167,4 +167,4 @@ Let's suppose we want to create a character. We might want it to have a position
 </Entity>
 ```
 
->Note how this is the same XML format used by the [entity serialiser](Serialisation.md). Of course the same outcome can be achived by creating the entity and code and adding the required components.
+Note how this is the same XML format used by the [entity serialiser](Serialisation.md). Of course the same outcome can be achived by creating the entity and code and adding the required components.

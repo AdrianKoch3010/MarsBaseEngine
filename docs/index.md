@@ -2,7 +2,7 @@
 The engine is documented using doxygen.
 The tutorial below provides some worked examples of how to use the Mars Base Engine.
 
->The full documentation can be found [here](Doxygen/index.html).
+>The full documentation can be found [here](Doxygen/html/index.html).
 
 # Demo
 I am using the engine to develop a game called 'The Mars Base Project'. The Mars Base Project is a 2D city building game set on Mars that puts its focus on building a sustainable base while caring about the needs of the astronauts living there. It heavily relies on the simulation of the individual inhabitants in the likes of games such as Banished or Planet Base.

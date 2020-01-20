@@ -27,7 +27,7 @@ namespace mbe
 	class Animator : public BaseAnimator<TID>
 	{
 	public:
-		/// @brief Functor to animate the objects.
+		/// @brief The signature of the function type used to animate the object.
 		/// @details TAnimated is the object being animated.
 		/// @n The float represents the progress in [0,1] determining the state of the animation
 		/// @note This is the definition of an animation. Every animation is seen as a a function altering an object
@@ -45,6 +45,8 @@ namespace mbe
 
 	public:
 		/// @brief Constructor
+		/// @param animatedObject A reference to the object being animated.
+		/// @details Internally the object's handle id is stored so it doesn't matter when the reference becomes invalid
 		Animator(TAnimated& animatedObject);
 
 		/// @brief Default destructor
@@ -70,6 +72,8 @@ namespace mbe
 		/// by a preceding call to HasAnimation() that an animation with this id exists.
 		void PlayAnimation(const TID& id, bool loop = false) override;
 
+		/// @brief Pauses or unpauses the currently playing animation
+		/// @param value Pass true to pause, false to unpause
 		void SetPaused(bool value = true) override;
 
 		/// @brief Interrupts the animation that is currently active.
@@ -80,6 +84,8 @@ namespace mbe
 		/// @returns Returns true after an animation has been started with PlayAnimation(), as long as it has not ended. False otherwise.
 		bool IsPlayingAnimation() const override;
 
+		/// @bríef Returns whether the currently playing animation is paused
+		/// @returns True if the animation is paused, false otherwise
 		bool IsPaused() const override;
 
 		/// @brief Returns the id of the currently playing animation.
@@ -143,6 +149,8 @@ namespace mbe
 
 	public:
 		/// @brief Constructor
+		/// @param animatedObject A reference to the object being animated.
+		/// @details Internally the object's handle id is stored so it doesn't matter when the reference becomes invalid
 		Animator(TAnimated& animatedObject);
 
 		/// @brief Default destructor
@@ -168,7 +176,8 @@ namespace mbe
 		/// by a preceding call to HasAnimation() that an animation with this id exists.
 		void PlayAnimation(const std::string& id, bool loop = false) override;
 
-
+		/// @brief Pauses or unpauses the currently playing animation
+		/// @param value Pass true to pause, false to unpause
 		void SetPaused(bool value = true) override;
 
 		/// @brief Interrupts the animation that is currently active.
@@ -179,6 +188,8 @@ namespace mbe
 		/// @returns Returns true after an animation has been started with PlayAnimation(), as long as it has not ended. False otherwise.
 		bool IsPlayingAnimation() const override;
 
+		/// @bríef Returns whether the currently playing animation is paused
+		/// @returns True if the animation is paused, false otherwise
 		bool IsPaused() const override;
 
 		/// @brief Returns the id of the currently playing animation.

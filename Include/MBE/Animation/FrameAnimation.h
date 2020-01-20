@@ -13,7 +13,7 @@
 
 namespace mbe
 {
-	/// @brief Changes a render component's subrect over time.
+	/// @brief Changes a texture wrapper component's subrect over time.
 	/// @details This class stores multiple frames that represent the sub-rectangle of a texture.
 	/// The resulting animation consists of a sequence of frames that are drawn one after another.
 	class FrameAnimation

@@ -20,8 +20,7 @@ namespace mbe
 	/// @details Components can be added to a mbe::Entity. They encapsulate one specific functionality
 	/// and provide an interface for accessing that functionality through the mbe::Entity::GetComponent() function.
 	/// A component may require its parent entity to have/provide one or more other components of a specific type.
-	/// @warning Components should only be created using the mbe::Entity::AddComponent() function. Otherwise,
-	/// it cannot be guaranteed that their Update() methods will be called correctly
+	/// @note Components should only be created using the mbe::Entity::AddComponent() function.
 	class Component : private sf::NonCopyable
 	{
 	public:
