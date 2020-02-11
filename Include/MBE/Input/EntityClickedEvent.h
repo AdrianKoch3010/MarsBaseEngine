@@ -30,7 +30,7 @@ namespace mbe
 			/// @param entityId The id of the entity that has been clicked
 			/// @param button The sf::Mouse::Button with which the entity has been clicked 
 			EntityClickedEvent(Entity::HandleID entityId, sf::Mouse::Button button);
-			
+
 			/// @brief Default destructor
 			~EntityClickedEvent() = default;
 
@@ -53,7 +53,7 @@ namespace mbe
 
 			/// @brief Allows this class to be written to an out stream
 			/// @details This may be used to output the event's data to the console or a log file
-			friend std::ostream & operator << (std::ostream & stream, const EntityClickedEvent & event);
+			friend std::ostream& operator << (std::ostream& stream, const EntityClickedEvent& event);
 
 		private:
 			Entity::HandleID entityId;

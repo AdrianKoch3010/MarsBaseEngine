@@ -1,6 +1,7 @@
 var searchData=
 [
   ['clickablecomponent_2eh',['ClickableComponent.h',['../_clickable_component_8h.html',1,'']]],
+  ['clickablecomponentserialiser_2eh',['ClickableComponentSerialiser.h',['../_clickable_component_serialiser_8h.html',1,'']]],
   ['clickablesystem_2eh',['ClickableSystem.h',['../_clickable_system_8h.html',1,'']]],
   ['component_2eh',['Component.h',['../_component_8h.html',1,'']]],
   ['componentschangedevent_2eh',['ComponentsChangedEvent.h',['../_components_changed_event_8h.html',1,'']]],

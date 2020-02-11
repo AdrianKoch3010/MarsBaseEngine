@@ -24,7 +24,7 @@ namespace mbe
 	/// @tparam TID The key type used to store and play animations (default is std::string)
 	/// @note There is a template overload for TID = std::string
 	template <class TAnimated, typename TID = std::string>
-	class Animator : public BaseAnimator<TID>
+	class Animator : public detail::BaseAnimator<TID>
 	{
 	public:
 		/// @brief The signature of the function type used to animate the object.
@@ -128,7 +128,7 @@ namespace mbe
 	/// @attention The id strings are <b>not</b> case sensitive! This is to reduce the likelyhood of mistyping an id which may cause unwanted behaviour.
 	/// Further they should only use <b>ASCII</b> characters
 	template <class TAnimated>
-	class Animator<TAnimated, std::string> : public BaseAnimator<std::string>
+	class Animator<TAnimated, std::string> : public detail::BaseAnimator<std::string>
 	{
 	public:
 		/// @brief Functor to animate the objects.

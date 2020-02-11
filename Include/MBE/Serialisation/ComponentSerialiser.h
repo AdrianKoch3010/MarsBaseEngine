@@ -37,8 +37,8 @@ namespace mbe
 
 		/// @brief Interface for serialising a component into an XML element
 		/// @param entity The entity whos component is stored
-		/// @param document The xml document to which the component data is stored to
-		/// @param componentData The xml element to which the component data is stored to
+		/// @param document The XML document to which the component data is stored to
+		/// @param componentData The XML element to which the component data is stored to
 		virtual void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) = 0;
 	};
 

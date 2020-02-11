@@ -1,7 +1,7 @@
 #pragma once
 
 /// @file
-/// @brief The Class mbe::RenderSystem
+/// @brief Class mbe::RenderSystem
 
 #include <map>
 #include <vector>

@@ -15,7 +15,7 @@ EntityClickedEvent::EntityClickedEvent(Entity::HandleID entityId, sf::Mouse::But
 {
 }
 
-std::ostream & mbe::event::operator<<(std::ostream & stream, const EntityClickedEvent & event)
+std::ostream& mbe::event::operator<<(std::ostream& stream, const EntityClickedEvent& event)
 {
 	stream << "EnitityClickedEvent:\tEntityId: ";
 	stream << event.GetEntityID();

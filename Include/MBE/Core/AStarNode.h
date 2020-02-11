@@ -53,4 +53,5 @@ namespace mbe
 		};
 
 	} // namespace detail
+
 } // namespace mbe

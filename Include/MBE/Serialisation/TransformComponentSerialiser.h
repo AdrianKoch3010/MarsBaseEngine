@@ -35,16 +35,18 @@ namespace mbe
 	public:
 
 		/// @brief Loads the transform component data and adds it to the entity
-		/// @details The xml element stores the position, origin, scale and rotation
-		/// @param entity The entity to which the component is added
-		/// @param componentData The XML element which is parsed and used to determine the value of the component
+		/// @details The XML element stores the position, origin, scale and rotation
+		/// @param entity The entity to which the transform component is added
+		/// @param componentData The XML element being parsed
+		/// @throws std::runtime_error if the parsing fails
 		void LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) override;
 
-		/// @brief Stores the entity's transform component an xml element
+		/// @brief Stores the entity's transform component to an XML element
 		/// @details Stores the position, origin, scale and rotation of the transform component
 		/// @param entity The entity whos transform component is stored. This entity must have an mbe::TransformComponent
-		/// @param document The xml document to which the transform component is stored to
-		/// @param componentData The xml element to which the transfrom component is stored to
+		/// @param document The XML document to which the transform component is stored
+		/// @param componentData The XML element to which the transfrom component is stored
+		/// @throws std::runtime_error if the entity doesn't have an mbe::TransformComponent
 		void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) override;
 	};
 

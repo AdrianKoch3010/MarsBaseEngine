@@ -151,7 +151,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9278538e9974e90ef6e971829464e872"><td class="memItemLeft" align="right" valign="top">sf::Time&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_entity_animator.html#a9278538e9974e90ef6e971829464e872">GetAnimationDuration</a> (const std::string &amp;id) const</td></tr>
 <tr class="separator:a9278538e9974e90ef6e971829464e872"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1e89683448b63d1d3c89ddc5cf9e89b"><td class="memItemLeft" align="right" valign="top">AnimationDictionary &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_entity_animator.html#ac1e89683448b63d1d3c89ddc5cf9e89b">GetAnimationDictionary</a> ()</td></tr>
-<tr class="memdesc:ac1e89683448b63d1d3c89ddc5cf9e89b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the underlaying animation dictionary.  <a href="#ac1e89683448b63d1d3c89ddc5cf9e89b">More...</a><br /></td></tr>
+<tr class="memdesc:ac1e89683448b63d1d3c89ddc5cf9e89b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the underlying animation dictionary.  <a href="#ac1e89683448b63d1d3c89ddc5cf9e89b">More...</a><br /></td></tr>
 <tr class="separator:ac1e89683448b63d1d3c89ddc5cf9e89b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7d7ef2cc2f70a36f4b3bbf9579c1a57f"><td class="memItemLeft" align="right" valign="top">const AnimationDictionary &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_entity_animator.html#a7d7ef2cc2f70a36f4b3bbf9579c1a57f">GetAnimationDictionary</a> () const</td></tr>
 <tr class="separator:a7d7ef2cc2f70a36f4b3bbf9579c1a57f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -162,7 +162,7 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Stores an entity's animations and their progress. </p>
 <p>Takes care of multiple animations which are registered by an id. The animations can be played at any time but only one animation can be played at a time. <br />
- There is a more general form of <a class="el" href="classmbe_1_1_animator.html" title="Stores an object&#39;s animations and their progress.">Animator</a> that can be used to animate objects that aren't entities. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classmbe_1_1_animator.html" title="Stores an object&#39;s animations and their progress.">mbe::Animator</a>, <a class="el" href="classmbe_1_1_base_animator.html">mbe::BaseAnimator</a> </dd></dl>
+ There is a more general form of <a class="el" href="classmbe_1_1_animator.html" title="Stores an object&#39;s animations and their progress.">Animator</a> that can be used to animate objects that aren't entities. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classmbe_1_1_animator.html" title="Stores an object&#39;s animations and their progress.">mbe::Animator</a>, mbe::BaseAnimator </dd></dl>
 <dl class="section attention"><dt>Attention</dt><dd>The id strings are <b>not</b> case sensitive! This is to reduce the likelyhood of mistyping an id which may cause unwanted behaviour. Use the <a class="el" href="namespacembe.html#a340a1d40a3a560915b8bd5a766b9de33" title="Standard method for normalising a string.">mbe::NormaliseIDString()</a> function when comparing ids. Further they should only use <b>ASCII</b> characters. </dd></dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a25a8bf0f3a9056a57599d646daecb60d"></a>
@@ -354,8 +354,8 @@ template&lt;typename TAnimation &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Gets the underlaying animation dictionary. </p>
-<p>This method is meant for the <a class="el" href="classmbe_1_1_animation_system.html" title="Updates the animators and animations of the animation components.">mbe::AnimationSystem</a> and <a class="el" href="classmbe_1_1_animation_component_serialiser.html">mbe::AnimationComponentSerialiser</a> to have direct access to the underlying dictionary and should generally be avoided. To change the state of the playing animation, use id = <a class="el" href="classmbe_1_1_entity_animator.html#a8c8ae92bc8c4e2f3a24264aac0182c21" title="Returns the id of the currently playing animation.">GetPlayingAnimation()</a> followed by e.g. PlayAnimation(id) instead. </p><dl class="section return"><dt>Returns</dt><dd>A reference to the underlying animation dictionary </dd></dl>
+<p>Gets the underlying animation dictionary. </p>
+<p>This method is meant for the <a class="el" href="classmbe_1_1_animation_system.html" title="Updates the animators and animations of the animation components.">mbe::AnimationSystem</a> and <a class="el" href="classmbe_1_1_animation_component_serialiser.html" title="Component serialiser for the mbe::AnimationComponent.">mbe::AnimationComponentSerialiser</a> to have direct access to the underlying dictionary and should generally be avoided. To change the state of the playing animation, use id = <a class="el" href="classmbe_1_1_entity_animator.html#a8c8ae92bc8c4e2f3a24264aac0182c21" title="Returns the id of the currently playing animation.">GetPlayingAnimation()</a> followed by e.g. PlayAnimation(id) instead. </p><dl class="section return"><dt>Returns</dt><dd>A reference to the underlying animation dictionary </dd></dl>
 
 </div>
 </div>
@@ -381,7 +381,7 @@ template&lt;typename TAnimation &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="classmbe_1_1_entity_animator.html#ac1e89683448b63d1d3c89ddc5cf9e89b" title="Gets the underlaying animation dictionary.">GetAnimationDictionary</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classmbe_1_1_entity_animator.html#ac1e89683448b63d1d3c89ddc5cf9e89b" title="Gets the underlying animation dictionary.">GetAnimationDictionary</a> </dd></dl>
 
 </div>
 </div>

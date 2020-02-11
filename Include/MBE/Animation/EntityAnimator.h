@@ -156,7 +156,7 @@ namespace mbe
 		/// by a preceding call to HasAnimation() that an animation with this id exists.
 		sf::Time GetAnimationDuration(const std::string& id) const;
 
-		/// @brief Gets the underlaying animation dictionary
+		/// @brief Gets the underlying animation dictionary
 		/// @details This method is meant for the mbe::AnimationSystem and mbe::AnimationComponentSerialiser to have direct access to the underlying dictionary
 		/// and should generally be avoided. To change the state of the playing animation, use id = GetPlayingAnimation() followed by e.g. PlayAnimation(id) instead.
 		/// @returns A reference to the underlying animation dictionary

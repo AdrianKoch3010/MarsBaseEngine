@@ -1,5 +1,5 @@
 # Serialisation
-Serialisation is the process of translating data structures or object state into a format that can be stored. The Mars Base Engine takes the approach of using a human-readable format, namely XML for this task. Any set of entities can be saved to and loaded from an XML file (or string containing valid xml) using the ```mbe::EntitySerialiser```.
+Serialisation is the process of translating data structures or object state into a format that can be stored. The Mars Base Engine takes the approach of using a human-readable format, namely XML for this task. Any set of entities can be saved to and loaded from an XML file (or string containing valid XML) using the ```mbe::EntitySerialiser```.
 
 Further, serialisation is seperated into its own module. Rather than forcing each component or entity to provide an interface for loading and storing, there exist seperate classes for this purpose.
 
@@ -23,7 +23,7 @@ The engine doesn't provide its own XML library. However, the library used intern
 To write your own component serialiser you have to inherit from ```mbe::ComponentSerialiser``` and overwrite the ```LoadComponent()``` and ```StoreComponent()``` methods.
 
 ``` c++
-class CustomComponentSerialiser : public mbe::ComponentSerialiser´
+class CustomComponentSerialiser : public mbe::ComponentSerialiser
 {
 public:
     typedef std::shared_ptr<CustomComponentSerialiser> Ptr;

@@ -27,4 +27,4 @@ The engine makes use of a number of open source libraries.
 
 SFML 2.5.1 is required and must be linked with the project. A [tutorial](https://www.sfml-dev.org/tutorials/2.5/ "SFML Tutorial") showing how to set up SFML in different development environments can be found here. SFML itself is based on OpenGL and OpenAL to provide its graphics and audio functionality.
 
-TinyXML2 is used as a source library and part of the Mars Base Engine"s source code.
+TinyXML2 is used as a source library and part of the Mars Base Engine's source code.

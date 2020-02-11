@@ -18,6 +18,7 @@ using namespace mbe;
 
 AnimationComponentSerialiser::AnimationComponentSerialiser()
 {
+	// Add the default animation serialisers
 	AddAnimationSerialiser<FrameAnimationSerialiser, FrameAnimation>("FrameAnimation");
 	AddAnimationSerialiser<RotationAnimationSerialiser, RotationAnimation>("RotationAnimation");
 	AddAnimationSerialiser<BlinkingAnimationSerialiser, BlinkingAnimation>("BlinkingAnimation");
@@ -109,7 +110,7 @@ void AnimationComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 
 			// Call the appropreate animation serialiser for that animation type
 			if (animationSerialiserDictionary.find(animationTypeString) == animationSerialiserDictionary.end())
-				throw std::runtime_error("Load animation component: No animation serialiser found for this type");
+				throw std::runtime_error("Load animation component: No animation serialiser found for this type (" + animationTypeString + ")");
 			animationSerialiserDictionary.at(animationTypeString)->Load(animator, *animationElement, animationIdString, sf::milliseconds(duration));
 		}
 
@@ -127,7 +128,7 @@ void AnimationComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2
 {
 		// The entity must have an animation component (this should be the case when this function is called from the EntitySerialiser
 	if (entity.HasComponent<AnimationComponent>() == false)
-		throw std::runtime_error("Store animation component: The entity must have an mbe::AnimationComponent");
+		throw std::runtime_error("AnimationComponentSerialiser: Store animation component: The entity must have an mbe::AnimationComponent");
 	const auto& animationComponent = entity.GetComponent<AnimationComponent>();
 
 	// Store the animators
@@ -173,16 +174,21 @@ void AnimationComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2
 			const auto& animationId = animationPair.first;
 			const auto& animationTime = animationPair.second.second;
 
+			// Find the animation's type id
+			if (animationTypeDictionary.find(animator.GetAnimationTypeID(animationId)) == animationTypeDictionary.cend())
+				throw std::runtime_error("Store animation component: No animation serialiser found for this type, animation (" + animationId + ")");
+			const auto& animationTypeString = animationTypeDictionary.at(animator.GetAnimationTypeID(animationId));
+
 			// Store animation type and id
 			auto animationElement = document.NewElement("Animation");
-			animationElement->SetAttribute("type", animationTypeDictionary.at(animator.GetAnimationTypeID(animationId)).c_str());
+			animationElement->SetAttribute("type", animationTypeString.c_str());
 			animationElement->SetAttribute("id", animationId.c_str());
 
 			// Store animation time
 			animationElement->SetAttribute("duration", animationTime.asMilliseconds());
 
 			// Call the corresponding animation serialiser
-			animationSerialiserDictionary.at(animationTypeDictionary.at(animator.GetAnimationTypeID(animationId)))->Store(animator, animationId, document, *animationElement);
+			animationSerialiserDictionary.at(animationTypeString)->Store(animator, animationId, document, *animationElement);
 
 			animationsElement->InsertEndChild(animationElement);
 		}

@@ -74,7 +74,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Add a template parameter for the heuristic.  
+<p>All items that are part of the Mars Base Engine.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
@@ -101,8 +101,10 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for loading and storing ai task data from and to an XML file format.  <a href="classmbe_1_1_a_i_task_serialiser.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animation_component.html">AnimationComponent</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores an entities animations.  <a href="classmbe_1_1_animation_component.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animation_component_serialiser.html">AnimationComponentSerialiser</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classmbe_1_1_component.html" title="The base class for all components.">Component</a> serialiser for the <a class="el" href="classmbe_1_1_animation_component.html" title="Stores an entities animations.">mbe::AnimationComponent</a>.  <a href="classmbe_1_1_animation_component_serialiser.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_animation_serialiser.html">AnimationSerialiser</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for loading and storing animation data from and to an XML file format.  <a href="classmbe_1_1_animation_serialiser.html#details">More...</a><br /></td></tr>
@@ -133,8 +135,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_audio_system.html">AudioSystem</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_base_a_i_system.html">BaseAISystem</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_base_animator.html">BaseAnimator</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_base_audio_component.html">BaseAudioComponent</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -240,7 +240,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes care of drawing all entities with a <a class="el" href="classmbe_1_1_render_component.html">mbe::RenderComponent</a> in the correct order.  <a href="classmbe_1_1_render_system.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_rotation_animation.html">RotationAnimation</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class defining a rotation animation that can be used by the <a class="el" href="classmbe_1_1_animation_component.html">mbe::AnimationComponent</a>.  <a href="classmbe_1_1_rotation_animation.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class defining a rotation animation that can be used by the <a class="el" href="classmbe_1_1_animation_component.html" title="Stores an entities animations.">mbe::AnimationComponent</a>.  <a href="classmbe_1_1_rotation_animation.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_rotation_animation_serialiser.html">RotationAnimationSerialiser</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -434,9 +434,7 @@ Variables</h2></td></tr>
 <tr class="separator:a74017d4190c08e08ef5dc0e4e36e0345"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Add a template parameter for the heuristic. </p>
-<p>All items that are part of the Mars Base Engine.</p>
-<p>Change assert(speed &gt;= 1.f) to assert(speed &gt;= defaultSpeed) where default speed may be declared in the constants class or the gird Somehow make sure that the tile movement speed it always greater that 1 (the heuristic movement speed)Put the GetNeighbours function into the map. This will allow for more complex neighbour identification e.g. based on inside outside..... Maybe allow for using a std::function that returns a list of neighbours as an option - or a functor similar to how the std::priority_queue does it </p>
+<div class="textblock"><p>All items that are part of the Mars Base Engine. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a370895b450a019166e2442611eeb5528"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a370895b450a019166e2442611eeb5528">&#9670;&nbsp;</a></span>CartesianToIso()</h2>

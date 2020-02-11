@@ -1,5 +1,8 @@
 #pragma once
 
+/// @file
+/// @brief Class mbe::ClickableComponentSerialser
+
 #include <MBE/Core/TinyXML.h>
 #include <MBE/Core/Entity.h>
 

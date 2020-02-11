@@ -12,20 +12,22 @@ namespace mbe
 {
 
 	/// @brief Component serialiser for the mbe::TextureWrapperComponent
-	/// @details XML format
+	/// @details **XML format**
 	/// @code
 	/// <Component type="TextureWrapperComponent">
 	///		<ActiveTexture>unsigned int<ActiveTexture>
-	///		<Textures id=unsigned int">
-	///			<!-- optional -->
-	///			<TextureRect>
-	///				<Top>int</Top>
-	///				<Left>int</Left>
-	///				<Width>int</Width>
-	///				<Height>int</Height>
-	///			</TextureRect>
-	///			<TextureWrapper>string</TextureWrapper>
-	///		...
+	///		<Textures>
+	///			<Texture>
+	///				<!-- optional TextureRect -->
+	///				<TextureRect>
+	///					<Top>int</Top>
+	///					<Left>int</Left>
+	///					<Width>int</Width>
+	///					<Height>int</Height>
+	///				</TextureRect>
+	///				<TextureWrapper>string</TextureWrapper>
+	///			</Texture>
+	///			...
 	///		</Textures>
 	/// </Component>
 	/// @endcode
@@ -37,7 +39,10 @@ namespace mbe
 		typedef std::unique_ptr<TextureWrapperComponentSerialiser> UPtr;
 
 	public:
+		/// @brief Constructor
 		TextureWrapperComponentSerialiser();
+
+		/// @brief Default destructor
 		~TextureWrapperComponentSerialiser() = default;
 
 	public:

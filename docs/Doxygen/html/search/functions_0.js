@@ -1,6 +1,7 @@
 var searchData=
 [
   ['addanimation',['AddAnimation',['../classmbe_1_1_animator.html#a0dd48efddcaef75528e041de7c9e76b1',1,'mbe::Animator::AddAnimation()'],['../classmbe_1_1_animator_3_01_t_animated_00_01std_1_1string_01_4.html#abdd2f759405b002d308e00dc362156a9',1,'mbe::Animator&lt; TAnimated, std::string &gt;::AddAnimation()'],['../classmbe_1_1_entity_animator.html#a7c5f6ec30a594aa1bae4e6ba5a825982',1,'mbe::EntityAnimator::AddAnimation()']]],
+  ['addanimationserialiser',['AddAnimationSerialiser',['../classmbe_1_1_animation_component_serialiser.html#ad558bcc5a3dcce6dd711689bca0192f8',1,'mbe::AnimationComponentSerialiser']]],
   ['addcomponent',['AddComponent',['../classmbe_1_1_entity.html#a8979cbf2814cbbf4e826fd0f6ee4f5bb',1,'mbe::Entity']]],
   ['addcomponentserialiser',['AddComponentSerialiser',['../classmbe_1_1_entity_serialiser.html#aa431f2a3d602828251f31898af53661d',1,'mbe::EntitySerialiser']]],
   ['addframe',['AddFrame',['../classmbe_1_1_frame_animation.html#a5e5c7863e5e651aa5f1e820907e45781',1,'mbe::FrameAnimation::AddFrame(const sf::IntRect &amp;subrect, float relativeDuration=1.f)'],['../classmbe_1_1_frame_animation.html#ae65ed0de29dd5d68ba623a6165cc7511',1,'mbe::FrameAnimation::AddFrame(const sf::IntRect &amp;subrect, sf::Vector2f origin, float relativeDuration=1.f)']]],
@@ -9,6 +10,7 @@ var searchData=
   ['addtogroup',['AddToGroup',['../classmbe_1_1_entity.html#ae23d3fccb43caecc1f7b09c64e050f5e',1,'mbe::Entity']]],
   ['aitask',['AITask',['../classmbe_1_1_a_i_task.html#ab9646ace99e6a9c3b5475c11d8a85287',1,'mbe::AITask']]],
   ['animationcomponent',['AnimationComponent',['../classmbe_1_1_animation_component.html#aad343e5dc0adaaaa8ca9ffa6920ff2bc',1,'mbe::AnimationComponent']]],
+  ['animationcomponentserialiser',['AnimationComponentSerialiser',['../classmbe_1_1_animation_component_serialiser.html#aa8aadf804af05f4549a989e8b2c9db8b',1,'mbe::AnimationComponentSerialiser']]],
   ['animationserialiser',['AnimationSerialiser',['../classmbe_1_1_animation_serialiser.html#a5408a99fc2bddae0f0253ab1c0af01c4',1,'mbe::AnimationSerialiser']]],
   ['animationsystem',['AnimationSystem',['../classmbe_1_1_animation_system.html#abd1037a99b0ff211741f696696154465',1,'mbe::AnimationSystem']]],
   ['animator',['Animator',['../classmbe_1_1_animator.html#a64ae6bcbebd1eb830945b2a9ff667707',1,'mbe::Animator::Animator()'],['../classmbe_1_1_animator_3_01_t_animated_00_01std_1_1string_01_4.html#abb7ccc4366cb44537cca99de7d4e51b4',1,'mbe::Animator&lt; TAnimated, std::string &gt;::Animator()']]],

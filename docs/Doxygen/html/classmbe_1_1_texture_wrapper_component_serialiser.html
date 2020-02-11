@@ -113,6 +113,14 @@ typedef std::unique_ptr&lt; <a class="el" href="classmbe_1_1_component_serialser
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a226773d70fc26b01350949e73d04b667"><td class="memItemLeft" align="right" valign="top"><a id="a226773d70fc26b01350949e73d04b667"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_texture_wrapper_component_serialiser.html#a226773d70fc26b01350949e73d04b667">TextureWrapperComponentSerialiser</a> ()</td></tr>
+<tr class="memdesc:a226773d70fc26b01350949e73d04b667"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br /></td></tr>
+<tr class="separator:a226773d70fc26b01350949e73d04b667"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a158e52b2b02a6f1c0c35e25b9d4d988c"><td class="memItemLeft" align="right" valign="top"><a id="a158e52b2b02a6f1c0c35e25b9d4d988c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_texture_wrapper_component_serialiser.html#a158e52b2b02a6f1c0c35e25b9d4d988c">~TextureWrapperComponentSerialiser</a> ()=default</td></tr>
+<tr class="memdesc:a158e52b2b02a6f1c0c35e25b9d4d988c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor. <br /></td></tr>
+<tr class="separator:a158e52b2b02a6f1c0c35e25b9d4d988c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab92589e18965d88c275d34e239be47b3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_texture_wrapper_component_serialiser.html#ab92589e18965d88c275d34e239be47b3">LoadComponent</a> (<a class="el" href="classmbe_1_1_entity.html">Entity</a> &amp;entity, const tinyxml2::XMLElement &amp;componentData) override</td></tr>
 <tr class="memdesc:ab92589e18965d88c275d34e239be47b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interface for loading and adding a component to the entity.  <a href="#ab92589e18965d88c275d34e239be47b3">More...</a><br /></td></tr>
 <tr class="separator:ab92589e18965d88c275d34e239be47b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,7 +139,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classmbe_1_1_component.html" title="The base class for all components.">Component</a> serialiser for the <a class="el" href="classmbe_1_1_texture_wrapper_component.html">mbe::TextureWrapperComponent</a>. </p>
-<p>XML format </p><div class="fragment"><div class="line">&lt;Component type=<span class="stringliteral">&quot;TextureWrapperComponent&quot;</span>&gt;</div><div class="line">    &lt;ActiveTexture&gt;<span class="keywordtype">unsigned</span> int&lt;ActiveTexture&gt;</div><div class="line">    &lt;Textures <span class="keywordtype">id</span>=<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span><span class="stringliteral">&quot;&gt;</span></div><div class="line"><span class="stringliteral">        &lt;!-- optional --&gt;</span></div><div class="line"><span class="stringliteral">        &lt;TextureRect&gt;</span></div><div class="line"><span class="stringliteral">            &lt;Top&gt;int&lt;/Top&gt;</span></div><div class="line"><span class="stringliteral">            &lt;Left&gt;int&lt;/Left&gt;</span></div><div class="line"><span class="stringliteral">            &lt;Width&gt;int&lt;/Width&gt;</span></div><div class="line"><span class="stringliteral">            &lt;Height&gt;int&lt;/Height&gt;</span></div><div class="line"><span class="stringliteral">        &lt;/TextureRect&gt;</span></div><div class="line"><span class="stringliteral">        &lt;TextureWrapper&gt;string&lt;/TextureWrapper&gt;</span></div><div class="line"><span class="stringliteral">    ...</span></div><div class="line"><span class="stringliteral">    &lt;/Textures&gt;</span></div><div class="line"><span class="stringliteral">&lt;/Component&gt;</span></div></div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
+<p><b>XML format</b> </p><div class="fragment"><div class="line">&lt;Component type=<span class="stringliteral">&quot;TextureWrapperComponent&quot;</span>&gt;</div><div class="line">    &lt;ActiveTexture&gt;<span class="keywordtype">unsigned</span> int&lt;ActiveTexture&gt;</div><div class="line">    &lt;Textures&gt;</div><div class="line">        &lt;Texture&gt;</div><div class="line">            &lt;!-- optional TextureRect --&gt;</div><div class="line">            &lt;TextureRect&gt;</div><div class="line">                &lt;Top&gt;<span class="keywordtype">int</span>&lt;/Top&gt;</div><div class="line">                &lt;Left&gt;<span class="keywordtype">int</span>&lt;/Left&gt;</div><div class="line">                &lt;Width&gt;<span class="keywordtype">int</span>&lt;/Width&gt;</div><div class="line">                &lt;Height&gt;<span class="keywordtype">int</span>&lt;/Height&gt;</div><div class="line">            &lt;/TextureRect&gt;</div><div class="line">            &lt;TextureWrapper&gt;<span class="keywordtype">string</span>&lt;/TextureWrapper&gt;</div><div class="line">        &lt;/Texture&gt;</div><div class="line">        ...</div><div class="line">    &lt;/Textures&gt;</div><div class="line">&lt;/Component&gt;</div></div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="ab92589e18965d88c275d34e239be47b3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab92589e18965d88c275d34e239be47b3">&#9670;&nbsp;</a></span>LoadComponent()</h2>
 
@@ -223,8 +231,8 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">entity</td><td>The entity whos component is stored </td></tr>
-    <tr><td class="paramname">document</td><td>The xml document to which the component data is stored to </td></tr>
-    <tr><td class="paramname">componentData</td><td>The xml element to which the component data is stored to </td></tr>
+    <tr><td class="paramname">document</td><td>The XML document to which the component data is stored to </td></tr>
+    <tr><td class="paramname">componentData</td><td>The XML element to which the component data is stored to </td></tr>
   </table>
   </dd>
 </dl>

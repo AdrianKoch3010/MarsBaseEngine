@@ -1,5 +1,8 @@
 #pragma once
 
+/// @file
+/// @brief Class mbe::AStarPathfinder
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -16,13 +19,13 @@
 
 #include <MBE/Core/AStarNode.h>
 
-/// Change assert(speed >= 1.f) to assert(speed >= defaultSpeed) where default speed may be declared in the constants class or the gird
-/// Somehow make sure that the tile movement speed it always greater that 1 (the heuristic movement speed)
+// Change assert(speed >= 1.f) to assert(speed >= defaultSpeed) where default speed may be declared in the constants class or the gird
+// Somehow make sure that the tile movement speed it always greater that 1 (the heuristic movement speed)
 
-/// Add a template parameter for the heuristic
+// Add a template parameter for the heuristic
 
-/// Put the GetNeighbours function into the map. This will allow for more complex neighbour identification e.g. based on inside outside.....
-/// Maybe allow for using a std::function that returns a list of neighbours as an option - or a functor similar to how the std::priority_queue does it
+// Put the GetNeighbours function into the map. This will allow for more complex neighbour identification e.g. based on inside outside.....
+// Maybe allow for using a std::function that returns a list of neighbours as an option - or a functor similar to how the std::priority_queue does it
 
 namespace mbe
 {
@@ -46,10 +49,9 @@ namespace mbe
 	class AStarPathfinder
 	{
 	public:
+		/// @brief The type of a map position
+		/// @details This will be the same as the position type the tile map is using
 		typedef typename TTileMap::Position Position;
-
-	private:
-		
 
 	private:
 		struct CompareNodes

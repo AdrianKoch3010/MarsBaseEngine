@@ -76,8 +76,16 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7930a5aea267d84e1673e13b64fd2321"><td class="memItemLeft" align="right" valign="top"><a id="a7930a5aea267d84e1673e13b64fd2321"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>loadFromFile</b> (std::string filePath, bool createPixelMask=false)</td></tr>
+<tr class="memitem:a748e19933a1a1176ab27d568b298c4c3"><td class="memItemLeft" align="right" valign="top"><a id="a748e19933a1a1176ab27d568b298c4c3"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_texture_wrapper.html#a748e19933a1a1176ab27d568b298c4c3">TextureWrapper</a> ()=default</td></tr>
+<tr class="memdesc:a748e19933a1a1176ab27d568b298c4c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
+<tr class="separator:a748e19933a1a1176ab27d568b298c4c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef4c1f4e4ebe26ee0a24e5a418aaa805"><td class="memItemLeft" align="right" valign="top"><a id="aef4c1f4e4ebe26ee0a24e5a418aaa805"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_texture_wrapper.html#aef4c1f4e4ebe26ee0a24e5a418aaa805">~TextureWrapper</a> ()=default</td></tr>
+<tr class="memdesc:aef4c1f4e4ebe26ee0a24e5a418aaa805"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor. <br /></td></tr>
+<tr class="separator:aef4c1f4e4ebe26ee0a24e5a418aaa805"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7930a5aea267d84e1673e13b64fd2321"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmbe_1_1_texture_wrapper.html#a7930a5aea267d84e1673e13b64fd2321">loadFromFile</a> (std::string filePath, bool createPixelMask=false)</td></tr>
+<tr class="memdesc:a7930a5aea267d84e1673e13b64fd2321"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads a texture from a file and optionally creates a pixel mask for it.  <a href="#a7930a5aea267d84e1673e13b64fd2321">More...</a><br /></td></tr>
 <tr class="separator:a7930a5aea267d84e1673e13b64fd2321"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeee8570ecbac76c8910179a68562798f"><td class="memItemLeft" align="right" valign="top"><a id="aeee8570ecbac76c8910179a68562798f"></a>
 const PixelMask::Ptr&#160;</td><td class="memItemRight" valign="bottom"><b>GetPixelMask</b> () const</td></tr>
@@ -89,6 +97,46 @@ sf::Texture &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetTextu
 const sf::Texture &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>GetTexture</b> () const</td></tr>
 <tr class="separator:ae967817c64b8bc2b626535e4f1c0340f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7930a5aea267d84e1673e13b64fd2321"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7930a5aea267d84e1673e13b64fd2321">&#9670;&nbsp;</a></span>loadFromFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool mbe::TextureWrapper::loadFromFile </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>filePath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>createPixelMask</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Loads a texture from a file and optionally creates a pixel mask for it. </p>
+<p>The creating of a pixel mask can be fairly computationally expensive. Hence, this functions allows for calculating it at the same time as loading the textures (in the program flow, not actually in parallel). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filePath</td><td>The file path of the texture to be loaded </td></tr>
+    <tr><td class="paramname">createPixelMask</td><td>If true, a pixel mask is created after loading the texture. If false, no further actions are taken </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This method has the same signature as the methods provided by SFML for loading assets from a file such as sf::Texture::loadFromFile(), sf::SoundBuffer::loadFromFile(). This enables the texture wrapper to be treated just like any other asset. Therefore, texture wrappers can be stored in an <a class="el" href="namespacembe.html#ade86fa22fae21c09102855b032288192" title="A mbe::AssetHolder that holds mbe::TextureWrappers.">mbe::TextureWrapperHolder</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="classmbe_1_1_asset_holder.html" title="A class managing the loading and access of assets.">mbe::AssetHolder</a> </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>C:/Users/Adrian/Documents/Visual Studio 2017/Projects/Mars Base Project/Mars Base Engine ECS/Include/MBE/Graphics/<a class="el" href="_texture_wrapper_8h_source.html">TextureWrapper.h</a></li>
 </ul>

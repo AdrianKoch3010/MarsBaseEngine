@@ -1,5 +1,8 @@
 #pragma once
 
+/// @file
+/// @brief Class mbe::SpriteRenderComponent
+
 #include <cassert>
 #include <SFML/Graphics/Sprite.hpp>
 

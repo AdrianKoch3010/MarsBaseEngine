@@ -402,6 +402,9 @@
     <ClCompile Include="Source\MBE\Graphics\CustomRenderComponent.cpp">
       <Filter>Quelldateien\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MBE\Core\Exceptions.cpp">
+      <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\TransformComponent.h">
@@ -706,6 +709,9 @@
     </ClInclude>
     <ClInclude Include="Include\MBE\Graphics\CustomRenderComponent.h">
       <Filter>Headerdateien\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Core\Exceptions.h">
+      <Filter>Headerdateien\Framework</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
