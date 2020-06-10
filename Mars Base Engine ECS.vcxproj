@@ -103,7 +103,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\adria\Desktop\Visual Studio\C++ Libs\Includes;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\adria\Desktop\Game Dev\C++ Libs\Includes;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
@@ -128,7 +128,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\adria\Desktop\Visual Studio\C++ Libs\Includes;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\adria\Desktop\Game Dev\C++ Libs\Includes;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
@@ -149,7 +149,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\adria\Desktop\Visual Studio\C++ Libs\Includes;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\adria\Desktop\Game Dev\C++ Libs\Includes;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <WholeProgramOptimization>false</WholeProgramOptimization>
