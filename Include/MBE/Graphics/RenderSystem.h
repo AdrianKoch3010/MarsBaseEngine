@@ -61,7 +61,7 @@ namespace mbe
 		/// @param eventManager A reference to the mbe::EventManager that will be used to listen out
 		/// for a mbe::event::EntityCreatedEvent and mbe::event::RenderNodeRemovedEvent.
 		/// @param textureWrapperHolder The texture wrapper holder that holds the textures indexed by the id in the mbe::TextureWrapperComponent
-		RenderSystem(std::unique_ptr<sf::RenderWindow>& windowPtr, EventManager& eventManager, TextureWrapperHolder<>& textureWrapperHolder);
+		RenderSystem(sf::RenderWindow& windowPtr, EventManager& eventManager, TextureWrapperHolder<>& textureWrapperHolder);
 
 		/// @brief Default destructor
 		~RenderSystem();
@@ -81,10 +81,8 @@ namespace mbe
 		// Const overload
 		const sf::View& GetView(RenderLayer renderLayer) const;
 
-		inline sf::RenderWindow& GetRenderWindow() { return *windowPtr; }
-		inline const sf::RenderWindow& GetRenderWindow() const { return *windowPtr; }
-		inline std::unique_ptr<sf::RenderWindow>& GetRenderWindowPtr(){ return windowPtr; }
-		inline const std::unique_ptr<sf::RenderWindow>& GetRenderWindowPtr() const { return windowPtr; }
+		inline sf::RenderWindow& GetRenderWindow() { return window; }
+		inline const sf::RenderWindow& GetRenderWindow() const { return window; }
 
 	private:
 		void AddRenderEntity(Entity::HandleID entityId);
@@ -106,7 +104,7 @@ namespace mbe
 
 	private:
 		// A reference to the pointer is stored so that when a new window is created the correct pointer is referenced
-		std::unique_ptr<sf::RenderWindow>& windowPtr;
+		sf::RenderWindow& window;
 		TextureWrapperHolder<>& textureWrapperHolder;
 
 		RenderEntityDictionary renderEntityDictionary;
