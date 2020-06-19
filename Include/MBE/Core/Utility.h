@@ -12,6 +12,7 @@
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/View.hpp>
 
 #include <MBE/Core/TinyXML.h>
 #include <MBE\Core\Component.h>
@@ -110,6 +111,20 @@ namespace mbe
 	/// @brief Converts a point in the isometric coordinate system to the cartesian coordinate system
 	/// @param cartesian The point to convert
 	sf::Vector2f IsoToCartesian(sf::Vector2f iso);
+
+	/// @brief Recalculate view for a given zoom factor
+	/// @details Adjusts the view given the current view, the size of the window the view is applied to and the zoom factor.
+	/// This function only changes the size and center of the view. All other state is preserved.
+	/// @param currentView The view, before the zoom is applied
+	/// @param windowSize The size of the window that the view is applied to
+	/// @param zoomFactor The zoom factor
+	/// @returns The view with the zoom applied
+	sf::View CalculateView(sf::View currentView, sf::Vector2u windowSize, float zoomFactor);
+
+	/// @brief Calculates the zoom factor based on the diveation from a given resolution
+	/// @param The current size of the window
+	/// @param standardResolution The resolution that the zoom factor should be relative to
+	float CalculateZoomFactor(sf::Vector2u windowSize, sf::Vector2f standardResolution = { 1920.f, 1080.f });
 
 	/// @brief Class providing methods for loading and storing an sf::IntRect
 	/// @details XML format

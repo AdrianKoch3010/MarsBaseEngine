@@ -92,7 +92,7 @@ bool Constants::ReadFile(string filePath)
 			// The function returns false anyway
 			cerr << "Error: Unable to open file!" << endl << endl;
 	}
-	catch (const std::exception & e)
+	catch (const std::exception& e)
 	{
 		cerr << endl << "An error occured when creating the standard expression to match general constant definitions:" << endl;
 		cerr << e.what() << endl << endl;

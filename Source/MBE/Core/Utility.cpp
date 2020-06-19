@@ -40,6 +40,25 @@ sf::Vector2f mbe::IsoToCartesian(sf::Vector2f iso)
 	return cartesian;
 }
 
+sf::View mbe::CalculateView(sf::View currentView, sf::Vector2u windowSize, float zoomFactor)
+{
+	currentView.setSize(sf::Vector2f(windowSize.x / zoomFactor, windowSize.y / zoomFactor));
+	currentView.setCenter({ windowSize.x / (2 * zoomFactor), windowSize.y / (2 * zoomFactor) });
+	return currentView;
+}
+
+float mbe::CalculateZoomFactor(sf::Vector2u windowSize, sf::Vector2f standardResolution)
+{
+	// Calculate resolution compared to the standard resolution
+	sf::Vector2f resolutionRatio;
+	resolutionRatio.x = static_cast<float>(windowSize.x) / standardResolution.x;
+	resolutionRatio.y = static_cast<float>(windowSize.y) / standardResolution.y;
+	resolutionRatio = resolutionRatio * 2.f;
+
+	// Take the smaller of the two
+	return std::min(resolutionRatio.x, resolutionRatio.y);
+}
+
 sf::IntRect mbe::IntRectSerialiser::Load(const tinyxml2::XMLElement& rectData)
 {
 	using namespace tinyxml2;

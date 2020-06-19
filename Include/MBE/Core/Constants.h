@@ -31,13 +31,16 @@ namespace mbe
 
 	public:
 		// Returns a flag set in the constructor (where the Load() function is called) that indicated whether there have been any loading errors
-		auto HasLoadedSuccessfully() { return hasLoadedSuccessfully; }
+		auto HasLoadedSuccessfully() const { return hasLoadedSuccessfully; }
 
-		inline auto GetScreenWidth() { return *screenWidth; }
+		inline auto GetScreenWidth() const { return *screenWidth; }
 
-		inline auto GetScreenHeight() { return *screenHeight; }
+		inline auto GetScreenHeight() const { return *screenHeight; }
 
-		inline auto GetTestTimeMultiplicator() { return *testTimeMultiplicator; }
+		inline auto GetTestTimeMultiplicator() const { return *testTimeMultiplicator; }
+
+		// This defeats the entire purpose of the constants class, but it is obsolete anyway
+		inline void SetTestTimeMultiplicator(float value) { *testTimeMultiplicator = value; }
 
 	protected:
 		bool Load(std::string filePath);
@@ -51,10 +54,10 @@ namespace mbe
 
 	private:
 		// The pointer is used to make the values nullable
-		unsigned short int * screenHeight;
-		unsigned short int * screenWidth;
+		unsigned short int* screenHeight;
+		unsigned short int* screenWidth;
 
-		float * testTimeMultiplicator;
+		float* testTimeMultiplicator;
 
 		std::vector<std::string> lines;
 		// A flag (set in the constructor where the Load() function is called) that indicated whether there have been any loading errors
