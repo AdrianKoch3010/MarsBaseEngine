@@ -405,6 +405,9 @@
     <ClCompile Include="Source\MBE\Core\Exceptions.cpp">
       <Filter>Quelldateien\Framework</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MBE\Map\GoalInaccessibleEvent.cpp">
+      <Filter>Quelldateien\Systems\Event System\Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\TransformComponent.h">
@@ -712,6 +715,9 @@
     </ClInclude>
     <ClInclude Include="Include\MBE\Core\Exceptions.h">
       <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Map\GoalInaccessibleEvent.h">
+      <Filter>Headerdateien\Systems\Event System\Events</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

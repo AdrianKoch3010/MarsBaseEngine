@@ -103,7 +103,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Adrian\Desktop\Visual Studio\C++ Libs\Includes;C:\Users\adria\Desktop\Game Dev\C++ Libs\Includes;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Adrian\Desktop\Visual Studio\C++ Libs\Includes;C:\Users\Adrian\Desktop\GameDev\C++ Libs\Include;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
@@ -128,7 +128,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Adrian\Desktop\Visual Studio\C++ Libs\Includes;C:\Users\adria\Desktop\Game Dev\C++ Libs\Includes;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Adrian\Desktop\Visual Studio\C++ Libs\Includes;C:\Users\Adrian\Desktop\GameDev\C++ Libs\Include;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
@@ -149,7 +149,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Adrian\Desktop\Visual Studio\C++ Libs\Includes;C:\Users\adria\Desktop\Game Dev\C++ Libs\Includes;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Adrian\Desktop\Visual Studio\C++ Libs\Includes;C:\Users\Adrian\Desktop\GameDev\C++ Libs\Include;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <WholeProgramOptimization>false</WholeProgramOptimization>
@@ -232,6 +232,7 @@
     <ClCompile Include="Source\MBE\Audio\AudioData.cpp" />
     <ClCompile Include="Source\MBE\Audio\AudioSystem.cpp" />
     <ClCompile Include="Source\MBE\Graphics\SpriteRenderComponent.cpp" />
+    <ClCompile Include="Source\MBE\Map\GoalInaccessibleEvent.cpp" />
     <ClCompile Include="Source\MBE\Map\GoalReachedEvent.cpp" />
     <ClCompile Include="Source\MBE\Map\TiledTerrain.cpp" />
     <ClCompile Include="Source\MBE\Map\TileComponent.cpp" />
@@ -323,6 +324,7 @@
     <ClInclude Include="Include\MBE\Audio\AudioData.h" />
     <ClInclude Include="Include\MBE\Audio\AudioSystem.h" />
     <ClInclude Include="Include\MBE\Graphics\SpriteRenderComponent.h" />
+    <ClInclude Include="Include\MBE\Map\GoalInaccessibleEvent.h" />
     <ClInclude Include="Include\MBE\Map\GoalReachedEvent.h" />
     <ClInclude Include="Include\MBE\Map\TiledTerrain.h" />
     <ClInclude Include="Include\MBE\Map\TileComponent.h" />
