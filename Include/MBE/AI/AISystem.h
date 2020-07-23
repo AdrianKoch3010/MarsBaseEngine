@@ -5,6 +5,8 @@
 
 #include <memory>
 
+#include <SFML/System/Clock.hpp>
+
 #include <MBE/Core/EntityManager.h>
 #include <MBE/Core/EventManager.h>
 #include <MBE/AI/AIComponent.h>
@@ -24,7 +26,7 @@ namespace mbe
 		~BaseAISystem() = default;
 
 	public:
-		virtual void Update() = 0;
+		virtual void Update(sf::Time simTime) = 0;
 
 	protected:
 		EntityManager & entityManager;

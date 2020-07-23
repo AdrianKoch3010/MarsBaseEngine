@@ -77,7 +77,7 @@ namespace mbe
 
 		void SubscribeEvents();
 		void OnTextureWrapperChangedEvent(TextureWrapperComponent& textureWraapperComponent);
-		void OnIndexListChangedEvent(TileComponent& tiledTerrainLayerComponent);
+		void OnIndexListChangedEvent(TileComponent& tileComponent);
 
 	private:
 		const sf::Vector2u size;

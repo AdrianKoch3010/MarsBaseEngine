@@ -77,7 +77,7 @@ void AIComponentSerialser::StoreComponent(const Entity& entity, tinyxml2::XMLDoc
 		activeTaskElement->SetAttribute("type", aiTaskTypeDictionary.at(typeId).c_str());
 
 		// Store the task data
-		//aiTaskSerialiserDictionary.at(aiTaskTypeDictionary.at(typeId))->Store(aiComponent.GetActiveTask(), document, *activeTaskElement);
+		aiTaskSerialiserDictionary.at(aiTaskTypeDictionary.at(typeId))->Store(aiComponent, true, document, *activeTaskElement);
 
 		componentData.InsertEndChild(activeTaskElement);
 	}
@@ -94,7 +94,7 @@ void AIComponentSerialser::StoreComponent(const Entity& entity, tinyxml2::XMLDoc
 		queuedTaskElement->SetAttribute("type", aiTaskTypeDictionary.at(typeId).c_str());
 
 		// Store the task data
-		//aiTaskSerialiserDictionary.at(aiTaskTypeDictionary.at(typeId))->Store(aiComponent, document, *queuedTaskElement);
+		aiTaskSerialiserDictionary.at(aiTaskTypeDictionary.at(typeId))->Store(aiComponent, false, document, *queuedTaskElement);
 
 		componentData.InsertEndChild(queuedTaskElement);
 	}

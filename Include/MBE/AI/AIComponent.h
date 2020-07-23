@@ -222,13 +222,13 @@ namespace mbe
 
 		assert(currentTask.first != nullptr && "AIComponent: Currently there is no task active");
 
-		return *std::dynamic_pointer_cast<TTask::Ptr>(currentTask.first);
+		return *std::dynamic_pointer_cast<TTask>(currentTask.first);
 	}
 
 	template<class TTask>
 	inline typename TTask::Ptr AIComponent::GetActiveTaskPtr()
 	{
-		return std::dynamic_pointer_cast<TTask::Ptr>(currentTask.first);
+		return std::dynamic_pointer_cast<TTask>(currentTask.first);
 	}
 
 	template<class TTask>
@@ -240,7 +240,7 @@ namespace mbe
 
 		assert(nextTask.first != nullptr && "AIComponent: Currently there is no task queued");
 
-		return *std::dynamic_pointer_cast<TTask::Ptr>(nextTask.first);
+		return *std::dynamic_pointer_cast<TTask>(nextTask.first);
 	}
 
 	template<class TTask>
@@ -252,7 +252,7 @@ namespace mbe
 
 		assert(nextTask.first != nullptr && "AIComponent: Currently there is no task queued");
 
-		return *std::dynamic_pointer_cast<TTask::Ptr>(nextTask.first);
+		return *std::dynamic_pointer_cast<TTask>(nextTask.first);
 	}
 
 	template<class TTask>

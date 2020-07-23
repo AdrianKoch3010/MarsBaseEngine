@@ -156,9 +156,9 @@ void TiledTerrain::OnTextureWrapperChangedEvent(TextureWrapperComponent& texture
 		RecalculateLayer(entity);
 }
 
-void TiledTerrain::OnIndexListChangedEvent(TileComponent& tiledTerrainLayerComponent)
+void TiledTerrain::OnIndexListChangedEvent(TileComponent& tileComponent)
 {
-	auto& entity = tiledTerrainLayerComponent.GetParentEntity();
+	auto& entity = tileComponent.GetParentEntity();
 
 	// Use event Subscription to update the texture
 	if (!entity.HasComponent<TiledRenderComponent>())

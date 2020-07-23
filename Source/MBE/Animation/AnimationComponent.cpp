@@ -286,7 +286,7 @@ bool AnimationComponent::IsPlayingAnimation(std::string animatorId) const
 	NormaliseIDString(animatorId);
 
 	const auto animatorItr = animatorDictionary.find(animatorId);
-	if (animatorItr == animatorDictionary.cend())
+	if (animatorItr != animatorDictionary.cend())
 	{
 		if (animatorItr->second->IsPlayingAnimation())
 			return true;
