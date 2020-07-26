@@ -14,6 +14,7 @@
 
 #include <MBE/Serialisation/AnimationComponentSerialser.h>
 
+
 using namespace mbe;
 
 AnimationComponentSerialiser::AnimationComponentSerialiser()

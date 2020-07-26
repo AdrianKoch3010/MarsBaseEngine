@@ -348,9 +348,6 @@
     <ClCompile Include="Source\MBE\Serialisation\AnimationComponentSerialser.cpp">
       <Filter>Quelldateien\ComponentSerialisers</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MBE\Serialisation\AIComponentSerialiser.cpp">
-      <Filter>Quelldateien\ComponentSerialisers</Filter>
-    </ClCompile>
     <ClCompile Include="Source\MBE\Serialisation\TopDownInformationComponentSerialiser.cpp">
       <Filter>Quelldateien\ComponentSerialisers</Filter>
     </ClCompile>
@@ -407,6 +404,9 @@
     </ClCompile>
     <ClCompile Include="Source\MBE\Map\GoalInaccessibleEvent.cpp">
       <Filter>Quelldateien\Systems\Event System\Events</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Serialisation\AIComponentSerialiser.cpp">
+      <Filter>Quelldateien\ComponentSerialisers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -659,9 +659,6 @@
     <ClInclude Include="Include\MBE\Serialisation\AnimationComponentSerialser.h">
       <Filter>Headerdateien\ComponentSerialisers</Filter>
     </ClInclude>
-    <ClInclude Include="Include\MBE\Serialisation\AIComponentSerialiser.h">
-      <Filter>Headerdateien\ComponentSerialisers</Filter>
-    </ClInclude>
     <ClInclude Include="Include\MBE\Serialisation\TopDownInformationComponentSerialiser.h">
       <Filter>Headerdateien\ComponentSerialisers</Filter>
     </ClInclude>
@@ -718,6 +715,9 @@
     </ClInclude>
     <ClInclude Include="Include\MBE\Map\GoalInaccessibleEvent.h">
       <Filter>Headerdateien\Systems\Event System\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Serialisation\AIComponentSerialiser.h">
+      <Filter>Headerdateien\ComponentSerialisers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -10,6 +10,17 @@ AIComponent::AIComponent(EventManager& eventManager, Entity& parentEntity) :
 
 }
 
+void AIComponent::AssignTask(TaskData taskData)
+{
+	// Just for now
+	nextTask.first = taskData.GetTaskPtr();
+	nextTask.second = taskData.GetTypeID();
+
+	// Set the current task aborting
+	if (IsTaskActive())
+		currentTask.first->SetAborting();
+}
+
 bool AIComponent::IsTaskActive() const
 {
 	bool active = true;
@@ -116,16 +127,16 @@ void AIComponent::ResetQueuedTask()
 	nextTask.second = detail::UnspecifiedAITaskTypeID;
 }
 
-void AIComponent::SetActiveTask(typename AITask::Ptr taskPtr, typename AIComponent::AITaskTypeID typeId)
+void AIComponent::SetActiveTask(TaskData taskData)
 {
-	currentTask.first = taskPtr;
-	currentTask.second = typeId;
+	currentTask.first = taskData.GetTaskPtr();
+	currentTask.second = taskData.GetTypeID();
 }
 
-void AIComponent::SetQueuedTask(typename AITask::Ptr taskPtr, typename AIComponent::AITaskTypeID typeId)
+void AIComponent::SetQueuedTask(TaskData taskData)
 {
-	nextTask.first = taskPtr;
-	nextTask.second = typeId;
+	nextTask.first = taskData.GetTaskPtr();
+	nextTask.second = taskData.GetTypeID();
 }
 
 void AIComponent::MakeNextTaskActive()

@@ -49,6 +49,27 @@ namespace mbe
 		typedef typename detail::AITaskTypeID AITaskTypeID;
 
 	public:
+		class TaskData
+		{
+		public:
+			TaskData(AITaskTypeID typeId, AITask::Ptr taskPtr) : typeId(typeId), taskPtr(taskPtr) {}
+			// Default constructor - only for creating null objects (required by safe queue on shutdown)
+			TaskData() : typeId(std::numeric_limits<AITaskTypeID>::max()), taskPtr(nullptr) {}
+
+
+			inline AITaskTypeID GetTypeID() const { return typeId; }
+			inline AITask::Ptr GetTaskPtr() const { return taskPtr; }
+
+			// Operator overloads
+			inline bool operator<(const TaskData& taskData) const { return taskPtr < taskData.taskPtr; }
+			inline bool operator==(const TaskData& taskData) const { return taskPtr == taskData.taskPtr; }
+
+		private:
+			AITaskTypeID typeId;
+			AITask::Ptr taskPtr;
+		};
+
+	public:
 		AIComponent(EventManager& eventManager, Entity& parentEntity);
 		~AIComponent() = default;
 
@@ -65,15 +86,17 @@ namespace mbe
 		template<class TTask>
 		void AssignTask(typename TTask::Ptr taskPtr);
 
+		void AssignTask(TaskData taskData);
+
 		// Overwrites the current task without setting it aborting
 		// This should be used when loading tasks
 		// Adds an existing task by type id
-		void SetActiveTask(typename AITask::Ptr taskPtr, typename AITaskTypeID typeId);
+		void SetActiveTask(TaskData taskData);
 
 		// Overwrites the queued task
 		// This should be used when loading tasks
 		// Adds an existing task by type id
-		void SetQueuedTask(typename AITask::Ptr taskPtr, typename AITaskTypeID typeId);
+		void SetQueuedTask(TaskData taskData);
 
 		// Check whether there is a next task using IsTaskQueued
 		// Throws if no task is queued

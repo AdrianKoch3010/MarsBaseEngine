@@ -11,6 +11,11 @@
 #include <MBE/Animation/AnimationComponent.h>
 #include <MBE/Serialisation/AnimationSerialiser.h>
 
+
+// only for testing
+#include <MBE/AI/AIComponent.h>
+#include <MBE/Serialisation/AITaskSerialser.h>
+
 namespace mbe
 {
 	/// @brief Component serialiser for the mbe::AnimationComponent
@@ -118,5 +123,6 @@ namespace mbe
 	}
 
 #pragma endregion
+
 
 } // namespace mbe

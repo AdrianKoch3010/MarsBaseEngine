@@ -60,15 +60,6 @@ namespace mbe
 		conditionVariable.notify_one();
 	}
 
-	/*template<typename T>
-	inline void SafeQueue<T>::Push(T && item)
-	{
-		std::lock_guard lock(mutex);
-		queue.push(std::move(item));
-		empty = false;
-		conditionVariable.notify_one();
-	}*/
-
 	template<typename T>
 	inline void SafeQueue<T>::ShutDown()
 	{

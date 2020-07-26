@@ -1,13 +1,15 @@
 #pragma once
 
 /// @file
-/// @brief
+/// @brief AIComponentSerialiser
 
+#include <string>
+#include <unordered_map>
 #include <memory>
 
 #include <MBE/Serialisation/ComponentSerialiser.h>
-#include <MBE/Serialisation/AITaskSerialser.h>
 #include <MBE/AI/AIComponent.h>
+#include <MBE/Serialisation/AITaskSerialser.h>
 
 namespace mbe
 {
@@ -22,15 +24,15 @@ namespace mbe
 	// </Component>
 	class AIComponentSerialser : public ComponentSerialser
 	{
+	private:
+		typedef std::unordered_map<std::string, AITaskSerialiser::UPtr> AITaskSerialiserDictionary;
+		typedef std::unordered_map<AIComponent::AITaskTypeID, std::string> AITaskTypeDictionary;
+		typedef std::unordered_map<std::string, AIComponent::AITaskTypeID> AITaskTypeStringDictionary;
+
 	public:
 		std::shared_ptr<AIComponentSerialser> Ptr;
 		std::weak_ptr<AIComponentSerialser> WPtr;
 		std::unique_ptr<AIComponentSerialser> UPtr;
-
-	private:
-		typedef std::unordered_map<std::string, std::unique_ptr<AITaskSerialiser>> AITaskSerialiserDictionary;
-		typedef std::unordered_map<typename AIComponent::AITaskTypeID, std::string> AITaskTypeDictionary;
-		typedef std::unordered_map<std::string, typename AIComponent::AITaskTypeID> AITaskTypeStringDictionary;
 
 	public:
 		AIComponentSerialser() = default;
@@ -43,12 +45,12 @@ namespace mbe
 
 	public:
 		template<class TAITaskSerialiser, class TAITask, typename... TArguments>
-		void AddAITaskSerialiser(const std::string& aiTaskType, TArguments... arguments);
+		static void AddAITaskSerialiser(const std::string& aiTaskType, TArguments... arguments);
 
 	private:
-		AITaskSerialiserDictionary aiTaskSerialiserDictionary;
-		AITaskTypeDictionary aiTaskTypeDictionary;
-		AITaskTypeStringDictionary aITaskTypeStringDictionary;
+		static AITaskSerialiserDictionary aiTaskSerialiserDictionary;
+		static AITaskTypeDictionary aiTaskTypeDictionary;
+		static AITaskTypeStringDictionary aITaskTypeStringDictionary;
 	};
 
 #pragma region Template Implementations
@@ -66,7 +68,7 @@ namespace mbe
 		// Remember the typeId for this ai task type for the serialiser store function
 		aiTaskTypeDictionary.insert({ detail::GetAITaskTypeID<TAITask>(), aiTaskType });
 
-		// Remember the type string for this tyep
+		// Remember the type string for this type
 		aITaskTypeStringDictionary.insert({ aiTaskType, detail::GetAITaskTypeID<TAITask>() });
 
 		// Make a new component serialser

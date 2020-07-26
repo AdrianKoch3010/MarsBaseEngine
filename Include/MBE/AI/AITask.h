@@ -3,15 +3,17 @@
 /// @file
 /// @brief Class mbe::AITask
 
-
 #include <memory>
+
+#include <MBE/Core/HandleBase.h>
+#include <MBE/Map/TileMapBase.h>
 
 namespace mbe
 {
 
-	///@brief Base class for AIStates managed by the mbe::AIComponent
-	///@details An mbe::AIState contains the information on an action performed by the an mbe::Entity
-	class AITask
+	/// @brief Base class for AIStates managed by the mbe::AIComponent
+	/// @details An mbe::AIState contains the information on an action performed by the an mbe::Entity
+	class AITask /*: public HandleBase<AITask>*/
 	{
 	public:
 		typedef std::shared_ptr<AITask> Ptr;
@@ -19,10 +21,10 @@ namespace mbe
 		typedef std::unique_ptr<AITask> UPtr;
 
 	public:
-		///@brief Constructor
+		/// @brief Constructor
 		AITask(float utility);
 
-		///@brief Default Destructor
+		/// @brief Default Destructor
 		virtual ~AITask() = default;
 
 	public:
@@ -56,6 +58,9 @@ namespace mbe
 
 		/// @brief Flags the task as failed
 		inline void SetFailed(bool value = true) { failed = value; }
+		
+		/// @brief Return the task's starting position on the map
+		virtual const mbe::TileMapBase::Position& GetStartingPosition() const = 0;
 	
 	protected:
 		float utility;

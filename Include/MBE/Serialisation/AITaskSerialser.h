@@ -16,16 +16,16 @@ namespace mbe
 	class AITaskSerialiser
 	{
 	public:
-		std::shared_ptr<AITaskSerialiser> Ptr;
-		std::weak_ptr<AITaskSerialiser> WPtr;
-		std::unique_ptr<AITaskSerialiser> UPtr;
+		typedef std::shared_ptr<AITaskSerialiser> Ptr;
+		typedef std::weak_ptr<AITaskSerialiser> WPtr;
+		typedef std::unique_ptr<AITaskSerialiser> UPtr;
 
 	public:
 		AITaskSerialiser() = default;
 		~AITaskSerialiser() = default;
 
 	public:
-		virtual typename AITask::Ptr Load(const tinyxml2::XMLElement& taskData, float utility) = 0;
+		virtual AITask::Ptr Load(const tinyxml2::XMLElement& taskData, float utility) = 0;
 
 		//virtual void Store(const typename AITask::Ptr aiTask, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& taskData) = 0;
 		virtual void Store(const mbe::AIComponent& aiComponent, bool activeTask, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& taskData) = 0;
