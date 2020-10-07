@@ -10,7 +10,7 @@ AIComponent::AIComponent(EventManager& eventManager, Entity& parentEntity) :
 
 }
 
-void AIComponent::AssignTask(TaskData taskData)
+void AIComponent::AssignTask(AITask::Data taskData)
 {
 	// Just for now
 	nextTask.first = taskData.GetTaskPtr();
@@ -127,13 +127,13 @@ void AIComponent::ResetQueuedTask()
 	nextTask.second = detail::UnspecifiedAITaskTypeID;
 }
 
-void AIComponent::SetActiveTask(TaskData taskData)
+void AIComponent::SetActiveTask(AITask::Data taskData)
 {
 	currentTask.first = taskData.GetTaskPtr();
 	currentTask.second = taskData.GetTypeID();
 }
 
-void AIComponent::SetQueuedTask(TaskData taskData)
+void AIComponent::SetQueuedTask(AITask::Data taskData)
 {
 	nextTask.first = taskData.GetTaskPtr();
 	nextTask.second = taskData.GetTypeID();

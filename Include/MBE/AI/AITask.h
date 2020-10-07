@@ -5,11 +5,36 @@
 
 #include <memory>
 
-#include <MBE/Core/HandleBase.h>
+//#include <MBE/Core/HandleBase.h>
 #include <MBE/Map/TileMapBase.h>
 
 namespace mbe
 {
+
+	namespace detail
+	{
+		typedef std::size_t AITaskTypeID;
+
+		constexpr AITaskTypeID UnspecifiedAITaskTypeID = std::numeric_limits<AITaskTypeID>::max();
+
+		inline AITaskTypeID GetAITaskID() noexcept
+		{
+			// This will only be initialised once
+			static AITaskTypeID lastId = 0;
+
+			// After the first initialisation a new number will be returned for every function call
+			return lastId++;
+		}
+
+		template <typename T>
+		inline AITaskTypeID GetAITaskTypeID() noexcept
+		{
+			// There will be only one static variable for each template type
+			static AITaskTypeID typeId = GetAITaskID();
+			return typeId;
+		}
+
+	} //namespace detail
 
 	/// @brief Base class for AIStates managed by the mbe::AIComponent
 	/// @details An mbe::AIState contains the information on an action performed by the an mbe::Entity
@@ -19,6 +44,24 @@ namespace mbe
 		typedef std::shared_ptr<AITask> Ptr;
 		typedef std::weak_ptr<AITask> WPtr;
 		typedef std::unique_ptr<AITask> UPtr;
+
+	public:
+		class Data
+		{
+		public:
+			Data(detail::AITaskTypeID typeId, AITask::Ptr taskPtr) : typeId(typeId), taskPtr(taskPtr) {}
+
+			inline detail::AITaskTypeID GetTypeID() const { return typeId; }
+			inline AITask::Ptr GetTaskPtr() const { return taskPtr; }
+
+			// Operator overloads
+			inline bool operator<(const Data& taskData) const { return taskPtr < taskData.taskPtr; }
+			inline bool operator==(const Data& taskData) const { return taskPtr == taskData.taskPtr; }
+
+		private:
+			detail::AITaskTypeID typeId;
+			AITask::Ptr taskPtr;
+		};
 
 	public:
 		/// @brief Constructor

@@ -13,32 +13,6 @@
 
 namespace mbe
 {
-	namespace detail
-	{
-		typedef std::size_t AITaskTypeID;
-
-		constexpr AITaskTypeID UnspecifiedAITaskTypeID = std::numeric_limits<AITaskTypeID>::max();
-
-		inline AITaskTypeID GetAITaskID() noexcept
-		{
-			// This will only be initialised once
-			static AITaskTypeID lastId = 0;
-
-			// After the first initialisation a new number will be returned for every function call
-			return lastId++;
-		}
-
-		template <typename T>
-		inline AITaskTypeID GetAITaskTypeID() noexcept
-		{
-			// There will be only one static variable for each template type
-			static AITaskTypeID typeId = GetAITaskID();
-			return typeId;
-		}
-
-	} //namespace detail
-
-
 	class AIComponent : public Component
 	{
 	public:
@@ -47,27 +21,6 @@ namespace mbe
 		typedef std::unique_ptr<AIComponent> UPtr;
 
 		typedef typename detail::AITaskTypeID AITaskTypeID;
-
-	public:
-		class TaskData
-		{
-		public:
-			TaskData(AITaskTypeID typeId, AITask::Ptr taskPtr) : typeId(typeId), taskPtr(taskPtr) {}
-			// Default constructor - only for creating null objects (required by safe queue on shutdown)
-			TaskData() : typeId(std::numeric_limits<AITaskTypeID>::max()), taskPtr(nullptr) {}
-
-
-			inline AITaskTypeID GetTypeID() const { return typeId; }
-			inline AITask::Ptr GetTaskPtr() const { return taskPtr; }
-
-			// Operator overloads
-			inline bool operator<(const TaskData& taskData) const { return taskPtr < taskData.taskPtr; }
-			inline bool operator==(const TaskData& taskData) const { return taskPtr == taskData.taskPtr; }
-
-		private:
-			AITaskTypeID typeId;
-			AITask::Ptr taskPtr;
-		};
 
 	public:
 		AIComponent(EventManager& eventManager, Entity& parentEntity);
@@ -86,17 +39,17 @@ namespace mbe
 		template<class TTask>
 		void AssignTask(typename TTask::Ptr taskPtr);
 
-		void AssignTask(TaskData taskData);
+		void AssignTask(AITask::Data taskData);
 
 		// Overwrites the current task without setting it aborting
 		// This should be used when loading tasks
 		// Adds an existing task by type id
-		void SetActiveTask(TaskData taskData);
+		void SetActiveTask(AITask::Data taskData);
 
 		// Overwrites the queued task
 		// This should be used when loading tasks
 		// Adds an existing task by type id
-		void SetQueuedTask(TaskData taskData);
+		void SetQueuedTask(AITask::Data taskData);
 
 		// Check whether there is a next task using IsTaskQueued
 		// Throws if no task is queued
