@@ -9,6 +9,7 @@
 #include <string>
 #include <map>
 #include <memory>
+#include <variant>
 
 #include <MBE/Core/Entity.h>
 
@@ -65,10 +66,11 @@ namespace mbe
 		typedef std::unique_ptr<EntityAnimator> UPtr;
 
 	private:
-		typedef std::pair<AnimationFunction, sf::Time> ScaledAnimation;
+		typedef std::pair<std::variant<AnimationFunction, std::string>, sf::Time> ScaledAnimation;
 		typedef std::map<std::string, ScaledAnimation> AnimationDictionary;
 		typedef typename AnimationDictionary::iterator	AnimationDictionaryIterator;
 		typedef std::unordered_map<std::string, detail::AnimationTypeID> AnimationTypeDictionary;
+		typedef std::unordered_map<std::string, std::string> StringDictionary;
 
 	public:
 		/// @brief Constructor
@@ -87,7 +89,14 @@ namespace mbe
 		/// @param duration The absolute duration of the animation in seconds. This parameter can be used to play 'smooth' animations.
 		/// For a FrameAnimation The duration should be set to (1 / target frame rate) * number of frames
 		template <typename TAnimationFunction>
-		void AddAnimation(std::string id, const TAnimationFunction& animation, sf::Time duration);
+		void AddLocalAnimation(std::string id, const TAnimationFunction& animation, sf::Time duration);
+
+		/// @brief Registers an animation with a given id and duration.
+		/// @param id The id that will later be used to play the animation
+		/// @param globalId The id that refers to the animation template
+		/// @param duration The absolute duration of the animation in seconds. This parameter can be used to play 'smooth' animations.
+		/// For a FrameAnimation The duration should be set to (1 / target frame rate) * number of frames
+		void AddGlobalAnimation(std::string id, std::string globalId, sf::Time duration);
 
 		/// @brief Plays the animation with the given id.
 		/// @param id The id of the animation to be played.
@@ -144,10 +153,23 @@ namespace mbe
 		/// @tparam TAnimation The type of the requested animation. Animations are function objects.
 		/// @param id The id of the requested animation.
 		/// @returns The animation casted to TAnimation
+		/// @note Only animations that are stroed locally in this animator can be accessed. Animations that are stored using a global
+		/// animation id must be looked up in their respective mbe::AnimationHolder
 		/// @throws std::runntime_error if no animation has been registered under this id or if the requested animation is not of type TAnimation.
 		/// Therefore, you have to make sure by a preceding call to HasAnimation() that an animation with this id and type exists.
 		template<typename TAnimation>
-		const TAnimation& GetAnimation(const std::string& id) const;
+		const TAnimation& GetLocalAnimation(const std::string& id) const;
+
+		/// @brief Gets the type id of an animation
+		/// @details The type id of an animation is a unique number for that animation type. This can be useful when comparing the
+		/// types of two animations.
+		/// @param id The id of the animation
+		/// @retruns The type of the animtion
+		/// @note Only animations that are stroed locally in this animator can be accessed. Animations that are stored using a global
+		/// animation id must be looked up in their respective mbe::AnimationHolder
+		/// @throws std::runntime_error if no animation has been registered under this id. Therefore, you have to make sure
+		/// by a preceding call to HasAnimation() that an animation with this id exists.
+		AnimationTypeID GetLocalAnimationTypeID(const std::string& id) const;
 
 		/// @Gets the duration of an animation
 		/// @param id The id of the requested animation
@@ -165,14 +187,20 @@ namespace mbe
 		/// @see GetAnimationDictionary
 		inline const AnimationDictionary& GetAnimationDictionary() const { return animationDictionary; }
 
-		/// @brief Gets the type id of an animation
-		/// @details The type id of an animation is a unique number for that animation type. This can be useful when comparing the
-		/// types of two animations.
-		/// @param id The id of the animation
-		/// @retruns The type of the animtion
-		/// @throws std::runntime_error if no animation has been registered under this id. Therefore, you have to make sure
-		/// by a preceding call to HasAnimation() that an animation with this id exists.
-		AnimationTypeID GetAnimationTypeID(const std::string& id) const;
+		/// @brief Returns whether a local to global animation id mapping exists
+		/// @details The global animation id refers to an animation template and is unique across an mbe::AnimationHolder.
+		/// The animation id is only unqiue within this animator and can be seen as a more general name of the animation.
+		/// Note that it can be useful to use the same name across multiple animators to play multiple animations through a single play call.
+		/// @param animationId The (local) id or name of the animation
+		/// @return True if the animation has been added via a global animation id, false otherwise
+		bool HasGlobalAnimationID(std::string animationId) const;
+
+		/// @brief Returns the corresponding global animation id
+		/// @throws If the animation has not been added as a global animation id
+		/// @see HasGlobalAnimationID()
+		/// @param animationID The (local) id or name of the animation
+		/// @return The global id of the animation (if it exists)
+		const std::string& GetGlobalAnimationID(std::string animationID) const;
 
 	private:
 		const Entity::HandleID entityId;
@@ -184,33 +212,39 @@ namespace mbe
 		float progress;
 		bool loop;
 		bool paused;
+
+		StringDictionary globalAnimationIdDictionary;
 	};
 
 #pragma region Template Implementations
 
 	template<typename TAnimationFunction>
-	inline void EntityAnimator::AddAnimation(std::string id, const TAnimationFunction& animation, sf::Time duration)
+	inline void EntityAnimator::AddLocalAnimation(std::string id, const TAnimationFunction& animation, sf::Time duration)
 	{
 		NormaliseIDString(id);
 
 		// Make sure that the id is unique
 		if (animationDictionary.find(id) != animationDictionary.end())
 			throw std::runtime_error("EntityAnimator: An animation with the same id already exists (" + id + ")");
-		
-		// Remember the type
-		animationTypeDictionary.insert(std::make_pair(id, detail::GetAnimationTypeID<TAnimationFunction>()));
 
 		animationDictionary.insert(std::make_pair(id, ScaledAnimation(animation, duration)));
+
+		// Remember the type
+		animationTypeDictionary.insert(std::make_pair(id, detail::GetAnimationTypeID<TAnimationFunction>()));
 	}
 
 	template<typename TAnimation>
-	inline const TAnimation& EntityAnimator::GetAnimation(const std::string& id) const
+	inline const TAnimation& EntityAnimator::GetLocalAnimation(const std::string& id) const
 	{
 		if (HasAnimation(id) == false)
 			throw std::runtime_error("Entity animator: No animation has been added under this id (" + id + ")");
 
+		// The animation must be stored as a local animation
+		if (animationDictionary.at(id).first.index() != 0)
+			throw std::runtime_error("Entity animator: This animation is stored in an animation holder");
+
 		// Try to cast the animaton to the required type
-		auto animationPtr = animationDictionary.at(id).first.target<TAnimation>();
+		auto animationPtr = std::get<AnimationFunction>(animationDictionary.at(id).first).target<TAnimation>();
 
 		if (animationPtr == nullptr)
 			throw std::runtime_error("Entity animator: Wrong animation type");

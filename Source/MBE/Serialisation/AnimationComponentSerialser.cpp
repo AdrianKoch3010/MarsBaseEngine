@@ -92,12 +92,6 @@ void AnimationComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 
 		for (auto animationElement = animationsElement->FirstChildElement("Animation"); animationElement != nullptr; animationElement = animationElement->NextSiblingElement("Animation"))
 		{
-			// Get the animation type
-			auto animationType = animationElement->Attribute("type");
-			if (animationType == nullptr)
-				throw std::runtime_error("Load animation component: Failed to parse animation type");
-			std::string animationTypeString{ animationType };
-
 			// Get the animation id
 			auto animationId = animationElement->Attribute("id");
 			if (animationId == nullptr)
@@ -109,10 +103,35 @@ void AnimationComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 			if (animationElement->QueryIntAttribute("duration", &duration) != XML_SUCCESS)
 				throw std::runtime_error("Load animation component: Failed to parse animation time");
 
-			// Call the appropreate animation serialiser for that animation type
-			if (animationSerialiserDictionary.find(animationTypeString) == animationSerialiserDictionary.end())
-				throw std::runtime_error("Load animation component: No animation serialiser found for this type (" + animationTypeString + ")");
-			animationSerialiserDictionary.at(animationTypeString)->Load(animator, *animationElement, animationIdString, sf::milliseconds(duration));
+			// Check whether a global animation id is used
+			bool usingGlobalId = false;
+			std::string globalAnimationIdString = "";
+			auto globalAnimationId = animationElement->Attribute("globalId");
+			if (globalAnimationId != nullptr)
+			{
+				usingGlobalId = true;
+				globalAnimationIdString = std::string(globalAnimationId);
+			}
+
+			// When using a global id for the animation, the corresponding XMLElement must be looked up
+			if (usingGlobalId)
+			{
+				animator.AddLocalAnimation(animationIdString, globalAnimationIdString, sf::milliseconds(duration));
+			}
+			else
+			{
+				// Get the animation type
+				auto animationType = animationElement->Attribute("type");
+				if (animationType == nullptr)
+					throw std::runtime_error("Load animation component: Failed to parse animation type");
+				std::string animationTypeString{ animationType };
+
+				// Call the appropreate animation serialiser for that animation type
+				if (animationSerialiserDictionary.find(animationTypeString) == animationSerialiserDictionary.end())
+					throw std::runtime_error("Load animation component: No animation serialiser found for this type (" + animationTypeString + ")");
+			
+				animationSerialiserDictionary.at(animationTypeString)->Load(animator, *animationElement, animationIdString, sf::milliseconds(duration));
+			}
 		}
 
 		// Set the animator state
@@ -173,23 +192,34 @@ void AnimationComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2
 		for (const auto& animationPair : animator.GetAnimationDictionary())
 		{
 			const auto& animationId = animationPair.first;
-			const auto& animationTime = animationPair.second.second;
+			const auto& animationDuration = animationPair.second.second;
 
-			// Find the animation's type id
-			if (animationTypeDictionary.find(animator.GetAnimationTypeID(animationId)) == animationTypeDictionary.cend())
-				throw std::runtime_error("Store animation component: No animation serialiser found for this type, animation (" + animationId + ")");
-			const auto& animationTypeString = animationTypeDictionary.at(animator.GetAnimationTypeID(animationId));
-
+			
 			// Store animation type and id
 			auto animationElement = document.NewElement("Animation");
-			animationElement->SetAttribute("type", animationTypeString.c_str());
 			animationElement->SetAttribute("id", animationId.c_str());
 
 			// Store animation time
-			animationElement->SetAttribute("duration", animationTime.asMilliseconds());
+			animationElement->SetAttribute("duration", animationDuration.asMilliseconds());
 
-			// Call the corresponding animation serialiser
-			animationSerialiserDictionary.at(animationTypeString)->Store(animator, animationId, document, *animationElement);
+			// Check if a global id exists for this animator
+			if (animator.HasGlobalAnimationID(animationId))
+			{
+				// Only store the global animation id
+				animationElement->SetAttribute("globalId", animator.GetGlobalAnimationID(animationId).c_str());
+			}
+			else
+			{
+				// Find the animation's type id
+				if (animationTypeDictionary.find(animator.GetLocalAnimationTypeID(animationId)) == animationTypeDictionary.cend())
+					throw std::runtime_error("Store animation component: No animation serialiser found for this type, animation (" + animationId + ")");
+				const auto& animationTypeString = animationTypeDictionary.at(animator.GetLocalAnimationTypeID(animationId));
+
+				animationElement->SetAttribute("type", animationTypeString.c_str());
+
+				// Call the corresponding animation serialiser
+				animationSerialiserDictionary.at(animationTypeString)->Store(animator, animationId, document, *animationElement);
+			}
 
 			animationsElement->InsertEndChild(animationElement);
 		}

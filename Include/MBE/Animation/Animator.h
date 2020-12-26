@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <string>
 #include <map>
+#include <unordered_map>
 #include <memory>
 
 #include <MBE/Animation/BaseAnimator.h>
@@ -42,6 +43,7 @@ namespace mbe
 		typedef std::pair<AnimationFunction, sf::Time> ScaledAnimation;
 		typedef std::map<TID, ScaledAnimation> AnimationMap;
 		typedef typename AnimationMap::iterator	AnimationMapIterator;
+		typedef std::unordered_map<std::string, std::string> StringDictionary;
 
 	public:
 		/// @brief Constructor
@@ -64,6 +66,16 @@ namespace mbe
 		/// @param duration The absolute duration of the animation in seconds. This parameter can be used to play 'smooth' animations.
 		/// For a FrameAnimation The duration should be set to (1 / target frame rate) * number of frames
 		void AddAnimation(const TID& id, const AnimationFunction& animation, sf::Time duration);
+
+		/// @brief Registers an animation with a given id and duration.
+		/// @param id The id that will later be used to play the animation
+		/// @param globalId The id that refers to the animation template
+		/// @param animation The animation to be registered. Any functor of the correct signature suffices
+		/// @param duration The absolute duration of the animation in seconds. This parameter can be used to play 'smooth' animations.
+		/// For a FrameAnimation The duration should be set to (1 / target frame rate) * number of frames
+		/// /// @note No sanity checks are performed on the globalId. The user is responsible for ensuring its existence in some animatio holder.
+		/// The id itself will only be unique within an mbe::AnimationHolder so it is assumed that the correct animation holder is known.
+		void AddAnimation(const TID& id, const TID& globalId, const AnimationFunction& animation, sf::Time duration);
 
 		/// @brief Plays the animation with the given id.
 		/// @param id The id of the animation to be played
@@ -106,6 +118,21 @@ namespace mbe
 		/// @details An animator can be set inactive using the Destroy() method
 		bool IsActive() const override;
 
+		/// @brief Returns whether a local to global animation id mapping exists
+		/// @details The global animation id refers to an animation template and is unique across an mbe::AnimationHolder.
+		/// The animation id is only unqiue within this animator and can be seen as a more general name of the animation.
+		/// Note that it can be useful to use the same name across multiple animators to play multiple animations through a single play call.
+		/// @param animationId The (local) id or name of the animation
+		/// @return True if the animation has been added via a global animation id, false otherwise
+		bool HasGlobalAnimationID(const TID& animationId) const;
+
+		/// @brief Returns the corresponding global animation id
+		/// @throws If the animation has not been added as a global animation id
+		/// @see HasGlobalAnimationID()
+		/// @param animationID The (local) id or name of the animation
+		/// @return The global id of the animation (if it exists)
+		const TID& GetGlobalAnimationID(const TID& animationID) const;
+
 	private:
 		const typename TAnimated::HandleID animatedObjectId;
 		bool active;
@@ -115,6 +142,8 @@ namespace mbe
 		float progress;
 		bool loop;
 		bool paused;
+
+		StringDictionary globalAnimationIdDictionary;
 	};
 
 #pragma region Template Overload for TID = std::string
@@ -146,6 +175,7 @@ namespace mbe
 		typedef std::pair<AnimationFunction, sf::Time> ScaledAnimation;
 		typedef std::map<std::string, ScaledAnimation> AnimationMap;
 		typedef typename AnimationMap::iterator	AnimationMapIterator;
+		typedef std::unordered_map<std::string, std::string> StringDictionary;
 
 	public:
 		/// @brief Constructor
@@ -168,6 +198,16 @@ namespace mbe
 		/// @param duration The absolute duration of the animation in seconds. This parameter can be used to play 'smooth' animations.
 		/// For a FrameAnimation The duration should be set to (1 / target frame rate) * number of frames
 		void AddAnimation(std::string id, const AnimationFunction& animation, sf::Time duration);
+
+		/// @brief Registers an animation with a given id and duration.
+		/// @param id The id that will later be used to play the animation
+		/// @param globalId The id that refers to the animation template
+		/// @param animation The animation to be registered. Any functor of the correct signature suffices
+		/// @param duration The absolute duration of the animation in seconds. This parameter can be used to play 'smooth' animations.
+		/// For a FrameAnimation The duration should be set to (1 / target frame rate) * number of frames
+		/// @note No sanity checks are performed on the globalId. The user is responsible for ensuring its existence in some animatio holder.
+		/// The id itself will only be unique within an mbe::AnimationHolder so it is assumed that the correct animation holder is known.
+		void AddAnimation(std::string id, std::string globalId, const AnimationFunction& animation, sf::Time duration);
 
 		/// @brief Plays the animation with the given id.
 		/// @param id The id of the animation to be played.
@@ -210,6 +250,21 @@ namespace mbe
 		/// @details An animator can be set inactive using the Destroy() method
 		bool IsActive() const override;
 
+		/// @brief Returns whether a local to global animation id mapping exists
+		/// @details The global animation id refers to an animation template and is unique across an mbe::AnimationHolder.
+		/// The animation id is only unqiue within this animator and can be seen as a more general name of the animation.
+		/// Note that it can be useful to use the same name across multiple animators to play multiple animations through a single play call.
+		/// @param animationId The (local) id or name of the animation
+		/// @return True if the animation has been added via a global animation id, false otherwise
+		bool HasGlobalAnimationID(std::string animationId) const;
+
+		/// @brief Returns the corresponding global animation id
+		/// @throws If the animation has not been added as a global animation id
+		/// @see HasGlobalAnimationID()
+		/// @param animationID The (local) id or name of the animation
+		/// @return The global id of the animation (if it exists)
+		const std::string& GetGlobalAnimationID(std::string animationID) const;
+
 	private:
 		const typename TAnimated::HandleID animatedObjectId;
 		bool active;
@@ -219,6 +274,8 @@ namespace mbe
 		float progress;
 		bool loop;
 		bool paused;
+
+		StringDictionary globalAnimationIdDictionary;
 	};
 
 #pragma endregion
@@ -293,6 +350,13 @@ namespace mbe
 	}
 
 	template<class TAnimated, typename TID>
+	inline void Animator<TAnimated, TID>::AddAnimation(const TID& id, const TID& globalId, const AnimationFunction& animation, sf::Time duration)
+	{
+		globalAnimationIdDictionary.insert({ id, globalId });
+		AddAnimation(id, animation, duration);
+	}
+
+	template<class TAnimated, typename TID>
 	inline void Animator<TAnimated, TID>::PlayAnimation(const TID& id, bool loop)
 	{
 		AnimationMapIterator it = animationDictionary.find(id);
@@ -355,6 +419,46 @@ namespace mbe
 	inline bool Animator<TAnimated, TID>::IsActive() const
 	{
 		return this->active;
+	}
+
+	template<class TAnimated>
+	inline bool Animator<TAnimated, std::string>::HasGlobalAnimationID(std::string animationId) const
+	{
+		NormaliseIDString(animationId);
+		auto it = globalAnimationIdDictionary.find(animationId);
+		if (it != globalAnimationIdDictionary.cend())
+			return true;
+
+		return false;
+	}
+
+	template<class TAnimated>
+	inline const std::string& Animator<TAnimated, std::string>::GetGlobalAnimationID(std::string animationID) const
+	{
+		NormaliseIDString(animationID);
+		if (HasGlobalAnimationID(animationID) == false)
+			throw std::runtime_error("Animator: No global animation id exists for this id: " + animationID);
+
+		return globalAnimationIdDictionary.at(animationID);
+	}
+
+	template<class TAnimated, typename TID>
+	inline bool Animator<TAnimated, TID>::HasGlobalAnimationID(const TID& animationId) const
+	{
+		auto it = globalAnimationIdDictionary.find(animationId);
+		if (it != globalAnimationIdDictionary.cend())
+			return true;
+
+		return false;
+	}
+
+	template<class TAnimated, typename TID>
+	inline const TID& Animator<TAnimated, TID>::GetGlobalAnimationID(const TID& animationID) const
+	{
+		if (HasGlobalAnimationID(animationID) == false)
+			throw std::runtime_error("Animator: No global animation id exists for this id: " + std::to_string(animationID));
+
+		return globalAnimationIdDictionary.at(animationID);
 	}
 
 #pragma endregion
@@ -430,6 +534,19 @@ namespace mbe
 		if (animationDictionary.find(id) != animationDictionary.end())
 			throw std::runtime_error("Animator: An animation with the same id already exists");
 		animationDictionary.insert(std::make_pair(id, ScaledAnimation(animation, duration)));
+	}
+
+	template<class TAnimated>
+	inline void Animator<TAnimated, std::string>::AddAnimation(std::string id, std::string globalId, const AnimationFunction& animation, sf::Time duration)
+	{
+		// Add the animation (this will discover duplicate ids)
+		AddAnimation(id, animation, duration);
+
+		// Register the id in the global id dictionary
+		NormaliseIDString(id);
+		NormaliseIDString(globalId);
+
+		globalAnimationIdDictionary.insert({ id, globalId });
 	}
 
 	template<class TAnimated>

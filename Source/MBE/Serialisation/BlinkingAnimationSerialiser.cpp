@@ -4,7 +4,22 @@
 
 using namespace mbe;
 
-void BlinkingAnimationSerialiser::Load(EntityAnimator& entityAnimator, const tinyxml2::XMLElement& animationData, const std::string& animationId, sf::Time duration)
+void BlinkingAnimationSerialiser::Load(EntityAnimator& entityAnimator, const tinyxml2::XMLElement& animationData, const std::string& animationId, sf::Time duration) const
+{	// Add the animation
+	entityAnimator.AddLocalAnimation(animationId, Parse(animationData), duration);
+}
+
+void BlinkingAnimationSerialiser::Store(const EntityAnimator& entityAnimator, const std::string& animationId, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& animationData) const
+{
+	// Get the animation
+	const auto& animation = entityAnimator.GetLocalAnimation<BlinkingAnimation>(animationId);
+
+	auto minimumBrightnessElement = document.NewElement("MinimumBrightness");
+	minimumBrightnessElement->SetText(animation.GetMinimumBrightness());
+	animationData.InsertEndChild(minimumBrightnessElement);
+}
+
+EntityAnimator::AnimationFunction BlinkingAnimationSerialiser::Parse(const tinyxml2::XMLElement& animationData) const
 {
 	using namespace tinyxml2;
 
@@ -17,16 +32,5 @@ void BlinkingAnimationSerialiser::Load(EntityAnimator& entityAnimator, const tin
 	if (minimumBrightnessElement->QueryFloatText(&minimumBrightness) != XML_SUCCESS)
 		throw std::runtime_error("Blinking animation serialiser: Failed to parse minimum brightness text");
 
-	// Add the animation
-	entityAnimator.AddAnimation(animationId, BlinkingAnimation(minimumBrightness), duration);
-}
-
-void BlinkingAnimationSerialiser::Store(const EntityAnimator& entityAnimator, const std::string& animationId, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& animationData)
-{
-	// Get the animation
-	const auto& animation = entityAnimator.GetAnimation<BlinkingAnimation>(animationId);
-
-	auto minimumBrightnessElement = document.NewElement("MinimumBrightness");
-	minimumBrightnessElement->SetText(animation.GetMinimumBrightness());
-	animationData.InsertEndChild(minimumBrightnessElement);
+	return BlinkingAnimation(minimumBrightness);
 }

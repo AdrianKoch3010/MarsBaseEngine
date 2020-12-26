@@ -34,14 +34,19 @@ namespace mbe
 		/// @param animationData The XML element which is parsed and used to determine the value of the animation
 		/// @param animationId The id of the animation
 		/// @param duration The duration of the animation
-		virtual void Load(EntityAnimator& entityAnimator, const tinyxml2::XMLElement& animationData, const std::string& animationId, sf::Time duration) = 0;
+		virtual void Load(EntityAnimator& entityAnimator, const tinyxml2::XMLElement& animationData, const std::string& animationId, sf::Time duration) const = 0;
 
 		/// @brief Interface for serialising an animation into an XML element
 		/// @param entityAnimator The animator whos animation is stored.
 		/// @param animationId The id of the animation to be stored
 		/// @param document The XML document that the animation is stored to
 		/// @param animationData The XML element to which the animation is stored to
-		virtual void Store(const EntityAnimator& entityAnimator, const std::string& animationId, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& animationData) = 0;
+		virtual void Store(const EntityAnimator& entityAnimator, const std::string& animationId, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& animationData) const = 0;
+		
+		/// @brief Interface for parsing a single animation template
+		/// @param animationData The XML element which is parsed and then converted to the respective animation function
+		/// @return The animation function object
+		virtual EntityAnimator::AnimationFunction Parse(const tinyxml2::XMLElement& animationData) const = 0;
 	};
 
 

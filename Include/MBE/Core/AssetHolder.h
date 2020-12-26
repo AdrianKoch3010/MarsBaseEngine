@@ -50,25 +50,25 @@ namespace mbe
 		/// @throws std::runntime_error if the asset failed to load
 		/// @throws std::runntime error if an asset with the same id already exists
 		template <typename... TArguments>
-		void Load(const TID & id, const std::string & filePath, TArguments&&... arguments);
+		void Load(const TID& id, const std::string& filePath, TArguments&&... arguments);
 
 		/// @brief Returns a reference to the asset with the given id
 		/// @param id The id of the asset to get
 		/// @throws std::runntime error when trying to get an asset that has not been loaded
-		TAsset & Get(const TID & id);
+		TAsset& Get(const TID& id);
 
 		/// @brief Returns a const reference of the asset with the given id
 		/// @details Const overload enabling the class to be used in when only a const version is available
 		/// @param id The id of the asset to get
 		/// @throws std::runntime error when trying to get an asset that has not been loaded
-		const TAsset & Get(const TID & id) const;
+		const TAsset& Get(const TID& id) const;
 
 		/// @brief An operator overload that allows for accessing assets using the index operator
 		/// @param id The id of the asset to get
 		/// @returns A reference to the requested asset
 		/// @throws Whenever mbe::AssetHolder::Get() throws
 		/// @see mbe::AssetHolder::Get()
-		inline TAsset & operator [] (const TID & id) { return this->Get(id); }
+		inline TAsset& operator [] (const TID& id) { return this->Get(id); }
 
 		/// @brief An operator overload that allows for accessing assets using the index operator
 		/// @details Const overload enabling the class to be used in when only a const version is available
@@ -76,7 +76,7 @@ namespace mbe
 		/// @returns A const reference to the requested asset
 		/// @throws Whenever mbe::AssetHolder::Get() const throws
 		/// @see mbe::AssetHolder::Get() const
-		inline const TAsset & operator [] (const TID & id) const { return this->Get(id); }
+		inline const TAsset& operator [] (const TID& id) const { return this->Get(id); }
 
 	protected:
 		std::unordered_map<TID, std::unique_ptr<TAsset>> assetDictionary;
@@ -115,25 +115,25 @@ namespace mbe
 		/// @throws std::runntime_error if the asset failed to load
 		/// @throws std::runntime error if an asset with the same id already exists
 		template <typename... TArguments>
-		void Load(std::string id, const std::string & filePath, TArguments&&... arguments);
+		void Load(std::string id, const std::string& filePath, TArguments&&... arguments);
 
 		/// @brief Returns a reference to the asset with the given id
 		/// @param id The id of the asset to get. It is not case sensetive so capital letters do not matter. Only use ASCII strings!
 		/// @throws std::runntime error when trying to get an asset that has not been loaded
-		TAsset & Get(std::string id);
+		TAsset& Get(std::string id);
 
 		/// @brief Returns a const reference of the asset with the given id
 		/// @details Const overload enabling the class to be used in when only a const version is available
 		/// @param id The id of the asset to get. It is not case sensetive so capital letters do not matter. Only use ASCII strings!
 		/// @throws std::runntime error when trying to get an asset that has not been loaded
-		const TAsset & Get(std::string id) const;
+		const TAsset& Get(std::string id) const;
 
 		/// @brief An operator overload that allows for accessing assets using the index operator
 		/// @param id The id of the asset to get. It is not case sensetive so capital letters do not matter. Only use ASCII strings!
 		/// @returns A reference to the requested asset
 		/// @throws Whenever mbe::AssetHolder::Get() throws
 		/// @see mbe::AssetHolder::Get()
-		inline TAsset & operator [] (std::string id) { return this->Get(id); }
+		inline TAsset& operator [] (std::string id) { return this->Get(id); }
 
 		/// @brief An operator overload that allows for accessing assets using the index operator
 		/// @details Const overload enabling the class to be used in when only a const version is available
@@ -141,7 +141,7 @@ namespace mbe
 		/// @returns A const reference to the requested asset
 		/// @throws Whenever mbe::AssetHolder::Get() const throws
 		/// @see mbe::AssetHolder::Get() const
-		inline const TAsset & operator [] (std::string id) const { return this->Get(id); }
+		inline const TAsset& operator [] (std::string id) const { return this->Get(id); }
 
 	protected:
 		std::unordered_map<std::string, std::unique_ptr<TAsset>> assetDictionary;
@@ -153,7 +153,7 @@ namespace mbe
 
 	template<typename TID, class TAsset>
 	template<typename ...TArguments>
-	inline void AssetHolder<TID, TAsset>::Load(const TID & id, const std::string & filePath, TArguments&& ...arguments)
+	inline void AssetHolder<TID, TAsset>::Load(const TID& id, const std::string& filePath, TArguments&& ...arguments)
 	{
 		auto asset = std::make_unique<TAsset>();
 
@@ -169,18 +169,18 @@ namespace mbe
 	}
 
 	template<typename TID, class TAsset>
-	inline TAsset & AssetHolder<TID, TAsset>::Get(const TID & id)
+	inline TAsset& AssetHolder<TID, TAsset>::Get(const TID& id)
 	{
 		auto it = assetDictionary.find(id);
 		// Throw if the id could not be found
 		if (it == assetDictionary.end())
 			throw std::runtime_error("AssetHolder: No asset exists under this id");
-		
+
 		return *(it->second);
 	}
 
 	template<typename TID, class TAsset>
-	inline const TAsset & AssetHolder<TID, TAsset>::Get(const TID & id) const
+	inline const TAsset& AssetHolder<TID, TAsset>::Get(const TID& id) const
 	{
 		auto it = assetDictionary.find(id);
 		// Throw if the id could not be found
@@ -196,7 +196,7 @@ namespace mbe
 
 	template<class TAsset>
 	template<typename ...TArguments>
-	inline void AssetHolder<std::string, TAsset>::Load(std::string id, const std::string & filePath, TArguments && ...arguments)
+	inline void AssetHolder<std::string, TAsset>::Load(std::string id, const std::string& filePath, TArguments && ...arguments)
 	{
 		NormaliseIDString(id);
 
@@ -214,26 +214,26 @@ namespace mbe
 	}
 
 	template<class TAsset>
-	inline TAsset & AssetHolder<std::string, TAsset>::Get(std::string id)
+	inline TAsset& AssetHolder<std::string, TAsset>::Get(std::string id)
 	{
 		NormaliseIDString(id);
 
 		auto it = assetDictionary.find(id);
 		// Throw if the id could not be found
-		if(it == assetDictionary.end())
+		if (it == assetDictionary.end())
 			throw std::runtime_error("AssetHolder: No asset exists under this id: " + id);
 
 		return *(it->second);
 	}
 
 	template<class TAsset>
-	inline const TAsset & AssetHolder<std::string, TAsset>::Get(std::string id) const
+	inline const TAsset& AssetHolder<std::string, TAsset>::Get(std::string id) const
 	{
 		NormaliseIDString(id);
 
 		auto it = assetDictionary.find(id);
 		// Throw if the id could not be found
-		if(it == assetDictionary.end())
+		if (it == assetDictionary.end())
 			throw std::runtime_error("AssetHolder: No asset exists under this id: " + id);
 
 		return *(it->second);

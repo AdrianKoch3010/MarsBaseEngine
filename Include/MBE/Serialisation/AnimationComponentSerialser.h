@@ -10,6 +10,7 @@
 #include <MBE/Serialisation/ComponentSerialiser.h>
 #include <MBE/Animation/AnimationComponent.h>
 #include <MBE/Serialisation/AnimationSerialiser.h>
+#include <MBE/Animation/AnimationHolder.h>
 
 
 // only for testing

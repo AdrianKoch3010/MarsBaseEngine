@@ -9,6 +9,7 @@
 
 #include <MBE/Core/EntityManager.h>
 #include <MBE/Animation/AnimationComponent.h>
+#include <MBE/Animation/AnimationHolder.h>
 
 namespace mbe
 {
@@ -24,7 +25,8 @@ namespace mbe
 	public:
 		/// @brief Constructor
 		/// @param entityManager A reference to the mbe::EntityManager whos entities will be updated
-		AnimationSystem(EntityManager& entityManager);
+		/// @param animationHolder A reference to the mbe::AnimationHolder managing the global animation templates
+		AnimationSystem(EntityManager& entityManager, AnimationHolder& animationHolder);
 
 		/// @brief Default destructor
 		~AnimationSystem() = default;
@@ -38,6 +40,7 @@ namespace mbe
 
 	private:
 		EntityManager& entityManager;
+		AnimationHolder& animationHolder;
 	};
 
 

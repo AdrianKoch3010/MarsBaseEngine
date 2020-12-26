@@ -1,11 +1,13 @@
 #include <cassert>
+#include <variant>
 
 #include <MBE/Animation/AnimationSystem.h>
 
 using namespace mbe;
 
-AnimationSystem::AnimationSystem(EntityManager& entityManager) :
-	entityManager(entityManager)
+AnimationSystem::AnimationSystem(EntityManager& entityManager, AnimationHolder& animationHolder) :
+	entityManager(entityManager),
+	animationHolder(animationHolder)
 {
 }
 
@@ -54,14 +56,24 @@ void AnimationSystem::Update(sf::Time frameTime)
 
 			animator.SetProgress(progress);
 
-			// If an animation is playing, apply it to the Animated template (e.g. the render object of the parentEntity)
+			// If an animation is playing, apply it to the entity
 			if (animator.IsPlayingAnimation())
 			{
-				auto animatedObjectPtr = Entity::GetObjectFromID(entityId);
+				auto animatedEntityPtr = Entity::GetObjectFromID(entityId);
 
 				auto& currentlyPlayingAnimation = animator.GetAnimationDictionary().at(animator.GetPlayingAnimation());
-				auto& animationFunction = currentlyPlayingAnimation.first;
-				animationFunction(*animatedObjectPtr, animator.GetProgress());
+
+				// If this animation references the animation holder
+				if (auto globalId = std::get_if<std::string>(&currentlyPlayingAnimation.first))
+				{
+					const auto& animationFunction = animationHolder[*globalId];
+					animationFunction(*animatedEntityPtr, animator.GetProgress());
+				}
+				else
+				{
+					const auto& animationFunction = std::get<EntityAnimator::AnimationFunction>(currentlyPlayingAnimation.first);
+					animationFunction(*animatedEntityPtr, animator.GetProgress());
+				}
 			}
 		}
 	}

@@ -5,7 +5,42 @@
 
 using namespace mbe;
 
-void FrameAnimationSerialiser::Load(EntityAnimator& entityAnimator, const tinyxml2::XMLElement& animationData, const std::string& animationId, sf::Time duration)
+void FrameAnimationSerialiser::Load(EntityAnimator& entityAnimator, const tinyxml2::XMLElement& animationData, const std::string& animationId, sf::Time duration) const
+{
+	// Add the animation
+	entityAnimator.AddLocalAnimation(animationId, Parse(animationData), duration);
+}
+
+void FrameAnimationSerialiser::Store(const EntityAnimator& entityAnimator, const std::string& animationId, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& animationData) const
+{
+	// Get the frame list
+	for (const auto& frame : entityAnimator.GetLocalAnimation<FrameAnimation>(animationId).GetFrameList())
+	{
+		auto frameElement = document.NewElement("Frame");
+		animationData.InsertEndChild(frameElement);
+
+		// Store duration
+		auto durationElement = document.NewElement("Duration");
+		durationElement->SetText(frame.duration);
+		frameElement->InsertEndChild(durationElement);
+
+		// Store origin (if needed)
+		if (frame.applyOrigin)
+		{
+			auto originElement = document.NewElement("Origin");
+			originElement->SetAttribute("x", frame.origin.x);
+			originElement->SetAttribute("y", frame.origin.y);
+			frameElement->InsertEndChild(originElement);
+		}
+
+		// Store subRect
+		auto subRectElement = document.NewElement("SubRect");
+		IntRectSerialiser::Store(frame.subrect, document, *subRectElement);
+		frameElement->InsertEndChild(subRectElement);
+	}
+}
+
+EntityAnimator::AnimationFunction FrameAnimationSerialiser::Parse(const tinyxml2::XMLElement& animationData) const
 {
 	using namespace tinyxml2;
 
@@ -53,35 +88,5 @@ void FrameAnimationSerialiser::Load(EntityAnimator& entityAnimator, const tinyxm
 			frameAnimation.AddFrame(subRect, duration);
 	}
 
-	// Add the animation
-	entityAnimator.AddAnimation(animationId, frameAnimation, duration);
-}
-
-void FrameAnimationSerialiser::Store(const EntityAnimator& entityAnimator, const std::string& animationId, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& animationData)
-{
-	// Get the frame list
-	for (const auto& frame : entityAnimator.GetAnimation<FrameAnimation>(animationId).GetFrameList())
-	{
-		auto frameElement = document.NewElement("Frame");
-		animationData.InsertEndChild(frameElement);
-
-		// Store duration
-		auto durationElement = document.NewElement("Duration");
-		durationElement->SetText(frame.duration);
-		frameElement->InsertEndChild(durationElement);
-
-		// Store origin (if needed)
-		if (frame.applyOrigin)
-		{
-			auto originElement = document.NewElement("Origin");
-			originElement->SetAttribute("x", frame.origin.x);
-			originElement->SetAttribute("y", frame.origin.y);
-			frameElement->InsertEndChild(originElement);
-		}
-
-		// Store subRect
-		auto subRectElement = document.NewElement("SubRect");
-		IntRectSerialiser::Store(frame.subrect, document, *subRectElement);
-		frameElement->InsertEndChild(subRectElement);
-	}
+	return frameAnimation;
 }

@@ -1,3 +1,4 @@
+#include "..\..\..\Include\MBE\Core\AssetLoader.h"
 #include <MBE/Core/AssetLoader.h>
 
 using namespace mbe;
@@ -26,7 +27,7 @@ void AssetLoader::Load(TextureWrapperHolder<>& assetHolder, const std::string& f
 	{
 		folder = FindFolder(lineTokens);
 	}
-	catch (const std::runtime_error & error)
+	catch (const std::runtime_error& error)
 	{
 		throw std::runtime_error(std::string(error.what()) + " (" + fileName + ")");
 	}
@@ -75,7 +76,7 @@ void AssetLoader::Load(FilePathDictionary<>& filePathDictionary, const std::stri
 	{
 		lineTokens = Tokenise(registerFiler);
 	}
-	catch (const std::runtime_error & error)
+	catch (const std::runtime_error& error)
 	{
 		throw std::runtime_error(std::string(error.what()) + " (" + fileName + ")");
 	}
@@ -120,6 +121,57 @@ void AssetLoader::Load(FilePathDictionary<>& filePathDictionary, const std::stri
 	}
 }
 
+void AssetLoader::Load(AnimationHolder& animationHolder, const std::string& filePath, std::string fileName)
+{
+	// Try load the file
+	std::ifstream registerFiler{ filePath + fileName };
+	if (registerFiler.is_open() == false)
+		throw std::runtime_error("AssetLoader failed to open register file (" + fileName + ")");
+
+	// Tokenise
+	std::vector<std::vector<std::string>> lineTokens;
+	try
+	{
+		lineTokens = Tokenise(registerFiler);
+	}
+	catch (const std::runtime_error& error)
+	{
+		throw std::runtime_error(std::string(error.what()) + " (" + fileName + ")");
+	}
+
+	// Get the folder
+	std::string folder = "";
+	try
+	{
+		folder = FindFolder(lineTokens);
+	}
+	catch (const std::runtime_error& error)
+	{
+		throw std::runtime_error(std::string(error.what()) + " (" + fileName + ")");
+	}
+
+	std::string currentSubFolder = "";
+	for (const auto& tokens : lineTokens)
+	{
+		// If this is a subfolder declaration
+		if (tokens.size() == 1 && tokens.front().front() == '[')
+		{
+			currentSubFolder = tokens.front();
+			// Remove the brackets
+			currentSubFolder.erase(0, 1);
+			currentSubFolder.erase(currentSubFolder.size() - 1, 1);
+		}
+		// If this is an asset declaration
+		else if (tokens.size() >= 1)
+		{
+			const auto& animationFileName = tokens.at(0);
+			animationHolder.Load(filePath + folder + currentSubFolder + animationFileName);
+		}
+		else
+			std::cerr << "AssetLoader load file path dictionary: invalid declaration" << "(" << fileName << ")" << std::endl;
+	}
+}
+
 std::vector<std::vector<std::string>> AssetLoader::Tokenise(std::ifstream& file)
 {
 	std::vector<std::vector<std::string>> lineTokens;
@@ -156,12 +208,14 @@ std::vector<std::vector<std::string>> AssetLoader::Tokenise(std::ifstream& file)
 		bool invalidSyntax = false;
 		if (tokens.size() < 3)
 		{
-			// Could be a subfolder declaration if there is only one token and it starts with '[' and ends with ']'
-			if ((tokens.size() == 1
-				&& tokens.front().front() == '['
-				&& tokens.front().at(tokens.front().size() - 1) == ']')
-				== false)
-				invalidSyntax = true;
+			// There are declarations that do not require an assignment
+
+			//// Could be a subfolder declaration if there is only one token and it starts with '[' and ends with ']'
+			//if ((tokens.size() == 1
+			//	&& tokens.front().front() == '['
+			//	&& tokens.front().at(tokens.front().size() - 1) == ']')
+			//	== false)
+			//	invalidSyntax = true;
 		}
 
 		// The first 3 tokens must not contain any commnets

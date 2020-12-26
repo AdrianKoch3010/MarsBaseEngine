@@ -103,11 +103,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Adrian\Desktop\Visual Studio\C++ Libs\Includes;C:\Users\Adrian\Desktop\GameDev\C++ Libs\Include;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\adria\Desktop\GameDev\C++ Libs\Include;C:\Users\Adrian\Desktop\Visual Studio\C++ Libs\Includes;C:\Users\Adrian\Desktop\GameDev\C++ Libs\Include;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>D:\C++ Libs\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -128,7 +129,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Adrian\Desktop\Visual Studio\C++ Libs\Includes;C:\Users\Adrian\Desktop\GameDev\C++ Libs\Include;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\adria\Desktop\GameDev\C++ Libs\Include;C:\Users\Adrian\Desktop\Visual Studio\C++ Libs\Includes;C:\Users\Adrian\Desktop\GameDev\C++ Libs\Include;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
@@ -149,13 +150,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>false</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Users\Adrian\Desktop\Visual Studio\C++ Libs\Includes;C:\Users\Adrian\Desktop\GameDev\C++ Libs\Include;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\adria\Desktop\GameDev\C++ Libs\Include;C:\Users\Adrian\Desktop\Visual Studio\C++ Libs\Includes;C:\Users\Adrian\Desktop\GameDev\C++ Libs\Include;D:\C++ Libs\includes;%(AdditionalIncludeDirectories);$(SolutionDir)Mars Base Engine ECS\Include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -195,6 +197,7 @@
     <ClCompile Include="Source\MBE\AI\AIComponent.cpp" />
     <ClCompile Include="Source\MBE\AI\AISystem.cpp" />
     <ClCompile Include="Source\MBE\AI\AITask.cpp" />
+    <ClCompile Include="Source\MBE\Animation\AnimationHolder.cpp" />
     <ClCompile Include="Source\MBE\Animation\AnimationSystem.cpp" />
     <ClCompile Include="Source\MBE\Animation\EntityAnimator.cpp" />
     <ClCompile Include="Source\MBE\Core\AssetLoader.cpp" />
@@ -287,6 +290,7 @@
     <ClInclude Include="Include\MBE\AI\AIComponent.h" />
     <ClInclude Include="Include\MBE\AI\AISystem.h" />
     <ClInclude Include="Include\MBE\AI\AITask.h" />
+    <ClInclude Include="Include\MBE\Animation\AnimationHolder.h" />
     <ClInclude Include="Include\MBE\Animation\AnimationSystem.h" />
     <ClInclude Include="Include\MBE\Animation\EntityAnimator.h" />
     <ClInclude Include="Include\MBE\Audio\BaseAudioComponent.h" />

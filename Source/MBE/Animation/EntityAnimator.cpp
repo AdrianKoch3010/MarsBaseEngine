@@ -14,6 +14,21 @@ EntityAnimator::EntityAnimator(Entity& entity) :
 {
 }
 
+void EntityAnimator::AddGlobalAnimation(std::string id, std::string globalId, sf::Time duration)
+{
+	NormaliseIDString(id);
+	NormaliseIDString(globalId);
+
+	// Make sure that the id is unique
+	if (animationDictionary.find(id) != animationDictionary.end())
+		throw std::runtime_error("EntityAnimator: An animation with the same id already exists (" + id + ")");
+
+	animationDictionary.insert(std::make_pair(id, ScaledAnimation(globalId, duration)));
+
+	// Register the id in the global id dictionary
+	globalAnimationIdDictionary.insert({ id, globalId });
+}
+
 void EntityAnimator::PlayAnimation(const std::string& id, bool loop)
 {
 	auto normalisedId = NormaliseIDString(id);
@@ -81,7 +96,7 @@ sf::Time EntityAnimator::GetAnimationDuration(const std::string& id) const
 	return animationDictionary.at(id).second;
 }
 
-EntityAnimator::AnimationTypeID EntityAnimator::GetAnimationTypeID(const std::string& id) const
+EntityAnimator::AnimationTypeID EntityAnimator::GetLocalAnimationTypeID(const std::string& id) const
 {
 	auto normalisedId = NormaliseIDString(id);
 
@@ -89,4 +104,23 @@ EntityAnimator::AnimationTypeID EntityAnimator::GetAnimationTypeID(const std::st
 		throw std::runtime_error("EntityAnimator: No animation has been registered under this id: " + id);
 
 	return animationTypeDictionary.at(normalisedId);
+}
+
+bool EntityAnimator::HasGlobalAnimationID(std::string animationId) const
+{
+	NormaliseIDString(animationId);
+	auto it = globalAnimationIdDictionary.find(animationId);
+	if (it != globalAnimationIdDictionary.cend())
+		return true;
+
+	return false;
+}
+
+const std::string& EntityAnimator::GetGlobalAnimationID(std::string animationID) const
+{
+	NormaliseIDString(animationID);
+	if (HasGlobalAnimationID(animationID) == false)
+		throw std::runtime_error("Animator: No global animation id exists for this id: " + animationID);
+
+	return globalAnimationIdDictionary.at(animationID);
 }
