@@ -1,9 +1,10 @@
+#include <MBE/Serialisation/FrameAnimationSerialiser.h>
+
 #include <MBE/Animation/FrameAnimation.h>
 #include <MBE/Core/Utility.h>
 
-#include <MBE/Serialisation/FrameAnimationSerialiser.h>
-
 using namespace mbe;
+
 
 void FrameAnimationSerialiser::Load(EntityAnimator& entityAnimator, const tinyxml2::XMLElement& animationData, const std::string& animationId, sf::Time duration) const
 {

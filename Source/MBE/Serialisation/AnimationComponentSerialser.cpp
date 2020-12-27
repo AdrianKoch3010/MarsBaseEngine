@@ -12,19 +12,11 @@
 #include <MBE/Serialisation/PitchAnimationSerialiser.h>
 #include <MBE/Animation/PitchAnimation.h>
 
+#include <MBE/Serialisation/AnimationSerialiserRegistry.h>
+
 #include <MBE/Serialisation/AnimationComponentSerialser.h>
 
-
 using namespace mbe;
-
-AnimationComponentSerialiser::AnimationComponentSerialiser()
-{
-	// Add the default animation serialisers
-	AddAnimationSerialiser<FrameAnimationSerialiser, FrameAnimation>("FrameAnimation");
-	AddAnimationSerialiser<RotationAnimationSerialiser, RotationAnimation>("RotationAnimation");
-	AddAnimationSerialiser<BlinkingAnimationSerialiser, BlinkingAnimation>("BlinkingAnimation");
-	AddAnimationSerialiser<PitchAnimationSerialiser, PitchAnimation>("PitchAnimation");
-}
 
 void AnimationComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData)
 {
@@ -127,6 +119,7 @@ void AnimationComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 				std::string animationTypeString{ animationType };
 
 				// Call the appropreate animation serialiser for that animation type
+				const auto& animationSerialiserDictionary = AnimationSerialiserRegistry::Instance().GetAnimationSerialiserDictionary();
 				if (animationSerialiserDictionary.find(animationTypeString) == animationSerialiserDictionary.end())
 					throw std::runtime_error("Load animation component: No animation serialiser found for this type (" + animationTypeString + ")");
 			
@@ -211,6 +204,7 @@ void AnimationComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2
 			else
 			{
 				// Find the animation's type id
+				const auto& animationTypeDictionary = AnimationSerialiserRegistry::Instance().GetAnimationTypeDictionary();
 				if (animationTypeDictionary.find(animator.GetLocalAnimationTypeID(animationId)) == animationTypeDictionary.cend())
 					throw std::runtime_error("Store animation component: No animation serialiser found for this type, animation (" + animationId + ")");
 				const auto& animationTypeString = animationTypeDictionary.at(animator.GetLocalAnimationTypeID(animationId));
@@ -218,6 +212,7 @@ void AnimationComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2
 				animationElement->SetAttribute("type", animationTypeString.c_str());
 
 				// Call the corresponding animation serialiser
+				const auto& animationSerialiserDictionary = AnimationSerialiserRegistry::Instance().GetAnimationSerialiserDictionary();
 				animationSerialiserDictionary.at(animationTypeString)->Store(animator, animationId, document, *animationElement);
 			}
 

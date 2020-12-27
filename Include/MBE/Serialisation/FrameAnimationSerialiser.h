@@ -10,6 +10,7 @@
 
 namespace mbe
 {
+	class FrameAnimation;
 
 	// XML format
 	// <Animation type="FrameAnimation" id="string" duration="int">

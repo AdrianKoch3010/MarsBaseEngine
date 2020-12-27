@@ -45,7 +45,7 @@ namespace mbe
 
 	public:
 		template<class TAITaskSerialiser, class TAITask, typename... TArguments>
-		static void AddAITaskSerialiser(const std::string& aiTaskType, TArguments... arguments);
+		static void AddAITaskSerialiser(std::string aiTaskType, TArguments... arguments);
 
 	private:
 		static AITaskSerialiserDictionary aiTaskSerialiserDictionary;
@@ -56,7 +56,7 @@ namespace mbe
 #pragma region Template Implementations
 
 	template<class TAITaskSerialiser, class TAITask, typename ...TArguments>
-	inline void AIComponentSerialser::AddAITaskSerialiser(const std::string& aiTaskType, TArguments ...arguments)
+	inline void AIComponentSerialser::AddAITaskSerialiser(std::string aiTaskType, TArguments ...arguments)
 	{
 		// make sure that TAITaskSerialiser inherits from AITaskSerialiser
 		static_assert(std::is_base_of<AITaskSerialiser, TAITaskSerialiser>::value, "The ai task serialiser must inherit from mbe::AITaskSerialser");

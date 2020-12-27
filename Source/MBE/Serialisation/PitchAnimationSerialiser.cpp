@@ -4,6 +4,13 @@
 
 using namespace mbe;
 
+//MBE_REGISTER_ANIMATION_SERIALISER(PitchAnimationSerialiser, PitchAnimation)
+
+//namespace AnimationSerialiserRegistrations
+//{
+//	mbe::AnimationSerialiserRegistrations::AnimationSerialiserRegistration<PitchAnimationSerialiser, PitchAnimation> frameAniamtion(MBE_NAME_OF(PitchAnimation));
+//}
+
 void PitchAnimationSerialiser::Load(EntityAnimator& entityAnimator, const tinyxml2::XMLElement& animationData, const std::string& animationId, sf::Time duration) const
 {
 	// Add the animation

@@ -82,9 +82,6 @@
     <Filter Include="Headerdateien\Systems\Audio System">
       <UniqueIdentifier>{aed507cd-02ce-45a3-bb1f-a28367224917}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headerdateien\Map">
-      <UniqueIdentifier>{e582bd5e-15c5-42c4-ad63-37f90671cda2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headerdateien\Components">
       <UniqueIdentifier>{e225f7d0-eb73-4cd5-bbd8-5816ef0573e6}</UniqueIdentifier>
     </Filter>
@@ -147,6 +144,9 @@
     </Filter>
     <Filter Include="Quelldateien\Systems\AI System">
       <UniqueIdentifier>{64546994-32f0-40a2-a97e-3a253d1b6ea6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Map">
+      <UniqueIdentifier>{e582bd5e-15c5-42c4-ad63-37f90671cda2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -410,6 +410,9 @@
     </ClCompile>
     <ClCompile Include="Source\MBE\Animation\AnimationHolder.cpp">
       <Filter>Quelldateien\Resources Management</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Serialisation\AnimationSerialiserRegistry.cpp">
+      <Filter>Quelldateien\Systems\Animation System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -724,6 +727,12 @@
     </ClInclude>
     <ClInclude Include="Include\MBE\Animation\AnimationHolder.h">
       <Filter>Headerdateien\Resources Management</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Core\StaticBlock.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Serialisation\AnimationSerialiserRegistry.h">
+      <Filter>Headerdateien\Systems\Animation System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

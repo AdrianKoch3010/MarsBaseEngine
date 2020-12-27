@@ -4,6 +4,13 @@
 
 using namespace mbe;
 
+//MBE_REGISTER_ANIMATION_SERIALISER(BlinkingAnimationSerialiser, BlinkingAnimation)
+
+//namespace AnimationSerialiserRegistrations
+//{
+//	mbe::AnimationSerialiserRegistrations::AnimationSerialiserRegistration<BlinkingAnimationSerialiser, BlinkingAnimation> frameAniamtion(MBE_NAME_OF(BlinkingAnimation));
+//}
+
 void BlinkingAnimationSerialiser::Load(EntityAnimator& entityAnimator, const tinyxml2::XMLElement& animationData, const std::string& animationId, sf::Time duration) const
 {	// Add the animation
 	entityAnimator.AddLocalAnimation(animationId, Parse(animationData), duration);

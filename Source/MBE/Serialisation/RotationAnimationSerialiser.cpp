@@ -4,6 +4,14 @@
 
 using namespace mbe;
 
+//MBE_REGISTER_ANIMATION_SERIALISER(RotationAnimationSerialiser, RotationAnimation)
+
+//namespace AnimationSerialiserRegistrations
+//{
+//	mbe::AnimationSerialiserRegistrations::AnimationSerialiserRegistration<RotationAnimationSerialiser, RotationAnimation> frameAniamtion(MBE_NAME_OF(RotationAnimation));
+//}
+
+
 void RotationAnimationSerialiser::Load(EntityAnimator& entityAnimator, const tinyxml2::XMLElement& animationData, const std::string& animationId, sf::Time duration) const
 {
 	// Add the animation

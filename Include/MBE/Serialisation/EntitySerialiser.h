@@ -185,21 +185,21 @@ namespace mbe
 	template<class TComponentSerialiser>
 	inline TComponentSerialiser& EntitySerialiser::GetComponentSerialser()
 	{
-		if (componentSerialiserTypeDictionary.find(detail::GetComponentSerialiserTypeID<TComponentSerialiser()) == componentSerialiserTypeDictionary.end())
+		if (componentSerialiserTypeDictionary.find(detail::GetComponentSerialiserTypeID<TComponentSerialiser>()) == componentSerialiserTypeDictionary.end())
 			throw std::runtime_error("Entity serialiser: No component serialser exists for this component serialiser type");
 
 		auto componentSerialiserPtr = componentSerialiserTypeDictionary.at(detail::GetComponentSerialiserTypeID<TComponentSerialiser>()).lock();
-		return std::dynamic_pointer_cast<TComponentSerialiser>(componentSerialiserPtr);
+		return *std::dynamic_pointer_cast<TComponentSerialiser>(componentSerialiserPtr);
 	}
 
 	template<class TComponentSerialiser>
 	inline const TComponentSerialiser& EntitySerialiser::GetComponentSerialser() const
 	{
-		if (componentSerialiserTypeDictionary.find(detail::GetComponentSerialiserTypeID < TComponentSerialiser()) == componentSerialiserTypeDictionary.end())
+		if (componentSerialiserTypeDictionary.find(detail::GetComponentSerialiserTypeID<TComponentSerialiser>()) == componentSerialiserTypeDictionary.end())
 			throw std::runtime_error("Entity serialiser: No component serialser exists for this component serialiser type");
 
 		auto componentSerialiserPtr = componentSerialiserTypeDictionary.at(detail::GetComponentSerialiserTypeID<TComponentSerialiser>()).lock();
-		return std::dynamic_pointer_cast<TComponentSerialiser>(componentSerialiserPtr);
+		return *std::dynamic_pointer_cast<TComponentSerialiser>(componentSerialiserPtr);
 	}
 
 #pragma endregion
