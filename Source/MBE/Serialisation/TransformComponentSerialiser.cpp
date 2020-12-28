@@ -6,7 +6,7 @@
 
 using namespace mbe;
 
-void TransformComponentSerialser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData)
+void TransformComponentSerialser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const
 {
 	using namespace tinyxml2;
 
@@ -55,7 +55,7 @@ void TransformComponentSerialser::LoadComponent(Entity& entity, const tinyxml2::
 	transformComponent.SetRotation(rotation);
 }
 
-void TransformComponentSerialser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData)
+void TransformComponentSerialser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const
 {
 	using namespace tinyxml2;
 

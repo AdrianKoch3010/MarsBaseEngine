@@ -21,7 +21,7 @@ namespace mbe
 	///		<ZOrder>float</ZOrder>
 	/// </Component>
 	/// @endcode
-	class RenderInformationComponentSerialiser : public ComponentSerialser
+	class RenderInformationComponentSerialiser : public ComponentSerialiser
 	{
 	public:
 		typedef std::shared_ptr<RenderInformationComponentSerialiser> Ptr;
@@ -33,9 +33,9 @@ namespace mbe
 		~RenderInformationComponentSerialiser() = default;
 
 	public:
-		void LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) override;
+		void LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const override;
 
-		void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) override;
+		void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const override;
 
 	public:
 		static std::string RenderLayerToString(RenderLayer renderLayer);

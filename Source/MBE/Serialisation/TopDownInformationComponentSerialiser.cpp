@@ -4,7 +4,7 @@
 
 using namespace mbe;
 
-void TopDownInformationComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData)
+void TopDownInformationComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const
 {
 	using namespace tinyxml2;
 
@@ -20,7 +20,7 @@ void TopDownInformationComponentSerialiser::LoadComponent(Entity& entity, const 
 	entity.AddComponent<TopDownInformationComponent>().SetLogicalBottomOffset(logicalBottomOffset);
 }
 
-void TopDownInformationComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData)
+void TopDownInformationComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const
 {
 	// The entity must have a top-down information component (this should be the case when this function is called from the EntitySerialiser)
 	if (entity.HasComponent<TopDownInformationComponent>() == false)

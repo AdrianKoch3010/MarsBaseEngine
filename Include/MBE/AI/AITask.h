@@ -45,6 +45,8 @@ namespace mbe
 		typedef std::weak_ptr<AITask> WPtr;
 		typedef std::unique_ptr<AITask> UPtr;
 
+		typedef detail::AITaskTypeID TypeID;
+
 	public:
 		class Data
 		{
@@ -104,6 +106,9 @@ namespace mbe
 		
 		/// @brief Return the task's starting position on the map
 		virtual const mbe::TileMapBase::Position& GetStartingPosition() const = 0;
+
+		template<class TAITask>
+		static TypeID GetTypeID();
 	
 	protected:
 		float utility;
@@ -111,5 +116,17 @@ namespace mbe
 		bool completed;
 		bool failed;
 	};
+
+#pragma region Template Implementations
+
+	template<class TAITask>
+	inline AITask::TypeID AITask::GetTypeID()
+	{
+		static_assert(std::is_base_of<AITask, TAITask>::value, "TAITask must inherit from mbe::AITask");
+		return detail::GetAITaskTypeID<TAITask>();
+	}
+
+#pragma endregion
+
 
 } // namespace mbe

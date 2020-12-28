@@ -7,7 +7,10 @@
 
 #include <vector>
 #include <cassert>
+#include <memory>
 
+#include <MBE/Core/Utility.h>
+#include <MBE/Animation/EntityAnimator.h>
 #include <MBE/TransformComponent.h>
 #include <MBE/Graphics/TextureWrapperComponent.h>
 
@@ -43,6 +46,13 @@ namespace mbe
 			sf::Vector2f	origin;
 			const bool		applyOrigin;
 		};
+
+	public:
+		typedef std::shared_ptr<FrameAnimation> Ptr;
+		typedef std::weak_ptr<FrameAnimation> WPtr;
+		typedef std::unique_ptr<FrameAnimation> UPtr;
+
+		typedef typename EntityAnimator::AnimationTypeID TypeID;
 
 	public:
 		/// @brief Default constructor
@@ -81,6 +91,8 @@ namespace mbe
 		/// @param progress The progress (Values in [0, 1]) determins the state of the animation i.e. which sub-rect is applied
 		template <class TAnimated>
 		void operator () (TAnimated & target, float progress) const;
+
+		MBE_GET_TYPE_ID(Animation)
 
 	private:
 		void EnsureNormalized() const;

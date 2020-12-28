@@ -6,7 +6,7 @@
 
 using namespace mbe;
 
-void RenderInformationComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData)
+void RenderInformationComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const
 {
 	using namespace tinyxml2;
 
@@ -34,7 +34,7 @@ void RenderInformationComponentSerialiser::LoadComponent(Entity& entity, const t
 	renderInformationComponent.SetZOrder(zOrder);
 }
 
-void RenderInformationComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData)
+void RenderInformationComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const
 {
 	// The entity must have a render information component (this should be the case when this function is called from the EntitySerialiser
 	if (entity.HasComponent<RenderInformationComponent>() == false)

@@ -3,9 +3,12 @@
 /// @file
 /// @brief Class mbe::PitchAnimation
 
+#include <memory>
 #include <cassert>
 #include <cmath>
 
+#include <MBE/Core/Utility.h>
+#include <MBE/Animation/EntityAnimator.h>
 #include <MBE/Audio/BaseAudioComponent.h>
 
 namespace mbe
@@ -13,6 +16,13 @@ namespace mbe
 
 	class PitchAnimation
 	{
+	public:
+		typedef std::shared_ptr<PitchAnimation> Ptr;
+		typedef std::weak_ptr<PitchAnimation> WPtr;
+		typedef std::unique_ptr<PitchAnimation> UPtr;
+
+		typedef typename EntityAnimator::AnimationTypeID TypeID;
+
 	public:
 		// minimum brighness must be a value between 0 and 1
 		PitchAnimation(float minimumPitch = 0.f);
@@ -23,6 +33,8 @@ namespace mbe
 		void operator() (TAnimated & target, float progress);
 
 		inline float GetMinimumPitch() const { return minimumPitch; }
+
+		MBE_GET_TYPE_ID(Animation)
 
 	private:
 		float minimumPitch;

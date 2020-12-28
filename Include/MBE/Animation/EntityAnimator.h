@@ -19,6 +19,7 @@ namespace mbe
 
 	namespace detail
 	{
+		// Note that in this case the MBE_DECLARE_TYPE_ID macro cannot be used since there is no Animation base class
 		typedef std::size_t AnimationTypeID;
 
 		constexpr AnimationTypeID UnspecifiedAnimtionTypeID = std::numeric_limits<AnimationTypeID>::max();
@@ -157,8 +158,8 @@ namespace mbe
 		/// animation id must be looked up in their respective mbe::AnimationHolder
 		/// @throws std::runntime_error if no animation has been registered under this id or if the requested animation is not of type TAnimation.
 		/// Therefore, you have to make sure by a preceding call to HasAnimation() that an animation with this id and type exists.
-		template<typename TAnimation>
-		const TAnimation& GetLocalAnimation(const std::string& id) const;
+		template<typename TComponent>
+		const TComponent& GetLocalAnimation(const std::string& id) const;
 
 		/// @brief Gets the type id of an animation
 		/// @details The type id of an animation is a unique number for that animation type. This can be useful when comparing the
@@ -233,8 +234,8 @@ namespace mbe
 		animationTypeDictionary.insert(std::make_pair(id, detail::GetAnimationTypeID<TAnimationFunction>()));
 	}
 
-	template<typename TAnimation>
-	inline const TAnimation& EntityAnimator::GetLocalAnimation(const std::string& id) const
+	template<typename TComponent>
+	inline const TComponent& EntityAnimator::GetLocalAnimation(const std::string& id) const
 	{
 		if (HasAnimation(id) == false)
 			throw std::runtime_error("Entity animator: No animation has been added under this id (" + id + ")");
@@ -244,7 +245,7 @@ namespace mbe
 			throw std::runtime_error("Entity animator: This animation is stored in an animation holder");
 
 		// Try to cast the animaton to the required type
-		auto animationPtr = std::get<AnimationFunction>(animationDictionary.at(id).first).target<TAnimation>();
+		auto animationPtr = std::get<AnimationFunction>(animationDictionary.at(id).first).target<TComponent>();
 
 		if (animationPtr == nullptr)
 			throw std::runtime_error("Entity animator: Wrong animation type");

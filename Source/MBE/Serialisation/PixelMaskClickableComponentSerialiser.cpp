@@ -5,7 +5,7 @@
 
 using namespace mbe;
 
-void PixelMaskClickableComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData)
+void PixelMaskClickableComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const
 {
 	// Get the component data
 	auto data = ClickableComponentSerialser::LoadComponent(componentData);
@@ -16,7 +16,7 @@ void PixelMaskClickableComponentSerialiser::LoadComponent(Entity& entity, const 
 	pixelMaskClickableComponent.SetAbsorbeClick(data.absorbeClick);
 }
 
-void PixelMaskClickableComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData)
+void PixelMaskClickableComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const
 {
 	// Delegate to the cliickable component serialser
 	ClickableComponentSerialser::StoreComponent(entity, document, componentData);

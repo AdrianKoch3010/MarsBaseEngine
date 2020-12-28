@@ -1,28 +1,5 @@
-// Component serialisers
-#include <MBE/Serialisation/TransformComponentSerialiser.h>
-#include <MBE/Serialisation/AIComponentSerialiser.h>
-#include <MBE/Serialisation/AnimationComponentSerialser.h>
-#include <MBE/Serialisation/PixelMaskClickableComponentSerialiser.h>
-#include <MBE/Serialisation/TopDownInformationComponentSerialiser.h>
-#include <MBE/Serialisation/RenderInformationComponentSerialiser.h>
-#include <MBE/Serialisation/TextureWrapperComponentSerialiser.h>
-#include <MBE/Serialisation/TiledRenderComponentSerialiser.h>
-#include <MBE/Serialisation/SpriteRenderComponentSerialiser.h>
-#include <MBE/Serialisation/TileMapComponentSerialiser.h>
-
-// Components
-#include <MBE/TransformComponent.h>
-#include <MBE/AI/AIComponent.h>
-#include <MBE/Animation/AnimationComponent.h>
-#include <MBE/Input/PixelMaskClickableComponent.h>
-#include <MBE/Graphics/TopDownInformationComponent.h>
-#include <MBE/Graphics/RenderInformationComponent.h>
-#include <MBE/Graphics/TextureWrapperComponent.h>
-#include <MBE/Graphics/TiledRenderComponent.h>
-#include <MBE/Graphics/SpriteRenderComponent.h>
-#include <MBE/Map/TileMapComponent.h>
-
 #include <MBE/Serialisation/EntitySerialiser.h>
+#include <MBE/Serialisation/SerrialiserRegistry.h>
 
 using namespace mbe;
 
@@ -31,16 +8,6 @@ EntitySerialiser::EntitySerialiser(EntityManager& entityManager, EventManager& e
 	eventManager(eventManager)
 	//context(context)
 {
-	AddComponentSerialiser<TransformComponentSerialser, TransformComponent>("TransformComponent");
-	AddComponentSerialiser<AIComponentSerialser, AIComponent>("AIComponent");
-	AddComponentSerialiser<AnimationComponentSerialiser, AnimationComponent>("AnimationComponent");
-	AddComponentSerialiser<PixelMaskClickableComponentSerialiser, PixelMaskClickableComponent>("PixelMaskClickableComponent");
-	AddComponentSerialiser<TopDownInformationComponentSerialiser, TopDownInformationComponent>("TopDownInformationComponent");
-	AddComponentSerialiser<RenderInformationComponentSerialiser, RenderInformationComponent>("RenderInformationComponent");
-	AddComponentSerialiser<TextureWrapperComponentSerialiser, TextureWrapperComponent>("TextureWrapperComponent");
-	AddComponentSerialiser<TiledRenderComponentSerialiser, TiledRenderComponent>("TiledRenderComponent");
-	AddComponentSerialiser<SpriteRenderComponentSerialiser, SpriteRenderComponent>("SpriteRenderComponent");
-	AddComponentSerialiser<TileMapComponentSerialiser, TileMapComponent>("TileMapComponent");
 }
 
 std::vector<Entity::HandleID> EntitySerialiser::LoadEntites(const std::string& filePath)
@@ -90,18 +57,18 @@ void EntitySerialiser::StoreEntites(const std::string& filePath)
 		rootNode->InsertEndChild(entityElement);
 
 		// Store the components
-		for (auto componentTypeId : entity.GetComponentTypeIDList())
+		for (const auto componentTypeId : entity.GetComponentTypeIDList())
 		{
 			// If there is a component serialiser for this component, use it
 			// Otherwise, do nothing
-			if (componentTypeDictionary.count(componentTypeId))
+			if (ComponentSerialiserRegistry::Instance().HasSerialiser(componentTypeId))
 			{
 				// There will always be a component serialiser for this type
 				auto componentElement = document.NewElement("Component");
-				componentElement->SetAttribute("type", componentTypeDictionary.at(componentTypeId).c_str());
+				componentElement->SetAttribute("type", ComponentSerialiserRegistry::Instance().GetObjectName(componentTypeId).c_str());
 
 				// Call the corresponding component serialiser
-				componentSerialiserDictionary.at(componentTypeDictionary.at(componentTypeId))->StoreComponent(entity, document, *componentElement);
+				ComponentSerialiserRegistry::Instance()[componentTypeId].StoreComponent(entity, document, *componentElement);
 				entityElement->InsertEndChild(componentElement);
 			}
 		}
@@ -159,10 +126,7 @@ std::vector<Entity::HandleID> EntitySerialiser::Load(const tinyxml2::XMLDocument
 				throw std::runtime_error("Load Components: Failed to parse component type");
 			std::string componentTypeString{ componentType };
 
-			// Call the appropreate component serialiser for that component type
-			if (componentSerialiserDictionary.find(componentTypeString) == componentSerialiserDictionary.end())
-				throw std::runtime_error("Load Components: No component serialiser found for this type (" + componentTypeString + ")");
-			componentSerialiserDictionary.at(componentTypeString)->LoadComponent(entity, *componentElement);
+			ComponentSerialiserRegistry::Instance()[componentTypeString].LoadComponent(entity, *componentElement);
 		}
 		// Raise the entity created event
 		eventManager.RaiseEvent(event::EntityCreatedEvent(entity.GetHandleID()));

@@ -8,11 +8,11 @@
 using namespace mbe;
 
 TextureWrapperComponentSerialiser::TextureWrapperComponentSerialiser() :
-	ComponentSerialser()
+	ComponentSerialiser()
 {
 }
 
-void TextureWrapperComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData)
+void TextureWrapperComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const
 {
 	using namespace tinyxml2;
 	using TextureID = TextureWrapperComponent::TextureID;
@@ -81,7 +81,7 @@ void TextureWrapperComponentSerialiser::LoadComponent(Entity& entity, const tiny
 	textureWrapperComponent.SetActiveTexture(activeTextureId);
 }
 
-void TextureWrapperComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData)
+void TextureWrapperComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const
 {
 	// The entity must have a texture wrapper component (this should be the case when this function is called from the EntitySerialiser
 	if (entity.HasComponent<TextureWrapperComponent>() == false)

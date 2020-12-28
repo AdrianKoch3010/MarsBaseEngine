@@ -1,14 +1,8 @@
 #include <MBE/Serialisation/AIComponentSerialiser.h>
 
-// Only for testing
-
 using namespace mbe;
 
-AIComponentSerialser::AITaskSerialiserDictionary AIComponentSerialser::aiTaskSerialiserDictionary;
-AIComponentSerialser::AITaskTypeDictionary AIComponentSerialser::aiTaskTypeDictionary;
-AIComponentSerialser::AITaskTypeStringDictionary AIComponentSerialser::aITaskTypeStringDictionary;
-
-void AIComponentSerialser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData)
+void AIComponentSerialser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const
 {
 	using namespace tinyxml2;
 
@@ -31,12 +25,11 @@ void AIComponentSerialser::LoadComponent(Entity& entity, const tinyxml2::XMLElem
 			throw std::runtime_error("Ai component serialiser: Failed to parse ai task utility attribute");
 
 		// Call the task serialiser for this type which creates the task
-		if (aiTaskSerialiserDictionary.find(typeString) == aiTaskSerialiserDictionary.end())
-			throw std::runtime_error("Ai component serialiser: No task serialiser found for this type (" + typeString + ")");
-		auto taskPtr = aiTaskSerialiserDictionary.at(typeString)->Load(*activeTaskElement, utility);
+		auto taskPtr = AITaskSerialiserRegistry::Instance()[typeString].Load(*activeTaskElement, utility);
 
 		// Set the active task under this type
-		aiComponent.SetActiveTask({ aITaskTypeStringDictionary.at(typeString), taskPtr });
+		const auto aiTaskTypeId = AITaskSerialiserRegistry::Instance().GetObjectTypeByName(typeString);
+		aiComponent.SetActiveTask({ aiTaskTypeId, taskPtr });
 	}
 
 	const auto queuedTaskElement = componentData.FirstChildElement("QueuedTask");
@@ -55,16 +48,15 @@ void AIComponentSerialser::LoadComponent(Entity& entity, const tinyxml2::XMLElem
 			throw std::runtime_error("Ai component serialiser: Failed to parse ai task utility attribute");
 
 		// Call the task serialiser for this type which creates the task
-		if (aiTaskSerialiserDictionary.find(typeString) == aiTaskSerialiserDictionary.end())
-			throw std::runtime_error("Ai component serialiser: No task serialiser found for this type (" + typeString + ")");
-		auto taskPtr = aiTaskSerialiserDictionary.at(typeString)->Load(*queuedTaskElement, utility);
+		auto taskPtr = AITaskSerialiserRegistry::Instance()[typeString].Load(*queuedTaskElement, utility);
 
 		// Set the active task under this type
-		aiComponent.SetQueuedTask({ aITaskTypeStringDictionary.at(typeString), taskPtr });
+		const auto aiTaskTypeId = AITaskSerialiserRegistry::Instance().GetObjectTypeByName(typeString);
+		aiComponent.SetQueuedTask({ aiTaskTypeId, taskPtr });
 	}
 }
 
-void AIComponentSerialser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData)
+void AIComponentSerialser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const
 {
 	// The entity must have an ai component (this should be the case when this function is called from the EntitySerialiser
 	if (entity.HasComponent<AIComponent>() == false)
@@ -75,16 +67,14 @@ void AIComponentSerialser::StoreComponent(const Entity& entity, tinyxml2::XMLDoc
 	if (aiComponent.IsTaskActive())
 	{
 		const auto typeId = aiComponent.GetActiveTaskTypeID();
-		if (aiTaskTypeDictionary.find(typeId) == aiTaskTypeDictionary.end())
-			throw std::runtime_error("Ai component serialiser: No task serialiser found for this active ai task type id");
 
 		// Create the active task element
 		auto activeTaskElement = document.NewElement("ActiveTask");
-		activeTaskElement->SetAttribute("type", aiTaskTypeDictionary.at(typeId).c_str());
+		activeTaskElement->SetAttribute("type", AITaskSerialiserRegistry::Instance().GetObjectName(typeId).c_str());
 		activeTaskElement->SetAttribute("utility", aiComponent.GetActiveTask().GetUtility());
 
 		// Store the task data
-		aiTaskSerialiserDictionary.at(aiTaskTypeDictionary.at(typeId))->Store(aiComponent, true, document, *activeTaskElement);
+		AITaskSerialiserRegistry::Instance()[typeId].Store(aiComponent, true, document, *activeTaskElement);
 
 		componentData.InsertEndChild(activeTaskElement);
 	}
@@ -93,16 +83,14 @@ void AIComponentSerialser::StoreComponent(const Entity& entity, tinyxml2::XMLDoc
 	if (aiComponent.IsTaskQueued())
 	{
 		const auto typeId = aiComponent.GetQueuedTaskTypeID();
-		if (aiTaskTypeDictionary.find(typeId) == aiTaskTypeDictionary.end())
-			throw std::runtime_error("Ai component serialiser: No task serialiser found for this queued ai task type id");
 
 		// Create the active task element
 		auto queuedTaskElement = document.NewElement("QueuedTask");
-		queuedTaskElement->SetAttribute("type", aiTaskTypeDictionary.at(typeId).c_str());
+		queuedTaskElement->SetAttribute("type", AITaskSerialiserRegistry::Instance().GetObjectName(typeId).c_str());
 		queuedTaskElement->SetAttribute("utility", aiComponent.GetQueuedTask().GetUtility());
 
 		// Store the task data
-		aiTaskSerialiserDictionary.at(aiTaskTypeDictionary.at(typeId))->Store(aiComponent, false, document, *queuedTaskElement);
+		AITaskSerialiserRegistry::Instance()[typeId].Store(aiComponent, false, document, *queuedTaskElement);
 
 		componentData.InsertEndChild(queuedTaskElement);
 	}

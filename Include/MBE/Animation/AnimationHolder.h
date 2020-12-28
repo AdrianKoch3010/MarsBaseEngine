@@ -39,7 +39,7 @@ namespace mbe
 		/// @tparam The type of the animation being added
 		/// @param animationId The global id of the animation template
 		/// @param xmlString The animation template in xml format
-		template<class TAnimation>
+		template<class TComponent>
 		void AddAnimation(std::string animationId, const std::string& xmlString);
 
 		/// @brief Returns a reference to the managed animation template
@@ -59,7 +59,7 @@ namespace mbe
 
 #pragma region Template Implementation
 
-	template<class TAnimation>
+	template<class TComponent>
 	inline void AnimationHolder::AddAnimation(std::string animationId, const std::string& xmlString)
 	{
 		NormaliseIDString(globalId);
@@ -83,9 +83,9 @@ namespace mbe
 			throw std::runtime_error("AnimationHolder: The root node could not be found");
 
 		// Get the animation type string
-		auto typeItr = animationTypeDictionary.find(detail::GetAnimationTypeID<TAnimation>());
+		auto typeItr = animationTypeDictionary.find(detail::GetAnimationTypeID<TComponent>());
 		if (typeItr == animationTypeDictionary.cend())
-			throw std::runtime_error("AnimationHolder: No animation serialiser has been registered for this animation type: " + std::to_string(detail::GetAnimationTypeID<TAnimation>()));
+			throw std::runtime_error("AnimationHolder: No animation serialiser has been registered for this animation type: " + std::to_string(detail::GetAnimationTypeID<TComponent>()));
 
 		auto animationTypeString = *typeItr;
 

@@ -9,13 +9,8 @@
 
 #include <MBE/Serialisation/ComponentSerialiser.h>
 #include <MBE/Animation/AnimationComponent.h>
-#include <MBE/Serialisation/AnimationSerialiser.h>
 #include <MBE/Animation/AnimationHolder.h>
 
-
-// only for testing
-#include <MBE/AI/AIComponent.h>
-#include <MBE/Serialisation/AITaskSerialser.h>
 
 namespace mbe
 {
@@ -48,7 +43,7 @@ namespace mbe
 	///		</Animator>
 	/// </Component>
 	/// @endcode
-	class AnimationComponentSerialiser : public ComponentSerialser
+	class AnimationComponentSerialiser : public ComponentSerialiser
 	{
 	public:
 		typedef std::shared_ptr<AnimationComponentSerialiser> Ptr;
@@ -70,7 +65,7 @@ namespace mbe
 		/// @param componentData The XML element being parsed
 		/// @throws std::runtime_error if the parsing fails or when there was no animation serialiser registered for a given animation type
 		/// @see AddAnimationSerialiser
-		void LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) override;
+		void LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const override;
 
 		/// @brief Stores the entity's animation component to an XML element
 		/// @details Stores all animators and their animations
@@ -79,7 +74,7 @@ namespace mbe
 		/// @param componentData The XML element to which the animation component is stored
 		/// @throws std::runtime_error if the entity doesn't have an mbe::AnimationComponent or when there was no animation serialiser registered for a given animation type
 		/// @see AddAnimationSerialiser
-		void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) override;
+		void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const override;
 	};
 
 } // namespace mbe

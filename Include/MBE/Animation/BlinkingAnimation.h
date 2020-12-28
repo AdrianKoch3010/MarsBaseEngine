@@ -8,15 +8,26 @@
 #include <cassert>
 #define _USE_MATH_DEFINES
 #include <cmath>
+#include <memory>
+
 #include <SFML/Graphics/Color.hpp>
 
+#include <MBE/Core/Utility.h>
+#include <MBE/Animation/EntityAnimator.h>
 #include <mbe/Graphics/SpriteRenderComponent.h>
+
 
 namespace mbe
 {
-
 	class BlinkingAnimation
 	{
+	public:
+		typedef std::shared_ptr<BlinkingAnimation> Ptr;
+		typedef std::weak_ptr<BlinkingAnimation> WPtr;
+		typedef std::unique_ptr<BlinkingAnimation> UPtr;
+
+		typedef typename EntityAnimator::AnimationTypeID TypeID;
+
 	public:
 		// minimum brighness must be a value between 0 and 1
 		BlinkingAnimation(float minimumBrightness = 0.f);
@@ -27,6 +38,10 @@ namespace mbe
 		void operator() (TAnimated & target, float progress);
 
 		inline float GetMinimumBrightness() const { return minimumBrightness; }
+
+		// There exists no base class for animations so every animation must declare its GetTypeID method. However, they must all refer to the same function,
+		// hence, Animation is needed here not BlinkingAnimation
+		MBE_GET_TYPE_ID(Animation)
 
 	private:
 		float minimumBrightness;

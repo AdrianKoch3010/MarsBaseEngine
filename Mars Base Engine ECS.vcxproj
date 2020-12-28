@@ -268,7 +268,6 @@
     </ClCompile>
     <ClCompile Include="Source\MBE\Serialisation\AIComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\AnimationComponentSerialser.cpp" />
-    <ClCompile Include="Source\MBE\Serialisation\AnimationSerialiserRegistry.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\BlinkingAnimationSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\ClickableComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\EntitySerialiser.cpp" />
@@ -371,7 +370,6 @@
     <ClInclude Include="Include\MBE\Serialisation\AITaskSerialser.h" />
     <ClInclude Include="Include\MBE\Serialisation\AnimationComponentSerialser.h" />
     <ClInclude Include="Include\MBE\Serialisation\AnimationSerialiser.h" />
-    <ClInclude Include="Include\MBE\Serialisation\AnimationSerialiserRegistry.h" />
     <ClInclude Include="Include\MBE\Serialisation\BlinkingAnimationSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\ClickableComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\ComponentSerialiser.h" />
@@ -381,6 +379,7 @@
     <ClInclude Include="Include\MBE\Serialisation\PixelMaskClickableComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\RenderInformationComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\RotationAnimationSerialiser.h" />
+    <ClInclude Include="Include\MBE\Serialisation\SerrialiserRegistry.h" />
     <ClInclude Include="Include\MBE\Serialisation\SpriteRenderComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\TextureWrapperComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\TiledRenderComponentSerialiser.h" />

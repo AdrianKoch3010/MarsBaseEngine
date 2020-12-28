@@ -19,7 +19,7 @@ namespace mbe
 	///		<TileSize x="unsigend int" y="unsigned int" />
 	/// </Component>
 	/// @endcode
-	class TiledRenderComponentSerialiser : public ComponentSerialser
+	class TiledRenderComponentSerialiser : public ComponentSerialiser
 	{
 	public:
 		typedef std::shared_ptr<TiledRenderComponentSerialiser> Ptr;
@@ -31,9 +31,9 @@ namespace mbe
 		~TiledRenderComponentSerialiser() = default;
 
 	public:
-		void LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) override;
+		void LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const override;
 
-		void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) override;
+		void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const override;
 
 	};
 

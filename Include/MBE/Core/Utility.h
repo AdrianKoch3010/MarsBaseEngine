@@ -32,6 +32,24 @@ ensure uniqueness always the full type name is used. This includes e.g. namespac
 */
 #define MBE_NAME_OF(x) #x
 
+/// @brief declares the GetTypeID() function for that object in the details namespace
+#define MBE_DECLARE_TYPE_ID(TObject) namespace mbe { namespace detail { \
+typedef std::size_t TObject##TypeID; \
+inline TObject##TypeID Get##TObject##ID() noexcept { \
+static TObject##TypeID lastId = 0u; \
+return lastId++; } \
+template <typename T> inline TObject##TypeID Get##TObject##TypeID() noexcept { \
+static_assert(std::is_base_of<TObject, T>::value, "Type id requested for invalid type"); \
+static TObject##TypeID typeId = Get##TObject##ID(); \
+return typeId; } } }
+
+/// @brief Declares a static function returning the type id
+/// @details Requires a definition of the GetTypeID() function for this object type as well as a definition of TypeID within the class.
+/// This macro is intended to be used in the public function area of the class.
+/// The generated function returns the type id for the object class
+#define MBE_GET_TYPE_ID(TObject) template<class T##TObject> static TypeID GetTypeID() { \
+return detail::Get##TObject##TypeID<T##TObject>(); }
+
 namespace mbe
 {
 

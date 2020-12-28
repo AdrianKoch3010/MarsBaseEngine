@@ -18,7 +18,7 @@ namespace mbe
 	///		<BubbleUp>bool</BubbleUp>
 	/// </Component>
 	/// @endcode
-	class PixelMaskClickableComponentSerialiser : public ComponentSerialser
+	class PixelMaskClickableComponentSerialiser : public ComponentSerialiser
 	{
 	public:
 		typedef std::shared_ptr<PixelMaskClickableComponentSerialiser> Ptr;
@@ -33,9 +33,9 @@ namespace mbe
 		~PixelMaskClickableComponentSerialiser() = default;
 
 	public:
-		void LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) override;
+		void LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const override;
 
-		void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) override;
+		void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const override;
 	};
 
 } // namespace mbe

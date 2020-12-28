@@ -5,7 +5,7 @@
 #include <exception>
 
 #include <MBE/Core/Utility.h>
-#include <MBE/Serialisation/AnimationSerialiserRegistry.h>
+#include <MBE/Serialisation/SerrialiserRegistry.h>
 
 
 using namespace mbe;
@@ -53,8 +53,7 @@ void AnimationHolder::Load(const std::string file)
 		std::string animationIdString{ animationId };
 		NormaliseIDString(animationIdString);
 
-		const auto& animationSerialiserDictionary = AnimationSerialiserRegistry::Instance().GetAnimationSerialiserDictionary();
-		animationDictionary.insert({ animationIdString, animationSerialiserDictionary.at(animationTypeString)->Parse(*animationElement) });
+		animationDictionary.insert({ animationIdString, AnimationSerialiserRegistry::Instance()[animationTypeString].Parse(*animationElement) });
 	}
 }
 

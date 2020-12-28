@@ -3,6 +3,10 @@
 /// @file
 /// @brief Class mbe::RotationAnimation
 
+#include <memory>
+
+#include <MBE/Core/Utility.h>
+#include <MBE/Animation/EntityAnimator.h>
 #include <MBE/TransformComponent.h>
 
 namespace mbe
@@ -11,6 +15,13 @@ namespace mbe
 	/// @details Requires the animated object to have a SetRotationFunction
 	class RotationAnimation
 	{
+	public:
+		typedef std::shared_ptr<RotationAnimation> Ptr;
+		typedef std::weak_ptr<RotationAnimation> WPtr;
+		typedef std::unique_ptr<RotationAnimation> UPtr;
+
+		typedef typename EntityAnimator::AnimationTypeID TypeID;
+
 	public:
 		/// @brief Constructor
 		/// @param maximumRotation The relative maximum rotation achived. 1 is a full rotation.
@@ -31,6 +42,8 @@ namespace mbe
 		// @brief Returns the relative maximum rotation
 		// @returns The relative maximum rotation achived. 1 is a full rotation.
 		inline float GetRelativeMaximumRotation() const { return relativeMaximumRotation; }
+
+		MBE_GET_TYPE_ID(Animation)
 
 	private:
 		float relativeMaximumRotation;

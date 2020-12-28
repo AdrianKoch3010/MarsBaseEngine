@@ -20,46 +20,13 @@
 #include <MBE/Core/EntityManager.h>
 #include <MBE/Core/EntityCreatedEvent.h>
 #include <MBE/Core/EventManager.h>
-#include <MBE/Serialisation/ComponentSerialiser.h>
 #include <MBE/Core/AssetHolder.h>
 #include <MBE/Core/FilePathDictionary.h>
 
 namespace mbe
 {
-	namespace detail
-	{
-		/// @brief Defines the type of the component serialiser id
-		/// @details This id is generated at runtime for each component serialiser class by calling mbe::detail::GetComponentSerialiserTypeID()
-		typedef std::size_t ComponentSerialserTypeID;
-
-		/// @brief Returns a unique ComponentTypeID (for each function call)
-		inline ComponentSerialserTypeID GetComponentSerialiserID() noexcept
-		{
-			// This will only be initialised once
-			static ComponentSerialserTypeID lastId = 0;
-
-			// After the first initialisation a new number will be returned for every function call
-			return lastId++;
-		}
-
-		/// @brief Returns a unique number (of type std::size_t) for each type T
-		/// @details Each component serialiser type will have its own unique id.
-		/// The id will be the same for every instance of that type
-		/// @tparam TComponentSerialiser The type for which the id is generated. It must inherit from mbe::ComponentSerialiser
-		template <typename TComponentSerialiser>
-		inline ComponentSerialserTypeID GetComponentSerialiserTypeID() noexcept
-		{
-			// make sure that TComponentSerialiser inherits from ComponentSerialiser
-			static_assert(std::is_base_of<ComponentSerialser, TComponentSerialiser>::value, "The component serialiser must inherit from mbe::ComponentSerialiser");
-
-			// There will be only one static variable for each template type
-			static ComponentSerialserTypeID typeId = GetComponentSerialiserID();
-			return typeId;
-		}
-	}
-
 	/// @brief Provides functions for loading and storing entities from and to an XML file format
-	/// @details Component serialisers can be added using the AddComponentSerialiser() method.
+	/// @details Component serialisers can be registered with the mbe::ComponentSerialiserRegistry.
 	/// The registered serialisers will then be used to load and store the components they have been registered for.
 	/// The XML is formatted in the following way:
 	///
@@ -72,23 +39,9 @@ namespace mbe
 	/// </Entity>
 	/// </Entities>
 	/// @endcode
-	/// The EntitySerialser already has component serialisers for the
-	/// - TransformComponent
-	/// - AIComponent
-	/// - AnimationComponent
-	/// - PixelMaskClickableComponent
-	/// - TopDownInformationComponent
-	/// - TextureWrapperComponent
-	/// - TiledRenderComponent
-	/// - SpriteRenderComponent
 	/// @note The entity ids will be reassigned after loading. However, the parent / child entity relations will be preserved.
 	class EntitySerialiser : private sf::NonCopyable
 	{
-	private:
-		typedef std::unordered_map<std::string, ComponentSerialser::Ptr> ComponentSerialiserDictionary;
-		typedef std::unordered_map<detail::ComponentTypeID, std::string> ComponentTypeDictionary;
-		typedef std::unordered_map<detail::ComponentSerialserTypeID, ComponentSerialser::WPtr> ComponentSerialserTypeDictionary;
-
 		// First is old, second is new
 		typedef std::unordered_map<Entity::HandleID, Entity::HandleID> EntityIDMap;
 		// First is new entity, seonds is old parent entity id
@@ -119,27 +72,6 @@ namespace mbe
 		// Throws runtime_error when storing fails
 		void StoreEntites(const std::string& filePath);
 
-		/// @brief Add a component serialiser
-		/// @details The serialiser is added for a component of a particular type. This serialiser will then be used
-		/// to load / add and store a component of that type from an to an XML element.
-		/// @tparam TComponentSerialiser The type of component serialiser to create and add
-		/// @tparam TComponent The type of component for which the serialiser's store function will be applied
-		/// @tparam TArguments The type of the arguments passed
-		/// @param componentType A string id for the type of the component. Thisw will be the same as the type attribute in the component xml node
-		/// @param arguments The arguments passed to the constructor of the TComponentSerialiser
-		/// @note The componen serialiser must inherit from mbe::ComponentSerialiser
-		template<class TComponentSerialiser, class TComponent, typename... TArguments>
-		void AddComponentSerialiser(const std::string& componentType, TArguments... arguments);
-
-		// Throws if no component serialiser of this type has been found
-		template<class TComponentSerialiser>
-		TComponentSerialiser& GetComponentSerialser();
-
-		// Throws if no component serialiser of this type has been found
-		// Const overload
-		template<class TComponentSerialiser>
-		const TComponentSerialiser& GetComponentSerialser() const;
-
 	private:
 		std::vector<Entity::HandleID> Load(const tinyxml2::XMLDocument& document);
 
@@ -147,61 +79,10 @@ namespace mbe
 		EntityManager& entityManager;
 		EventManager& eventManager;
 
-		ComponentSerialiserDictionary componentSerialiserDictionary;
-		ComponentTypeDictionary componentTypeDictionary;
-		ComponentSerialserTypeDictionary componentSerialiserTypeDictionary;
-
 		// Maps the old to the new entity ids
 		EntityIDMap entityIdMap;
 		// Maps the new entity id to the old parent entity id
 		ParentEntityIDMap parentEntityIdMap;
 	};
-
-#pragma region Template Implementations
-
-	template<class TComponentSerialiser, class TComponent, typename ...TArguments>
-	inline void EntitySerialiser::AddComponentSerialiser(const std::string& componentType, TArguments ...arguments)
-	{
-		// make sure that TComponentSerialiser inherits from ComponentSerialiser
-		static_assert(std::is_base_of<ComponentSerialser, TComponentSerialiser>::value, "The component serialiser must inherit from mbe::ComponentSerialiser");
-
-		// Throw if a component serialiser for this type already exists
-		if (componentSerialiserDictionary.find(componentType) != componentSerialiserDictionary.end())
-			throw std::runtime_error("EntitySerialiser: A component serialser already exists for this component type (" + componentType + ")");
-
-		// Remember the typeId for this component type for the serialiser store function
-		componentTypeDictionary.insert({ detail::GetComponentTypeID<TComponent>(), componentType });
-
-		// Make a new component serialser
-		auto componentSerialiserPtr = std::make_shared<TComponentSerialiser>(std::forward<TArguments>(arguments)...);
-
-		// Remember it under this type so that it can be accessed later
-		componentSerialiserTypeDictionary.insert({ detail::GetComponentSerialiserTypeID<TComponentSerialiser>(), componentSerialiserPtr });
-	
-		// Add the component serialiser to the dictionary
-		componentSerialiserDictionary.insert({ componentType, std::move(componentSerialiserPtr) });
-	}
-
-	template<class TComponentSerialiser>
-	inline TComponentSerialiser& EntitySerialiser::GetComponentSerialser()
-	{
-		if (componentSerialiserTypeDictionary.find(detail::GetComponentSerialiserTypeID<TComponentSerialiser>()) == componentSerialiserTypeDictionary.end())
-			throw std::runtime_error("Entity serialiser: No component serialser exists for this component serialiser type");
-
-		auto componentSerialiserPtr = componentSerialiserTypeDictionary.at(detail::GetComponentSerialiserTypeID<TComponentSerialiser>()).lock();
-		return *std::dynamic_pointer_cast<TComponentSerialiser>(componentSerialiserPtr);
-	}
-
-	template<class TComponentSerialiser>
-	inline const TComponentSerialiser& EntitySerialiser::GetComponentSerialser() const
-	{
-		if (componentSerialiserTypeDictionary.find(detail::GetComponentSerialiserTypeID<TComponentSerialiser>()) == componentSerialiserTypeDictionary.end())
-			throw std::runtime_error("Entity serialiser: No component serialser exists for this component serialiser type");
-
-		auto componentSerialiserPtr = componentSerialiserTypeDictionary.at(detail::GetComponentSerialiserTypeID<TComponentSerialiser>()).lock();
-		return *std::dynamic_pointer_cast<TComponentSerialiser>(componentSerialiserPtr);
-	}
-
-#pragma endregion
 
 } // namespace mbe

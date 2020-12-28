@@ -18,7 +18,7 @@ namespace mbe
 	///		<Rotation>float</Rotation>
 	/// </Component>
 	/// @endcode
-	class TransformComponentSerialser : public ComponentSerialser
+	class TransformComponentSerialser : public ComponentSerialiser
 	{
 	public:
 		typedef std::shared_ptr<TransformComponentSerialser> Ptr;
@@ -39,7 +39,7 @@ namespace mbe
 		/// @param entity The entity to which the transform component is added
 		/// @param componentData The XML element being parsed
 		/// @throws std::runtime_error if the parsing fails
-		void LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) override;
+		void LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const override;
 
 		/// @brief Stores the entity's transform component to an XML element
 		/// @details Stores the position, origin, scale and rotation of the transform component
@@ -47,7 +47,7 @@ namespace mbe
 		/// @param document The XML document to which the transform component is stored
 		/// @param componentData The XML element to which the transfrom component is stored
 		/// @throws std::runtime_error if the entity doesn't have an mbe::TransformComponent
-		void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) override;
+		void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const override;
 	};
 
 } // namespace mbe

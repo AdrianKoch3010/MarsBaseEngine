@@ -23,7 +23,7 @@ namespace mbe
 	///		</Colour>
 	/// </Component>
 	/// @endcode
-	class SpriteRenderComponentSerialiser : public ComponentSerialser
+	class SpriteRenderComponentSerialiser : public ComponentSerialiser
 	{
 	public:
 		typedef std::shared_ptr<SpriteRenderComponentSerialiser> Ptr;
@@ -31,9 +31,9 @@ namespace mbe
 		typedef std::unique_ptr<SpriteRenderComponentSerialiser> UPtr;
 
 	public:
-		void LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) override;
+		void LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const override;
 
-		void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) override;
+		void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const override;
 
 	};
 

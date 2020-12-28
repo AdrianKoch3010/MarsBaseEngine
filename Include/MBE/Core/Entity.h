@@ -28,35 +28,6 @@ namespace mbe
 
 	namespace detail
 	{
-		/// @brief Defines the type of the component id
-		/// @details This id is generated at runtime for each component class by calling mbe::detail::GetComponentTypeID()
-		typedef std::size_t ComponentTypeID;
-
-		/// @brief Returns a unique ComponentTypeID (for each function call)
-		inline ComponentTypeID GetComponentID() noexcept
-		{
-			// This will only be initialised once
-			static ComponentTypeID lastId = 0;
-
-			// After the first initialisation a new number will be returned for every function call
-			return lastId++;
-		}
-
-		/// @brief Returns a unique number (of type std::size_t) for each type T
-		/// @details Each component type will have its own unique id.
-		/// The id will be the same for every instance of that type
-		/// @tparam TComponent The type for which the id is generated. It must inherit from mbe::Component
-		template <typename TComponent>
-		inline ComponentTypeID GetComponentTypeID() noexcept
-		{
-			// make sure that TComponentSerialiser inherits from ComponentSerialiser
-			static_assert(std::is_base_of<Component, TComponent>::value, "The component must inherit from mbe::Component");
-
-			// There will be only one static variable for each template type
-			static ComponentTypeID typeId = GetComponentID();
-			return typeId;
-		}
-
 		class PolyimorphicComponentDictionary : public Singleton<PolyimorphicComponentDictionary>
 		{
 			friend class Entity;

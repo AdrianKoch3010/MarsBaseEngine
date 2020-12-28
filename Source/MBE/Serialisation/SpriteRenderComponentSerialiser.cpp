@@ -5,7 +5,7 @@
 
 using namespace mbe;
 
-void SpriteRenderComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData)
+void SpriteRenderComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const
 {
 	const auto colourElement = componentData.FirstChildElement("Colour");
 	if (colourElement == nullptr)
@@ -16,7 +16,7 @@ void SpriteRenderComponentSerialiser::LoadComponent(Entity& entity, const tinyxm
 	entity.AddComponent<SpriteRenderComponent>().SetColor(colour);
 }
 
-void SpriteRenderComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData)
+void SpriteRenderComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const
 {
 	// The entity must have a transform component (this should be the case when this function is called from the EntitySerialiser
 	if (entity.HasComponent<SpriteRenderComponent>() == false)

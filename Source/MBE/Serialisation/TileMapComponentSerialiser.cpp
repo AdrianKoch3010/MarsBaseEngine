@@ -8,7 +8,7 @@
 
 using namespace mbe;
 
-void TileMapComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData)
+void TileMapComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const
 {
 	using namespace tinyxml2;
 
@@ -46,7 +46,7 @@ void TileMapComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::X
 	tileMapComponent.SetMovementSpeedShape(std::move(movementSpeedShape));
 }
 
-void TileMapComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData)
+void TileMapComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const
 {
 	// The entity must have a tile map component (this should be the case when this function is called from the EntitySerialiser)
 	if (entity.HasComponent<TileMapComponent>() == false)

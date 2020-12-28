@@ -12,17 +12,10 @@
 #include <MBE/Core/Entity.h>
 #include <MBE/Animation/EntityAnimator.h>
 
-#include <MBE/Core/StaticBlock.h>
+#include <MBE/Core/Utility.h>
 #include <MBE/Core/Singleton.h>
 
-namespace mbe { class AnimationSerialiserRegistry; }
-
-/// @brief A macro for adding an animation serialiser to the global registry
-/// @details This is meant to be put in the .cpp file of the animation serialiser. The animation serialiser will be registered
-/// under the string name of the animation
-/// @attention An animation serialiser can only be registred once, hence, this macro must only be compiled once
-//#define MBE_REGISTER_ANIMATION_SERIALISER(_AnimationSerialiser, _Animation) static_block{ mbe::AnimationSerialiserRegistry::Instance().AddAnimationSerialiser<_AnimationSerialiser, _Animation>(MBE_NAME_OF(_Animation)); }
-
+MBE_DECLARE_TYPE_ID(AnimationSerialiser)
 
 namespace mbe
 {
@@ -33,6 +26,8 @@ namespace mbe
 		typedef std::shared_ptr<AnimationSerialiser> Ptr;
 		typedef std::weak_ptr<AnimationSerialiser> WPtr;
 		typedef std::unique_ptr<AnimationSerialiser> UPtr;
+
+		typedef detail::AnimationSerialiserTypeID TypeID;
 
 	public:
 		/// @brief Default constructor
@@ -60,6 +55,8 @@ namespace mbe
 		/// @param animationData The XML element which is parsed and then converted to the respective animation function
 		/// @return The animation function object
 		virtual EntityAnimator::AnimationFunction Parse(const tinyxml2::XMLElement& animationData) const = 0;
+
+		MBE_GET_TYPE_ID(AnimationSerialiser)
 
 	};
 

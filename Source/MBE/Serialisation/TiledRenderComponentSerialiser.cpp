@@ -4,7 +4,7 @@
 
 using namespace mbe;
 
-void TiledRenderComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData)
+void TiledRenderComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const
 {
 	using namespace tinyxml2;
 
@@ -39,7 +39,7 @@ void TiledRenderComponentSerialiser::LoadComponent(Entity& entity, const tinyxml
 	auto& tiledRenderComponent = entity.AddComponent<TiledRenderComponent>(size, tileSize);
 }
 
-void TiledRenderComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData)
+void TiledRenderComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const
 {
 	// The entity must have a tiled render component (this should be the case when this function is called from the EntitySerialiser)
 	if (entity.HasComponent<TiledRenderComponent>() == false)

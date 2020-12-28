@@ -22,7 +22,7 @@ namespace mbe
 	///		</MovementSpeedShape>
 	/// </Component>
 	/// @endcode
-	class TileMapComponentSerialiser : public ComponentSerialser
+	class TileMapComponentSerialiser : public ComponentSerialiser
 	{
 	public:
 		typedef std::shared_ptr<TileMapComponentSerialiser> Ptr;
@@ -34,9 +34,9 @@ namespace mbe
 		~TileMapComponentSerialiser() = default;
 
 	public:
-		void LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) override;
+		void LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const override;
 
-		void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) override;
+		void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const override;
 
 	private:
 		std::vector<float> ParseRow(const std::string& rowString) const;

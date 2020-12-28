@@ -31,7 +31,7 @@ namespace mbe
 	///		</Textures>
 	/// </Component>
 	/// @endcode
-	class TextureWrapperComponentSerialiser : public ComponentSerialser
+	class TextureWrapperComponentSerialiser : public ComponentSerialiser
 	{
 	public:
 		typedef std::shared_ptr<TextureWrapperComponentSerialiser> Ptr;
@@ -46,9 +46,9 @@ namespace mbe
 		~TextureWrapperComponentSerialiser() = default;
 
 	public:
-		void LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) override;
+		void LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const override;
 
-		void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) override;
+		void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const override;
 	};
 
 
