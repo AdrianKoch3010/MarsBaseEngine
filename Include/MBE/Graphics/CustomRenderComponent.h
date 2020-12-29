@@ -14,7 +14,7 @@
 namespace mbe
 {
 
-	class CustomRenderComponent : public mbe::RenderComponent
+	class CustomRenderComponent : public RenderComponent
 	{
 	public:
 		typedef std::shared_ptr<CustomRenderComponent> Ptr;

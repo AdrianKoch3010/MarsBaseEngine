@@ -411,6 +411,9 @@
     <ClCompile Include="Source\MBE\Animation\AnimationHolder.cpp">
       <Filter>Quelldateien\Resources Management</Filter>
     </ClCompile>
+    <ClCompile Include="Source\MBE\Serialisation\CustomRenderComponentSerialiser.cpp">
+      <Filter>Quelldateien\ComponentSerialisers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\MBE\TransformComponent.h">
@@ -730,6 +733,9 @@
     </ClInclude>
     <ClInclude Include="Include\MBE\Serialisation\SerrialiserRegistry.h">
       <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Serialisation\CustomRenderComponentSerialiser.h">
+      <Filter>Headerdateien\ComponentSerialisers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

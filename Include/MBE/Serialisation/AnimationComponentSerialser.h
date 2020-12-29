@@ -15,14 +15,9 @@
 namespace mbe
 {
 	/// @brief Component serialiser for the mbe::AnimationComponent
-	/// @details By default this class provides serialisers for the
-	/// - FrameAnimation
-	/// - BlinkingAnimation
-	/// - RotationAnimation
-	/// - PitchAnimation
 	/// @n Animations can also be stored in an animation holder in which case they are referred to purly by their globalId. In this case,
 	/// the animation serialisers are not needed.
-	/// @n Custom animation serialisers can be added using the AddAnimationSerialiser() method and must inherit from mbe::AnimationSerialiser
+	/// @n Custom animation serialisers can be registered with the mbe::AnimationSerialiserRegistry and must inherit from mbe::AnimationSerialiser
 	/// @n@n **XML format**
 	/// @code
 	/// <Component type="AnimationComponent">

@@ -61,7 +61,7 @@ namespace mbe
 		typedef std::unique_ptr<Component> UPtr;
 
 		typedef detail::ComponentTypeID TypeID;
-		
+
 	public:
 		/// @brief Enables an entity to use the components constructor.
 		/// @details Making the constructor protected is necessarry to ensure
@@ -71,7 +71,7 @@ namespace mbe
 	protected:
 		/// @brief Protected Constructor
 		/// @param parentEntity A reference to the mbe::Entity in which this class is created (To which it then belongs to)
-		Component(EventManager & eventManager, Entity & parentEntity);
+		Component(EventManager& eventManager, Entity& parentEntity);
 
 	public:
 		/// @brief Default destructor
@@ -79,7 +79,7 @@ namespace mbe
 
 		/// @brief Gets the entity to which this component belongs
 		/// @returns A reference to its parent Enity
-		Entity & GetParentEntity() const { return parentEntity; }
+		Entity& GetParentEntity() const { return parentEntity; }
 
 		/// @brief Generates the type id for a component
 		/// @tparam TComponent The type of component. Must inherit from mbe::Component
@@ -88,8 +88,8 @@ namespace mbe
 		static TypeID GetTypeID();
 
 	protected:
-		EventManager & eventManager;
-		Entity & parentEntity;
+		EventManager& eventManager;
+		Entity& parentEntity;
 	};
 
 

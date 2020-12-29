@@ -270,6 +270,7 @@
     <ClCompile Include="Source\MBE\Serialisation\AnimationComponentSerialser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\BlinkingAnimationSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\ClickableComponentSerialiser.cpp" />
+    <ClCompile Include="Source\MBE\Serialisation\CustomRenderComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\EntitySerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\FrameAnimationSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\PitchAnimationSerialiser.cpp" />
@@ -373,6 +374,7 @@
     <ClInclude Include="Include\MBE\Serialisation\BlinkingAnimationSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\ClickableComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\ComponentSerialiser.h" />
+    <ClInclude Include="Include\MBE\Serialisation\CustomRenderComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\EntitySerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\FrameAnimationSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\PitchAnimationSerialiser.h" />

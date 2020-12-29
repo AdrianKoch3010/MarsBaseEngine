@@ -126,7 +126,7 @@ void AnimationComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 
 void AnimationComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const
 {
-		// The entity must have an animation component (this should be the case when this function is called from the EntitySerialiser
+	// The entity must have an animation component (this should be the case when this function is called from the EntitySerialiser
 	if (entity.HasComponent<AnimationComponent>() == false)
 		throw std::runtime_error("AnimationComponentSerialiser: Store animation component: The entity must have an mbe::AnimationComponent");
 	const auto& animationComponent = entity.GetComponent<AnimationComponent>();
