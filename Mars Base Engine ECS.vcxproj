@@ -231,7 +231,6 @@
     <ClCompile Include="Source\MBE\Input\MouseButtonPressedEvent.cpp" />
     <ClCompile Include="Source\MBE\Input\MouseButtonReleasedEvent.cpp" />
     <ClCompile Include="Source\MBE\Animation\PitchAnimation.cpp" />
-    <ClCompile Include="Source\MBE\Input\PixelMaskClickableComponent.cpp" />
     <ClCompile Include="Source\MBE\Audio\AudioData.cpp" />
     <ClCompile Include="Source\MBE\Audio\AudioSystem.cpp" />
     <ClCompile Include="Source\MBE\Graphics\SpriteRenderComponent.cpp" />
@@ -274,7 +273,6 @@
     <ClCompile Include="Source\MBE\Serialisation\EntitySerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\FrameAnimationSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\PitchAnimationSerialiser.cpp" />
-    <ClCompile Include="Source\MBE\Serialisation\PixelMaskClickableComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\RenderInformationComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\RotationAnimationSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\SpriteRenderComponentSerialiser.cpp" />
@@ -326,7 +324,6 @@
     <ClInclude Include="Include\MBE\Core\HandleBase.h" />
     <ClInclude Include="Include\MBE\Input\ActionBaseEvent.h" />
     <ClInclude Include="Include\MBE\Animation\PitchAnimation.h" />
-    <ClInclude Include="Include\MBE\Input\PixelMaskClickableComponent.h" />
     <ClInclude Include="Include\MBE\Audio\AudioData.h" />
     <ClInclude Include="Include\MBE\Audio\AudioSystem.h" />
     <ClInclude Include="Include\MBE\Graphics\SpriteRenderComponent.h" />
@@ -378,7 +375,6 @@
     <ClInclude Include="Include\MBE\Serialisation\EntitySerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\FrameAnimationSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\PitchAnimationSerialiser.h" />
-    <ClInclude Include="Include\MBE\Serialisation\PixelMaskClickableComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\RenderInformationComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\RotationAnimationSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\SerrialiserRegistry.h" />

@@ -225,9 +225,6 @@
     <ClCompile Include="Source\MBE\Input\InputHandler.cpp">
       <Filter>Quelldateien\Framework</Filter>
     </ClCompile>
-    <ClCompile Include="Source\MBE\Input\PixelMaskClickableComponent.cpp">
-      <Filter>Quelldateien\Components</Filter>
-    </ClCompile>
     <ClCompile Include="Source\MBE\Core\Constants.cpp">
       <Filter>Quelldateien\Resources Management</Filter>
     </ClCompile>
@@ -340,9 +337,6 @@
       <Filter>Quelldateien\ComponentSerialisers</Filter>
     </ClCompile>
     <ClCompile Include="Source\MBE\Serialisation\ClickableComponentSerialiser.cpp">
-      <Filter>Quelldateien\ComponentSerialisers</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\MBE\Serialisation\PixelMaskClickableComponentSerialiser.cpp">
       <Filter>Quelldateien\ComponentSerialisers</Filter>
     </ClCompile>
     <ClCompile Include="Source\MBE\Serialisation\AnimationComponentSerialser.cpp">
@@ -524,9 +518,6 @@
     <ClInclude Include="Include\MBE\Input\MouseButtonReleasedEvent.h">
       <Filter>Headerdateien\Systems\Event System\Events\InputEvents\Mouse</Filter>
     </ClInclude>
-    <ClInclude Include="Include\MBE\Input\PixelMaskClickableComponent.h">
-      <Filter>Headerdateien\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Include\MBE\Animation\AnimationComponent.h">
       <Filter>Headerdateien\Components</Filter>
     </ClInclude>
@@ -651,9 +642,6 @@
       <Filter>Headerdateien\ComponentSerialisers</Filter>
     </ClInclude>
     <ClInclude Include="Include\MBE\Serialisation\ClickableComponentSerialiser.h">
-      <Filter>Headerdateien\ComponentSerialisers</Filter>
-    </ClInclude>
-    <ClInclude Include="Include\MBE\Serialisation\PixelMaskClickableComponentSerialiser.h">
       <Filter>Headerdateien\ComponentSerialisers</Filter>
     </ClInclude>
     <ClInclude Include="Include\MBE\Serialisation\AnimationSerialiser.h">

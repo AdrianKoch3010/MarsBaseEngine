@@ -8,10 +8,6 @@
 #include <MBE/Core/EventManager.h>
 #include <MBE/Core/EntityManager.h>
 #include <MBE/Input/ClickableComponent.h>
-#include <MBE/Input/MouseButtonReleasedEvent.h>
-#include <MBE/Input/EntityClickedEvent.h>
-#include <MBE/Graphics/RenderInformationComponent.h>
-#include <MBE/TransformComponent.h>
 
 // There are 3 cases of managing audio clickable components
 // - RenderComponent, TransformComponent, ClickableComponent
@@ -27,21 +23,21 @@ namespace mbe
 	class ClickableSystem
 	{
 	public:
-		ClickableSystem(EventManager & eventManager, EntityManager & entityManager);
+		ClickableSystem(EventManager& eventManager, EntityManager& entityManager);
 		~ClickableSystem();
 
 	private:
 		void OnClick(sf::Vector2f clickPosition, sf::Mouse::Button button);
 
 		// Reverses view and entity transfroms based on the entity's components
-		sf::Vector2f CalculatePosition(const Entity & entity, sf::Vector2f clickPosition);
+		sf::Vector2f CalculatePosition(const Entity& entity, sf::Vector2f clickPosition);
 
 		// Raise the mbe::event::EntityClickedEvent for the clicked entity and every entity connected to it
-		void RaiseClickEvents(const ClickableComponent & clickableComponent, sf::Mouse::Button button);
+		void RaiseClickEvents(const ClickableComponent& clickableComponent, sf::Mouse::Button button);
 
 	private:
-		EventManager & eventManager;
-		EntityManager & entityManager;
+		EventManager& eventManager;
+		EntityManager& entityManager;
 
 		EventManager::SubscriptionID onClickSubscription;
 	};
