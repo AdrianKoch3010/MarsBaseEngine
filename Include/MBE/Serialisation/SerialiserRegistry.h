@@ -189,6 +189,6 @@ namespace mbe
 } // namespace mbe
 
 // Define the respective registration macros
-#define MBE_REGISTER_COMPONENT_SERIALISER(TSerialiser, TComponent) mbe::ComponentSerialiserRegistry::Instance().AddSerialiser<TSerialiser, TComponent>(MBE_NAME_OF(TComponent));
-#define MBE_REGISTER_ANIMATION_SERIALISER(TSerialiser, TAnimation) mbe::AnimationSerialiserRegistry::Instance().AddSerialiser<TSerialiser, TAnimation>(MBE_NAME_OF(TAnimation));
-#define MBE_REGISTER_AITASK_SERIALISER(TSerialiser, TAITask) mbe::AITaskSerialiserRegistry::Instance().AddSerialiser<TSerialiser, TAITask>(MBE_NAME_OF(TAITask));
+#define MBE_REGISTER_COMPONENT_SERIALISER(TComponent) mbe::ComponentSerialiserRegistry::Instance().AddSerialiser<TComponent##Serialiser, TComponent>(MBE_NAME_OF(TComponent));
+#define MBE_REGISTER_ANIMATION_SERIALISER(TAnimation) mbe::AnimationSerialiserRegistry::Instance().AddSerialiser<TAnimation##Serialiser, TAnimation>(MBE_NAME_OF(TAnimation));
+#define MBE_REGISTER_AITASK_SERIALISER(TAITask) mbe::AITaskSerialiserRegistry::Instance().AddSerialiser<TAITask##Serialiser, TAITask>(MBE_NAME_OF(TAITask));

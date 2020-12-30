@@ -2,7 +2,7 @@
 
 using namespace mbe;
 
-void AIComponentSerialser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const
+void AIComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const
 {
 	using namespace tinyxml2;
 
@@ -56,7 +56,7 @@ void AIComponentSerialser::LoadComponent(Entity& entity, const tinyxml2::XMLElem
 	}
 }
 
-void AIComponentSerialser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const
+void AIComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const
 {
 	// The entity must have an ai component (this should be the case when this function is called from the EntitySerialiser
 	if (entity.HasComponent<AIComponent>() == false)

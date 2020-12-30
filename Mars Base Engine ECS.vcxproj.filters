@@ -719,11 +719,11 @@
     <ClInclude Include="Include\MBE\Core\StaticBlock.h">
       <Filter>Headerdateien\Framework\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="Include\MBE\Serialisation\SerrialiserRegistry.h">
-      <Filter>Headerdateien\Framework</Filter>
-    </ClInclude>
     <ClInclude Include="Include\MBE\Serialisation\CustomRenderComponentSerialiser.h">
       <Filter>Headerdateien\ComponentSerialisers</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Serialisation\SerialiserRegistry.h">
+      <Filter>Headerdateien\Framework</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

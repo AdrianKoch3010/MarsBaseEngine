@@ -10,7 +10,7 @@ void RenderInformationComponentSerialiser::LoadComponent(Entity& entity, const t
 {
 	using namespace tinyxml2;
 
-	float zOrder;
+	auto& renderInformationComponent = entity.AddComponent<RenderInformationComponent>();
 
 	// Get the render layer
 	const auto renderLayerElement = componentData.FirstChildElement("RenderLayer");
@@ -20,18 +20,17 @@ void RenderInformationComponentSerialiser::LoadComponent(Entity& entity, const t
 	if (renderLayerText == nullptr)
 		throw std::runtime_error("Load render information component: Failed to parese RenderLayer text");
 	std::string renderLayerString{ renderLayerText };
+	renderInformationComponent.SetRenderLayer(StringToRenderLayer(renderLayerString));
 
 	// Get the z order
 	const auto zOrderElement = componentData.FirstChildElement("ZOrder");
-	if (zOrderElement == nullptr)
-		throw std::runtime_error("Load render information component: Failed to parse ZOrder");
-	if (zOrderElement->QueryFloatText(&zOrder) != XML_SUCCESS)
-		throw std::runtime_error("Load render information component: Failed to parese ZOrder text");
-
-	// Create the component and set the vlaues
-	auto& renderInformationComponent = entity.AddComponent<RenderInformationComponent>();
-	renderInformationComponent.SetRenderLayer(StringToRenderLayer(renderLayerString));
-	renderInformationComponent.SetZOrder(zOrder);
+	if (zOrderElement != nullptr)
+	{
+		float zOrder;
+		if (zOrderElement->QueryFloatText(&zOrder) != XML_SUCCESS)
+			throw std::runtime_error("Load render information component: Failed to parese ZOrder text");
+		renderInformationComponent.SetZOrder(zOrder);
+	}
 }
 
 void RenderInformationComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const

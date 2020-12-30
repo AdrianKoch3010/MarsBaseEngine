@@ -17,16 +17,9 @@ void TextureWrapperComponentSerialiser::LoadComponent(Entity& entity, const tiny
 	using namespace tinyxml2;
 	using TextureID = TextureWrapperComponent::TextureID;
 
-	TextureID activeTextureId;
+	// Get the textures and texture rects
 	std::vector<std::pair<sf::IntRect, std::string>> textureDataList;
 	std::vector<bool> setTextureRectList;
-
-	// Get the active texture id
-	const auto activeTextureElement = componentData.FirstChildElement("ActiveTexture");
-	if (activeTextureElement == nullptr)
-		throw std::runtime_error("Load texture wrapper component: Failed to parse ActiveTexture");
-	if (activeTextureElement->QueryUnsignedText(&activeTextureId) != XML_SUCCESS)
-		throw std::runtime_error("Load texture wrapper component: Failed to parse ActiveTexture text");
 
 	// Get the textures
 	const auto texturesElement = componentData.FirstChildElement("Textures");
@@ -63,8 +56,18 @@ void TextureWrapperComponentSerialiser::LoadComponent(Entity& entity, const tiny
 	if (textureDataList.empty())
 		throw std::runtime_error("Load texture wrapper component: There must be at least one texture");
 
-	// Create the component and set the value
 	auto& textureWrapperComponent = entity.AddComponent<TextureWrapperComponent>(textureDataList.front().second);
+
+	// Get the active texture id
+	const auto activeTextureElement = componentData.FirstChildElement("ActiveTexture");
+	if (activeTextureElement != nullptr)
+	{
+		TextureID activeTextureId;
+		if (activeTextureElement->QueryUnsignedText(&activeTextureId) != XML_SUCCESS)
+			throw std::runtime_error("Load texture wrapper component: Failed to parse ActiveTexture text");
+		textureWrapperComponent.SetActiveTexture(activeTextureId);
+	}
+
 	if (setTextureRectList.front())
 		textureWrapperComponent.SetTextureRect(textureDataList.front().first);
 
@@ -77,8 +80,6 @@ void TextureWrapperComponentSerialiser::LoadComponent(Entity& entity, const tiny
 			textureWrapperComponent.SetTextureRect(texture.first, textureId);
 	}
 
-	// Set the active texture
-	textureWrapperComponent.SetActiveTexture(activeTextureId);
 }
 
 void TextureWrapperComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const

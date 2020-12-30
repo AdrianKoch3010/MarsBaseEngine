@@ -9,25 +9,31 @@ void ClickableComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 {
 	using namespace tinyxml2;
 
+	auto& clickableComponent = entity.AddComponent<ClickableComponent>();
+
 	// Get absorbe click
-	bool absorbeClick = false;
 	const auto absorbeClickElement = componentData.FirstChildElement("AbsorbeClick");
-	if (absorbeClickElement == nullptr)
-		throw std::runtime_error("Load clickable component: Failed to parse AbsorbeClick");
-	if (absorbeClickElement->QueryBoolText(&absorbeClick) != XML_SUCCESS)
-		throw std::runtime_error("Load clickable component: Failed to parese AbsorbeClick text");
+	if (absorbeClickElement != nullptr)
+	{
+		bool absorbeClick = false;
+		if (absorbeClickElement->QueryBoolText(&absorbeClick) != XML_SUCCESS)
+			throw std::runtime_error("Load clickable component: Failed to parese AbsorbeClick text");
+
+		// Set absorbe click
+		clickableComponent.SetAbsorbeClick(absorbeClick);
+	}
 
 	// Get bubble up
-	bool bubbleUp = false;
 	const auto bubbleUpElement = componentData.FirstChildElement("BubbleUp");
-	if (bubbleUpElement == nullptr)
-		throw std::runtime_error("Load clickable component: Failed to parse BubbleUp");
-	if (bubbleUpElement->QueryBoolText(&bubbleUp) != XML_SUCCESS)
-		throw std::runtime_error("Load clickable component: Failed to parese BubbleUp text");
+	if (bubbleUpElement != nullptr)
+	{
+		bool bubbleUp = false;
+		if (bubbleUpElement->QueryBoolText(&bubbleUp) != XML_SUCCESS)
+			throw std::runtime_error("Load clickable component: Failed to parese BubbleUp text");
 
-	auto& clickableComponent = entity.AddComponent<ClickableComponent>();
-	clickableComponent.SetAbsorbeClick(absorbeClick);
-	clickableComponent.SetBubbleUp(bubbleUp);
+		// Set bubble up
+		clickableComponent.SetBubbleUp(bubbleUp);
+	}
 }
 
 void ClickableComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const

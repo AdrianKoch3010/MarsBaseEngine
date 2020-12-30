@@ -15,35 +15,35 @@ void TileMapComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::X
 	sf::Vector2i position;
 	std::vector<std::vector<float>> movementSpeedShape;
 
+	auto& tileMapComponent = entity.AddComponent<TileMapComponent>();
+
 	// Get position
 	const auto positionElement = componentData.FirstChildElement("Position");
-	if (positionElement == nullptr)
-		throw std::runtime_error("Load tile map component: Failed to parse position");
-	if (positionElement->QueryIntAttribute("x", &position.x) != XML_SUCCESS)
-		throw std::runtime_error("Load tile map component: Failed to pass position x attribute");
-	if (positionElement->QueryIntAttribute("y", &position.y) != XML_SUCCESS)
-		throw std::runtime_error("Load tile map component: Failed to parse position y attribute");
+	if (positionElement != nullptr)
+	{
+		if (positionElement->QueryIntAttribute("x", &position.x) != XML_SUCCESS)
+			throw std::runtime_error("Load tile map component: Failed to pass position x attribute");
+		if (positionElement->QueryIntAttribute("y", &position.y) != XML_SUCCESS)
+			throw std::runtime_error("Load tile map component: Failed to parse position y attribute");
+		tileMapComponent.SetPosition(position);
+	}
 
 	// Get the movement speed shape
 	const auto shapeElement = componentData.FirstChildElement("MovementSpeedShape");
-	if (shapeElement == nullptr)
-		throw std::runtime_error("Load tile map component: Failed to parse movement speed shape");
-
-	// Get all the rows
-	for (auto rowElement = shapeElement->FirstChildElement("Row"); rowElement != nullptr; rowElement = rowElement->NextSiblingElement("Row"))
+	if (shapeElement != nullptr)
 	{
-		auto rowText = rowElement->GetText();
-		if (rowText == nullptr)
-			throw std::runtime_error("Load tile map component: Failed to parese row text");
-		std::string rowString{ rowText };
+		// Get all the rows
+		for (auto rowElement = shapeElement->FirstChildElement("Row"); rowElement != nullptr; rowElement = rowElement->NextSiblingElement("Row"))
+		{
+			auto rowText = rowElement->GetText();
+			if (rowText == nullptr)
+				throw std::runtime_error("Load tile map component: Failed to parese row text");
+			std::string rowString{ rowText };
 
-		movementSpeedShape.push_back(ParseRow(rowString));
+			movementSpeedShape.push_back(ParseRow(rowString));
+		}
+		tileMapComponent.SetMovementSpeedShape(std::move(movementSpeedShape));
 	}
-
-	// Create the tile map component
-	auto& tileMapComponent = entity.AddComponent<TileMapComponent>();
-	tileMapComponent.SetPosition(position);
-	tileMapComponent.SetMovementSpeedShape(std::move(movementSpeedShape));
 }
 
 void TileMapComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const

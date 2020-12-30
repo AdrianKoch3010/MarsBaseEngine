@@ -13,6 +13,7 @@ namespace mbe
 	/// @details XML format
 	/// @code
 	/// <Component type="TopDownInformationComponent">
+	///		<!-- optional - default: 0 -->
 	///		<LogicalBottomOffset>float</LogicalBottomOffset>
 	/// </Component>
 	/// @endcode

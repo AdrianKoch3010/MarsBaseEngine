@@ -18,6 +18,7 @@ namespace mbe
 	/// @code
 	/// <Component type="RenderInformationComponent">
 	///		<RenderLayer>string</RenderLayer>
+	///		<!-- optional - default: 0 -->
 	///		<ZOrder>float</ZOrder>
 	/// </Component>
 	/// @endcode

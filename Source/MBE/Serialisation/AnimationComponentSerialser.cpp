@@ -3,8 +3,9 @@
 #include <SFML/System/Time.hpp>
 
 #include <MBE/Animation/AnimationComponent.h>
+#include <MBE/Animation/AnimationHolder.h>
 
-#include <MBE/Serialisation/SerrialiserRegistry.h>
+#include <MBE/Serialisation/SerialiserRegistry.h>
 #include <MBE/Serialisation/AnimationComponentSerialser.h>
 
 using namespace mbe;
@@ -25,30 +26,32 @@ void AnimationComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 			throw std::runtime_error("Load animation component: Failed to parse animator id");
 		std::string animatorIdString{ animatorId };
 
-		bool loop, paused;
+		// Add the animator
+		auto& animator = animationComponent.CreateAnimator(animatorIdString);
+
+		// Get the default values from the animator
+		bool loop = animator.IsLooping();
+		bool paused = animator.IsPaused();
+		float progress = animator.GetProgress();
 		bool isPlayingAnimation = false;
-		float progress;
 
 		// Get Loop
 		const auto loopElement = animatorElement->FirstChildElement("Loop");
-		if (loopElement == nullptr)
-			throw std::runtime_error("Load animation component: Failed to parse animator loop element");
-		if (loopElement->QueryBoolText(&loop) != XML_SUCCESS)
-			throw std::runtime_error("Load animation component: Failed to parse animator loop text");
+		if (loopElement != nullptr)
+			if (loopElement->QueryBoolText(&loop) != XML_SUCCESS)
+				throw std::runtime_error("Load animation component: Failed to parse animator loop text");
 
 		// Get Paused
 		const auto pausedElement = animatorElement->FirstChildElement("Paused");
-		if (pausedElement == nullptr)
-			throw std::runtime_error("Load animation component: Failed to parse animator paused element");
-		if (pausedElement->QueryBoolText(&paused) != XML_SUCCESS)
-			throw std::runtime_error("Load animation component: Failed to parse animator paused text");
+		if (pausedElement != nullptr)
+			if (pausedElement->QueryBoolText(&paused) != XML_SUCCESS)
+				throw std::runtime_error("Load animation component: Failed to parse animator paused text");
 
 		// Get Progress
 		const auto progressElement = animatorElement->FirstChildElement("Progress");
-		if (progressElement == nullptr)
-			throw std::runtime_error("Load animation component: Failed to parse animator progress element");
-		if (progressElement->QueryFloatText(&progress) != XML_SUCCESS)
-			throw std::runtime_error("Load animation component: Failed to parse animator progress text");
+		if (progressElement != nullptr)
+			if (progressElement->QueryFloatText(&progress) != XML_SUCCESS)
+				throw std::runtime_error("Load animation component: Failed to parse animator progress text");
 
 		// Get the currently playing animation
 		// If none exists, the animator is stopped
@@ -64,9 +67,6 @@ void AnimationComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 				throw std::runtime_error("Load animation component: Failed to parse currently playing animation");
 			currentlyPlayingAnimationString = currentlyPlayingAnimation;
 		}
-
-		// Add the animator
-		auto& animator = animationComponent.CreateAnimator(animatorIdString);
 
 		// Load recreate the amimations
 		auto animationsElement = animatorElement->FirstChildElement("Animations");

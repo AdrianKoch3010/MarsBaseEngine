@@ -1,5 +1,5 @@
 #include <MBE/Serialisation/EntitySerialiser.h>
-#include <MBE/Serialisation/SerrialiserRegistry.h>
+#include <MBE/Serialisation/SerialiserRegistry.h>
 
 using namespace mbe;
 

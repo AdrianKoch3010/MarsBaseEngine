@@ -7,7 +7,7 @@
 #include <unordered_map>
 #include <memory>
 
-#include <MBE/Serialisation/SerrialiserRegistry.h>
+#include <MBE/Serialisation/SerialiserRegistry.h>
 #include <MBE/AI/AIComponent.h>
 #include <MBE/Serialisation/AITaskSerialser.h>
 
@@ -22,16 +22,16 @@ namespace mbe
 	//			// Task data
 	//		</QueuedTask>
 	// </Component>
-	class AIComponentSerialser : public ComponentSerialiser
+	class AIComponentSerialiser : public ComponentSerialiser
 	{
 	public:
-		std::shared_ptr<AIComponentSerialser> Ptr;
-		std::weak_ptr<AIComponentSerialser> WPtr;
-		std::unique_ptr<AIComponentSerialser> UPtr;
+		std::shared_ptr<AIComponentSerialiser> Ptr;
+		std::weak_ptr<AIComponentSerialiser> WPtr;
+		std::unique_ptr<AIComponentSerialiser> UPtr;
 
 	public:
-		AIComponentSerialser() = default;
-		~AIComponentSerialser() = default;
+		AIComponentSerialiser() = default;
+		~AIComponentSerialiser() = default;
 
 	public:
 		void LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const override;

@@ -43,6 +43,7 @@ namespace mbe
 		typedef std::function<const sf::RenderWindow * ()> WindowGetterFunction;
 
 	public:
+		// Default zorder = 0
 		RenderInformationComponent(EventManager& eventManager, Entity& parentEntity, RenderLayer renderLayer = RenderLayer::GUI, float zOrder = 0.f);
 		~RenderInformationComponent() = default;
 

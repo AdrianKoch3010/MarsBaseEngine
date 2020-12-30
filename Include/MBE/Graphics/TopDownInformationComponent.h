@@ -12,14 +12,15 @@ namespace mbe
 	class TopDownInformationComponent : public Component
 	{
 	public:
-		TopDownInformationComponent(EventManager & eventManager, Entity & parentEntity, float logicalBottomOffset = 0.f);
+		// Default 0
+		TopDownInformationComponent(EventManager& eventManager, Entity& parentEntity, float logicalBottomOffset = 0.f);
 
 		~TopDownInformationComponent() = default;
 
 	public:
-		inline void SetLogicalBottomOffset(float value) { logicalBottomOffset = value; }
-
 		inline float GetLogicalBottomOffset() const { return logicalBottomOffset; }
+
+		inline void SetLogicalBottomOffset(float value) { logicalBottomOffset = value; }
 
 	private:
 		float logicalBottomOffset;

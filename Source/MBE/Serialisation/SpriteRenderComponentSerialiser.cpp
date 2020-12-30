@@ -7,13 +7,13 @@ using namespace mbe;
 
 void SpriteRenderComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const
 {
+	auto& spriteRenderComponent = entity.AddComponent<SpriteRenderComponent>();
+
 	const auto colourElement = componentData.FirstChildElement("Colour");
-	if (colourElement == nullptr)
-		throw std::runtime_error("Load sprite render component: Failed to parse colour");
-
-	auto colour = ColourSerialiser::Load(*colourElement);
-
-	entity.AddComponent<SpriteRenderComponent>().SetColor(colour);
+	if (colourElement != nullptr) {
+		auto colour = ColourSerialiser::Load(*colourElement);
+		spriteRenderComponent.SetColor(colour);
+	}
 }
 
 void SpriteRenderComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const

@@ -32,8 +32,10 @@ namespace mbe
 		TileMapComponent(EventManager& eventManager, Entity& parentEntity);
 		~TileMapComponent() = default;
 
+		// Default is { 0u, 0u }
 		inline const Position& GetPosition() const { return position; }
 
+		// Default is an empty vector
 		inline const MovementSpeedShape& GetMovementSpeedShape() const { return movementSpeedShape; }
 
 		// Throw if not in range

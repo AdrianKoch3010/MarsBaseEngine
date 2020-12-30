@@ -17,6 +17,7 @@ namespace mbe
 	{
 	public:
 		/// @brief Constructor
+		/// @details By default both absorbeClick and bubbleUp is set to true
 		/// @param parentEntity A reference to the mbe::Entity in which this class is created (To which it then belongs to)
 		ClickableComponent(EventManager & eventManager, Entity & parentEntity);
 

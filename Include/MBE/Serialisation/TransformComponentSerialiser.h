@@ -9,28 +9,33 @@ namespace mbe
 {
 
 	/// @brief Component serialiser for the mbe::TransformComponent
-	/// @details XML format
+	/// @details The defaults are the same as the mbe::TransformComponent itself
+	/// @n@n **XML format**
 	/// @code
 	/// <Component type="TransformComponent">
+	///		<!-- optional - default: x=0 y=0 -->
 	///		<Position x="float" y="float" />
+	///		<!-- optional - default: x=0 y=0 -->
 	///		<Origin x="float y="float" />
+	///		<!-- optional - default: x=1 y=1 -->
 	///		<Scale x="float" y="float" />
+	///		<!-- optional - default: 0 -->
 	///		<Rotation>float</Rotation>
 	/// </Component>
 	/// @endcode
-	class TransformComponentSerialser : public ComponentSerialiser
+	class TransformComponentSerialiser : public ComponentSerialiser
 	{
 	public:
-		typedef std::shared_ptr<TransformComponentSerialser> Ptr;
-		typedef std::weak_ptr<TransformComponentSerialser> WPtr;
-		typedef std::unique_ptr<TransformComponentSerialser> UPtr;
+		typedef std::shared_ptr<TransformComponentSerialiser> Ptr;
+		typedef std::weak_ptr<TransformComponentSerialiser> WPtr;
+		typedef std::unique_ptr<TransformComponentSerialiser> UPtr;
 
 	public:
 		/// @brief Default constructor
-		TransformComponentSerialser() = default;
+		TransformComponentSerialiser() = default;
 
 		/// @brief Default destructor
-		~TransformComponentSerialser() = default;
+		~TransformComponentSerialiser() = default;
 
 	public:
 

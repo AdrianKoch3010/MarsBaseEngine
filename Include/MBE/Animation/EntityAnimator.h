@@ -78,6 +78,7 @@ namespace mbe
 		/// @param entity A reference to the entity that is being animated. 
 		/// @details Typically, the entity animator will live inside the animation component which itself is part of the entity.
 		/// Therefore, this reference is guaranteed to be valid since when the entity gets destroyed, so do its component and, hence, the entity animator.
+		/// By default the progress is set to 0 and both the looped and paused properties to false.
 		EntityAnimator(Entity& entity);
 
 		/// @brief Default destructor

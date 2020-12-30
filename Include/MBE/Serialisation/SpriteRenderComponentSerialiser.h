@@ -12,9 +12,11 @@ namespace mbe
 {
 
 	/// @brief Component serialiser for the mbe::SpriteRenderComponent
-	/// @details XML formal
+	/// @details Defaults are the same as for the mbe::SpriteRenderComponent
+	/// @n@n **XML formal**
 	/// @code
 	/// <Component type="SpriteRenderComponent">
+	///		<!-- optional - default: all 255 -->
 	///		<Colour>
 	///			<R>unsigned int</R>
 	///			<G>unsigned int</G>

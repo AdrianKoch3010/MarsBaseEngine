@@ -377,7 +377,7 @@
     <ClInclude Include="Include\MBE\Serialisation\PitchAnimationSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\RenderInformationComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\RotationAnimationSerialiser.h" />
-    <ClInclude Include="Include\MBE\Serialisation\SerrialiserRegistry.h" />
+    <ClInclude Include="Include\MBE\Serialisation\SerialiserRegistry.h" />
     <ClInclude Include="Include\MBE\Serialisation\SpriteRenderComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\TextureWrapperComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\TiledRenderComponentSerialiser.h" />

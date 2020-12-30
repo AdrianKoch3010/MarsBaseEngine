@@ -5,7 +5,7 @@
 #include <exception>
 
 #include <MBE/Core/Utility.h>
-#include <MBE/Serialisation/SerrialiserRegistry.h>
+#include <MBE/Serialisation/SerialiserRegistry.h>
 
 
 using namespace mbe;

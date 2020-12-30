@@ -12,10 +12,13 @@ namespace mbe
 {
 
 	/// @brief Component serialiser for the mbe::TileMapComponent
-	/// @details XML format
+	/// @details The defaults are the same as for the mbe::TileMapComponent
+	/// @n@n **XML format**
 	/// @code
 	/// <Component type="TileMapComponent">
+	///		<!-- optional - default: x=0 y=0 -->
 	///		<Position x="int" y="int" />
+	///		<!-- optional -->
 	///		<MovementSpeedShape>
 	///			<Row>float, float, float, ...</Row>
 	///			...

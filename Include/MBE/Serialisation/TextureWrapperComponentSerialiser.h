@@ -15,6 +15,7 @@ namespace mbe
 	/// @details **XML format**
 	/// @code
 	/// <Component type="TextureWrapperComponent">
+	///		<!-- optional - default: 0 -->
 	///		<ActiveTexture>unsigned int<ActiveTexture>
 	///		<Textures>
 	///			<Texture>

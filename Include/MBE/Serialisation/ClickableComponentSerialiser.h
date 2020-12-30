@@ -1,41 +1,3 @@
-//#pragma once
-//
-///// @file
-///// @brief Class mbe::ClickableComponentSerialser
-//
-//#include <MBE/Core/TinyXML.h>
-//#include <MBE/Core/Entity.h>
-//
-//namespace mbe
-//{
-//
-//	/// @brief Static class providing functions for loading and storing the clickable component data
-//	class ClickableComponentSerialser
-//	{
-//	public:
-//
-//		struct Data
-//		{
-//			bool absorbeClick = false;
-//			bool bubbleUp = false;
-//		};
-//
-//	public:
-//		/// @brief Default constructor
-//		ClickableComponentSerialser() = default;
-//
-//		/// @brief Default Destructor
-//		~ClickableComponentSerialser() = default;
-//
-//	public:
-//		static Data LoadComponent(const tinyxml2::XMLElement& componentData);
-//
-//		static void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData);
-//	};
-//
-//} // namespace mbe
-
-
 #pragma once
 
 /// @file
@@ -46,11 +8,14 @@
 namespace mbe
 {
 
-	/// @brief Component serialiser for the mbe::PixelMaskClicableComponent
-	/// @details **XML format**
+	/// @brief Component serialiser for the mbe::ClicableComponent
+	/// @details The default values are the same as in the mbe::ClickableComponent
+	/// @n@n **XML format**
 	/// @code
 	/// <Component type="ClickableComponent>
+	///		<!-- Optional - default: true -->
 	///		<AbsorbeClick>bool</AbsorbeClick>
+	///		<!-- Optional - default: true -->
 	///		<BubbleUp>bool</BubbleUp>
 	/// </Component>
 	/// @endcode

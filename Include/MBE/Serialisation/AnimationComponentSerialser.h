@@ -8,13 +8,12 @@
 #include <memory>
 
 #include <MBE/Serialisation/ComponentSerialiser.h>
-#include <MBE/Animation/AnimationComponent.h>
-#include <MBE/Animation/AnimationHolder.h>
 
 
 namespace mbe
 {
 	/// @brief Component serialiser for the mbe::AnimationComponent
+	/// @details The deafault values are the same as in the mbe::EntityAnimator
 	/// @n Animations can also be stored in an animation holder in which case they are referred to purly by their globalId. In this case,
 	/// the animation serialisers are not needed.
 	/// @n Custom animation serialisers can be registered with the mbe::AnimationSerialiserRegistry and must inherit from mbe::AnimationSerialiser
@@ -22,8 +21,11 @@ namespace mbe
 	/// @code
 	/// <Component type="AnimationComponent">
 	///		<Animator id"string">
+	///			<!-- Optional - default: 0 -->
 	///			<Progress>float>/Progress>
+	///			<!-- Optional - default: false -->
 	///			<Loop>bool</Loop>
+	///			<!-- Optional - default: false -->
 	///			<Paused>bool</Paused>
 	///			<!-- Optional -->
 	///			<CurrentlyPlayingAnimation>string</CurrentlyPlayingAnimation>
@@ -59,7 +61,6 @@ namespace mbe
 		/// @param entity The entity to which the animation component is added
 		/// @param componentData The XML element being parsed
 		/// @throws std::runtime_error if the parsing fails or when there was no animation serialiser registered for a given animation type
-		/// @see AddAnimationSerialiser
 		void LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const override;
 
 		/// @brief Stores the entity's animation component to an XML element
@@ -68,7 +69,6 @@ namespace mbe
 		/// @param document The XML document to which the animation component is stored
 		/// @param componentData The XML element to which the animation component is stored
 		/// @throws std::runtime_error if the entity doesn't have an mbe::AnimationComponent or when there was no animation serialiser registered for a given animation type
-		/// @see AddAnimationSerialiser
 		void StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const override;
 	};
 

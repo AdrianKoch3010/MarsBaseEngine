@@ -8,16 +8,17 @@ void TopDownInformationComponentSerialiser::LoadComponent(Entity& entity, const 
 {
 	using namespace tinyxml2;
 
-	float logicalBottomOffset;
+	auto& topDownInformationComponent = entity.AddComponent<TopDownInformationComponent>();
 
 	// Load logical bottom offset
 	const auto logicalBottomOffsetElement = componentData.FirstChildElement("LogicalBottomOffset");
-	if (logicalBottomOffsetElement == nullptr)
-		throw std::runtime_error("Load top-down information component: Failed to parse LogicalBottomOffset");
-	if (logicalBottomOffsetElement->QueryFloatText(&logicalBottomOffset) != XML_SUCCESS)
-		throw std::runtime_error("Load top-down information component: Failed to parse LogicalBottomOffset value");
-
-	entity.AddComponent<TopDownInformationComponent>().SetLogicalBottomOffset(logicalBottomOffset);
+	if (logicalBottomOffsetElement != nullptr)
+	{
+		float logicalBottomOffset = 0.f;
+		if (logicalBottomOffsetElement->QueryFloatText(&logicalBottomOffset) != XML_SUCCESS)
+			throw std::runtime_error("Load top-down information component: Failed to parse LogicalBottomOffset value");
+		topDownInformationComponent.SetLogicalBottomOffset(logicalBottomOffset);
+	}
 }
 
 void TopDownInformationComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const

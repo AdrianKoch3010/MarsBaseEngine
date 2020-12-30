@@ -6,56 +6,60 @@
 
 using namespace mbe;
 
-void TransformComponentSerialser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const
+void TransformComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const
 {
 	using namespace tinyxml2;
 
+	// The default values are left to the transform component
 	sf::Vector2f position, origin, scale;
-	float rotation;
+	float rotation = 0;
+
+	auto& transformComponent = entity.AddComponent<TransformComponent>();
 
 	// Get position
 	const auto positionElement = componentData.FirstChildElement("Position");
-	if (positionElement == nullptr)
-		throw std::runtime_error("Load transform component: Failed to parse position");
-	if (positionElement->QueryFloatAttribute("x", &position.x) != XML_SUCCESS)
-		throw std::runtime_error("Load transform component: Failed to pass position x attribute");
-	if (positionElement->QueryFloatAttribute("y", &position.y) != XML_SUCCESS)
-		throw std::runtime_error("Load transform component: Failed to parse position y attribute");
+	if (positionElement != nullptr)
+	{
+		if (positionElement->QueryFloatAttribute("x", &position.x) != XML_SUCCESS)
+			throw std::runtime_error("Load transform component: Failed to pass position x attribute");
+		if (positionElement->QueryFloatAttribute("y", &position.y) != XML_SUCCESS)
+			throw std::runtime_error("Load transform component: Failed to parse position y attribute");
+		transformComponent.SetPosition(position);
+	}
 
 	// Get origin
 	const auto originElement = componentData.FirstChildElement("Origin");
-	if (originElement == nullptr)
-		throw std::runtime_error("Load transform component: Failed to parse origin");
-	if (originElement->QueryFloatAttribute("x", &origin.x) != XML_SUCCESS)
-		throw std::runtime_error("Load transform component: Failed to parse origin x attribute");
-	if (originElement->QueryFloatAttribute("y", &origin.y) != XML_SUCCESS)
-		throw std::runtime_error("Load transform component: Failed to parse origin y attribute");
+	if (originElement != nullptr)
+	{
+		if (originElement->QueryFloatAttribute("x", &origin.x) != XML_SUCCESS)
+			throw std::runtime_error("Load transform component: Failed to parse origin x attribute");
+		if (originElement->QueryFloatAttribute("y", &origin.y) != XML_SUCCESS)
+			throw std::runtime_error("Load transform component: Failed to parse origin y attribute");
+		transformComponent.SetOrigin(origin);
+	}
 
 	// Get scale
 	const auto scaleElement = componentData.FirstChildElement("Scale");
-	if (scaleElement == nullptr)
-		throw std::runtime_error("Load transform component: Failed to parse scale");
-	if (scaleElement->QueryFloatAttribute("x", &scale.x) != XML_SUCCESS)
-		throw std::runtime_error("Load transform component: Failed to parse scale x attribute");
-	if (scaleElement->QueryFloatAttribute("y", &scale.y) != XML_SUCCESS)
-		throw std::runtime_error("Load transform component: Failed to parse scale y attribute");
+	if (scaleElement != nullptr)
+	{
+		if (scaleElement->QueryFloatAttribute("x", &scale.x) != XML_SUCCESS)
+			throw std::runtime_error("Load transform component: Failed to parse scale x attribute");
+		if (scaleElement->QueryFloatAttribute("y", &scale.y) != XML_SUCCESS)
+			throw std::runtime_error("Load transform component: Failed to parse scale y attribute");
+		transformComponent.SetScale(scale);
+	}
 
 	// Get rotation
 	const auto rotationElement = componentData.FirstChildElement("Rotation");
-	if (rotationElement == nullptr)
-		throw std::runtime_error("Load transform component: Failed to parse rotation");
-	if (rotationElement->QueryFloatText(&rotation) != XML_SUCCESS)
-		throw std::runtime_error("Load transform component: Failed to parse rotation text");
-
-	// Add the component
-	auto& transformComponent = entity.AddComponent<TransformComponent>();
-	transformComponent.SetPosition(position);
-	transformComponent.SetOrigin(origin);
-	transformComponent.SetScale(scale);
-	transformComponent.SetRotation(rotation);
+	if (rotationElement != nullptr)
+	{
+		if (rotationElement->QueryFloatText(&rotation) != XML_SUCCESS)
+			throw std::runtime_error("Load transform component: Failed to parse rotation text");
+		transformComponent.SetRotation(rotation);
+	}
 }
 
-void TransformComponentSerialser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const
+void TransformComponentSerialiser::StoreComponent(const Entity& entity, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& componentData) const
 {
 	using namespace tinyxml2;
 
