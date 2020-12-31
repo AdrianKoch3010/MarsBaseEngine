@@ -9,7 +9,7 @@ using namespace mbe;
 void FrameAnimationSerialiser::Load(EntityAnimator& entityAnimator, const tinyxml2::XMLElement& animationData, const std::string& animationId, sf::Time duration) const
 {
 	// Add the animation
-	entityAnimator.AddLocalAnimation(animationId, Parse(animationData), duration);
+	entityAnimator.AddLocalAnimation(animationId, *Parse(animationData).target<FrameAnimation>(), duration);
 }
 
 void FrameAnimationSerialiser::Store(const EntityAnimator& entityAnimator, const std::string& animationId, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& animationData) const

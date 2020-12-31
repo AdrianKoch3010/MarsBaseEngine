@@ -159,8 +159,8 @@ namespace mbe
 		/// animation id must be looked up in their respective mbe::AnimationHolder
 		/// @throws std::runntime_error if no animation has been registered under this id or if the requested animation is not of type TAnimation.
 		/// Therefore, you have to make sure by a preceding call to HasAnimation() that an animation with this id and type exists.
-		template<typename TComponent>
-		const TComponent& GetLocalAnimation(const std::string& id) const;
+		template<typename TAnimation>
+		const TAnimation& GetLocalAnimation(const std::string& id) const;
 
 		/// @brief Gets the type id of an animation
 		/// @details The type id of an animation is a unique number for that animation type. This can be useful when comparing the
@@ -220,23 +220,24 @@ namespace mbe
 
 #pragma region Template Implementations
 
-	template<typename TAnimationFunction>
-	inline void EntityAnimator::AddLocalAnimation(std::string id, const TAnimationFunction& animation, sf::Time duration)
+	template<typename TAnimation>
+	inline void EntityAnimator::AddLocalAnimation(std::string id, const TAnimation& animation, sf::Time duration)
 	{
 		NormaliseIDString(id);
 
 		// Make sure that the id is unique
-		if (animationDictionary.find(id) != animationDictionary.end())
+		if (animationDictionary.find(id) != animationDictionary.cend())
 			throw std::runtime_error("EntityAnimator: An animation with the same id already exists (" + id + ")");
 
 		animationDictionary.insert(std::make_pair(id, ScaledAnimation(animation, duration)));
 
 		// Remember the type
-		animationTypeDictionary.insert(std::make_pair(id, detail::GetAnimationTypeID<TAnimationFunction>()));
+		//animationTypeDictionary.insert(std::make_pair(id, detail::GetAnimationTypeID<TAnimationFunction>()));
+		animationTypeDictionary.insert(std::make_pair(id, TAnimation::GetTypeID<TAnimation>()));
 	}
 
-	template<typename TComponent>
-	inline const TComponent& EntityAnimator::GetLocalAnimation(const std::string& id) const
+	template<typename TAnimation>
+	inline const TAnimation& EntityAnimator::GetLocalAnimation(const std::string& id) const
 	{
 		if (HasAnimation(id) == false)
 			throw std::runtime_error("Entity animator: No animation has been added under this id (" + id + ")");
@@ -246,7 +247,7 @@ namespace mbe
 			throw std::runtime_error("Entity animator: This animation is stored in an animation holder");
 
 		// Try to cast the animaton to the required type
-		auto animationPtr = std::get<AnimationFunction>(animationDictionary.at(id).first).target<TComponent>();
+		auto animationPtr = std::get<AnimationFunction>(animationDictionary.at(id).first).target<TAnimation>();
 
 		if (animationPtr == nullptr)
 			throw std::runtime_error("Entity animator: Wrong animation type");

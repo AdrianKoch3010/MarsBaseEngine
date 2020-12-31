@@ -6,7 +6,8 @@ using namespace mbe;
 
 void BlinkingAnimationSerialiser::Load(EntityAnimator& entityAnimator, const tinyxml2::XMLElement& animationData, const std::string& animationId, sf::Time duration) const
 {	// Add the animation
-	entityAnimator.AddLocalAnimation(animationId, Parse(animationData), duration);
+	// Casting the result of Parse is necessary in order to register the correct function type
+	entityAnimator.AddLocalAnimation(animationId, *Parse(animationData).target<BlinkingAnimation>(), duration);
 }
 
 void BlinkingAnimationSerialiser::Store(const EntityAnimator& entityAnimator, const std::string& animationId, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& animationData) const

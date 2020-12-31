@@ -15,7 +15,7 @@ using namespace mbe;
 void RotationAnimationSerialiser::Load(EntityAnimator& entityAnimator, const tinyxml2::XMLElement& animationData, const std::string& animationId, sf::Time duration) const
 {
 	// Add the animation
-	entityAnimator.AddLocalAnimation(animationId, Parse(animationData), duration);
+	entityAnimator.AddLocalAnimation(animationId, *Parse(animationData).target<RotationAnimation>(), duration);
 }
 
 void RotationAnimationSerialiser::Store(const EntityAnimator& entityAnimator, const std::string& animationId, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& animationData) const

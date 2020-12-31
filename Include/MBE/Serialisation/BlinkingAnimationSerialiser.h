@@ -30,7 +30,7 @@ namespace mbe
 		void Load(EntityAnimator& entityAnimator, const tinyxml2::XMLElement& animationData, const std::string& animationId, sf::Time duration) const override;
 
 		void Store(const EntityAnimator& entityAnimator, const std::string& animationId, tinyxml2::XMLDocument& document, tinyxml2::XMLElement& animationData) const override;
-	
+		
 		EntityAnimator::AnimationFunction Parse(const tinyxml2::XMLElement& animationData) const override;
 	};
 

@@ -154,8 +154,8 @@ namespace mbe
 		/// @tparam arguments The arguments that the created component requires in its constructor.
 		/// @attention Note that the parentEntity must not be passed (It is added implicetly by this function)
 		/// @returns Returns a reference to the added component which can be used insted of GetComponent<T>()
-		template <class TComponentSerialiser, typename... TArguments>
-		TComponentSerialiser & AddComponent(TArguments&&... arguments);
+		template <class TComponent, typename... TArguments>
+		TComponent & AddComponent(TArguments&&... arguments);
 
 		template <typename... TComponents, typename... TTuples>
 		void AddComponents(TTuples&&... tuples);
@@ -176,13 +176,13 @@ namespace mbe
 		/// @throws std::runntime_error if this entity does not have the requested component.
 		/// Therefore, before calling this function, the HasComponent() function should be called
 		///  to make sure that this entity actually has the requested component.
-		template <class TComponentSerialiser>
-		TComponentSerialiser & GetComponent() const;
+		template <class TComponent>
+		TComponent & GetComponent() const;
 
 		/// @brief Returns true if the Entity has the requested component, flase otherwise
 		/// @details If an entity has comonent TComponent, it will also be in the corresponding entity group
 		/// @tparam T The type of the requested component
-		template <class TComponentSerialiser>
+		template <class TComponent>
 		bool HasComponent() const;
 
 		/// @brief Looks up whether this entity is the group
@@ -233,7 +233,7 @@ namespace mbe
 		//void RemoveBaseComponents(detail::ComponentTypeID typeId);
 
 		// Template method to unpack the tules passed to the AddComponents() method
-		template <class TComponentSerialiser, typename TTuple>
+		template <class TComponent, typename TTuple>
 		void AddComponentUnpack(TTuple && tuple);
 
 		//// Add component that has been constructed outside the entiy
@@ -262,19 +262,19 @@ namespace mbe
 
 #pragma region Template Implementations
 
-	template <class TComponentSerialiser, typename... TArguments>
-	inline TComponentSerialiser & Entity::AddComponent(TArguments&&... arguments)
+	template <class TComponent, typename... TArguments>
+	inline TComponent & Entity::AddComponent(TArguments&&... arguments)
 	{
 		// Needed since std::is_base_of<T, T> == true
-		static_assert(std::is_base_of<Component, TComponentSerialiser>::value, "Entity: TComponent must inherit from Component");
-		static_assert(std::is_same<Component, TComponentSerialiser>::value == false, "Entity: TComponent must inherit from Component");
+		static_assert(std::is_base_of<Component, TComponent>::value, "Entity: TComponent must inherit from Component");
+		static_assert(std::is_same<Component, TComponent>::value == false, "Entity: TComponent must inherit from Component");
 
-		auto typeId = detail::GetComponentTypeID<TComponentSerialiser>();
+		auto typeId = detail::GetComponentTypeID<TComponent>();
 
 		// Make sure that the component doesn't already exist
-		assert(this->HasComponent<TComponentSerialiser>() == false && "Entity: The component already exists");
+		assert(this->HasComponent<TComponent>() == false && "Entity: The component already exists");
 
-		auto component = std::make_shared<TComponentSerialiser>(eventManager, *this, std::forward<TArguments>(arguments)...);
+		auto component = std::make_shared<TComponent>(eventManager, *this, std::forward<TArguments>(arguments)...);
 
 		// For debugging
 		//std::cout << std::endl << "Entity: Added component with id " << std::to_string(typeId);
@@ -291,11 +291,11 @@ namespace mbe
 		return *component;
 	}
 
-	template <class TComponentSerialiser, typename TTuple>
+	template <class TComponent, typename TTuple>
 	inline void Entity::AddComponentUnpack(TTuple && tuple)
 	{
 		std::apply([this](auto&&... args) {
-			AddComponent<TComponentSerialiser>(std::forward<decltype(args)>(args)...);
+			AddComponent<TComponent>(std::forward<decltype(args)>(args)...);
 		}, std::forward<TTuple>(tuple));
 	}
 
@@ -357,31 +357,31 @@ namespace mbe
 	//	eventManager.RaiseEvent(mbe::event::ComponentsChangedEvent(*this));
 	//}
 
-	template <class TComponentSerialiser>
-	inline TComponentSerialiser & Entity::GetComponent() const
+	template <class TComponent>
+	inline TComponent& Entity::GetComponent() const
 	{
 		// Needed since std::is_base_of<T, T> == true
-		static_assert(std::is_base_of<Component, TComponentSerialiser>::value, "Entity: TComponent must inherit from Component");
-		static_assert(std::is_same<Component, TComponentSerialiser>::value == false, "Entity: TComponent must inherit from Component");
+		static_assert(std::is_base_of<Component, TComponent>::value, "Entity: TComponent must inherit from Component");
+		static_assert(std::is_same<Component, TComponent>::value == false, "Entity: TComponent must inherit from Component");
 
-		const auto it = componentDictionary.find(detail::GetComponentTypeID<TComponentSerialiser>());
+		const auto it = componentDictionary.find(detail::GetComponentTypeID<TComponent>());
 
 		// Make sure the component exists
 		// Don't use HasComponent() to avoid unnecessary lookup
 		if (it == componentDictionary.cend())
-			throw std::runtime_error("Enity: This entity does not have the requested component Id: " + std::to_string(detail::GetComponentTypeID<TComponentSerialiser>()));
+			throw std::runtime_error("Enity: This entity does not have the requested component Id: " + std::to_string(detail::GetComponentTypeID<TComponent>()));
 
-		return *std::static_pointer_cast<TComponentSerialiser>(it->second.lock());
+		return *std::static_pointer_cast<TComponent>(it->second.lock());
 	}
 
-	template <class TComponentSerialiser>
+	template <class TComponent>
 	inline bool Entity::HasComponent() const
 	{
 		// Needed since std::is_base_of<T, T> == true
-		static_assert(std::is_base_of<Component, TComponentSerialiser>::value, "Entity: TComponent must inherit from Component");
-		static_assert(std::is_same<Component, TComponentSerialiser>::value == false, "Entity: TComponent must inherit from Component");
+		static_assert(std::is_base_of<Component, TComponent>::value, "Entity: TComponent must inherit from Component");
+		static_assert(std::is_same<Component, TComponent>::value == false, "Entity: TComponent must inherit from Component");
 
-		return componentDictionary.find(detail::GetComponentTypeID<TComponentSerialiser>()) != componentDictionary.end();
+		return componentDictionary.find(detail::GetComponentTypeID<TComponent>()) != componentDictionary.end();
 	}
 
 #pragma endregion

@@ -99,7 +99,7 @@ void AnimationComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 			// When using a global id for the animation, the corresponding XMLElement must be looked up
 			if (usingGlobalId)
 			{
-				animator.AddLocalAnimation(animationIdString, globalAnimationIdString, sf::milliseconds(duration));
+				animator.AddGlobalAnimation(animationIdString, globalAnimationIdString, sf::milliseconds(duration));
 			}
 			else
 			{
