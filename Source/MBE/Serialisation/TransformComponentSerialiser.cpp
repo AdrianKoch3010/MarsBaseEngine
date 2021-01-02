@@ -21,9 +21,9 @@ void TransformComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 	if (positionElement != nullptr)
 	{
 		if (positionElement->QueryFloatAttribute("x", &position.x) != XML_SUCCESS)
-			throw std::runtime_error("Load transform component: Failed to pass position x attribute");
+			throw ParseError(MBE_NAME_OF(TransformComponentSerialiser), "Failed to pass Position x attribute", positionElement->GetLineNum());
 		if (positionElement->QueryFloatAttribute("y", &position.y) != XML_SUCCESS)
-			throw std::runtime_error("Load transform component: Failed to parse position y attribute");
+			throw ParseError(MBE_NAME_OF(TransformComponentSerialiser), "Failed to parse Position y attribute", positionElement->GetLineNum());
 		transformComponent.SetPosition(position);
 	}
 
@@ -32,9 +32,9 @@ void TransformComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 	if (originElement != nullptr)
 	{
 		if (originElement->QueryFloatAttribute("x", &origin.x) != XML_SUCCESS)
-			throw std::runtime_error("Load transform component: Failed to parse origin x attribute");
+			throw ParseError(MBE_NAME_OF(TransformComponentSerialiser), "Failed to parse Origin x attribute", originElement->GetLineNum());
 		if (originElement->QueryFloatAttribute("y", &origin.y) != XML_SUCCESS)
-			throw std::runtime_error("Load transform component: Failed to parse origin y attribute");
+			throw ParseError(MBE_NAME_OF(TransformComponentSerialiser), "Failed to parse Origin y attribute", originElement->GetLineNum());
 		transformComponent.SetOrigin(origin);
 	}
 
@@ -43,9 +43,11 @@ void TransformComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 	if (scaleElement != nullptr)
 	{
 		if (scaleElement->QueryFloatAttribute("x", &scale.x) != XML_SUCCESS)
-			throw std::runtime_error("Load transform component: Failed to parse scale x attribute");
+		throw ParseError(MBE_NAME_OF(TransformComponentSerialiser), "Failed to parse Scale x attribute", scaleElement->GetLineNum());
+
 		if (scaleElement->QueryFloatAttribute("y", &scale.y) != XML_SUCCESS)
-			throw std::runtime_error("Load transform component: Failed to parse scale y attribute");
+		throw ParseError(MBE_NAME_OF(TransformComponentSerialiser), "Failed to parse Scale y attribute", scaleElement->GetLineNum());
+
 		transformComponent.SetScale(scale);
 	}
 
@@ -54,7 +56,8 @@ void TransformComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 	if (rotationElement != nullptr)
 	{
 		if (rotationElement->QueryFloatText(&rotation) != XML_SUCCESS)
-			throw std::runtime_error("Load transform component: Failed to parse rotation text");
+		throw ParseError(MBE_NAME_OF(TransformComponentSerialiser), "Failed to parse Rotation text", rotationElement->GetLineNum());
+
 		transformComponent.SetRotation(rotation);
 	}
 }

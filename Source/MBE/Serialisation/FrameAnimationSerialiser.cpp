@@ -58,9 +58,9 @@ EntityAnimator::AnimationFunction FrameAnimationSerialiser::Parse(const tinyxml2
 		// Get Duration
 		const auto durationElement = frameElement->FirstChildElement("Duration");
 		if (durationElement == nullptr)
-			throw std::runtime_error("Load frame animation: Failed to parse duration element");
+			throw ParseError(MBE_NAME_OF(FrameAnimationSerialiser), "Duration node is required", animationData.GetLineNum());
 		if (durationElement->QueryFloatText(&duration) != XML_SUCCESS)
-			throw std::runtime_error("Load frame animation: Failed to parse duration text");
+			throw ParseError(MBE_NAME_OF(FrameAnimationSerialiser), "Failed to parse Duration text", durationElement->GetLineNum());
 
 		// Get Origin
 		// The origin is optional
@@ -71,15 +71,15 @@ EntityAnimator::AnimationFunction FrameAnimationSerialiser::Parse(const tinyxml2
 		{
 			setOrigin = true;
 			if (originElement->QueryFloatAttribute("x", &origin.x) != XML_SUCCESS)
-				throw std::runtime_error("Load frame animation: Failed to pass origin x attribute");
+				throw ParseError(MBE_NAME_OF(FrameAnimationSerialiser), "Failed to parse Origin x attribute", originElement->GetLineNum());
 			if (originElement->QueryFloatAttribute("y", &origin.y) != XML_SUCCESS)
-				throw std::runtime_error("Load frame animation: Failed to pass origin y attribute");
+				throw ParseError(MBE_NAME_OF(FrameAnimationSerialiser), "Failed to parse Origin y attribute", originElement->GetLineNum());
 		}
 
 		// Get the subrect
 		const auto subRectElement = frameElement->FirstChildElement("SubRect");
 		if (subRectElement == nullptr)
-			throw std::runtime_error("Load frame animation: Failed to parse SubRect element");
+			throw ParseError(MBE_NAME_OF(FrameAnimationSerialiser), "SubRect node is required", animationData.GetLineNum());
 		auto subRect = IntRectSerialiser::Load(*subRectElement);
 
 		// Add the frame to the frame animation

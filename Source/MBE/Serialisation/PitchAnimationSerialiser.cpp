@@ -4,13 +4,6 @@
 
 using namespace mbe;
 
-//MBE_REGISTER_ANIMATION_SERIALISER(PitchAnimationSerialiser, PitchAnimation)
-
-//namespace AnimationSerialiserRegistrations
-//{
-//	mbe::AnimationSerialiserRegistrations::AnimationSerialiserRegistration<PitchAnimationSerialiser, PitchAnimation> frameAniamtion(MBE_NAME_OF(PitchAnimation));
-//}
-
 void PitchAnimationSerialiser::Load(EntityAnimator& entityAnimator, const tinyxml2::XMLElement& animationData, const std::string& animationId, sf::Time duration) const
 {
 	// Add the animation
@@ -36,9 +29,9 @@ EntityAnimator::AnimationFunction PitchAnimationSerialiser::Parse(const tinyxml2
 	// Get minimum brightness
 	const auto minimumPitchElement = animationData.FirstChildElement("MinimumPitch");
 	if (minimumPitchElement == nullptr)
-		throw std::runtime_error("Pitch animation serialiser: Failed to parse minimum pitch element");
+		throw ParseError(MBE_NAME_OF(PitchAnimationSerialiser), "MinimumPitch node is required", animationData.GetLineNum());
 	if (minimumPitchElement->QueryFloatText(&minimumPitch) != XML_SUCCESS)
-		throw std::runtime_error("Pitch animation serialiser: Failed to parse minimum pitch text");
+		throw ParseError(MBE_NAME_OF(PitchAnimationSerialiser), "Failed to parse MinimumPitch text", minimumPitchElement->GetLineNum());
 
 	return PitchAnimation(minimumPitch);
 }

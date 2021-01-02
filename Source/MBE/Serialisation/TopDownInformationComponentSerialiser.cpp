@@ -16,7 +16,7 @@ void TopDownInformationComponentSerialiser::LoadComponent(Entity& entity, const 
 	{
 		float logicalBottomOffset = 0.f;
 		if (logicalBottomOffsetElement->QueryFloatText(&logicalBottomOffset) != XML_SUCCESS)
-			throw std::runtime_error("Load top-down information component: Failed to parse LogicalBottomOffset value");
+			throw ParseError(MBE_NAME_OF(TopDownInformationComponentSerialiser), "Failed to parse LogicalBottomOffset text", logicalBottomOffsetElement->GetLineNum());
 		topDownInformationComponent.SetLogicalBottomOffset(logicalBottomOffset);
 	}
 }

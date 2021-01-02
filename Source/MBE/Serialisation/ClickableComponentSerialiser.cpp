@@ -17,7 +17,7 @@ void ClickableComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 	{
 		bool absorbeClick = false;
 		if (absorbeClickElement->QueryBoolText(&absorbeClick) != XML_SUCCESS)
-			throw std::runtime_error("Load clickable component: Failed to parese AbsorbeClick text");
+			throw ParseError(MBE_NAME_OF(ClickableComponentSerialiser), "Failed to parse AbsorbeClick text", absorbeClickElement->GetLineNum());
 
 		// Set absorbe click
 		clickableComponent.SetAbsorbeClick(absorbeClick);
@@ -29,7 +29,7 @@ void ClickableComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 	{
 		bool bubbleUp = false;
 		if (bubbleUpElement->QueryBoolText(&bubbleUp) != XML_SUCCESS)
-			throw std::runtime_error("Load clickable component: Failed to parese BubbleUp text");
+			throw ParseError(MBE_NAME_OF(ClickableComponentSerialiser), "Failed to parse BubbleUp text", bubbleUpElement->GetLineNum());
 
 		// Set bubble up
 		clickableComponent.SetBubbleUp(bubbleUp);

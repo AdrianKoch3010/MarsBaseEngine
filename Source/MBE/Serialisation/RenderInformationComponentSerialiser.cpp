@@ -15,10 +15,10 @@ void RenderInformationComponentSerialiser::LoadComponent(Entity& entity, const t
 	// Get the render layer
 	const auto renderLayerElement = componentData.FirstChildElement("RenderLayer");
 	if (renderLayerElement == nullptr)
-		throw std::runtime_error("Load render information component: Failed to parse RenderLayer");
+		throw ParseError(MBE_NAME_OF(RenderInformationComponentSerialiser), "RenderLayer node is required", componentData.GetLineNum());
 	auto renderLayerText = renderLayerElement->GetText();
 	if (renderLayerText == nullptr)
-		throw std::runtime_error("Load render information component: Failed to parese RenderLayer text");
+		throw ParseError(MBE_NAME_OF(RenderInformationComponentSerialiser), "Failed to parse RenderLayer text", renderLayerElement->GetLineNum());
 	std::string renderLayerString{ renderLayerText };
 	renderInformationComponent.SetRenderLayer(StringToRenderLayer(renderLayerString));
 
@@ -28,7 +28,7 @@ void RenderInformationComponentSerialiser::LoadComponent(Entity& entity, const t
 	{
 		float zOrder;
 		if (zOrderElement->QueryFloatText(&zOrder) != XML_SUCCESS)
-			throw std::runtime_error("Load render information component: Failed to parese ZOrder text");
+			throw ParseError(MBE_NAME_OF(RenderInformationComponentSerialiser), "Failed to parse ZOrder text", zOrderElement->GetLineNum());
 		renderInformationComponent.SetZOrder(zOrder);
 	}
 }

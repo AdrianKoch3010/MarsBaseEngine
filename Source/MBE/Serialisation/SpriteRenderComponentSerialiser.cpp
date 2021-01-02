@@ -10,7 +10,8 @@ void SpriteRenderComponentSerialiser::LoadComponent(Entity& entity, const tinyxm
 	auto& spriteRenderComponent = entity.AddComponent<SpriteRenderComponent>();
 
 	const auto colourElement = componentData.FirstChildElement("Colour");
-	if (colourElement != nullptr) {
+	if (colourElement != nullptr)
+	{
 		auto colour = ColourSerialiser::Load(*colourElement);
 		spriteRenderComponent.SetColor(colour);
 	}

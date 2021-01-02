@@ -22,9 +22,9 @@ void TileMapComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::X
 	if (positionElement != nullptr)
 	{
 		if (positionElement->QueryIntAttribute("x", &position.x) != XML_SUCCESS)
-			throw std::runtime_error("Load tile map component: Failed to pass position x attribute");
+			throw ParseError(MBE_NAME_OF(TileMapComponentSerialiser), "Failed to parse Position x attribute", positionElement->GetLineNum());
 		if (positionElement->QueryIntAttribute("y", &position.y) != XML_SUCCESS)
-			throw std::runtime_error("Load tile map component: Failed to parse position y attribute");
+			throw ParseError(MBE_NAME_OF(TileMapComponentSerialiser), "Failed to parse Position y attribute", positionElement->GetLineNum());
 		tileMapComponent.SetPosition(position);
 	}
 
@@ -37,7 +37,7 @@ void TileMapComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::X
 		{
 			auto rowText = rowElement->GetText();
 			if (rowText == nullptr)
-				throw std::runtime_error("Load tile map component: Failed to parese row text");
+				throw ParseError(MBE_NAME_OF(TileMapComponentSerialiser), "Failed to parse row text", rowElement->GetLineNum());
 			std::string rowString{ rowText };
 
 			movementSpeedShape.push_back(ParseRow(rowString));

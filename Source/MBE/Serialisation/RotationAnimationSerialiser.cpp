@@ -37,9 +37,9 @@ EntityAnimator::AnimationFunction RotationAnimationSerialiser::Parse(const tinyx
 	// Get minimum brightness
 	const auto maximumRotationElement = animationData.FirstChildElement("RelativeMaximumRotation");
 	if (maximumRotationElement == nullptr)
-		throw std::runtime_error("Rotation animation serialiser: Failed to parse relative maximum rotation element");
+		throw ParseError(MBE_NAME_OF(RotationAnimationSerialiser), "RelativeMaximumRotation node is required", animationData.GetLineNum());
 	if (maximumRotationElement->QueryFloatText(&maximumRotation) != XML_SUCCESS)
-		throw std::runtime_error("Rotation animation serialiser: Failed to parse relative maximum rotation text");
+		throw ParseError(MBE_NAME_OF(RotationAnimationSerialiser), "Failed to parse RelativeMaximumRotation text", maximumRotationElement->GetLineNum());
 
 	return RotationAnimation(maximumRotation);
 }

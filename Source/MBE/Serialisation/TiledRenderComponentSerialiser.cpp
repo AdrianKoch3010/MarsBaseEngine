@@ -14,27 +14,27 @@ void TiledRenderComponentSerialiser::LoadComponent(Entity& entity, const tinyxml
 	// Get created
 	const auto createdElement = componentData.FirstChildElement("Created");
 	if (createdElement == nullptr)
-		throw std::runtime_error("Load tiled render component: Failed to parse created");
+		throw ParseError(MBE_NAME_OF(TiledRenderComponentSerialiser), "Created node is required", componentData.GetLineNum());
 	if (createdElement->QueryBoolText(&isCreated) != XML_SUCCESS)
-		throw std::runtime_error("Load tiled render component: Failed to parse created text");
+		throw ParseError(MBE_NAME_OF(TiledRenderComponentSerialiser), "Failed to parse Created text", createdElement->GetLineNum());
 
 	// Get size
 	const auto sizeElement = componentData.FirstChildElement("Size");
 	if (sizeElement == nullptr)
-		throw std::runtime_error("Load tiled render component: Failed to parse size");
+		throw ParseError(MBE_NAME_OF(TiledRenderComponentSerialiser), "Size node is required", componentData.GetLineNum());
 	if (sizeElement->QueryUnsignedAttribute("x", &size.x) != XML_SUCCESS)
-		throw std::runtime_error("Load tiled render component: Failed to parse size x attribute");
+		throw ParseError(MBE_NAME_OF(TiledRenderComponentSerialiser), "Failed to parse Size x attribute", sizeElement->GetLineNum());
 	if (sizeElement->QueryUnsignedAttribute("y", &size.y) != XML_SUCCESS)
-		throw std::runtime_error("Load tiled render component: Failed to parse size y attribute");
+		throw ParseError(MBE_NAME_OF(TiledRenderComponentSerialiser), "Failed to parse Size y attribute", sizeElement->GetLineNum());
 
 	// Get tile size
 	const auto tileSizeElement = componentData.FirstChildElement("TileSize");
 	if (tileSizeElement == nullptr)
-		throw std::runtime_error("Load tiled render component: Failed to parse tile size");
+		throw ParseError(MBE_NAME_OF(TiledRenderComponentSerialiser), "TileSize node is required", componentData.GetLineNum());
 	if (tileSizeElement->QueryUnsignedAttribute("x", &tileSize.x) != XML_SUCCESS)
-		throw std::runtime_error("Load tiled render component: Failed to parse tile size x attribute");
+		throw ParseError(MBE_NAME_OF(TiledRenderComponentSerialiser), "Failed to parse TileSize x attribute", tileSizeElement->GetLineNum());
 	if (tileSizeElement->QueryUnsignedAttribute("y", &tileSize.y) != XML_SUCCESS)
-		throw std::runtime_error("Load tiled render component: Failed to parse tile size y attribute");
+		throw ParseError(MBE_NAME_OF(TiledRenderComponentSerialiser), "Failed to parse TileSize y attribute", tileSizeElement->GetLineNum());
 
 	auto& tiledRenderComponent = entity.AddComponent<TiledRenderComponent>(size, tileSize);
 }

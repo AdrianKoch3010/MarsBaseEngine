@@ -1,3 +1,4 @@
+#include "..\..\..\Include\MBE\Serialisation\EntitySerialiser.h"
 #include <MBE/Serialisation/EntitySerialiser.h>
 #include <MBE/Serialisation/SerialiserRegistry.h>
 
@@ -10,7 +11,7 @@ EntitySerialiser::EntitySerialiser(EntityManager& entityManager, EventManager& e
 {
 }
 
-std::vector<Entity::HandleID> EntitySerialiser::LoadEntites(const std::string& filePath)
+std::vector<Entity::HandleID> EntitySerialiser::LoadEntities(const std::string& filePath)
 {
 	using namespace tinyxml2;
 
@@ -21,6 +22,29 @@ std::vector<Entity::HandleID> EntitySerialiser::LoadEntites(const std::string& f
 		throw std::runtime_error("Load Entities: Error while reading from xml file (" + filePath + ") error id: " + std::to_string(loadError));
 
 	return Load(document);
+}
+
+std::vector<Entity::HandleID> EntitySerialiser::TryLoadEntities(const std::string& filePath, const std::string& fileName)
+{
+	try
+	{
+		return LoadEntities(filePath + fileName);
+	}
+	catch (const mbe::ParseError& parseError)
+	{
+		std::cerr << filePath << fileName << ": " << parseError.GetParser() << ":" << std::endl;
+		std::cerr << fileName;
+		if (parseError.GetLineNumber() > 0)
+			std::cerr << ":" << parseError.GetLineNumber();
+		std::cerr << ": " << parseError.GetMessage() << std::endl;
+	}
+	catch (const std::runtime_error& error)
+	{
+		std::cerr << "\nFailed to parse "<< filePath << fileName << error.what() << std::endl;
+	}
+
+	// Return an empty vector
+	return std::vector<Entity::HandleID>();
 }
 
 std::vector<Entity::HandleID> EntitySerialiser::CreateEntitiesFromString(const std::string& xmlString)

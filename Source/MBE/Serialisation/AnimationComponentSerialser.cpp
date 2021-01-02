@@ -23,7 +23,7 @@ void AnimationComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 		// Get the animator id
 		auto animatorId = animatorElement->Attribute("id");
 		if (animatorId == nullptr)
-			throw std::runtime_error("Load animation component: Failed to parse animator id");
+			throw ParseError(MBE_NAME_OF(AnimationComponentSerialiser), "Failed to parse Animator id attribute", animatorElement->GetLineNum());
 		std::string animatorIdString{ animatorId };
 
 		// Add the animator
@@ -39,19 +39,19 @@ void AnimationComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 		const auto loopElement = animatorElement->FirstChildElement("Loop");
 		if (loopElement != nullptr)
 			if (loopElement->QueryBoolText(&loop) != XML_SUCCESS)
-				throw std::runtime_error("Load animation component: Failed to parse animator loop text");
+				throw ParseError(MBE_NAME_OF(AnimationComponentSerialiser), "Failed to parse animator Loop text", loopElement->GetLineNum());
 
 		// Get Paused
 		const auto pausedElement = animatorElement->FirstChildElement("Paused");
 		if (pausedElement != nullptr)
 			if (pausedElement->QueryBoolText(&paused) != XML_SUCCESS)
-				throw std::runtime_error("Load animation component: Failed to parse animator paused text");
+				throw ParseError(MBE_NAME_OF(AnimationComponentSerialiser), "Failed to parse Paused text", pausedElement->GetLineNum());
 
 		// Get Progress
 		const auto progressElement = animatorElement->FirstChildElement("Progress");
 		if (progressElement != nullptr)
 			if (progressElement->QueryFloatText(&progress) != XML_SUCCESS)
-				throw std::runtime_error("Load animation component: Failed to parse animator progress text");
+				throw ParseError(MBE_NAME_OF(AnimationComponentSerialiser), "Failed to parse Progress text", progressElement->GetLineNum());
 
 		// Get the currently playing animation
 		// If none exists, the animator is stopped
@@ -64,27 +64,27 @@ void AnimationComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 			isPlayingAnimation = true;
 			auto currentlyPlayingAnimation = currentAnimationElement->GetText();
 			if (currentlyPlayingAnimation == nullptr)
-				throw std::runtime_error("Load animation component: Failed to parse currently playing animation");
+				throw ParseError(MBE_NAME_OF(AnimationComponentSerialiser), "Failed to parse CurrentlyPlayingAnimation text", currentAnimationElement->GetLineNum());
 			currentlyPlayingAnimationString = currentlyPlayingAnimation;
 		}
 
 		// Load recreate the amimations
 		auto animationsElement = animatorElement->FirstChildElement("Animations");
 		if (animationsElement == nullptr)
-			throw std::runtime_error("Load animation component: Failed to parse animator animations element");
+			throw ParseError(MBE_NAME_OF(AnimationComponentSerialiser), "Animations node is required", animatorElement->GetLineNum());
 
 		for (auto animationElement = animationsElement->FirstChildElement("Animation"); animationElement != nullptr; animationElement = animationElement->NextSiblingElement("Animation"))
 		{
 			// Get the animation id
 			auto animationId = animationElement->Attribute("id");
 			if (animationId == nullptr)
-				throw std::runtime_error("Load animation component: Failed to parse animation id");
+				throw ParseError(MBE_NAME_OF(AnimationComponentSerialiser), "Failed to parse Animation id attribute", animationElement->GetLineNum());
 			std::string animationIdString{ animationId };
 
 			// Get the animation duration
 			int duration;
 			if (animationElement->QueryIntAttribute("duration", &duration) != XML_SUCCESS)
-				throw std::runtime_error("Load animation component: Failed to parse animation time");
+				throw ParseError(MBE_NAME_OF(AnimationComponentSerialiser), "Failed to parse Animation duration attribute", animationElement->GetLineNum());
 
 			// Check whether a global animation id is used
 			bool usingGlobalId = false;
@@ -106,7 +106,7 @@ void AnimationComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 				// Get the animation type
 				auto animationType = animationElement->Attribute("type");
 				if (animationType == nullptr)
-					throw std::runtime_error("Load animation component: Failed to parse animation type");
+					throw ParseError(MBE_NAME_OF(AnimationComponentSerialiser), "Failed to parse Animation type attribute", animationElement->GetLineNum());
 				std::string animationTypeString{ animationType };
 
 				// Call the appropreate animation serialiser for that animation type

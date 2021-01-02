@@ -11,6 +11,7 @@
 #include <MBE/Core/Utility.h>
 #include <MBE/Core/Entity.h>
 #include <MBE/Core/EntityManager.h>
+#include <MBE/Core/Exceptions.h>
 
 MBE_DECLARE_TYPE_ID(ComponentSerialiser)
 

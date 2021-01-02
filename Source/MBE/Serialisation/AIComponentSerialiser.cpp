@@ -16,13 +16,13 @@ void AIComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLEle
 		// Get the type
 		const auto type = activeTaskElement->Attribute("type");
 		if (type == nullptr)
-			throw std::runtime_error("Ai component serialiser: Failed to parse ai task type attribute");
+			throw ParseError(MBE_NAME_OF(AIComponentSerialiser), "Failed to parse ActiveTask type attribute", activeTaskElement->GetLineNum());
 		const std::string typeString{ type };
 
 		// Get the utility
 		float utility;
 		if (activeTaskElement->QueryFloatAttribute("utility", &utility) != XML_SUCCESS)
-			throw std::runtime_error("Ai component serialiser: Failed to parse ai task utility attribute");
+			throw ParseError(MBE_NAME_OF(AIComponentSerialiser), "Failed to parse ActiveTask utility attribute", activeTaskElement->GetLineNum());
 
 		// Call the task serialiser for this type which creates the task
 		auto taskPtr = AITaskSerialiserRegistry::Instance()[typeString].Load(*activeTaskElement, utility);
@@ -39,13 +39,13 @@ void AIComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLEle
 		// Get the type
 		const auto type = queuedTaskElement->Attribute("type");
 		if (type == nullptr)
-			throw std::runtime_error("Ai component serialiser: Failed to parse ai task type attribute");
+			throw ParseError(MBE_NAME_OF(AIComponentSerialiser), "Failed to parse QueuedTask type attribute", queuedTaskElement->GetLineNum());
 		const std::string typeString{ type };
 
 		// Get the utility
 		float utility;
 		if (queuedTaskElement->QueryFloatAttribute("utility", &utility) != XML_SUCCESS)
-			throw std::runtime_error("Ai component serialiser: Failed to parse ai task utility attribute");
+			throw ParseError(MBE_NAME_OF(AIComponentSerialiser), "Failed to parse QueuedTask utility attribute", queuedTaskElement->GetLineNum());
 
 		// Call the task serialiser for this type which creates the task
 		auto taskPtr = AITaskSerialiserRegistry::Instance()[typeString].Load(*queuedTaskElement, utility);

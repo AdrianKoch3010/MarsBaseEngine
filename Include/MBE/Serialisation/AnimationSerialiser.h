@@ -13,7 +13,7 @@
 #include <MBE/Animation/EntityAnimator.h>
 
 #include <MBE/Core/Utility.h>
-#include <MBE/Core/Singleton.h>
+#include <MBE/Core/Exceptions.h>
 
 MBE_DECLARE_TYPE_ID(AnimationSerialiser)
 

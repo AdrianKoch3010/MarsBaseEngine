@@ -23,8 +23,7 @@ namespace mbe
 		// The sprite must have a texture - otherwise undefined behaviour
 		PixelMask(const sf::Sprite & sprite);
 		PixelMask(const sf::RectangleShape & rectangle);
-		//~PixelMask() = default;
-		~PixelMask() { std::cerr << "\nPixelMask Destructor" << std::endl; }
+		~PixelMask() = default;
 
 	public:
 		bool Contains(sf::Vector2f point) const;

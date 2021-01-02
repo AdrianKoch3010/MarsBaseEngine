@@ -19,10 +19,11 @@ std::ostream& mbe::operator<<(std::ostream& stream, const Exception& exception)
 	return stream;
 }
 
-SerialiserException::SerialiserException(const std::string& serialiser, const std::string& object) :
-	NonFatalException(serialiser + ": Failed to parse " + object),
-	serialiser(serialiser),
-	object(object)
+ParseError::ParseError(const std::string& parser, const std::string& message, int lineNumber) :
+	NonFatalException(parser + ": Failed to parse " + message),
+	parser(parser),
+	message(message),
+	lineNumber(lineNumber)
 {
 }
 

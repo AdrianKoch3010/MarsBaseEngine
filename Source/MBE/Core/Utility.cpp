@@ -1,5 +1,6 @@
 #include <MBE/Core/Utility.h>
 
+#include <MBE/Core/Exceptions.h>
 
 void mbe::NormaliseIDString(std::string & id)
 {
@@ -67,27 +68,27 @@ sf::IntRect mbe::IntRectSerialiser::Load(const tinyxml2::XMLElement& rectData)
 
 	const auto topElement = rectData.FirstChildElement("Top");
 	if (topElement == nullptr)
-		throw std::runtime_error("Load int rect: Failed to parse Top element");
+		throw ParseError(MBE_NAME_OF(IntRectSerialiser), "Top node is required", rectData.GetLineNum());
 	if (topElement->QueryIntText(&rect.top) != XML_SUCCESS)
-		throw std::runtime_error("Load int rect: Failed to parse Top text");
+		throw ParseError(MBE_NAME_OF(IntRectSerialiser), "Failed to parse Top text", topElement->GetLineNum());
 
 	const auto leftElement = rectData.FirstChildElement("Left");
 	if (leftElement == nullptr)
-		throw std::runtime_error("Load int rect: Failed to parse Left element");
+		throw ParseError(MBE_NAME_OF(IntRectSerialiser), "Left node is required", rectData.GetLineNum());
 	if (leftElement->QueryIntText(&rect.left) != XML_SUCCESS)
-		throw std::runtime_error("Load int rect: Failed to parse Left text");
+		throw ParseError(MBE_NAME_OF(IntRectSerialiser), "Failed to parse Left text", leftElement->GetLineNum());
 
 	const auto widthElement = rectData.FirstChildElement("Width");
 	if (widthElement == nullptr)
-		throw std::runtime_error("Load int rect: Failed to parse Width element");
+		throw ParseError(MBE_NAME_OF(IntRectSerialiser), "Width node is required", rectData.GetLineNum());
 	if (widthElement->QueryIntText(&rect.width) != XML_SUCCESS)
-		throw std::runtime_error("Load int rect: Failed to parse Width text");
+		throw ParseError(MBE_NAME_OF(IntRectSerialiser), "Failed to parse Width text", widthElement->GetLineNum());
 
 	const auto heightElement = rectData.FirstChildElement("Height");
 	if (heightElement == nullptr)
-		throw std::runtime_error("Load int rect: Failed to parse Height element");
+		throw ParseError(MBE_NAME_OF(IntRectSerialiser), "Height node is required", rectData.GetLineNum());
 	if (heightElement->QueryIntText(&rect.height) != XML_SUCCESS)
-		throw std::runtime_error("Load int rect: Failed to parse Height text");
+		throw ParseError(MBE_NAME_OF(IntRectSerialiser), "Failed to parse Height text", heightElement->GetLineNum());
 
 	return rect;
 }
@@ -119,27 +120,27 @@ sf::Color mbe::ColourSerialiser::Load(const tinyxml2::XMLElement& colourData)
 
 	const auto rElement = colourData.FirstChildElement("R");
 	if (rElement == nullptr)
-		throw std::runtime_error("Load colour: Failed to parse R element");
+		throw ParseError(MBE_NAME_OF(ColourSerialiser), "R node is required", colourData.GetLineNum());
 	if (rElement->QueryUnsignedText(&r) != XML_SUCCESS)
-		throw std::runtime_error("Load int colour: Failed to parse R text");
+		throw ParseError(MBE_NAME_OF(ColourSerialiser), "Failed to parse R text", rElement->GetLineNum());
 
 	const auto gElement = colourData.FirstChildElement("G");
 	if (gElement == nullptr)
-		throw std::runtime_error("Load int colour: Failed to parse G element");
+		throw ParseError(MBE_NAME_OF(ColourSerialiser), "G node is required", colourData.GetLineNum());
 	if (gElement->QueryUnsignedText(&g) != XML_SUCCESS)
-		throw std::runtime_error("Load int colour: Failed to parse G text");
+		throw ParseError(MBE_NAME_OF(ColourSerialiser), "Failed to parse G text", gElement->GetLineNum());
 
 	const auto bElement = colourData.FirstChildElement("B");
 	if (bElement == nullptr)
-		throw std::runtime_error("Load int colour: Failed to parse B element");
+		throw ParseError(MBE_NAME_OF(ColourSerialiser), "B node is required", colourData.GetLineNum());
 	if (bElement->QueryUnsignedText(&b) != XML_SUCCESS)
-		throw std::runtime_error("Load int colour: Failed to parse B text");
+		throw ParseError(MBE_NAME_OF(ColourSerialiser), "Failed to parse B text", bElement->GetLineNum());
 
 	const auto aElement = colourData.FirstChildElement("A");
 	if (aElement == nullptr)
-		throw std::runtime_error("Load int colour: Failed to parse A element");
+		throw ParseError(MBE_NAME_OF(ColourSerialiser), "A node is required", colourData.GetLineNum());
 	if (aElement->QueryUnsignedText(&a) != XML_SUCCESS)
-		throw std::runtime_error("Load int colour: Failed to parse A text");
+		throw ParseError(MBE_NAME_OF(ColourSerialiser), "Failed to parse A text", aElement->GetLineNum());
 
 	return sf::Color{ static_cast<sf::Uint8>(r), static_cast<sf::Uint8>(g), static_cast<sf::Uint8>(b), static_cast<sf::Uint8>(a) };
 }

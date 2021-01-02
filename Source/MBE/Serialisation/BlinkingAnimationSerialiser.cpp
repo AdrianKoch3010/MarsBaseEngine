@@ -29,9 +29,9 @@ EntityAnimator::AnimationFunction BlinkingAnimationSerialiser::Parse(const tinyx
 	// Get minimum brightness
 	const auto minimumBrightnessElement = animationData.FirstChildElement("MinimumBrightness");
 	if (minimumBrightnessElement == nullptr)
-		throw std::runtime_error("Blinking animation serialiser: Failed to parse minimum brightness element");
+		throw ParseError(MBE_NAME_OF(BlinkingAnimationSerialiser), "MinimumBrightness node is required", animationData.GetLineNum());
 	if (minimumBrightnessElement->QueryFloatText(&minimumBrightness) != XML_SUCCESS)
-		throw std::runtime_error("Blinking animation serialiser: Failed to parse minimum brightness text");
+		throw ParseError(MBE_NAME_OF(BlinkingAnimationSerialiser), "Failed to parse MinimumBrightness text", minimumBrightnessElement->GetLineNum());
 
 	return BlinkingAnimation(minimumBrightness);
 }

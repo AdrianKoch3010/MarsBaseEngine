@@ -40,8 +40,8 @@ namespace mbe
 		typedef std::unique_ptr<TextureWrapperComponentSerialiser> UPtr;
 
 	public:
-		/// @brief Constructor
-		TextureWrapperComponentSerialiser();
+		/// @brief Default Constructor
+		TextureWrapperComponentSerialiser() = default;
 
 		/// @brief Default destructor
 		~TextureWrapperComponentSerialiser() = default;

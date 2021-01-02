@@ -7,6 +7,8 @@
 #include <unordered_map>
 
 #include <MBE/Core/TinyXML.h>
+
+#include <MBE/Core/Exceptions.h>
 #include <MBE/Core/Utility.h>
 #include <MBE/AI/AITask.h>
 #include <MBE/AI/AIComponent.h>

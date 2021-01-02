@@ -34,8 +34,10 @@ namespace mbe
 	///				<Animation type="string" id="string" duration="int in milliseconds">
 	///					// Animation data
 	///				</Animation>
+	///				...
 	///				<!-- Or -->
 	///				<Animation id="string" duration="int in milliseconds" globalId="string" />
+	///				...
 	///			</Animations>
 	///		</Animator>
 	/// </Component>

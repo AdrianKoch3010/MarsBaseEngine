@@ -81,7 +81,7 @@ namespace mbe
 	template<class TSerialiser, class TObject, typename ...TArguments>
 	inline void SerialiserRegistry<TBaseSerialiser, TObjectTypeID, TSerialiserTypeID>::AddSerialiser(const std::string& objectName, TArguments ...arguments)
 	{
-		std::cerr << "Registered serialiser for " << objectName << std::endl;
+		//std::cerr << "Registered serialiser for " << objectName << std::endl;
 
 		// make sure that TSerialiser inherits from TBaseSerialiser
 		static_assert(std::is_base_of<TBaseSerialiser, TSerialiser>::value, "The serialiser must inherit from TBaseSerialiser");

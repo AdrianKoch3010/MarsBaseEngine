@@ -62,7 +62,11 @@ namespace mbe
 		// Thorws runtime_error when loading fails 
 		// The entity ids will be reassigned. However, the mapping of parents and childs will remain.
 		// Returns a list of the entities that have been loaded
-		std::vector<Entity::HandleID> LoadEntites(const std::string& filePath);
+		std::vector<Entity::HandleID> LoadEntities(const std::string& filePath);
+
+		// Prints an error message instead of throwing an error
+		// In case the parsing fails, an empty list is returned
+		std::vector<Entity::HandleID> TryLoadEntities(const std::string& filePath, const std::string& fileName);
 
 		// Works the same as LoadEntities but loads from a string rather than a file
 		// Returns a list of the entities that have been loaded

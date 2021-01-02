@@ -64,9 +64,9 @@ void PixelMask::CreateMaskFromTexture(const sf::Texture & texture)
 	sf::Image image(texture.copyToImage());
 
 	// measure the time this function takes
-	sf::Clock clock;
-	sf::Time time = sf::Time::Zero;
-	clock.restart();
+	//sf::Clock clock;
+	//sf::Time time = sf::Time::Zero;
+	//clock.restart();
 
 	// Allocate memory for the pixel mask
 	pixelMask = std::make_unique<bool[]>(pixelMaskSize.x * pixelMaskSize.y);
@@ -86,6 +86,6 @@ void PixelMask::CreateMaskFromTexture(const sf::Texture & texture)
 		}
 	}
 
-	time = clock.restart();
-	std::cout << std::endl << "The creation of the pixel mask took: " << time.asMicroseconds() << " microseconds (" << time.asSeconds() << ")";
+	//time = clock.restart();
+	//std::cout << std::endl << "The creation of the pixel mask took: " << time.asMicroseconds() << " microseconds (" << time.asSeconds() << ")";
 }

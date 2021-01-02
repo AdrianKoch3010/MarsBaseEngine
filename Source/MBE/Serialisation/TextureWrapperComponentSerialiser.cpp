@@ -7,10 +7,6 @@
 
 using namespace mbe;
 
-TextureWrapperComponentSerialiser::TextureWrapperComponentSerialiser() :
-	ComponentSerialiser()
-{
-}
 
 void TextureWrapperComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLElement& componentData) const
 {
@@ -24,7 +20,7 @@ void TextureWrapperComponentSerialiser::LoadComponent(Entity& entity, const tiny
 	// Get the textures
 	const auto texturesElement = componentData.FirstChildElement("Textures");
 	if (texturesElement == nullptr)
-		throw std::runtime_error("Load texture wrapper component: Failed to parse Textures");
+		throw ParseError(MBE_NAME_OF(TextureWrapperComponentSerialiser), "Textures node is required", componentData.GetLineNum());
 
 	for (auto textureElement = texturesElement->FirstChildElement("Texture"); textureElement != nullptr; textureElement = textureElement->NextSiblingElement("Texture"))
 	{
@@ -42,10 +38,10 @@ void TextureWrapperComponentSerialiser::LoadComponent(Entity& entity, const tiny
 		// Get the texture wrapper
 		const auto textureWrapperElement = textureElement->FirstChildElement("TextureWrapper");
 		if (textureWrapperElement == nullptr)
-			throw std::runtime_error("Load texture wrapper component: Failed to parse TextureWrapper");
+			throw ParseError(MBE_NAME_OF(TextureWrapperComponentSerialiser), "TextureWrapper node is required", textureElement->GetLineNum());
 		auto textureWrapperText = textureWrapperElement->GetText();
 		if (textureWrapperText == nullptr)
-			throw std::runtime_error("Load texture wrapper component: Failed to parese TextureWrapper text");
+			throw ParseError(MBE_NAME_OF(TextureWrapperComponentSerialiser), "Failed to parese TextureWrapper text", textureWrapperElement->GetLineNum());
 		std::string textureWrapperString{ textureWrapperText };
 
 		// These will be loaded in order so the ids will match when added in the same order
@@ -54,7 +50,7 @@ void TextureWrapperComponentSerialiser::LoadComponent(Entity& entity, const tiny
 	
 	// There must be at least one texture present
 	if (textureDataList.empty())
-		throw std::runtime_error("Load texture wrapper component: There must be at least one texture");
+		throw ParseError(MBE_NAME_OF(TextureWrapperComponentSerialiser), "There must be at least one Texture node");
 
 	auto& textureWrapperComponent = entity.AddComponent<TextureWrapperComponent>(textureDataList.front().second);
 
@@ -64,7 +60,7 @@ void TextureWrapperComponentSerialiser::LoadComponent(Entity& entity, const tiny
 	{
 		TextureID activeTextureId;
 		if (activeTextureElement->QueryUnsignedText(&activeTextureId) != XML_SUCCESS)
-			throw std::runtime_error("Load texture wrapper component: Failed to parse ActiveTexture text");
+			throw ParseError(MBE_NAME_OF(TextureWrapperComponentSerialiser), "Failed to parse ActiveTexture text", activeTextureElement->GetLineNum());
 		textureWrapperComponent.SetActiveTexture(activeTextureId);
 	}
 

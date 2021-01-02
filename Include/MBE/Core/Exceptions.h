@@ -68,22 +68,29 @@ namespace mbe
 		Component::TypeID componentTypeId;
 	};
 
-	class SerialiserException : public NonFatalException
+	// This error will likely be caught by whoever called the parse function and output with the file path and line number
+	class ParseError : public NonFatalException
 	{
 	public:
-		// Creates an error message in the form: {serialiser}Serialiser: Failed to parse {object}
-		SerialiserException(const std::string& serialiser, const std::string& object);
+		// Creates an error message in the form: {parser}: {message}
+		// Line number -1 indicates that this error is not particular to any line number
+		ParseError(const std::string& parser, const std::string& message, int lineNumber = -1);
 
 	public:
-		// The serialiser that was responsible for throwing the exception
-		inline const std::string& GetSerialiser() const { return serialiser; }
+		// The parser that was responsible for throwing the exception
+		// This could be a serialiser or e.g. the asset loader
+		inline const std::string& GetParser() const { return parser; }
 
-		// The object that could not be serialised
-		inline const std::string& GetObject() const { return object; }
+		// The error message
+		// E.g. Failed to parse object or something must something
+		inline const std::string& GetMessage() const { return message; }
+
+		inline int GetLineNumber() const { return lineNumber; }
 
 	private:
-		std::string serialiser;
-		std::string object;
+		std::string parser;
+		std::string message;
+		int lineNumber;
 	};
 
 	//// Creates message in the form: IDNotFoundException: no {objectType} id was found 

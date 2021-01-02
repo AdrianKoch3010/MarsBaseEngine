@@ -90,8 +90,10 @@ namespace mbe
 		/// @param animation The animation to be registered. Any functor of the correct signature suffices
 		/// @param duration The absolute duration of the animation in seconds. This parameter can be used to play 'smooth' animations.
 		/// For a FrameAnimation The duration should be set to (1 / target frame rate) * number of frames
-		template <typename TAnimationFunction>
-		void AddLocalAnimation(std::string id, const TAnimationFunction& animation, sf::Time duration);
+		/// @tparam TAnimation The type of the animation to be registerd. It must be a function object of type AnimationFunction and
+		/// provide a static GetTypeID() method.
+		template <typename TAnimation>
+		void AddLocalAnimation(std::string id, const TAnimation& animation, sf::Time duration);
 
 		/// @brief Registers an animation with a given id and duration.
 		/// @param id The id that will later be used to play the animation
