@@ -2,10 +2,10 @@
 
 #include <fstream>
 #include <iostream>
-#include <exception>
 
 #include <MBE/Core/Utility.h>
 #include <MBE/Serialisation/SerialiserRegistry.h>
+#include <MBE/Core/Exceptions.h>
 
 
 using namespace mbe;
@@ -35,7 +35,7 @@ void AnimationHolder::Load(const std::string file)
 
 	const auto rootNode = document.FirstChildElement();
 	if (rootNode == nullptr)
-		throw std::runtime_error("AnimationHolder: The root node could not be found");
+		throw ParseError(MBE_NAME_OF(AnimationHolder), "The root node could not be found", document.GetLineNum());
 
 	// Iterate over the animations
 	for (auto animationElement = rootNode->FirstChildElement("Animation"); animationElement != nullptr; animationElement = animationElement->NextSiblingElement("Animation"))
@@ -43,17 +43,28 @@ void AnimationHolder::Load(const std::string file)
 		// Get the animation type
 		auto animationType = animationElement->Attribute("type");
 		if (animationType == nullptr)
-			throw std::runtime_error("Load animation: Failed to parse animation type");
+			throw ParseError(MBE_NAME_OF(AnimationHolder), "Failed to parse Animation type attribute", animationElement->GetLineNum());
 		std::string animationTypeString{ animationType };
 
 		// Get the animation id
 		auto animationId = animationElement->Attribute("globalId");
 		if (animationId == nullptr)
-			throw std::runtime_error("Load animation: Failed to parse animation globalId");
+			throw ParseError(MBE_NAME_OF(AnimationHolder), "Failed to parse Animation global id attribute", animationElement->GetLineNum());
 		std::string animationIdString{ animationId };
 		NormaliseIDString(animationIdString);
 
-		animationDictionary.insert({ animationIdString, AnimationSerialiserRegistry::Instance()[animationTypeString].Parse(*animationElement) });
+		try
+		{
+			animationDictionary.insert({ animationIdString, AnimationSerialiserRegistry::Instance()[animationTypeString].Parse(*animationElement) });
+		}
+		catch (const ParseError& parseError)
+		{
+			throw parseError;
+		}
+		catch (std::runtime_error& error)
+		{
+			throw ParseError(MBE_NAME_OF(AnimationHolder), "Unknown animation serialiser (" + animationTypeString + ")", animationElement->GetLineNum());
+		}
 	}
 }
 

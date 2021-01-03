@@ -130,6 +130,12 @@ namespace mbe
 	/// @param cartesian The point to convert
 	sf::Vector2f IsoToCartesian(sf::Vector2f iso);
 
+	/// @brief Calculates the manhattan distance between two points
+	/// @param from First point
+	/// @param to Second point
+	/// @return The manhattan distance between from and to
+	unsigned int CalculateManhattanDistance(const sf::Vector2i& from, const sf::Vector2i& to);
+
 	/// @brief Recalculate view for a given zoom factor
 	/// @details Adjusts the view given the current view, the size of the window the view is applied to and the zoom factor.
 	/// This function only changes the size and center of the view. All other state is preserved.

@@ -41,6 +41,11 @@ sf::Vector2f mbe::IsoToCartesian(sf::Vector2f iso)
 	return cartesian;
 }
 
+unsigned int mbe::CalculateManhattanDistance(const sf::Vector2i& from, const sf::Vector2i& to)
+{
+	return std::abs(from.x - to.x) + std::abs(from.y - to.y);
+}
+
 sf::View mbe::CalculateView(sf::View currentView, sf::Vector2u windowSize, float zoomFactor)
 {
 	currentView.setSize(sf::Vector2f(windowSize.x / zoomFactor, windowSize.y / zoomFactor));

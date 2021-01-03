@@ -4,7 +4,7 @@
 using namespace mbe;
 
 
-Entity::Entity(EventManager & eventManager, EntityManager & entityManager) :
+Entity::Entity(EventManager& eventManager, EntityManager& entityManager) :
 	eventManager(eventManager),
 	entityManager(entityManager),
 	active(true),
@@ -24,7 +24,7 @@ void Entity::Destroy()
 	// Calling Destroy() changes the childEntityIdList by detatching itself
 	// Hence, the set is copied before before iterating it and therefore changing the original
 	auto childEntityIdListCopy = childEntityIdList;
-	for (const auto & childEntityId : childEntityIdListCopy)
+	for (const auto& childEntityId : childEntityIdListCopy)
 	{
 		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "Entity: The child entity must exist");
 		Entity::GetObjectFromID(childEntityId)->Destroy();
@@ -61,7 +61,7 @@ void Entity::AttachChild(HandleID childEntityId)
 {
 	// Make sure the entity exists
 	assert(Entity::GetObjectFromID(childEntityId) != nullptr && "Entity: The child entity must exists");
-	auto & childEntity = *Entity::GetObjectFromID(childEntityId);
+	auto& childEntity = *Entity::GetObjectFromID(childEntityId);
 
 	// Set the parentEntity on the child entity
 	childEntity.parentEntityId = this->GetHandleID();
@@ -74,7 +74,7 @@ void Entity::DetatchChild(HandleID childEntityId)
 {
 	// Make sure the entity exists
 	assert(Entity::GetObjectFromID(childEntityId) != nullptr && "Entity: The child entity must exists");
-	auto & childEntity = *Entity::GetObjectFromID(childEntityId);
+	auto& childEntity = *Entity::GetObjectFromID(childEntityId);
 
 	// Set the child entity's parent to null
 	childEntity.parentEntityId = Entity::GetNullID();
@@ -90,12 +90,12 @@ void Entity::SetParentEntityID(HandleID parentEntityId)
 		return;
 
 	// Remove this entity from the current parent, if there is one
-	auto * currentParentPtr = Entity::GetObjectFromID(this->parentEntityId);
+	auto* currentParentPtr = Entity::GetObjectFromID(this->parentEntityId);
 	if (currentParentPtr != nullptr)
 		currentParentPtr->DetatchChild(this->GetHandleID());
 
 	// Attatch this to the new parent (if it exists)
-	auto * newParentPtr = Entity::GetObjectFromID(parentEntityId);
+	auto* newParentPtr = Entity::GetObjectFromID(parentEntityId);
 	if (newParentPtr == nullptr)
 		return;
 

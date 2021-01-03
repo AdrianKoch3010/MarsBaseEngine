@@ -107,7 +107,7 @@ namespace mbe
 	template<class TAnimated>
 	inline void FrameAnimation::operator()(TAnimated & target, float progress) const
 	{
-		assert(!frameList.empty() && "FrameAnimation: No frames exist that could be appied");
+		assert(!frameList.empty() && "FrameAnimation: No frames exist that could be applied");
 		assert(progress >= 0.f && progress <= 1.f && "FrameAnimation: The progress must be a float between 0 and 1");
 
 		EnsureNormalized();

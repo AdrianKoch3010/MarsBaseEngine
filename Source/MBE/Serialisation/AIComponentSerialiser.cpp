@@ -25,11 +25,23 @@ void AIComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLEle
 			throw ParseError(MBE_NAME_OF(AIComponentSerialiser), "Failed to parse ActiveTask utility attribute", activeTaskElement->GetLineNum());
 
 		// Call the task serialiser for this type which creates the task
-		auto taskPtr = AITaskSerialiserRegistry::Instance()[typeString].Load(*activeTaskElement, utility);
+		try
+		{
+			auto taskPtr = AITaskSerialiserRegistry::Instance()[typeString].Load(*activeTaskElement, utility);
 
-		// Set the active task under this type
-		const auto aiTaskTypeId = AITaskSerialiserRegistry::Instance().GetObjectTypeByName(typeString);
-		aiComponent.SetActiveTask({ aiTaskTypeId, taskPtr });
+			// Set the active task under this type
+			const auto aiTaskTypeId = AITaskSerialiserRegistry::Instance().GetObjectTypeByName(typeString);
+			aiComponent.SetActiveTask({ aiTaskTypeId, taskPtr });
+		}
+		// This is so that the parse error is not caught by the runtime_error
+		catch (const ParseError& parseError)
+		{
+			throw parseError;
+		}
+		catch (const std::runtime_error& error)
+		{
+			throw ParseError(MBE_NAME_OF(AIComponentSerialiser), "Unkown AITask serialiser (" + typeString + ")", activeTaskElement->GetLineNum());
+		}
 	}
 
 	const auto queuedTaskElement = componentData.FirstChildElement("QueuedTask");
@@ -48,11 +60,23 @@ void AIComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::XMLEle
 			throw ParseError(MBE_NAME_OF(AIComponentSerialiser), "Failed to parse QueuedTask utility attribute", queuedTaskElement->GetLineNum());
 
 		// Call the task serialiser for this type which creates the task
-		auto taskPtr = AITaskSerialiserRegistry::Instance()[typeString].Load(*queuedTaskElement, utility);
+		try
+		{
+			auto taskPtr = AITaskSerialiserRegistry::Instance()[typeString].Load(*queuedTaskElement, utility);
 
-		// Set the active task under this type
-		const auto aiTaskTypeId = AITaskSerialiserRegistry::Instance().GetObjectTypeByName(typeString);
-		aiComponent.SetQueuedTask({ aiTaskTypeId, taskPtr });
+			// Set the active task under this type
+			const auto aiTaskTypeId = AITaskSerialiserRegistry::Instance().GetObjectTypeByName(typeString);
+			aiComponent.SetQueuedTask({ aiTaskTypeId, taskPtr });
+		}
+		// This is so that the parse error is not caught by the runtime_error
+		catch (const ParseError& parseError)
+		{
+			throw parseError;
+		}
+		catch (const std::runtime_error& error)
+		{
+			throw ParseError(MBE_NAME_OF(AIComponentSerialiser), "Unkown AITask serialiser (" + typeString + ")", queuedTaskElement->GetLineNum());
+		}
 	}
 }
 

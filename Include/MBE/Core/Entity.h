@@ -133,7 +133,7 @@ namespace mbe
 	protected:
 		/// @brief Constructor
 		/// @param entityManager A reference to the mbe::EntityManager in which this component is created
-		Entity(EventManager & eventManager, EntityManager & entityManager);
+		Entity(EventManager& eventManager, EntityManager& entityManager);
 
 	public:
 		/// @brief Default destructor
@@ -155,7 +155,7 @@ namespace mbe
 		/// @attention Note that the parentEntity must not be passed (It is added implicetly by this function)
 		/// @returns Returns a reference to the added component which can be used insted of GetComponent<T>()
 		template <class TComponent, typename... TArguments>
-		TComponent & AddComponent(TArguments&&... arguments);
+		TComponent& AddComponent(TArguments&&... arguments);
 
 		template <typename... TComponents, typename... TTuples>
 		void AddComponents(TTuples&&... tuples);
@@ -177,13 +177,18 @@ namespace mbe
 		/// Therefore, before calling this function, the HasComponent() function should be called
 		///  to make sure that this entity actually has the requested component.
 		template <class TComponent>
-		TComponent & GetComponent() const;
+		TComponent& GetComponent() const;
 
 		/// @brief Returns true if the Entity has the requested component, flase otherwise
 		/// @details If an entity has comonent TComponent, it will also be in the corresponding entity group
-		/// @tparam T The type of the requested component
+		/// @tparam TComponent The type of the requested component
 		template <class TComponent>
 		bool HasComponent() const;
+
+		/// @brief Returns true if the Entity has all the requested components, false otherwise
+		/// @tparam TComponents The types of the requested components
+		template <typename ...TComponents>
+		bool HasComponents() const;
 
 		/// @brief Looks up whether this entity is the group
 		/// @param groupId The id of the group to check. It is not case sensitive so capital letters do not matter. Only use ASCII strings!
@@ -223,7 +228,7 @@ namespace mbe
 
 		/// @breif Returns all child entities
 		/// @returns A list of child entity ids. If this entity has no child entities, an empty list is returned
-		inline const std::set<HandleID> & GetChildEntityIDList() const { return childEntityIdList; }
+		inline const std::set<HandleID>& GetChildEntityIDList() const { return childEntityIdList; }
 
 	private:
 		void AddPolymorphism(detail::ComponentTypeID typeId, Component::Ptr component);
@@ -234,20 +239,20 @@ namespace mbe
 
 		// Template method to unpack the tules passed to the AddComponents() method
 		template <class TComponent, typename TTuple>
-		void AddComponentUnpack(TTuple && tuple);
+		void AddComponentUnpack(TTuple&& tuple);
 
 		//// Add component that has been constructed outside the entiy
 		//template <class TComponent>
 		//void AddConstructedComponent(std::shared_ptr<TComponent> component);
 
 		// Returns a list of the type ids for all the components of this entity
-		// This olny returns derived components
+		// This only returns derived components
 		std::vector<detail::ComponentTypeID> GetComponentTypeIDList() const;
 
 
 	private:
-		EntityManager & entityManager;
-		EventManager & eventManager;
+		EntityManager& entityManager;
+		EventManager& eventManager;
 
 		bool active;
 		std::unordered_map<detail::ComponentTypeID, Component::WPtr> componentDictionary;
@@ -263,7 +268,7 @@ namespace mbe
 #pragma region Template Implementations
 
 	template <class TComponent, typename... TArguments>
-	inline TComponent & Entity::AddComponent(TArguments&&... arguments)
+	inline TComponent& Entity::AddComponent(TArguments&&... arguments)
 	{
 		// Needed since std::is_base_of<T, T> == true
 		static_assert(std::is_base_of<Component, TComponent>::value, "Entity: TComponent must inherit from Component");
@@ -292,11 +297,11 @@ namespace mbe
 	}
 
 	template <class TComponent, typename TTuple>
-	inline void Entity::AddComponentUnpack(TTuple && tuple)
+	inline void Entity::AddComponentUnpack(TTuple&& tuple)
 	{
 		std::apply([this](auto&&... args) {
 			AddComponent<TComponent>(std::forward<decltype(args)>(args)...);
-		}, std::forward<TTuple>(tuple));
+			}, std::forward<TTuple>(tuple));
 	}
 
 	template <typename... TComponents, typename... TTuples>
@@ -382,6 +387,12 @@ namespace mbe
 		static_assert(std::is_same<Component, TComponent>::value == false, "Entity: TComponent must inherit from Component");
 
 		return componentDictionary.find(detail::GetComponentTypeID<TComponent>()) != componentDictionary.end();
+	}
+
+	template<typename ...TComponents>
+	inline bool Entity::HasComponents() const
+	{
+		return (HasComponent<TComponents>() && ...);
 	}
 
 #pragma endregion

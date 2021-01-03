@@ -115,7 +115,7 @@ std::vector<Entity::HandleID> EntitySerialiser::Load(const tinyxml2::XMLDocument
 	// Get the root node
 	const auto rootNode = document.FirstChild();
 	if (rootNode == nullptr)
-		throw std::runtime_error("Load Entities: The root node could not be found");
+		throw ParseError(MBE_NAME_OF(EntitySerialiser), "The root node could not be found", document.GetLineNum());
 
 	// Load the list of entities
 	for (auto entityElement = rootNode->FirstChildElement("Entity"); entityElement != nullptr; entityElement = entityElement->NextSiblingElement("Entity"))
@@ -123,12 +123,12 @@ std::vector<Entity::HandleID> EntitySerialiser::Load(const tinyxml2::XMLDocument
 		// Get the entity id
 		int64_t entityId;
 		if (entityElement->QueryInt64Attribute("id", &entityId) != XML_SUCCESS)
-			throw std::runtime_error("Load Entities: Failed to parse entity id");
+			throw ParseError(MBE_NAME_OF(EntitySerialiser), "Failed to parse Entity id attribute",entityElement->GetLineNum());
 
 		// Get the parent entity id
 		int64_t parentEntityId;
 		if (entityElement->QueryInt64Attribute("parentId", &parentEntityId) != XML_SUCCESS)
-			throw std::runtime_error("Load Entities: Failed to parse parent entity id");
+			throw ParseError(MBE_NAME_OF(EntitySerialiser), "Failed to parse Entity parentId attribute", entityElement->GetLineNum());
 
 		// Create the entity
 		auto& entity = entityManager.CreateEntity();
@@ -147,10 +147,22 @@ std::vector<Entity::HandleID> EntitySerialiser::Load(const tinyxml2::XMLDocument
 			// Get the component type
 			auto componentType = componentElement->Attribute("type");
 			if (componentType == nullptr)
-				throw std::runtime_error("Load Components: Failed to parse component type");
+				throw ParseError(MBE_NAME_OF(EntitySerialiser), "Failed to parse Component type attribute", componentElement->GetLineNum());
 			std::string componentTypeString{ componentType };
 
-			ComponentSerialiserRegistry::Instance()[componentTypeString].LoadComponent(entity, *componentElement);
+			try
+			{
+				ComponentSerialiserRegistry::Instance()[componentTypeString].LoadComponent(entity, *componentElement);
+			}
+			// This is so that the parse error is not caught by the runtime_error
+			catch (const ParseError& parseError)
+			{
+				throw parseError;
+			}
+			catch (const std::runtime_error& error)
+			{
+				throw ParseError(MBE_NAME_OF(EntitySerialiser), "Unknown component serialiser (" + componentTypeString + ")", componentElement->GetLineNum());
+			}
 		}
 		// Raise the entity created event
 		eventManager.RaiseEvent(event::EntityCreatedEvent(entity.GetHandleID()));

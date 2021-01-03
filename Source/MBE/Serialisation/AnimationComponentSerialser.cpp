@@ -110,7 +110,18 @@ void AnimationComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2:
 				std::string animationTypeString{ animationType };
 
 				// Call the appropreate animation serialiser for that animation type
-				AnimationSerialiserRegistry::Instance()[animationTypeString].Load(animator, *animationElement, animationIdString, sf::milliseconds(duration));
+				try
+				{
+					AnimationSerialiserRegistry::Instance()[animationTypeString].Load(animator, *animationElement, animationIdString, sf::milliseconds(duration));
+				}
+				catch (const ParseError& parseError)
+				{
+					throw parseError;
+				}
+				catch (const std::runtime_error& error)
+				{
+					throw ParseError(MBE_NAME_OF(AnimationComponentSerialiser), "Unknown animation serialiser (" + animationTypeString + ")", animationsElement->GetLineNum());
+				}
 			}
 		}
 

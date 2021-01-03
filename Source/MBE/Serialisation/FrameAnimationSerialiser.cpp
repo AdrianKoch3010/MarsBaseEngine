@@ -89,5 +89,38 @@ EntityAnimator::AnimationFunction FrameAnimationSerialiser::Parse(const tinyxml2
 			frameAnimation.AddFrame(subRect, duration);
 	}
 
+	for (auto framesElement = animationData.FirstChildElement("Frames"); framesElement != nullptr; framesElement = framesElement->NextSiblingElement("Frames"))
+	{
+		sf::Vector2u size, first;
+		unsigned int noOfFrames = 0;
+
+		// Get the size
+		const auto sizeElement = framesElement->FirstChildElement("Size");
+		if (sizeElement == nullptr)
+			throw ParseError(MBE_NAME_OF(FrameAnimationSerialiser), "Size node is required", framesElement->GetLineNum());
+		if (sizeElement->QueryUnsignedAttribute("x", &size.x) != XML_SUCCESS)
+			throw ParseError(MBE_NAME_OF(FrameAnimationSerialiser), "Failed to parse Size x attribute", sizeElement->GetLineNum());
+		if (sizeElement->QueryUnsignedAttribute("y", &size.y) != XML_SUCCESS)
+			throw ParseError(MBE_NAME_OF(FrameAnimationSerialiser), "Failed to parse Size y attribute", sizeElement->GetLineNum());
+
+		// Get the first node
+		const auto firstElement = framesElement->FirstChildElement("First");
+		if (firstElement == nullptr)
+			throw ParseError(MBE_NAME_OF(FrameAnimationSerialiser), "First node is required", framesElement->GetLineNum());
+		if (firstElement->QueryUnsignedAttribute("x", &first.x) != XML_SUCCESS)
+			throw ParseError(MBE_NAME_OF(FrameAnimationSerialiser), "Failed to parse First x attribute", firstElement->GetLineNum());
+		if (firstElement->QueryUnsignedAttribute("y", &first.y) != XML_SUCCESS)
+			throw ParseError(MBE_NAME_OF(FrameAnimationSerialiser), "Failed to parse First y attribute", firstElement->GetLineNum());
+
+		// Get the noOfFrames
+		const auto noOfFramesElement = framesElement->FirstChildElement("NoOfFrames");
+		if (noOfFramesElement == nullptr)
+			throw ParseError(MBE_NAME_OF(FrameAnimationSerialiser), "NoOfFrames node is required", framesElement->GetLineNum());
+		if (noOfFramesElement->QueryUnsignedText(&noOfFrames) != XML_SUCCESS)
+			throw ParseError(MBE_NAME_OF(FrameAnimationSerialiser), "Failed to parse NoOfFrames text", noOfFramesElement->GetLineNum());
+
+		frameAnimation.AddFrames(size, first, noOfFrames);
+	}
+
 	return frameAnimation;
 }

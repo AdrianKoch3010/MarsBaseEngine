@@ -29,8 +29,8 @@ namespace mbe
 		virtual void Update(sf::Time simTime) = 0;
 
 	protected:
-		EntityManager & entityManager;
-		EventManager & eventManager;
+		EntityManager& entityManager;
+		EventManager& eventManager;
 	};
 
 } // namespace mbe
