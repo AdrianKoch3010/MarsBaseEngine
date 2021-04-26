@@ -6,8 +6,8 @@
 #include <string>
 #include <vector>
 #include <tuple>
-#include <set>
 #include <algorithm>
+#include <unordered_set>
 #include <unordered_map>
 #include <cassert>
 
@@ -129,6 +129,7 @@ namespace mbe
 	public:
 		/// @brief The type of the id used to access a group
 		typedef std::string Group;
+		typedef EntityID HandleID;
 
 	protected:
 		/// @brief Constructor
@@ -177,7 +178,16 @@ namespace mbe
 		/// Therefore, before calling this function, the HasComponent() function should be called
 		///  to make sure that this entity actually has the requested component.
 		template <class TComponent>
-		TComponent& GetComponent() const;
+		TComponent& GetComponent();
+
+		/// @brief Returns a const refernce to the requested component
+		/// @details Const overload to preserve const correctness
+		/// @tparam T The type of the requested component
+		/// @throws std::runntime_error if this entity does not have the requested component.
+		/// Therefore, before calling this function, the HasComponent() function should be called
+		///  to make sure that this entity actually has the requested component.
+		template <class TComponent>
+		const TComponent& GetComponent() const;
 
 		/// @brief Returns true if the Entity has the requested component, flase otherwise
 		/// @details If an entity has comonent TComponent, it will also be in the corresponding entity group
@@ -224,11 +234,26 @@ namespace mbe
 
 		/// @brief Gets the parent entity
 		/// @returns The id of the parent entity. If this entity has no parent entity, mbe::Entity::GetNullID() is returned
-		inline HandleID GetParentEntityID() const { return parentEntityId; }
+		inline HandleID GetParentEntityID() { return parentEntityId; }
+
+		/// @brief Gets the parent entity
+		/// @details Const overload
+		/// @returns The id of the parent entity. If this entity has no parent entity, mbe::Entity::GetNullID() is returned
+		inline const HandleID GetParentEntityID() const { return parentEntityId; }
+
+		/// @brief Gets the parent entity
+		/// @detail Const overload
+		/// @returns The id of the parent entity. If this entity has no parent entity, mbe::Entity::GetNullID() is returned
+		inline const HandleID GetParentEntityID() const { return parentEntityId; }
 
 		/// @breif Returns all child entities
 		/// @returns A list of child entity ids. If this entity has no child entities, an empty list is returned
-		inline const std::set<HandleID>& GetChildEntityIDList() const { return childEntityIdList; }
+		inline std::unordered_set<HandleID>& GetChildEntityIDList() { return childEntityIdList; }
+
+		/// @breif Returns all child entities
+		/// @detail Const overload
+		/// @returns A list of child entity ids. If this entity has no child entities, an empty list is returned
+		inline const std::unordered_set<HandleID>& GetChildEntityIDList() const { return childEntityIdList; }
 
 	private:
 		void AddPolymorphism(detail::ComponentTypeID typeId, Component::Ptr component);
@@ -261,7 +286,7 @@ namespace mbe
 		std::vector<Group> groupList; /// <The IDs of the groups that this entity belongs to
 
 		Entity::HandleID parentEntityId;
-		std::set<Entity::HandleID> childEntityIdList;
+		std::unordered_set<Entity::HandleID> childEntityIdList;
 	};
 
 
@@ -363,7 +388,24 @@ namespace mbe
 	//}
 
 	template <class TComponent>
-	inline TComponent& Entity::GetComponent() const
+	inline TComponent& Entity::GetComponent()
+	{
+		// Needed since std::is_base_of<T, T> == true
+		static_assert(std::is_base_of<Component, TComponent>::value, "Entity: TComponent must inherit from Component");
+		static_assert(std::is_same<Component, TComponent>::value == false, "Entity: TComponent must inherit from Component");
+
+		const auto it = componentDictionary.find(detail::GetComponentTypeID<TComponent>());
+
+		// Make sure the component exists
+		// Don't use HasComponent() to avoid unnecessary lookup
+		if (it == componentDictionary.cend())
+			throw std::runtime_error("Enity: This entity does not have the requested component Id: " + std::to_string(detail::GetComponentTypeID<TComponent>()));
+
+		return *std::static_pointer_cast<TComponent>(it->second.lock());
+	}
+
+	template <class TComponent>
+	inline const TComponent& Entity::GetComponent() const
 	{
 		// Needed since std::is_base_of<T, T> == true
 		static_assert(std::is_base_of<Component, TComponent>::value, "Entity: TComponent must inherit from Component");

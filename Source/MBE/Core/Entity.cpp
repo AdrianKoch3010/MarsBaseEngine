@@ -59,12 +59,8 @@ void Entity::RemoveFromGroup(Group groupId)
 
 void Entity::AttachChild(HandleID childEntityId)
 {
-	// Make sure the entity exists
-	assert(Entity::GetObjectFromID(childEntityId) != nullptr && "Entity: The child entity must exists");
-	auto& childEntity = *Entity::GetObjectFromID(childEntityId);
-
 	// Set the parentEntity on the child entity
-	childEntity.parentEntityId = this->GetHandleID();
+	childEntityId->parentEntityId = this->GetHandleID();
 
 	// Add the child entity to the list of child entities
 	childEntityIdList.insert(std::move(childEntityId));
@@ -72,12 +68,8 @@ void Entity::AttachChild(HandleID childEntityId)
 
 void Entity::DetatchChild(HandleID childEntityId)
 {
-	// Make sure the entity exists
-	assert(Entity::GetObjectFromID(childEntityId) != nullptr && "Entity: The child entity must exists");
-	auto& childEntity = *Entity::GetObjectFromID(childEntityId);
-
 	// Set the child entity's parent to null
-	childEntity.parentEntityId = Entity::GetNullID();
+	childEntityId->parentEntityId = Entity::GetNullID();
 
 	// Remove the child entity from this entity's child entity list
 	childEntityIdList.erase(childEntityId);

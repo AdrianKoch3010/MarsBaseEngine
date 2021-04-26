@@ -4,7 +4,7 @@ using namespace mbe;
 using mbe::event::EntityCreatedEvent;
 using TextureWrapperChangedEvent = mbe::event::ComponentValueChangedEvent<TextureWrapperComponent>;
 
-TiledTerrainLayerRenderSystem::TiledTerrainLayerRenderSystem(EventManager & eventManager, const EntityManager & entityManager) :
+TiledTerrainLayerRenderSystem::TiledTerrainLayerRenderSystem(EventManager& eventManager, const EntityManager& entityManager) :
 	eventManager(eventManager),
 	BaseComponentRenderSystem(entityManager)
 {
@@ -15,12 +15,10 @@ TiledTerrainLayerRenderSystem::TiledTerrainLayerRenderSystem(EventManager & even
 		}
 	}));*/
 
-	entityCreatedSubscription = eventManager.Subscribe(EventManager::TCallback<EntityCreatedEvent>([this](const EntityCreatedEvent & event)
-	{
-		assert(Entity::GetObjectFromID(event.GetEntityID()) != nullptr && "TiledTerrain: The entity must exist");
-
-		OnEntityCreatedEvent(*Entity::GetObjectFromID(event.GetEntityID()));
-	}));
+	entityCreatedSubscription = eventManager.Subscribe(EventManager::TCallback<EntityCreatedEvent>([this](const EntityCreatedEvent& event)
+		{
+			OnEntityCreatedEvent(*event.GetEntityID());
+		}));
 
 }
 
@@ -31,18 +29,15 @@ TiledTerrainLayerRenderSystem::~TiledTerrainLayerRenderSystem()
 
 void TiledTerrainLayerRenderSystem::Update()
 {
-	for (const auto entityId : entityManager.GetComponentGroup<TiledRenderComponent>())
+	for (auto& entityId : entityManager.GetComponentGroup<TiledRenderComponent>())
 	{
-		assert(Entity::GetObjectFromID(entityId) != nullptr && "TiledTerrainLayerRenderSystem: The entity must exists");
-
-		auto & entity = *Entity::GetObjectFromID(entityId);
-		auto & renderComponent = entity.GetComponent<TiledRenderComponent>();
+		auto& renderComponent = entityId->GetComponent<TiledRenderComponent>();
 
 		auto renderStates = renderComponent.GetRenderStates();
-		
+
 		// Set the transform if the entity has a transform component
-		if (entity.HasComponent<TransformComponent>())
-			renderStates.transform = entity.GetComponent<TransformComponent>().GetWorldTransform();
+		if (entityId->HasComponent<TransformComponent>())
+			renderStates.transform = entityId->GetComponent<TransformComponent>().GetWorldTransform();
 
 		// Update the TiledTerraiLayerRenderComponent's render states
 		renderComponent.SetRenderStates(std::move(renderStates));
@@ -68,12 +63,12 @@ void TiledTerrainLayerRenderSystem::Update()
 //	renderComponent.SetRenderStates(std::move(renderStates));
 //}
 
-void TiledTerrainLayerRenderSystem::OnEntityCreatedEvent(Entity & entity)
+void TiledTerrainLayerRenderSystem::OnEntityCreatedEvent(Entity& entity)
 {
 	if (!entity.HasComponent<TextureWrapperComponent>() || !entity.HasComponent<TiledRenderComponent>())
 		return;
 
-	auto & renderComponent = entity.GetComponent<TiledRenderComponent>();
+	auto& renderComponent = entity.GetComponent<TiledRenderComponent>();
 
 	// Update the texture
 	auto renderStates = renderComponent.GetRenderStates();

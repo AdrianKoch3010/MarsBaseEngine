@@ -29,18 +29,14 @@ void ClickableSystem::OnClick(sf::Vector2f clickPosition, sf::Mouse::Button butt
 	// Ptr since entity exist
 	std::vector<const Entity*> clickedEntityList;
 
-	for (const auto entityId : entityManager.GetComponentGroup<ClickableComponent>())
+	for (const auto& entityId : entityManager.GetComponentGroup<ClickableComponent>())
 	{
-		/// make sure that the entity exists - this may be done in a refresh function / guaranteed by the entityManager
-		assert(Entity::GetObjectFromID(entityId) != nullptr && "ClickableSystem: The entity must exist");
-		const auto& entity = *Entity::GetObjectFromID(entityId);
-
 		// The entity must have an mbe::TextureWrapperComponent
-		if (entity.HasComponent<TextureWrapperComponent>() == false)
+		if (entityId->HasComponent<TextureWrapperComponent>() == false)
 			continue;
 
-		const auto& clickableComponent = entity.GetComponent<ClickableComponent>();
-		const auto& textureWrapperComponent = entity.GetComponent<TextureWrapperComponent>();
+		const auto& clickableComponent = entityId->GetComponent<ClickableComponent>();
+		const auto& textureWrapperComponent = entityId->GetComponent<TextureWrapperComponent>();
 		const auto& textureRect = textureWrapperComponent.GetTextureRect();
 		const auto pixelMaskPtr = textureWrapperComponent.GetTextureWrapper().GetPixelMask();
 
@@ -48,12 +44,12 @@ void ClickableSystem::OnClick(sf::Vector2f clickPosition, sf::Mouse::Button butt
 		if (pixelMaskPtr == nullptr)
 			continue;
 
-		if (pixelMaskPtr->Contains(CalculatePosition(entity, clickPosition), textureRect))
+		if (pixelMaskPtr->Contains(CalculatePosition(*entityId, clickPosition), textureRect))
 			//if (clickableComponent.Contains(CalculatePosition(entity, clickPosition)))
 		{
 			// If the entity has a renderInformationComponent the 'drawing' order + clickAbsorbtion must be taken into account
-			if (entity.HasComponent<RenderInformationComponent>())
-				clickedEntityList.push_back(&entity);
+			if (entityId->HasComponent<RenderInformationComponent>())
+				clickedEntityList.push_back(&*entityId);
 			else
 				RaiseClickEvents(clickableComponent, button);
 		}
@@ -66,7 +62,7 @@ void ClickableSystem::OnClick(sf::Vector2f clickPosition, sf::Mouse::Button butt
 
 
 	// Loop through all clicked entities and figure out for which the event must be raised (depending on which one is drawn on top of each other)
-	for (const auto* entityPtr : clickedEntityList)
+	for (const auto* const entityPtr : clickedEntityList)
 	{
 		const auto& clickableComponent = entityPtr->GetComponent<ClickableComponent>();
 
@@ -112,7 +108,7 @@ void ClickableSystem::RaiseClickEvents(const ClickableComponent& clickableCompon
 		return;
 	}
 
-	for (auto entityId = clickableComponent.GetParentEntity().GetHandleID(); Entity::GetObjectFromID(entityId) != nullptr; )
+	for (auto entityId = clickableComponent.GetParentEntity().GetHandleID(); entityId.Valid(); )
 	{
 		const auto& clickedEntity = *Entity::GetObjectFromID(entityId);
 

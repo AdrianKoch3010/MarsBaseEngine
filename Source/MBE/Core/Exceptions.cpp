@@ -33,3 +33,9 @@ MissingComponentException::MissingComponentException(Entity::HandleID entityId, 
 	componentTypeId(componentTypeId)
 {
 }
+
+IDNotFoundException::IDNotFoundException(unsigned long long id) :
+	FatalException("Invalid id: " + std::to_string(id)),
+	id(id)
+{
+}

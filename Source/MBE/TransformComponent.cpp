@@ -20,19 +20,16 @@ sf::Transform TransformComponent::GetWorldTransform() const
 
 	sf::Transform transform{ sf::Transform::Identity };
 
-	for (auto transformEntityId = this->parentEntity.GetHandleID(); Entity::GetObjectFromID(transformEntityId) != nullptr && Entity::GetObjectFromID(transformEntityId)->HasComponent<TransformComponent>(); )
+	for (auto transformEntityId = this->parentEntity.GetHandleID(); transformEntityId.Valid() && transformEntityId->HasComponent<TransformComponent>(); )
 	{
-		// The entity's existance has been tested in the for loop
-		const auto & entity = *Entity::GetObjectFromID(transformEntityId);
-
 		// This should be guaranteed by the SetRelativeTo(parentTransformEntityId) method / constructor
-		assert(entity.HasComponent<TransformComponent>() && "TransformComponent: The entity must have a mbe::TransformComponent");
+		assert(transformEntityId->HasComponent<TransformComponent>() && "TransformComponent: The entity must have a mbe::TransformComponent");
 
 		// transform = transformComponent->getTransform() * transform;
-		transform = entity.GetComponent<TransformComponent>().GetLocalTransform() * transform;
+		transform = transformEntityId->GetComponent<TransformComponent>().GetLocalTransform() * transform;
 
 		// transformComponent = transformComponent->parent
-		transformEntityId = entity.GetParentEntityID();
+		transformEntityId = transformEntityId->GetParentEntityID();
 	}
 
 	return transform;

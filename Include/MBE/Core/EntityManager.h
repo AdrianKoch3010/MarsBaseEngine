@@ -32,7 +32,7 @@ namespace mbe
 	public:
 		/// @brief Constructor
 		/// @param eventManager A reference to the mbe::EventManager that is passed on to the entities
-		EntityManager(EventManager & eventManager);
+		EntityManager(EventManager& eventManager);
 
 		/// @brief Default Destructor
 		~EntityManager() = default;
@@ -47,7 +47,7 @@ namespace mbe
 		/// @n The CreateEntity() mehtod is be the only way to create entities since entities
 		/// created elsewhere may not be managed properly.
 		/// @returns A reference to the created entity
-		Entity & CreateEntity();
+		Entity& CreateEntity();
 
 		/// @brief Creates a derived entity
 		/// @details Components may be added in the entities constructor but can also be added later on.
@@ -60,18 +60,18 @@ namespace mbe
 		/// not add additional methods anyway.
 		// Is overloading based on the template parameters an option?
 		template <typename TData, typename... TArguments>
-		Entity & CreateEntity(TArguments&&... arguments);
+		Entity& CreateEntity(TArguments&&... arguments);
 
 		// The reference is valid as long as the entitymanager exists (which should be longer than the functions using it)
 		// Returns a list of all entites that have been added to this group
 		// If the group id doesn't exista an empty list is returned
 		// The group id is not case sensitive - ASCII only
-		const std::vector<Entity::HandleID>& GetGroup(Entity::Group groupId) const;
+		std::vector<Entity::HandleID>& GetGroup(Entity::Group groupId) const;
 
 		// The reference is valid as long as the entitymanager exists (which should be longer than the functions using it)
 		// Returns a list of all entities that have component TComponent
 		template <class TComponentSerialiser>
-		const std::vector<Entity::HandleID>& GetComponentGroup() const;
+		std::vector<Entity::HandleID>& GetComponentGroup() const;
 
 		/// @brief Returns a list of all entity ids
 		/// @details This function coppies all entity id from the entity list and should, therefore, be avoided.
@@ -85,27 +85,27 @@ namespace mbe
 
 		// This method is private since it should never be called directly
 		// If done so the entity manager might add an entity to a group that the entity itself is not added to
-		void AddEntityToGroup(const Entity & entity, Entity::Group groupId);
+		void AddEntityToGroup(const Entity& entity, Entity::Group groupId);
 
 		// This method is private since it should never be called directly
 		// If done so the entity might be added to a component group of a component that it doesn't have
-		void AddEntityToGroup(const Entity & entity, detail::ComponentTypeID componentTypeId);
+		void AddEntityToGroup(const Entity& entity, detail::ComponentTypeID componentTypeId);
 
 	private:
 		std::vector<std::unique_ptr<Entity>> entityList;
 		mutable std::map<Entity::Group, std::vector<Entity::HandleID>> entityGroups;
 		mutable EntityGroupDictionary entityGroupDictionary;
 
-		EventManager & eventManager;
+		EventManager& eventManager;
 	};
 
 #pragma region Template Implementations
 
 	template<typename TData, typename ...TArguments>
-	inline Entity & EntityManager::CreateEntity(TArguments && ...arguments)
+	inline Entity& EntityManager::CreateEntity(TArguments&& ...arguments)
 	{
 		// The raw new is needed for the entity manager to access the entities protected constructor
-		TData * rawEntity = new TData(*this, std::forward<TArguments>(arguments)...);
+		TData* rawEntity = new TData(*this, std::forward<TArguments>(arguments)...);
 
 		// Make a new unique pointer of the base type
 		std::unique_ptr<Entity> entity(rawEntity);
@@ -121,7 +121,7 @@ namespace mbe
 	}
 
 	template<class TComponentSerialiser>
-	inline const std::vector<Entity::HandleID>& EntityManager::GetComponentGroup() const
+	inline std::vector<Entity::HandleID>& EntityManager::GetComponentGroup() const
 	{
 		// Make sure that only Components are added as type id keys for the dictionary
 		static_assert(std::is_base_of<Component, TComponentSerialiser>::value, "EntityManager: TComponent must inherit from mbe::Component");
@@ -132,7 +132,7 @@ namespace mbe
 	}
 
 #pragma endregion
-	
+
 } // namespace mbe
 
 

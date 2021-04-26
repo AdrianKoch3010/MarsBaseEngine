@@ -53,14 +53,11 @@ bool AnimationComponent::HasAnimator(std::string id) const
 		return true;
 
 	// Recursivly search if any of the child entities has this animator
-	for (const auto childEntityId : this->GetParentEntity().GetChildEntityIDList())
+	for (const auto& childEntityId : this->GetParentEntity().GetChildEntityIDList())
 	{
-		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
-
-		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
-		if (childEntity.HasComponent<AnimationComponent>())
+		if (childEntityId->HasComponent<AnimationComponent>())
 		{
-			if (childEntity.GetComponent<AnimationComponent>().HasAnimator(id))
+			if (childEntityId->GetComponent<AnimationComponent>().HasAnimator(id))
 				return true;
 		}
 	}
@@ -77,14 +74,11 @@ bool AnimationComponent::HasAnimation(std::string id) const
 	}
 
 	// Recursivly search if any of the child entities has this animator
-	for (const auto childEntityId : this->GetParentEntity().GetChildEntityIDList())
+	for (const auto& childEntityId : this->GetParentEntity().GetChildEntityIDList())
 	{
-		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
-
-		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
-		if (childEntity.HasComponent<AnimationComponent>())
+		if (childEntityId->HasComponent<AnimationComponent>())
 		{
-			if (childEntity.GetComponent<AnimationComponent>().HasAnimation(id))
+			if (childEntityId->GetComponent<AnimationComponent>().HasAnimation(id))
 				return true;
 		}
 	}
@@ -103,13 +97,10 @@ void AnimationComponent::PlayAnimation(std::string animatorId, const std::string
 		animatorItr->second->PlayAnimation(animationId, loop);
 
 	// Recursivly call play Animation for the child entities
-	for (const auto childEntityId : this->GetParentEntity().GetChildEntityIDList())
+	for (auto& childEntityId : this->GetParentEntity().GetChildEntityIDList())
 	{
-		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
-
-		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
-		if (childEntity.HasComponent<mbe::AnimationComponent>())
-			childEntity.GetComponent<AnimationComponent>().PlayAnimation(animatorId, animationId, loop);
+		if (childEntityId->HasComponent<mbe::AnimationComponent>())
+			childEntityId->GetComponent<AnimationComponent>().PlayAnimation(animatorId, animationId, loop);
 	}
 }
 
@@ -123,13 +114,10 @@ void AnimationComponent::PlayAnimation(const std::string& animationId, bool loop
 	}
 
 	// Recursivly call play Animation for the child entities
-	for (const auto childEntityId : this->GetParentEntity().GetChildEntityIDList())
+	for (auto& childEntityId : this->GetParentEntity().GetChildEntityIDList())
 	{
-		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
-
-		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
-		if (childEntity.HasComponent<AnimationComponent>())
-			childEntity.GetComponent<AnimationComponent>().PlayAnimation(animationId, loop);
+		if (childEntityId->HasComponent<AnimationComponent>())
+			childEntityId->GetComponent<AnimationComponent>().PlayAnimation(animationId, loop);
 	}
 }
 
@@ -152,13 +140,10 @@ void AnimationComponent::StopAnimation(std::string animatorId, std::string anima
 	}
 
 	// Recursivly call stop animation for the child entities
-	for (const auto childEntityId : this->GetParentEntity().GetChildEntityIDList())
+	for (auto& childEntityId : this->GetParentEntity().GetChildEntityIDList())
 	{
-		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
-
-		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
-		if (childEntity.HasComponent<AnimationComponent>())
-			childEntity.GetComponent<AnimationComponent>().StopAnimation(animatorId, animationId);
+		if (childEntityId->HasComponent<AnimationComponent>())
+			childEntityId->GetComponent<AnimationComponent>().StopAnimation(animatorId, animationId);
 	}
 }
 
@@ -178,13 +163,10 @@ void AnimationComponent::StopAnimation(std::string animatorId)
 		}
 	}
 
-	for (const auto childEntityId : this->GetParentEntity().GetChildEntityIDList())
+	for (auto& childEntityId : this->GetParentEntity().GetChildEntityIDList())
 	{
-		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
-
-		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
-		if (childEntity.HasComponent<AnimationComponent>())
-			childEntity.GetComponent<AnimationComponent>().StopAnimation(animatorId);
+		if (childEntityId->HasComponent<AnimationComponent>())
+			childEntityId->GetComponent<AnimationComponent>().StopAnimation(animatorId);
 	}
 }
 
@@ -194,13 +176,10 @@ void AnimationComponent::StopAnimation()
 		pair.second->StopAnimation();
 
 	// Recursivly call stop animation for the child entities
-	for (const auto childEntityId : this->GetParentEntity().GetChildEntityIDList())
+	for (auto& childEntityId : this->GetParentEntity().GetChildEntityIDList())
 	{
-		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
-
-		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
-		if (childEntity.HasComponent<AnimationComponent>())
-			childEntity.GetComponent<AnimationComponent>().StopAnimation();
+		if (childEntityId->HasComponent<AnimationComponent>())
+			childEntityId->GetComponent<AnimationComponent>().StopAnimation();
 	}
 }
 
@@ -223,13 +202,10 @@ void AnimationComponent::SetPaused(std::string animatorId, std::string animation
 	}
 
 	// Recursivly call set paused for the child entities
-	for (const auto childEntityId : this->GetParentEntity().GetChildEntityIDList())
+	for (auto& childEntityId : this->GetParentEntity().GetChildEntityIDList())
 	{
-		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
-
-		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
-		if (childEntity.HasComponent<AnimationComponent>())
-			childEntity.GetComponent<AnimationComponent>().SetPaused(animatorId, animationId, value);
+		if (childEntityId->HasComponent<AnimationComponent>())
+			childEntityId->GetComponent<AnimationComponent>().SetPaused(animatorId, animationId, value);
 	}
 }
 
@@ -243,13 +219,10 @@ void AnimationComponent::SetPaused(std::string animatorId, bool value)
 		animatorItr->second->SetPaused(value);
 
 	// Recursivly call set paused for the child entities
-	for (const auto childEntityId : this->GetParentEntity().GetChildEntityIDList())
+	for (auto& childEntityId : this->GetParentEntity().GetChildEntityIDList())
 	{
-		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
-
-		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
-		if (childEntity.HasComponent<AnimationComponent>())
-			childEntity.GetComponent<AnimationComponent>().SetPaused(animatorId, value);
+		if (childEntityId->HasComponent<AnimationComponent>())
+			childEntityId->GetComponent<AnimationComponent>().SetPaused(animatorId, value);
 	}
 }
 
@@ -267,14 +240,11 @@ bool AnimationComponent::IsPlayingAnimation(std::string animatorId, std::string 
 	}
 
 	// Recursivly search if any of the child entities is playing this animation
-	for (const auto childEntityId : this->GetParentEntity().GetChildEntityIDList())
+	for (const auto& childEntityId : this->GetParentEntity().GetChildEntityIDList())
 	{
-		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
-
-		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
-		if (childEntity.HasComponent<AnimationComponent>())
+		if (childEntityId->HasComponent<AnimationComponent>())
 		{
-			if (childEntity.GetComponent<AnimationComponent>().IsPlayingAnimation(animatorId, animationId))
+			if (childEntityId->GetComponent<AnimationComponent>().IsPlayingAnimation(animatorId, animationId))
 				return true;
 		}
 	}
@@ -293,14 +263,11 @@ bool AnimationComponent::IsPlayingAnimation(std::string animatorId) const
 	}
 
 	// Recursivly search if any of the child entities is playing this animation
-	for (const auto childEntityId : this->GetParentEntity().GetChildEntityIDList())
+	for (const auto& childEntityId : this->GetParentEntity().GetChildEntityIDList())
 	{
-		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
-
-		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
-		if (childEntity.HasComponent<AnimationComponent>())
+		if (childEntityId->HasComponent<AnimationComponent>())
 		{
-			if (childEntity.GetComponent<AnimationComponent>().IsPlayingAnimation(animatorId))
+			if (childEntityId->GetComponent<AnimationComponent>().IsPlayingAnimation(animatorId))
 				return true;
 		}
 	}
@@ -317,14 +284,11 @@ bool AnimationComponent::IsPlayingAnimation() const
 	}
 
 	// Recursivly search if any of the child entities is playing this animation
-	for (const auto childEntityId : this->GetParentEntity().GetChildEntityIDList())
+	for (const auto& childEntityId : this->GetParentEntity().GetChildEntityIDList())
 	{
-		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
-
-		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
-		if (childEntity.HasComponent<AnimationComponent>())
+		if (childEntityId->HasComponent<AnimationComponent>())
 		{
-			if (childEntity.GetComponent<AnimationComponent>().IsPlayingAnimation())
+			if (childEntityId->GetComponent<AnimationComponent>().IsPlayingAnimation())
 				return true;
 		}
 	}
@@ -349,14 +313,11 @@ bool AnimationComponent::IsPaused(std::string animatorId, std::string animationI
 	}
 
 	// Recursivly search if any of the child entities is paused
-	for (const auto childEntityId : this->GetParentEntity().GetChildEntityIDList())
+	for (const auto& childEntityId : this->GetParentEntity().GetChildEntityIDList())
 	{
-		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
-
-		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
-		if (childEntity.HasComponent<AnimationComponent>())
+		if (childEntityId->HasComponent<AnimationComponent>())
 		{
-			if (childEntity.GetComponent<AnimationComponent>().IsPaused(animatorId, animationId))
+			if (childEntityId->GetComponent<AnimationComponent>().IsPaused(animatorId, animationId))
 				return true;
 		}
 	}
@@ -376,14 +337,11 @@ bool AnimationComponent::IsPaused(std::string animatorId) const
 	}
 
 	// Recursivly search if any of the child entities is paused
-	for (const auto childEntityId : this->GetParentEntity().GetChildEntityIDList())
+	for (const auto& childEntityId : this->GetParentEntity().GetChildEntityIDList())
 	{
-		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "AnimationComponent: The entity must exist");
-
-		auto& childEntity = *Entity::GetObjectFromID(childEntityId);
-		if (childEntity.HasComponent<AnimationComponent>())
+		if (childEntityId->HasComponent<AnimationComponent>())
 		{
-			if (childEntity.GetComponent<AnimationComponent>().IsPaused(animatorId))
+			if (childEntityId->GetComponent<AnimationComponent>().IsPaused(animatorId))
 				return true;
 		}
 	}

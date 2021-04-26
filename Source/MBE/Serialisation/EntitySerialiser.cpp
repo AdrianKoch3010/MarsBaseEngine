@@ -68,20 +68,16 @@ void EntitySerialiser::StoreEntites(const std::string& filePath)
 	auto rootNode = document.NewElement("Entities");
 	document.InsertFirstChild(rootNode);
 
-	for (const auto entityId : entityManager.GetEntityIDList())
+	for (const auto& entityId : entityManager.GetEntityIDList())
 	{
-		// The entity must exists
-		assert(Entity::GetObjectFromID(entityId) != nullptr && "Store entities: The entity must exist");
-
 		// Create the entity
-		const auto& entity = *Entity::GetObjectFromID(entityId);
 		auto entityElement = document.NewElement("Entity");
-		entityElement->SetAttribute("id", static_cast<int64_t>(entity.GetHandleID()));
-		entityElement->SetAttribute("parentId", static_cast<int64_t>(entity.GetParentEntityID()));
+		entityElement->SetAttribute("id", static_cast<int64_t>(entityId.GetUnderlyingID()));
+		entityElement->SetAttribute("parentId", static_cast<int64_t>(entityId.GetUnderlyingID()));
 		rootNode->InsertEndChild(entityElement);
 
 		// Store the components
-		for (const auto componentTypeId : entity.GetComponentTypeIDList())
+		for (const auto componentTypeId : entityId->GetComponentTypeIDList())
 		{
 			// If there is a component serialiser for this component, use it
 			// Otherwise, do nothing
@@ -92,7 +88,7 @@ void EntitySerialiser::StoreEntites(const std::string& filePath)
 				componentElement->SetAttribute("type", ComponentSerialiserRegistry::Instance().GetObjectName(componentTypeId).c_str());
 
 				// Call the corresponding component serialiser
-				ComponentSerialiserRegistry::Instance()[componentTypeId].StoreComponent(entity, document, *componentElement);
+				ComponentSerialiserRegistry::Instance()[componentTypeId].StoreComponent(*entityId, document, *componentElement);
 				entityElement->InsertEndChild(componentElement);
 			}
 		}
@@ -169,9 +165,9 @@ std::vector<Entity::HandleID> EntitySerialiser::Load(const tinyxml2::XMLDocument
 	}
 
 	// Set the parent entities
-	for (auto entityId : loadedEntityIdList)
+	for (auto& entityId : loadedEntityIdList)
 	{
-		auto& entity = *Entity::GetObjectFromID(entityId);
+		auto& entity = *entityId;
 		// Get the old parent entity id for this entity
 		// Then map it on the new entity and set it as a parent
 

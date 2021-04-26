@@ -14,20 +14,14 @@ AudioSystem::AudioSystem(const EntityManager & entityManager) :
 
 void AudioSystem::Update()
 {
-	const auto & baseAudioEntities = entityManager.GetComponentGroup<BaseAudioComponent>();
-
-	for (const auto entityId : baseAudioEntities)
+	for (auto& entityId : entityManager.GetComponentGroup<BaseAudioComponent>())
 	{
-		// make sure the entity exists
-		assert(Entity::GetObjectFromID(entityId) != nullptr && "AudioSystem: The entity must exists");
-
 		// Update audio position
-		auto & entity = *Entity::GetObjectFromID(entityId);
-		entity.GetComponent<BaseAudioComponent>().SetPosition(CalculatePosition(entity));
+		entityId->GetComponent<BaseAudioComponent>().SetPosition(CalculatePosition(*entityId));
 
 		// Delete audio entities that have finished playing
-		if (entity.GetComponent<BaseAudioComponent>().GetAudioStatus() == AudioData::AudioStatus::Stopped)
-			entity.Destroy();
+		if (entityId->GetComponent<BaseAudioComponent>().GetAudioStatus() == AudioData::AudioStatus::Stopped)
+			entityId->Destroy();
 	}
 }
 

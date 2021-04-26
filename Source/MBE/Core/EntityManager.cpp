@@ -2,7 +2,7 @@
 
 using namespace mbe;
 
-EntityManager::EntityManager(EventManager & eventManager) :
+EntityManager::EntityManager(EventManager& eventManager) :
 	eventManager(eventManager)
 {
 }
@@ -26,58 +26,58 @@ std::vector<Entity::HandleID> EntityManager::GetEntityIDList() const
 void EntityManager::Refresh()
 {
 	// Loops through group
-	for (auto & pair : entityGroups)
+	for (auto& pair : entityGroups)
 	{
-		auto & groupedEntityList = pair.second;
+		auto& groupedEntityList = pair.second;
 		groupedEntityList.erase(
 			std::remove_if(groupedEntityList.begin(), groupedEntityList.end(),
 				[&](Entity::HandleID entityId)
-		{
-			// Get the entity
-			// The entity will still exist since the only way to delete it would be to set it
-			// inactive (make sure that inactive entities are deleted after this loop)
-			const auto & entity = *Entity::GetObjectFromID(entityId);
+				{
+					// Get the entity
+					// The entity will still exist since the only way to delete it would be to set it
+					// inactive (make sure that inactive entities are deleted after this loop)
+					const auto& entity = *Entity::GetObjectFromID(entityId);
 
-			// Remove entities that are:
-			// Either marked to be deleted (IsActive() == false)
-			// or has been removed from the group (IsInGroup(groupId) == false)
-			return !entity.IsActive() || !entity.IsInGroup(pair.first);
-		}
+					// Remove entities that are:
+					// Either marked to be deleted (IsActive() == false)
+					// or has been removed from the group (IsInGroup(groupId) == false)
+					return !entity.IsActive() || !entity.IsInGroup(pair.first);
+				}
 		), groupedEntityList.end());
 	}
 
 	// Loops through Component Groups
-	for (auto & pair : entityGroupDictionary)
+	for (auto& pair : entityGroupDictionary)
 	{
-		auto & groupedEntityList = pair.second;
+		auto& groupedEntityList = pair.second;
 		groupedEntityList.erase(
 			std::remove_if(groupedEntityList.begin(), groupedEntityList.end(),
 				[&](Entity::HandleID entityId)
-		{
-			// Get the entity
-			// The entity will still exist since the only way to delete it would be to set it
-			// inactive (make sure that inactive entities are deleted after this loop)
-			const auto & entity = *Entity::GetObjectFromID(entityId);
+				{
+					// Get the entity
+					// The entity will still exist since the only way to delete it would be to set it
+					// inactive (make sure that inactive entities are deleted after this loop)
+					const auto& entity = *Entity::GetObjectFromID(entityId);
 
-			// Remove entities that are marked to be deleted
-			// Entities can't be removed from the group since components can only be added
-			return !entity.IsActive();
-		}
+					// Remove entities that are marked to be deleted
+					// Entities can't be removed from the group since components can only be added
+					return !entity.IsActive();
+				}
 		), groupedEntityList.end());
 	}
 
 	// Loops through every entity and removes it if its inactive
-	entityList.erase(std::remove_if(std::begin(entityList), std::end(entityList), [](const std::unique_ptr<Entity> &entity)
-	{
-		return !entity->IsActive();
-	}),
+	entityList.erase(std::remove_if(std::begin(entityList), std::end(entityList), [](const std::unique_ptr<Entity>& entity)
+		{
+			return !entity->IsActive();
+		}),
 		std::end(entityList));
 }
 
-Entity & EntityManager::CreateEntity()
+Entity& EntityManager::CreateEntity()
 {
 	// The raw new is needed for the entity manager to access the entities protected constructor
-	Entity * rawEntity = new Entity(eventManager, *this);
+	Entity* rawEntity = new Entity(eventManager, *this);
 	// Make a new unique pointer
 	std::unique_ptr<Entity> entity(rawEntity);
 
@@ -91,19 +91,19 @@ Entity & EntityManager::CreateEntity()
 	// Implicetly delete the obsolete/empty unique pointer
 }
 
-void EntityManager::AddEntityToGroup(const Entity & entity, Entity::Group groupId)
+void EntityManager::AddEntityToGroup(const Entity& entity, Entity::Group groupId)
 {
 	NormaliseIDString(groupId);
 
 	entityGroups[groupId].push_back(entity.GetHandleID());
 }
 
-void EntityManager::AddEntityToGroup(const Entity & entity, detail::ComponentTypeID componentTypeId)
+void EntityManager::AddEntityToGroup(const Entity& entity, detail::ComponentTypeID componentTypeId)
 {
 	entityGroupDictionary[componentTypeId].push_back(entity.GetHandleID());
 }
 
-const std::vector<Entity::HandleID>& EntityManager::GetGroup(Entity::Group groupId) const
+std::vector<Entity::HandleID>& EntityManager::GetGroup(Entity::Group groupId) const
 {
 	NormaliseIDString(groupId);
 

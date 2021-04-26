@@ -6,7 +6,8 @@
 #include <string>
 #include <stdexcept>
 
-#include <MBE/Core/Entity.h>
+//#include <MBE/Core/Entity.h>
+class Entity;
 
 // Types of mbe exceptions
 // - Exception (base class for all mbe exceptions)
@@ -66,6 +67,18 @@ namespace mbe
 	private:
 		Entity::HandleID entityId;
 		Component::TypeID componentTypeId;
+	};
+
+	class IDNotFoundException : public FatalException
+	{
+	public:
+		IDNotFoundException(unsigned long long id); // Change id type
+
+	public:
+		inline unsigned long long GetID() const { return id; }
+
+	private:
+		unsigned long long id;
 	};
 
 	// This error will likely be caught by whoever called the parse function and output with the file path and line number

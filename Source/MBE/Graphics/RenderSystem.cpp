@@ -54,15 +54,14 @@ RenderSystem::~RenderSystem()
 	// Reset the render information component getters
 	for (auto renderLayer = RenderLayer::Background; renderLayer != RenderLayer::LayerCount; ++renderLayer)
 	{
-		const auto& renderEntityIdList = renderEntityDictionary[renderLayer];
-		for (auto entityId : renderEntityIdList)
+		auto& renderEntityIdList = renderEntityDictionary[renderLayer];
+		for (auto& entityId : renderEntityIdList)
 		{
 			// This should always be the case
-			assert(Entity::GetObjectFromID(entityId) != nullptr && "RenderSystem: The entity must exist");
-			assert(Entity::GetObjectFromID(entityId)->HasComponent<RenderInformationComponent>() && "RenderSystem: The entity must have a mbe::RenderInformationComponent");
+			assert(entityId->HasComponent<RenderInformationComponent>() && "RenderSystem: The entity must have a mbe::RenderInformationComponent");
 
 			// Get the render information component and reset the getters
-			auto& renderInformationComponent = Entity::GetObjectFromID(entityId)->GetComponent<RenderInformationComponent>();
+			auto& renderInformationComponent = entityId->GetComponent<RenderInformationComponent>();
 			renderInformationComponent.ResetViewGetterFunction();
 			renderInformationComponent.ResetWindowGetterFunction();
 		}
@@ -94,10 +93,10 @@ void RenderSystem::Render()
 		// Sort the render nodes based on their z-order
 		SortByZOrder(renderEntityIdList);
 
-		for (const auto renderEntityId : renderEntityIdList)
+		for (const auto& renderEntityId : renderEntityIdList)
 		{
 			// Get the renderComponent of the entity that corresponds to the id
-			const auto& renderComponent = Entity::GetObjectFromID(renderEntityId)->GetComponent<RenderComponent>();
+			const auto& renderComponent = renderEntityId->GetComponent<RenderComponent>();
 
 			// Culling - only draw if the entity is visible on screen
 			if (renderComponent.IsVisible(viewDictionary[renderLayer]) && renderComponent.IsHidden() == false)
@@ -132,17 +131,16 @@ const sf::View& RenderSystem::GetView(RenderLayer renderLayer) const
 
 void RenderSystem::AddRenderEntity(Entity::HandleID entityId)
 {
-	auto* entity = Entity::GetObjectFromID(entityId);
 	// Can't add a non existing node
-	if (entity == nullptr)
+	if (!entityId.Valid())
 		return;
 
 	// The entity must have a mbe::RenderComponent and a mbe::RenderInformationComponent
-	if (entity->HasComponent<RenderComponent>() == false
-		|| entity->HasComponent<RenderInformationComponent>() == false)
+	if (entityId->HasComponent<RenderComponent>() == false
+		|| entityId->HasComponent<RenderInformationComponent>() == false)
 		return;
 
-	auto& renderInformationComponent = entity->GetComponent<RenderInformationComponent>();
+	auto& renderInformationComponent = entityId->GetComponent<RenderInformationComponent>();
 
 	// Set the view and window getter functions
 	renderInformationComponent.SetViewGetterFunction([this](const Entity& entity)
@@ -160,20 +158,17 @@ void RenderSystem::AddRenderEntity(Entity::HandleID entityId)
 
 void RenderSystem::RemoveRenderEntity(Entity::HandleID entityId)
 {
-	// Get the renderNode (nullptr if if doesn't exist)
-	auto* entity = Entity::GetObjectFromID(entityId);
-
 	// If the pointed-to object no longer exists (or e.g. an invalid id has been passed)
-	if (entity == nullptr)
+	if (!entityId.Valid())
 		return;
 
 	// The entity must have a mbe::RenderComponent and a mbe::RenderInformationComponent
-	if (entity->HasComponent<RenderComponent>() == false
-		&& entity->HasComponent<RenderInformationComponent>() == false)
+	if (entityId->HasComponent<RenderComponent>() == false
+		&& entityId->HasComponent<RenderInformationComponent>() == false)
 		return;
 
 	// Get the render layer;
-	auto& renderInformationComponent = entity->GetComponent<RenderInformationComponent>();
+	auto& renderInformationComponent = entityId->GetComponent<RenderInformationComponent>();
 	auto renderLayer = renderInformationComponent.GetRenderLayer();
 
 	// Remove the node from this layer
@@ -234,7 +229,7 @@ void RenderSystem::SortByZOrder(std::vector<Entity::HandleID>& entityIdList)
 	size_t size = entityIdList.size();
 	for (size_t i = 1; i < size; i++)
 	{
-		for (size_t j = i; j > 0 && Entity::GetObjectFromID(entityIdList[j - 1])->GetComponent<RenderInformationComponent>().GetZOrder() > Entity::GetObjectFromID(entityIdList[j])->GetComponent<RenderInformationComponent>().GetZOrder(); j--)
+		for (size_t j = i; j > 0 && entityIdList[j - 1]->GetComponent<RenderInformationComponent>().GetZOrder() > entityIdList[j]->GetComponent<RenderInformationComponent>().GetZOrder(); j--)
 		{
 			std::swap(entityIdList[j], entityIdList[j - 1]);
 		}

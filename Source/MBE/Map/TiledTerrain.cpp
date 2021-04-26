@@ -29,13 +29,12 @@ TiledTerrain::TiledTerrain(EventManager& eventManager, EntityManager& entityMana
 	// Add layers
 	for (const auto& layer : mapData->GetTileMapLayersIndexList())
 	{
-		Entity::HandleID layerId = this->AddTileMapLayer(tileMapTextureWrapperId);
-		auto& layerEntity = *Entity::GetObjectFromID(layerId);
+		auto& layerId = this->AddTileMapLayer(tileMapTextureWrapperId);
 
 		try
 		{
 			// Must exist
-			layerEntity.GetComponent<TiledRenderComponent>().Create(layer);
+			layerId->GetComponent<TiledRenderComponent>().Create(layer);
 		}
 		catch (const std::runtime_error & error)
 		{
@@ -44,7 +43,7 @@ TiledTerrain::TiledTerrain(EventManager& eventManager, EntityManager& entityMana
 
 		// Store the index list in the tiled terrain layer component
 		// This must be called after creating the layer
-		layerEntity.GetComponent<TileComponent>().SetIndexList(layer);
+		layerId->GetComponent<TileComponent>().SetIndexList(layer);
 
 	}
 }
@@ -92,11 +91,8 @@ void TiledTerrain::SwopRenderLayerOrder(const size_t first, const size_t second)
 	if (first == second)
 		return;
 
-	assert(Entity::GetObjectFromID(renderLayerList[first]) != nullptr && "TiledTerrain: The layer entity must exists");
-	assert(Entity::GetObjectFromID(renderLayerList[second]) != nullptr && "TiledTerrain: The layer entity must exists");
-
-	auto& firstRenderInformationComponent = Entity::GetObjectFromID(renderLayerList[first])->GetComponent<RenderInformationComponent>();
-	auto& secondRenderInformationComponent = Entity::GetObjectFromID(renderLayerList[second])->GetComponent<RenderInformationComponent>();
+	auto& firstRenderInformationComponent = renderLayerList[first]->GetComponent<RenderInformationComponent>();
+	auto& secondRenderInformationComponent = renderLayerList[second]->GetComponent<RenderInformationComponent>();
 
 	// swop the zOrder
 	auto temp = firstRenderInformationComponent.GetZOrder();
@@ -124,7 +120,8 @@ void TiledTerrain::SubscribeEvents()
 		{
 			if (event.IsValueChanged("TextureWrapper") || event.IsValueChanged("TextureId"))
 			{
-				auto& component = mbe::Entity::GetObjectFromID(event.GetComponent().GetParentEntity().GetHandleID())->GetComponent<TextureWrapperComponent>();
+				auto& component = event.GetComponent().GetParentEntity().GetComponent<TextureWrapperComponent>();
+				// Const cast needed --> change the event syntax to non const reference
 				OnTextureWrapperChangedEvent(component);
 			}
 			else if (event.IsValueChanged("IndexList"))
