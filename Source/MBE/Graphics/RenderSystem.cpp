@@ -204,11 +204,9 @@ void RenderSystem::Refresh()
 	for (auto& pair : renderEntityDictionary)
 	{
 		auto& entityList = pair.second;
-		entityList.erase(std::remove_if(entityList.begin(), entityList.end(), [](auto currentEntityId)
+		entityList.erase(std::remove_if(entityList.begin(), entityList.end(), [](const auto& currentEntityId)
 			{
-				Entity* entityPtr = Entity::GetObjectFromID(currentEntityId);
-				// The second condition is not checked if the first one is true. So IsActive() is never called on nullptr
-				return entityPtr == nullptr || entityPtr->IsActive() == false;
+				return !currentEntityId.Valid();
 			}), entityList.end());
 	}
 }

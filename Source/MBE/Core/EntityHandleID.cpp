@@ -1,12 +1,12 @@
-#include <MBE/Core/HandleBase.h>
+#include <MBE/Core/HandleID.h>
 #include <MBE/Core/Entity.h>
 
 using namespace mbe;
 
 HandleID<mbe::Entity>::HandleID(UnderlyingType id) :
-	id(id)
+	id(id),
+	cachedPointer(GetEntityFromID(id))
 {
-	pointerCache = HandleBase<Entity>::GetObjectFromID(id);
 }
 
 mbe::Entity& HandleID<mbe::Entity>::GetExistingEntity()
@@ -15,34 +15,22 @@ mbe::Entity& HandleID<mbe::Entity>::GetExistingEntity()
 	if (!Valid())
 		throw mbe::IDNotFoundException(id);
 #endif // _DEBUG
-	return *pointerCache;
+	return *cachedPointer;
 }
 
 const mbe::Entity& HandleID<mbe::Entity>::GetExistingEntity() const
 {
 #ifdef _DEBUG
-		if (!Valid())
-			throw mbe::IDNotFoundException(id);
+	if (!Valid())
+		throw mbe::IDNotFoundException(id);
 #endif // _DEBUG
-		return *pointerCache;
+	return *cachedPointer;
 }
 
 bool HandleID<mbe::Entity>::Valid() const
 {
-	const auto entityPtr = Entity::GetObjectFromID(id);
+	const auto entityPtr = GetEntityFromID(id);
 	return  entityPtr != nullptr && entityPtr->IsActive() == true;
-}
-
-HandleID<mbe::Entity> HandleID<mbe::Entity>::operator++()
-{
-	HandleID<Entity> tmp(++id);
-	return tmp;
-}
-
-HandleID<mbe::Entity> HandleID<mbe::Entity>::operator++(int)
-{
-	HandleID<Entity> tmp(id++);
-	return tmp;
 }
 
 

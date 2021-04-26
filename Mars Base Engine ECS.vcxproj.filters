@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Quelldateien">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="Headerdateien">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
@@ -13,14 +9,8 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Quelldateien\Components">
-      <UniqueIdentifier>{bfea674d-509b-4af2-aca5-82afde1a1d33}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headerdateien\Resources Management">
       <UniqueIdentifier>{8024d5fd-af0b-4222-a8ef-3a0e8598c4f2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Resources Management">
-      <UniqueIdentifier>{d3f6dc96-26e6-49e1-9f18-863ea17cadff}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headerdateien\Resources Management\Constants">
       <UniqueIdentifier>{a63b2887-cbe8-41c8-ac04-f0dbd123d858}</UniqueIdentifier>
@@ -28,74 +18,14 @@
     <Filter Include="Headerdateien\Framework">
       <UniqueIdentifier>{5b6be9e6-b19a-497b-aace-e26b5151d3c5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\Framework">
-      <UniqueIdentifier>{902852ac-f24c-4e37-9253-41e9f7827f4d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Map">
-      <UniqueIdentifier>{1d33ab7c-9720-4a39-b1f4-dc16a6390d61}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headerdateien\Framework\Helpers">
       <UniqueIdentifier>{33491c60-3003-4577-a9fe-6bb7451b0582}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Framework\Helpers">
-      <UniqueIdentifier>{f08d5e85-51db-49e1-a3d4-49c174d986fb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headerdateien\Components">
       <UniqueIdentifier>{e225f7d0-eb73-4cd5-bbd8-5816ef0573e6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Quelldateien\ComponentSerialisers">
-      <UniqueIdentifier>{ca59082f-c701-4a8e-95d0-d8fd7a72c8a3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Headerdateien\ComponentSerialisers">
       <UniqueIdentifier>{d0529665-1339-4e6e-84b9-c12b42366b79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Systems">
-      <UniqueIdentifier>{648cb55f-357f-4387-9f61-1366342e5245}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Systems\Event System">
-      <UniqueIdentifier>{33676ce7-b378-49b8-8e9a-b7229cd20b79}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Systems\Event System\Events">
-      <UniqueIdentifier>{5f7b2745-0d5e-48b5-8546-e2c82543e04a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Systems\Event System\Events\InputEvents">
-      <UniqueIdentifier>{96f5d9cd-39fc-4494-b5fa-02f2ffbbdb92}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Systems\Event System\Events\InputEvents\Actions">
-      <UniqueIdentifier>{6c609e7c-0e8b-4a7b-9031-e9d0da61747a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Systems\Event System\Events\InputEvents\Mouse">
-      <UniqueIdentifier>{37067aa3-dd2f-4f35-bd34-1c1552f27647}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Systems\State System">
-      <UniqueIdentifier>{5cd06ea2-7601-4ec7-b8c1-5a09bbdd0940}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Systems\Entity Component System">
-      <UniqueIdentifier>{78fe3683-3838-4302-9923-b8931dba6f90}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Systems\Render System">
-      <UniqueIdentifier>{db2c171f-b29d-4fec-9677-e10853c86a24}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Systems\Render System\Effects">
-      <UniqueIdentifier>{212d0125-5d6b-4d79-ae69-95d34478c971}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Systems\Animation System">
-      <UniqueIdentifier>{b97d91fe-785c-4f2d-aad6-42cdd32cf727}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Systems\Animation System\Animations">
-      <UniqueIdentifier>{85f0d648-25d6-42d0-8b75-c00b04052f90}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Systems\Animation System\AnimationSerialisers">
-      <UniqueIdentifier>{1b9fa926-3e59-4c7b-b43e-adff5150d186}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Systems\ClickableSystem">
-      <UniqueIdentifier>{bbb71426-f558-475c-9824-8ddbdc6ecd0d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Systems\Audio System">
-      <UniqueIdentifier>{bfb36fcb-1dd7-42da-b097-0d23029a4154}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Quelldateien\Systems\AI System">
-      <UniqueIdentifier>{64546994-32f0-40a2-a97e-3a253d1b6ea6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headerdateien\Map">
       <UniqueIdentifier>{e582bd5e-15c5-42c4-ad63-37f90671cda2}</UniqueIdentifier>
@@ -147,6 +77,76 @@
     </Filter>
     <Filter Include="Headerdateien\Systems\AI System">
       <UniqueIdentifier>{c24b45a9-db6b-40b5-a465-9b090451e897}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Quelldateien\Components">
+      <UniqueIdentifier>{bfea674d-509b-4af2-aca5-82afde1a1d33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Resources Management">
+      <UniqueIdentifier>{d3f6dc96-26e6-49e1-9f18-863ea17cadff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Framework">
+      <UniqueIdentifier>{902852ac-f24c-4e37-9253-41e9f7827f4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Framework\Helpers">
+      <UniqueIdentifier>{f08d5e85-51db-49e1-a3d4-49c174d986fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Map">
+      <UniqueIdentifier>{1d33ab7c-9720-4a39-b1f4-dc16a6390d61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\ComponentSerialisers">
+      <UniqueIdentifier>{ca59082f-c701-4a8e-95d0-d8fd7a72c8a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems">
+      <UniqueIdentifier>{648cb55f-357f-4387-9f61-1366342e5245}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Event System">
+      <UniqueIdentifier>{33676ce7-b378-49b8-8e9a-b7229cd20b79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Event System\Events">
+      <UniqueIdentifier>{5f7b2745-0d5e-48b5-8546-e2c82543e04a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Event System\Events\InputEvents">
+      <UniqueIdentifier>{96f5d9cd-39fc-4494-b5fa-02f2ffbbdb92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Event System\Events\InputEvents\Actions">
+      <UniqueIdentifier>{6c609e7c-0e8b-4a7b-9031-e9d0da61747a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Event System\Events\InputEvents\Mouse">
+      <UniqueIdentifier>{37067aa3-dd2f-4f35-bd34-1c1552f27647}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\State System">
+      <UniqueIdentifier>{5cd06ea2-7601-4ec7-b8c1-5a09bbdd0940}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Entity Component System">
+      <UniqueIdentifier>{78fe3683-3838-4302-9923-b8931dba6f90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Render System">
+      <UniqueIdentifier>{db2c171f-b29d-4fec-9677-e10853c86a24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Render System\Effects">
+      <UniqueIdentifier>{212d0125-5d6b-4d79-ae69-95d34478c971}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Animation System">
+      <UniqueIdentifier>{b97d91fe-785c-4f2d-aad6-42cdd32cf727}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Animation System\Animations">
+      <UniqueIdentifier>{85f0d648-25d6-42d0-8b75-c00b04052f90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Animation System\AnimationSerialisers">
+      <UniqueIdentifier>{1b9fa926-3e59-4c7b-b43e-adff5150d186}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\ClickableSystem">
+      <UniqueIdentifier>{bbb71426-f558-475c-9824-8ddbdc6ecd0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\Audio System">
+      <UniqueIdentifier>{bfb36fcb-1dd7-42da-b097-0d23029a4154}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Systems\AI System">
+      <UniqueIdentifier>{64546994-32f0-40a2-a97e-3a253d1b6ea6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -407,6 +407,9 @@
     </ClCompile>
     <ClCompile Include="Source\MBE\Serialisation\CustomRenderComponentSerialiser.cpp">
       <Filter>Quelldateien\ComponentSerialisers</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Core\EntityHandleID.cpp">
+      <Filter>Quelldateien\Framework</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -723,6 +726,12 @@
       <Filter>Headerdateien\ComponentSerialisers</Filter>
     </ClInclude>
     <ClInclude Include="Include\MBE\Serialisation\SerialiserRegistry.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Core\HandleID.h">
+      <Filter>Headerdateien\Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MBE\Core\EntityHandleID.h">
       <Filter>Headerdateien\Framework</Filter>
     </ClInclude>
   </ItemGroup>

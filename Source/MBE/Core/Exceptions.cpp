@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include <MBE/Core/Exceptions.h>
+#include <MBE/Core/Entity.h>
 
 using namespace mbe;
 
@@ -9,7 +10,7 @@ Exception::Exception(const std::string& message) : std::runtime_error(message)
 {
 }
 
-Exception::Exception(std::string&& message) : std::runtime_error(message)
+Exception::Exception(std::string&& message) : std::runtime_error(std::move(message))
 {
 }
 
@@ -28,7 +29,7 @@ ParseError::ParseError(const std::string& parser, const std::string& message, in
 }
 
 MissingComponentException::MissingComponentException(Entity::HandleID entityId, Component::TypeID componentTypeId) :
-	FatalException("The entity (id = " + std::to_string(entityId) + ") does not have the requested component (type = " + std::to_string(componentTypeId) + ")"),
+	FatalException("The entity (id = " + std::to_string(entityId.GetUnderlyingID()) + ") does not have the requested component (type = " + std::to_string(componentTypeId) + ")"),
 	entityId(entityId),
 	componentTypeId(componentTypeId)
 {

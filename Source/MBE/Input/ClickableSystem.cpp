@@ -110,13 +110,11 @@ void ClickableSystem::RaiseClickEvents(const ClickableComponent& clickableCompon
 
 	for (auto entityId = clickableComponent.GetParentEntity().GetHandleID(); entityId.Valid(); )
 	{
-		const auto& clickedEntity = *Entity::GetObjectFromID(entityId);
-
 		event::EntityClickedEvent entityClickedEvent;
-		entityClickedEvent.SetEntityID(clickedEntity.GetHandleID());
+		entityClickedEvent.SetEntityID(entityId);
 		entityClickedEvent.SetMouseButton(button);
 		eventManager.RaiseEvent(entityClickedEvent);
 
-		entityId = clickedEntity.GetParentEntityID();
+		entityId = entityId->GetParentEntityID();
 	}
 }

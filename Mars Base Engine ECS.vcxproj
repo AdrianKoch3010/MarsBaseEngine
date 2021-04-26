@@ -204,6 +204,7 @@
     <ClCompile Include="Source\MBE\Core\ComponentsChangedEvent.cpp" />
     <ClCompile Include="Source\MBE\Core\ComponentValueChangedEvent.cpp" />
     <ClCompile Include="Source\MBE\Core\Cursor.cpp" />
+    <ClCompile Include="Source\MBE\Core\EntityHandleID.cpp" />
     <ClCompile Include="Source\MBE\Core\Exceptions.cpp" />
     <ClCompile Include="Source\MBE\Graphics\BaseComponentRenderSystem.cpp" />
     <ClCompile Include="Source\MBE\Graphics\CustomRenderComponent.cpp" />
@@ -297,7 +298,9 @@
     <ClInclude Include="Include\MBE\Core\ComponentsChangedEvent.h" />
     <ClInclude Include="Include\MBE\Core\ComponentValueChangedEvent.h" />
     <ClInclude Include="Include\MBE\Core\Cursor.h" />
+    <ClInclude Include="Include\MBE\Core\EntityHandleID.h" />
     <ClInclude Include="Include\MBE\Core\Exceptions.h" />
+    <ClInclude Include="Include\MBE\Core\HandleID.h" />
     <ClInclude Include="Include\MBE\Core\SafeQueue.h" />
     <ClInclude Include="Include\MBE\Core\StaticBlock.h" />
     <ClInclude Include="Include\MBE\Graphics\BaseComponentRenderSystem.h" />

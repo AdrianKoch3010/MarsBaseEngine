@@ -129,7 +129,6 @@ namespace mbe
 	public:
 		/// @brief The type of the id used to access a group
 		typedef std::string Group;
-		typedef EntityID HandleID;
 
 	protected:
 		/// @brief Constructor

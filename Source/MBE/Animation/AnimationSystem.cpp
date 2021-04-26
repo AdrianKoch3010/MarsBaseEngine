@@ -13,12 +13,9 @@ AnimationSystem::AnimationSystem(EntityManager& entityManager, AnimationHolder& 
 
 void AnimationSystem::Update(sf::Time frameTime)
 {
-	for (auto entityId : entityManager.GetComponentGroup<AnimationComponent>())
+	for (auto& entityId : entityManager.GetComponentGroup<AnimationComponent>())
 	{
-		assert(Entity::GetObjectFromID(entityId) != nullptr && "AnimationSystem: The entity must exist");
-		auto& entity = *Entity::GetObjectFromID(entityId);
-
-		auto& animationComponent = entity.GetComponent<AnimationComponent>();
+		auto& animationComponent = entityId->GetComponent<AnimationComponent>();
 
 		// For each animator
 		for (auto& pair : animationComponent.GetAnimatorDictionary())
@@ -59,20 +56,18 @@ void AnimationSystem::Update(sf::Time frameTime)
 			// If an animation is playing, apply it to the entity
 			if (animator.IsPlayingAnimation())
 			{
-				auto animatedEntityPtr = Entity::GetObjectFromID(entityId);
-
 				auto& currentlyPlayingAnimation = animator.GetAnimationDictionary().at(animator.GetPlayingAnimation());
 
 				// If this animation references the animation holder
 				if (auto globalId = std::get_if<std::string>(&currentlyPlayingAnimation.first))
 				{
 					const auto& animationFunction = animationHolder[*globalId];
-					animationFunction(*animatedEntityPtr, animator.GetProgress());
+					animationFunction(*entityId, animator.GetProgress());
 				}
 				else
 				{
 					const auto& animationFunction = std::get<EntityAnimator::AnimationFunction>(currentlyPlayingAnimation.first);
-					animationFunction(*animatedEntityPtr, animator.GetProgress());
+					animationFunction(*entityId, animator.GetProgress());
 				}
 			}
 		}
