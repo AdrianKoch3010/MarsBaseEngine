@@ -3,7 +3,6 @@
 
 using namespace mbe;
 
-
 Entity::Entity(EventManager& eventManager, EntityManager& entityManager) :
 	eventManager(eventManager),
 	entityManager(entityManager),
@@ -17,18 +16,14 @@ void Entity::Destroy()
 	this->active = false;
 
 	// If it has a parent entity, detach itself
-	const auto parentEntityPtr = Entity::GetObjectFromID(this->parentEntityId);
-	if (parentEntityPtr != nullptr)
-		parentEntityPtr->DetatchChild(this->GetHandleID());
+	if (parentEntityId.Valid())
+		parentEntityId->DetatchChild(this->GetHandleID());
 
 	// Calling Destroy() changes the childEntityIdList by detatching itself
 	// Hence, the set is copied before before iterating it and therefore changing the original
 	auto childEntityIdListCopy = childEntityIdList;
-	for (const auto& childEntityId : childEntityIdListCopy)
-	{
-		assert(Entity::GetObjectFromID(childEntityId) != nullptr && "Entity: The child entity must exist");
-		Entity::GetObjectFromID(childEntityId)->Destroy();
-	}
+	for (auto& childEntityId : childEntityIdListCopy)
+		childEntityId->Destroy();
 }
 
 bool Entity::IsInGroup(Group groupId) const
@@ -57,37 +52,37 @@ void Entity::RemoveFromGroup(Group groupId)
 	groupList.erase(it);
 }
 
-void Entity::AttachChild(HandleID childEntityId)
+void Entity::AttachChild(HandleID& childEntityId)
 {
 	// Set the parentEntity on the child entity
 	childEntityId->parentEntityId = this->GetHandleID();
 
 	// Add the child entity to the list of child entities
-	childEntityIdList.insert(std::move(childEntityId));
+	childEntityIdList.emplace_back(std::move(childEntityId));
 }
 
-void Entity::DetatchChild(HandleID childEntityId)
+void Entity::DetatchChild(HandleID& childEntityId)
 {
 	// Set the child entity's parent to null
 	childEntityId->parentEntityId = Entity::GetNullID();
 
 	// Remove the child entity from this entity's child entity list
-	childEntityIdList.erase(childEntityId);
+	childEntityIdList.erase(std::remove(childEntityIdList.begin(), childEntityIdList.end(), childEntityId), childEntityIdList.end());
 }
 
-void Entity::SetParentEntityID(HandleID parentEntityId)
+void Entity::SetParentEntityID(HandleID& parentEntityId)
 {
 	// If the new equals the current parent, do nothing
 	if (this->parentEntityId == parentEntityId)
 		return;
 
 	// Remove this entity from the current parent, if there is one
-	auto* currentParentPtr = Entity::GetObjectFromID(this->parentEntityId);
+	auto currentParentPtr = this->parentEntityId.GetEntityPtr();
 	if (currentParentPtr != nullptr)
 		currentParentPtr->DetatchChild(this->GetHandleID());
 
 	// Attatch this to the new parent (if it exists)
-	auto* newParentPtr = Entity::GetObjectFromID(parentEntityId);
+	auto newParentPtr = parentEntityId.GetEntityPtr();
 	if (newParentPtr == nullptr)
 		return;
 

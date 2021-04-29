@@ -33,15 +33,14 @@ void EntityManager::Refresh()
 			std::remove_if(groupedEntityList.begin(), groupedEntityList.end(),
 				[&](Entity::HandleID entityId)
 				{
-					// Get the entity
 					// The entity will still exist since the only way to delete it would be to set it
 					// inactive (make sure that inactive entities are deleted after this loop)
-					const auto& entity = *Entity::GetObjectFromID(entityId);
-
 					// Remove entities that are:
 					// Either marked to be deleted (IsActive() == false)
 					// or has been removed from the group (IsInGroup(groupId) == false)
-					return !entity.IsActive() || !entity.IsInGroup(pair.first);
+					
+					//return !entityId->IsActive() || !entityId->IsInGroup(pair.first);
+					return !entityId.Valid() || !entityId->IsInGroup(pair.first);
 				}
 		), groupedEntityList.end());
 	}
@@ -54,14 +53,13 @@ void EntityManager::Refresh()
 			std::remove_if(groupedEntityList.begin(), groupedEntityList.end(),
 				[&](Entity::HandleID entityId)
 				{
-					// Get the entity
 					// The entity will still exist since the only way to delete it would be to set it
 					// inactive (make sure that inactive entities are deleted after this loop)
-					const auto& entity = *Entity::GetObjectFromID(entityId);
-
 					// Remove entities that are marked to be deleted
 					// Entities can't be removed from the group since components can only be added
-					return !entity.IsActive();
+					
+					// return !entityId->IsActive();
+					return !entityId.Valid();
 				}
 		), groupedEntityList.end());
 	}

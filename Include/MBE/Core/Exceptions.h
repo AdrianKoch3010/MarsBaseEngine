@@ -6,9 +6,6 @@
 #include <string>
 #include <stdexcept>
 
-//#include <MBE/Core/Entity.h>
-class Entity;
-
 // Types of mbe exceptions
 // - Exception (base class for all mbe exceptions)
 
@@ -30,6 +27,7 @@ class Entity;
 
 namespace mbe
 {
+	class Entity;
 
 	class Exception : public std::runtime_error
 	{
@@ -55,7 +53,7 @@ namespace mbe
 		NonFatalException(std::string&& message) : Exception(message) {}
 	};
 
-	class MissingComponentException : public FatalException
+	/*class MissingComponentException : public FatalException
 	{
 	public:
 		MissingComponentException(Entity::HandleID entityId, Component::TypeID componentTypeId);
@@ -67,7 +65,7 @@ namespace mbe
 	private:
 		Entity::HandleID entityId;
 		Component::TypeID componentTypeId;
-	};
+	};*/
 
 	class IDNotFoundException : public FatalException
 	{

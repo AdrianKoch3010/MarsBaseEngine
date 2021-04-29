@@ -129,6 +129,10 @@ namespace mbe
 	public:
 		/// @brief The type of the id used to access a group
 		typedef std::string Group;
+		typedef HandleID<Entity> HandleID;
+
+	private:
+		typedef std::vector<HandleID> EntityIDList;
 
 	protected:
 		/// @brief Constructor
@@ -216,43 +220,38 @@ namespace mbe
 		/// @details Couples the child entity's lifetime with the life time of this entity.
 		/// Thus, when this entity gets destroyed all its child entities will get destroyed too.
 		/// @param childEntityId The id of the child entity to attach (The entity must exist)
-		void AttachChild(HandleID childEntityId);
+		void AttachChild(HandleID& childEntityId);
 
 		/// @brief Removes the passed in entity as a child of this entity
 		/// @details Since this the child entity is no longer a child of this entity, their lifetimes are no longer coupled.
 		/// @param childEntityId The id of the child entity to remove (The entity must exist)
 		/// @throws std::runtime_error if the passed in child entity is not a child of this entity
-		void DetatchChild(HandleID childEntityId);
+		void DetatchChild(HandleID& childEntityId);
 
 		///@brief Attaches this entity as a child of the passed in parent entity
 		/// @details Equivalent to calling parentEntity.AttachChild(this->GetHandleID())
 		/// @note To detach from the parent, pass in mbe::Entity::GetNullID(). Passing in an invalid entity id
 		/// (one for which no entity exists) has the same effect as passing in mbe::Entity::GetNullID().
 		/// @param parentEntityId The id of the parent entity (Can be a null id)
-		void SetParentEntityID(HandleID parentEntityId);
+		void SetParentEntityID(HandleID& parentEntityId);
 
 		/// @brief Gets the parent entity
 		/// @returns The id of the parent entity. If this entity has no parent entity, mbe::Entity::GetNullID() is returned
-		inline HandleID GetParentEntityID() { return parentEntityId; }
+		inline HandleID& GetParentEntityID() { return parentEntityId; }
 
 		/// @brief Gets the parent entity
 		/// @details Const overload
 		/// @returns The id of the parent entity. If this entity has no parent entity, mbe::Entity::GetNullID() is returned
-		inline const HandleID GetParentEntityID() const { return parentEntityId; }
-
-		/// @brief Gets the parent entity
-		/// @detail Const overload
-		/// @returns The id of the parent entity. If this entity has no parent entity, mbe::Entity::GetNullID() is returned
-		inline const HandleID GetParentEntityID() const { return parentEntityId; }
+		inline const HandleID& GetParentEntityID() const { return parentEntityId; }
 
 		/// @breif Returns all child entities
 		/// @returns A list of child entity ids. If this entity has no child entities, an empty list is returned
-		inline std::unordered_set<HandleID>& GetChildEntityIDList() { return childEntityIdList; }
+		inline EntityIDList& GetChildEntityIDList() { return childEntityIdList; }
 
 		/// @breif Returns all child entities
 		/// @detail Const overload
 		/// @returns A list of child entity ids. If this entity has no child entities, an empty list is returned
-		inline const std::unordered_set<HandleID>& GetChildEntityIDList() const { return childEntityIdList; }
+		inline const EntityIDList& GetChildEntityIDList() const { return childEntityIdList; }
 
 	private:
 		void AddPolymorphism(detail::ComponentTypeID typeId, Component::Ptr component);
@@ -284,8 +283,8 @@ namespace mbe
 
 		std::vector<Group> groupList; /// <The IDs of the groups that this entity belongs to
 
-		Entity::HandleID parentEntityId;
-		std::unordered_set<Entity::HandleID> childEntityIdList;
+		HandleID parentEntityId;
+		EntityIDList childEntityIdList;
 	};
 
 

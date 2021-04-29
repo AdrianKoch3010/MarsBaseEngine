@@ -8,8 +8,6 @@
 
 #include <MBE/Core/HandleID.h>
 
-// Entity -> HandleBase -> HandleID -> Entity
-
 namespace mbe
 {
 	/// @brief Creates an id for the derived object and provides functionality to access it through an id
@@ -38,6 +36,11 @@ namespace mbe
 	public:
 		/// @brief Returns the id of this object
 		/// @details Note that the ids will start from 0 for every derived type
+		HandleID<TDerived>& GetHandleID();
+
+		/// @brief Returns the id of this object
+		/// @details Const overload
+		/// @details Note that the ids will start from 0 for every derived type
 		const HandleID<TDerived>& GetHandleID() const;
 
 		/// @brief Returns an id for which no object exists
@@ -46,25 +49,30 @@ namespace mbe
 		static const HandleID<TDerived> GetNullID();
 
 	private:
-		const HandleID<TDerived> id; // The id of this (handle) object
+		HandleID<TDerived> id; // The id of this (handle) object
 	};
 
 #pragma region Template Implementations
 
 	template<class TDerived>
-	HandleBase<TDerived>::HandleBase() :
-		id(NextHandle())
+	HandleBase<TDerived>::HandleBase()
+		// id({ HandleID<TDerived>::NextHandleID() })		-- Should be after the map allocation
 	{
 		// Should always be save
 		// asserting the dynamic_cast does not work since no polimorph type is used
-		GetMap()[id] = static_cast<TDerived*>(this);
+		const auto& nextId = HandleID<TDerived>::NextHandleID(); // Underlying id
+		HandleID<TDerived>::GetMap()[nextId] = static_cast<TDerived*>(this);
+		id = { nextId }; // Must be after the id has been added to the map (So that the map lookup caches the correct pointer)
 	}
 
 	template<class TDerived>
-	inline HandleBase<TDerived>::HandleBase(const HandleBase& other) :
-		id(NextHandle())
+	inline HandleBase<TDerived>::HandleBase(const HandleBase& other)
+		//id(HandleID<TDerived>::NextHandleID())
 	{
-		HandleBase::GetMap()[id] = static_cast<TDerived*>(this);
+		//HandleID<TDerived>::GetMap()[id] = static_cast<TDerived*>(this);
+		const auto& nextId = HandleID<TDerived>::NextHandleID(); // Underlying id
+		HandleID<TDerived>::GetMap()[nextId] = static_cast<TDerived*>(this);
+		id = { nextId };
 	}
 
 	template<class TDerived>
@@ -74,16 +82,23 @@ namespace mbe
 		if (&other == this)
 			return *this;
 
-		this->id = HandleID<TDerived>::NextHandleID();
-		HandleID<TDerived>::GetMap()[id] = static_cast<TDerived*>(this);
+		const auto& nextId = HandleID<TDerived>::NextHandleID();
+		HandleID<TDerived>::GetMap()[nextId] = static_cast<TDerived*>(this);
+		this->id = { nextId };
 		return *this;
 	}
 
 	template<class TDerived>
 	HandleBase<TDerived>::~HandleBase()
 	{
-		auto it = HandleID<TDerived>::GetMap().find(id);
+		auto it = HandleID<TDerived>::GetMap().find(id.GetUnderlyingID());
 		HandleID<TDerived>::GetMap().erase(it);
+	}
+
+	template<class TDerived>
+	inline HandleID<TDerived>& HandleBase<TDerived>::GetHandleID()
+	{
+		return id;
 	}
 
 	template<class TDerived>
@@ -95,7 +110,7 @@ namespace mbe
 	template<class TDerived>
 	inline const HandleID<TDerived> HandleBase<TDerived>::GetNullID()
 	{
-		return { std::numeric_limits<HandleID>::max() };
+		return { std::numeric_limits<HandleID<TDerived>::UnderlyingType>::max() };
 	}
 
 	//template<class TDerived>

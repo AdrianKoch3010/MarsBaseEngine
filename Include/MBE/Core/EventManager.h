@@ -38,6 +38,9 @@ namespace mbe
 		class BaseCallbackWrapper : public HandleBase<BaseCallbackWrapper>
 		{
 		public:
+			typedef HandleID<BaseCallbackWrapper> HandleID;
+
+		public:
 			BaseCallbackWrapper() = default;
 			virtual ~BaseCallbackWrapper() = default;
 
@@ -194,7 +197,8 @@ namespace mbe
 		callbackDictionaryDictionary[typeId].erase(subscriptionId);
 
 		// Delete the wrapper (this will not be necessary when using unique pointers)
-		delete BaseCallbackWrapper::GetObjectFromID(subscriptionId);
+		//delete BaseCallbackWrapper::GetObjectFromID(subscriptionId);
+		delete subscriptionId.GetObjectPtr();
 	}
 
 #pragma endregion

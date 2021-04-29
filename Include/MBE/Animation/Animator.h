@@ -134,7 +134,7 @@ namespace mbe
 		const TID& GetGlobalAnimationID(const TID& animationID) const;
 
 	private:
-		const typename TAnimated::HandleID animatedObjectId;
+		HandleID<TAnimated> animatedObjectId;
 		bool active;
 
 		AnimationMap animationDictionary;
@@ -266,7 +266,7 @@ namespace mbe
 		const std::string& GetGlobalAnimationID(std::string animationID) const;
 
 	private:
-		const typename TAnimated::HandleID animatedObjectId;
+		HandleID<TAnimated> animatedObjectId;
 		bool active;
 
 		AnimationMap animationDictionary;
@@ -325,10 +325,10 @@ namespace mbe
 		// If an animation is playing, apply it to the Animated template (e.g. the render object of the parentEntity)
 		if (this->IsPlayingAnimation())
 		{
-			auto animatedObjectPtr = TAnimated::GetObjectFromID(animatedObjectId);
+			//auto animatedObjectPtr = TAnimated::GetObjectFromID(animatedObjectId);
 
 			// Check if the object still exists
-			if (animatedObjectPtr == nullptr)
+			if (!animatedObjectId.Valid())
 			{
 				// Destroy the animator
 				this->Destroy();
@@ -336,7 +336,7 @@ namespace mbe
 			}
 
 			auto& animationFunction = currentlyPlayingAnimation->second.first;
-			animationFunction(*animatedObjectPtr, progress);
+			animationFunction(*animatedObjectId, progress);
 		}
 	}
 
@@ -509,11 +509,11 @@ namespace mbe
 		// If an animation is playing, apply it to the Animated template (e.g. the render object of the parentEntity)
 		if (this->IsPlayingAnimation())
 		{
-			auto animatedObjectPtr = TAnimated::GetObjectFromID(animatedObjectId);
+			//auto animatedObjectPtr = TAnimated::GetObjectFromID(animatedObjectId);
 
 			// Is this really needed?
 			// Check if the object still exists
-			if (animatedObjectPtr == nullptr)
+			if (!animatedObjectId.Valid())
 			{
 				// Destroy the animator
 				this->Destroy();
@@ -521,7 +521,7 @@ namespace mbe
 			}
 
 			auto& animationFunction = currentlyPlayingAnimation->second.first;
-			animationFunction(*animatedObjectPtr, progress);
+			animationFunction(*animatedObjectId, progress);
 		}
 	}
 
