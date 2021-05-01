@@ -52,7 +52,7 @@ void Entity::RemoveFromGroup(Group groupId)
 	groupList.erase(it);
 }
 
-void Entity::AttachChild(HandleID& childEntityId)
+void Entity::AttachChild(const ID& childEntityId)
 {
 	// Set the parentEntity on the child entity
 	childEntityId->parentEntityId = this->GetHandleID();
@@ -61,7 +61,7 @@ void Entity::AttachChild(HandleID& childEntityId)
 	childEntityIdList.emplace_back(std::move(childEntityId));
 }
 
-void Entity::DetatchChild(HandleID& childEntityId)
+void Entity::DetatchChild(const ID& childEntityId)
 {
 	// Set the child entity's parent to null
 	childEntityId->parentEntityId = Entity::GetNullID();
@@ -70,7 +70,7 @@ void Entity::DetatchChild(HandleID& childEntityId)
 	childEntityIdList.erase(std::remove(childEntityIdList.begin(), childEntityIdList.end(), childEntityId), childEntityIdList.end());
 }
 
-void Entity::SetParentEntityID(HandleID& parentEntityId)
+void Entity::SetParentEntityID(const ID& parentEntityId)
 {
 	// If the new equals the current parent, do nothing
 	if (this->parentEntityId == parentEntityId)

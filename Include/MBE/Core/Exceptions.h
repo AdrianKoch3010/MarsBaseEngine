@@ -56,14 +56,14 @@ namespace mbe
 	/*class MissingComponentException : public FatalException
 	{
 	public:
-		MissingComponentException(Entity::HandleID entityId, Component::TypeID componentTypeId);
+		MissingComponentException(Entity::ID entityId, Component::TypeID componentTypeId);
 
 	public:
-		inline Entity::HandleID GetEntityID() const { return entityId; }
+		inline Entity::ID GetEntityID() const { return entityId; }
 		inline Component::TypeID GetComponentTypeID() const { return componentTypeId; }
 
 	private:
-		Entity::HandleID entityId;
+		Entity::ID entityId;
 		Component::TypeID componentTypeId;
 	};*/
 
@@ -110,7 +110,7 @@ namespace mbe
 	//public:
 	//	IDNotFoundException(const std::string& objectType, const std::string& id);
 	//	IDNotFoundException(std::string&& objectType, std::string&& id);
-	//	IDNotFoundException(std::string&& objectType, Entity::HandleID id);
+	//	IDNotFoundException(std::string&& objectType, Entity::ID id);
 	//};
 
 } // namespace mbe

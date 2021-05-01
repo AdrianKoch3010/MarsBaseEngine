@@ -207,7 +207,7 @@ namespace mbe
 		const std::string& GetGlobalAnimationID(std::string animationID) const;
 
 	private:
-		const Entity::HandleID entityId;
+		const Entity::ID entityId;
 
 		AnimationDictionary animationDictionary;
 		AnimationDictionaryIterator currentlyPlayingAnimation;

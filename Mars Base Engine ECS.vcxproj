@@ -298,7 +298,6 @@
     <ClInclude Include="Include\MBE\Core\ComponentsChangedEvent.h" />
     <ClInclude Include="Include\MBE\Core\ComponentValueChangedEvent.h" />
     <ClInclude Include="Include\MBE\Core\Cursor.h" />
-    <ClInclude Include="Include\MBE\Core\EntityHandleID.h" />
     <ClInclude Include="Include\MBE\Core\Exceptions.h" />
     <ClInclude Include="Include\MBE\Core\HandleID.h" />
     <ClInclude Include="Include\MBE\Core\SafeQueue.h" />

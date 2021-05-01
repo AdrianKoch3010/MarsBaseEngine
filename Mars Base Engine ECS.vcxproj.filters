@@ -731,9 +731,6 @@
     <ClInclude Include="Include\MBE\Core\HandleID.h">
       <Filter>Headerdateien\Framework</Filter>
     </ClInclude>
-    <ClInclude Include="Include\MBE\Core\EntityHandleID.h">
-      <Filter>Headerdateien\Framework</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Namespace Documentation.txt">

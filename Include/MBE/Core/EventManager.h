@@ -38,9 +38,6 @@ namespace mbe
 		class BaseCallbackWrapper : public HandleBase<BaseCallbackWrapper>
 		{
 		public:
-			typedef HandleID<BaseCallbackWrapper> HandleID;
-
-		public:
 			BaseCallbackWrapper() = default;
 			virtual ~BaseCallbackWrapper() = default;
 
@@ -66,9 +63,9 @@ namespace mbe
 	public:
 		// This typedef must be defined after the BaseCallbackWrapper class
 		/// @brief Defines the id type used to uniquely identify the CallbackWrapper<TEvent>.
-		/// @details This is simply for convenience. It defines the same type as the mbe::HandleBase::HandleID.
-		/// @see mbe::HandleBase::HandleID
-		typedef BaseCallbackWrapper::HandleID SubscriptionID;
+		/// @details This is simply for convenience. It defines the same type as the mbe::HandleBase::ID.
+		/// @see mbe::HandleBase::ID
+		typedef BaseCallbackWrapper::ID SubscriptionID;
 
 	public:
 		/// @brief Default constructor
@@ -142,7 +139,7 @@ namespace mbe
 		//std::unique_ptr<BaseCallBackWrapper> auto baseCallbackPtr = std::make_unique<CallbackWrapper<DerivedEvent>>(callback);
 
 		// Get the handle id for this callback (this can be used to unsubscribe this callback)
-		BaseCallbackWrapper::HandleID callbackWrapperHandleId = baseCallbackPtr->GetHandleID();
+		BaseCallbackWrapper::ID callbackWrapperHandleId = baseCallbackPtr->GetHandleID();
 
 		// This is needed since the [] operator (unlike the std::map) does not
 		// create a new item automatically. To achieve that, push_back would have
@@ -152,7 +149,7 @@ namespace mbe
 			callbackDictionaryDictionary.resize(typeId + 1);
 
 		// Add the callback to the respective callback list
-		//callbackDictionaryList[typeId].insert(std::make_pair<BaseCallBackWrapper::HandleID, std::unique_ptr<BaseCallBackWrapper>>(callbackWrapperHandleId, std::move(baseCallbackPtr)));
+		//callbackDictionaryList[typeId].insert(std::make_pair<BaseCallBackWrapper::ID, std::unique_ptr<BaseCallBackWrapper>>(callbackWrapperHandleId, std::move(baseCallbackPtr)));
 		callbackDictionaryDictionary[typeId].insert(std::make_pair(callbackWrapperHandleId, baseCallbackPtr));
 
 		// return the handle id

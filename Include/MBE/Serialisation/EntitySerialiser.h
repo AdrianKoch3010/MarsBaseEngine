@@ -43,9 +43,9 @@ namespace mbe
 	class EntitySerialiser : private sf::NonCopyable
 	{
 		// First is old, second is new
-		typedef std::unordered_map<Entity::HandleID, Entity::HandleID> EntityIDMap;
+		typedef std::unordered_map<Entity::ID, Entity::ID> EntityIDMap;
 		// First is new entity, seonds is old parent entity id
-		typedef std::unordered_map<Entity::HandleID, Entity::HandleID> ParentEntityIDMap;
+		typedef std::unordered_map<Entity::ID, Entity::ID> ParentEntityIDMap;
 
 	public:
 		/// @brief Constructor
@@ -62,22 +62,22 @@ namespace mbe
 		// Thorws runtime_error when loading fails 
 		// The entity ids will be reassigned. However, the mapping of parents and childs will remain.
 		// Returns a list of the entities that have been loaded
-		std::vector<Entity::HandleID> LoadEntities(const std::string& filePath);
+		std::vector<Entity::ID> LoadEntities(const std::string& filePath);
 
 		// Prints an error message instead of throwing an error
 		// In case the parsing fails, an empty list is returned
-		std::vector<Entity::HandleID> TryLoadEntities(const std::string& filePath, const std::string& fileName);
+		std::vector<Entity::ID> TryLoadEntities(const std::string& filePath, const std::string& fileName);
 
 		// Works the same as LoadEntities but loads from a string rather than a file
 		// Returns a list of the entities that have been loaded
 		// Throws if the string doesn't contain valid xml
-		std::vector<Entity::HandleID> CreateEntitiesFromString(const std::string& xmlString);
+		std::vector<Entity::ID> CreateEntitiesFromString(const std::string& xmlString);
 
 		// Throws runtime_error when storing fails
 		void StoreEntites(const std::string& filePath);
 
 	private:
-		std::vector<Entity::HandleID> Load(const tinyxml2::XMLDocument& document);
+		std::vector<Entity::ID> Load(const tinyxml2::XMLDocument& document);
 
 	private:
 		EntityManager& entityManager;

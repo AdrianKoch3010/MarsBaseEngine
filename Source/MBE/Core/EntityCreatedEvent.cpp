@@ -8,7 +8,7 @@ EntityCreatedEvent::EntityCreatedEvent() :
 {
 }
 
-EntityCreatedEvent::EntityCreatedEvent(Entity::HandleID entityId) :
+EntityCreatedEvent::EntityCreatedEvent(Entity::ID entityId) :
 	entityId(entityId)
 {
 }

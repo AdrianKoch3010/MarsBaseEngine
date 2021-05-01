@@ -27,7 +27,7 @@ namespace mbe
 		friend class Entity;
 
 	private:
-		typedef std::map<detail::ComponentTypeID, std::vector<Entity::HandleID>> EntityGroupDictionary;
+		typedef std::map<detail::ComponentTypeID, std::vector<Entity::ID>> EntityGroupDictionary;
 
 	public:
 		/// @brief Constructor
@@ -66,17 +66,17 @@ namespace mbe
 		// Returns a list of all entites that have been added to this group
 		// If the group id doesn't exista an empty list is returned
 		// The group id is not case sensitive - ASCII only
-		std::vector<Entity::HandleID>& GetGroup(Entity::Group groupId) const;
+		const std::vector<Entity::ID>& GetGroup(Entity::Group groupId) const;
 
 		// The reference is valid as long as the entitymanager exists (which should be longer than the functions using it)
 		// Returns a list of all entities that have component TComponent
 		template <class TComponentSerialiser>
-		std::vector<Entity::HandleID>& GetComponentGroup() const;
+		const std::vector<Entity::ID>& GetComponentGroup() const;
 
 		/// @brief Returns a list of all entity ids
 		/// @details This function coppies all entity id from the entity list and should, therefore, be avoided.
 		/// @returns List of all entity ids
-		std::vector<Entity::HandleID> GetEntityIDList() const;
+		std::vector<Entity::ID> GetEntityIDList() const;
 
 	private:
 		/// @brief Deletes all inactive entities
@@ -85,15 +85,15 @@ namespace mbe
 
 		// This method is private since it should never be called directly
 		// If done so the entity manager might add an entity to a group that the entity itself is not added to
-		void AddEntityToGroup(const Entity& entity, Entity::Group groupId);
+		void AddEntityToGroup(Entity& entity, Entity::Group groupId);
 
 		// This method is private since it should never be called directly
 		// If done so the entity might be added to a component group of a component that it doesn't have
-		void AddEntityToGroup(const Entity& entity, detail::ComponentTypeID componentTypeId);
+		void AddEntityToGroup(Entity& entity, detail::ComponentTypeID componentTypeId);
 
 	private:
 		std::vector<std::unique_ptr<Entity>> entityList;
-		mutable std::map<Entity::Group, std::vector<Entity::HandleID>> entityGroups;
+		mutable std::map<Entity::Group, std::vector<Entity::ID>> entityGroups;
 		mutable EntityGroupDictionary entityGroupDictionary;
 
 		EventManager& eventManager;
@@ -121,7 +121,7 @@ namespace mbe
 	}
 
 	template<class TComponentSerialiser>
-	inline std::vector<Entity::HandleID>& EntityManager::GetComponentGroup() const
+	inline const std::vector<Entity::ID>& EntityManager::GetComponentGroup() const
 	{
 		// Make sure that only Components are added as type id keys for the dictionary
 		static_assert(std::is_base_of<Component, TComponentSerialiser>::value, "EntityManager: TComponent must inherit from mbe::Component");

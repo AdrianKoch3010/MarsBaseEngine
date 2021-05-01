@@ -29,7 +29,7 @@ namespace mbe
 			/// @brief Constructor
 			/// @param entityId The id of the entity that has been clicked
 			/// @param button The sf::Mouse::Button with which the entity has been clicked 
-			EntityClickedEvent(Entity::HandleID entityId, sf::Mouse::Button button);
+			EntityClickedEvent(Entity::ID entityId, sf::Mouse::Button button);
 
 			/// @brief Default destructor
 			~EntityClickedEvent() = default;
@@ -38,7 +38,7 @@ namespace mbe
 			/// @brief Sets the entity id of the mbe::Entity that has been clicked
 			/// @details This method is only needed when calling the default constructor.
 			/// @param id The id of the entity that has been clicked
-			inline void SetEntityID(Entity::HandleID id) { this->entityId = id; }
+			inline void SetEntityID(Entity::ID id) { this->entityId = id; }
 
 			/// @brief Sets the sf::Mouse::Button with which the entity has been clicked
 			/// @details This method is only needed when calling the default constructor.
@@ -46,7 +46,7 @@ namespace mbe
 			inline void SetMouseButton(sf::Mouse::Button button) { this->mouseButton = button; }
 
 			/// @brief Returns the id of the mbe::Entity that has been clicked
-			inline Entity::HandleID GetEntityID() const { return entityId; }
+			inline Entity::ID GetEntityID() const { return entityId; }
 
 			/// @brief Returns the sf::Mouse::Button with which the entity has been clicked
 			inline sf::Mouse::Button GetMouseButton() const { return mouseButton; }
@@ -56,7 +56,7 @@ namespace mbe
 			friend std::ostream& operator << (std::ostream& stream, const EntityClickedEvent& event);
 
 		private:
-			Entity::HandleID entityId;
+			Entity::ID entityId;
 			sf::Mouse::Button mouseButton;
 		};
 

@@ -2,7 +2,7 @@
 
 using namespace mbe;
 
-void TopDownZOrderSorter::operator()(std::vector<Entity::HandleID>& layer)
+void TopDownZOrderSorter::operator()(std::vector<Entity::ID>& layer)
 {
 	// Loop through this list and assign the zOrder
 	for (auto& topDownEntityId : layer)

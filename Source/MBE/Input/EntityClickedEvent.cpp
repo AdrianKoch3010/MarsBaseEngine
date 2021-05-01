@@ -9,7 +9,7 @@ EntityClickedEvent::EntityClickedEvent() :
 {
 }
 
-EntityClickedEvent::EntityClickedEvent(Entity::HandleID entityId, sf::Mouse::Button button) :
+EntityClickedEvent::EntityClickedEvent(Entity::ID entityId, sf::Mouse::Button button) :
 	entityId(entityId),
 	mouseButton(button)
 {

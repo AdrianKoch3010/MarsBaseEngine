@@ -8,7 +8,7 @@ GoalReachedEvent::GoalReachedEvent() :
 {
 }
 
-GoalReachedEvent::GoalReachedEvent(Entity::HandleID entityId) :
+GoalReachedEvent::GoalReachedEvent(Entity::ID entityId) :
 	entityId(entityId)
 {
 }

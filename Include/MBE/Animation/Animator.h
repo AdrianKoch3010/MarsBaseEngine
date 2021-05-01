@@ -134,7 +134,7 @@ namespace mbe
 		const TID& GetGlobalAnimationID(const TID& animationID) const;
 
 	private:
-		HandleID<TAnimated> animatedObjectId;
+		ID<TAnimated> animatedObjectId;
 		bool active;
 
 		AnimationMap animationDictionary;
@@ -266,7 +266,7 @@ namespace mbe
 		const std::string& GetGlobalAnimationID(std::string animationID) const;
 
 	private:
-		HandleID<TAnimated> animatedObjectId;
+		ID<TAnimated> animatedObjectId;
 		bool active;
 
 		AnimationMap animationDictionary;

@@ -21,7 +21,7 @@ namespace mbe
 	public:
 		typedef std::unique_ptr<TileMapBase> Ptr;
 		typedef sf::Vector2i Position;
-		typedef std::vector<mbe::Entity::HandleID> EntityIdList;
+		typedef std::vector<mbe::Entity::ID> EntityIdList;
 
 	public:
 		TileMapBase() = default;

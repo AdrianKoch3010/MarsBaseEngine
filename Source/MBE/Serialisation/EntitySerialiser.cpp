@@ -11,7 +11,7 @@ EntitySerialiser::EntitySerialiser(EntityManager& entityManager, EventManager& e
 {
 }
 
-std::vector<Entity::HandleID> EntitySerialiser::LoadEntities(const std::string& filePath)
+std::vector<Entity::ID> EntitySerialiser::LoadEntities(const std::string& filePath)
 {
 	using namespace tinyxml2;
 
@@ -24,7 +24,7 @@ std::vector<Entity::HandleID> EntitySerialiser::LoadEntities(const std::string& 
 	return Load(document);
 }
 
-std::vector<Entity::HandleID> EntitySerialiser::TryLoadEntities(const std::string& filePath, const std::string& fileName)
+std::vector<Entity::ID> EntitySerialiser::TryLoadEntities(const std::string& filePath, const std::string& fileName)
 {
 	try
 	{
@@ -44,10 +44,10 @@ std::vector<Entity::HandleID> EntitySerialiser::TryLoadEntities(const std::strin
 	}
 
 	// Return an empty vector
-	return std::vector<Entity::HandleID>();
+	return std::vector<Entity::ID>();
 }
 
-std::vector<Entity::HandleID> EntitySerialiser::CreateEntitiesFromString(const std::string& xmlString)
+std::vector<Entity::ID> EntitySerialiser::CreateEntitiesFromString(const std::string& xmlString)
 {
 	using namespace tinyxml2;
 
@@ -101,12 +101,12 @@ void EntitySerialiser::StoreEntites(const std::string& filePath)
 		throw std::runtime_error("Store Entities: Error while writing to xml file (" + std::to_string(storeError) + ")");
 }
 
-std::vector<Entity::HandleID> EntitySerialiser::Load(const tinyxml2::XMLDocument& document)
+std::vector<Entity::ID> EntitySerialiser::Load(const tinyxml2::XMLDocument& document)
 {
 	using namespace tinyxml2;
 
 	// Remember the entities that have been added
-	std::vector<Entity::HandleID> loadedEntityIdList;
+	std::vector<Entity::ID> loadedEntityIdList;
 
 	// Get the root node
 	const auto rootNode = document.FirstChild();
@@ -132,10 +132,10 @@ std::vector<Entity::HandleID> EntitySerialiser::Load(const tinyxml2::XMLDocument
 
 		//////////////////////////// TODO:
 		// Maping of new and old entity ids
-		entityIdMap.insert({ static_cast<Entity::HandleID>(entityId), entity.GetHandleID() });
-		parentEntityIdMap.insert({ entity.GetHandleID(), static_cast<Entity::HandleID>(parentEntityId) });
+		entityIdMap.insert({ static_cast<Entity::ID>(entityId), entity.GetHandleID() });
+		parentEntityIdMap.insert({ entity.GetHandleID(), static_cast<Entity::ID>(parentEntityId) });
 
-		// Maybe add entityManager.CreateLoadedEntity(mbe::Entity::HandleID id);
+		// Maybe add entityManager.CreateLoadedEntity(mbe::Entity::ID id);
 
 		// Get and attach the components
 		for (auto componentElement = entityElement->FirstChildElement("Component"); componentElement != nullptr; componentElement = componentElement->NextSiblingElement("Component"))

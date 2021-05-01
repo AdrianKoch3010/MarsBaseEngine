@@ -19,6 +19,10 @@ namespace mbe
 		/// @endcond
 	{
 	public:
+		typedef HandleID<const TDerived> ConstID;
+		typedef HandleID<TDerived> ID;
+
+	public:
 		/// @brief Default constructor
 		HandleBase();
 
@@ -36,19 +40,24 @@ namespace mbe
 	public:
 		/// @brief Returns the id of this object
 		/// @details Note that the ids will start from 0 for every derived type
-		HandleID<TDerived>& GetHandleID();
+		//mbe::HandleID<TDerived>& GetHandleID();
 
 		/// @brief Returns the id of this object
 		/// @details Const overload
 		/// @details Note that the ids will start from 0 for every derived type
-		const HandleID<TDerived>& GetHandleID() const;
+		const HandleID<TDerived>& GetHandleID();
+
+		// Const overload (can't be a reference - The automatic conversion creates a new object)
+		HandleID<const TDerived> GetHandleID() const;
 
 		/// @brief Returns an id for which no object exists
 		/// @details mbe::HandleBase::GetObjectFromID(mbe::HandleBase::GetNullID()) should always return nullptr.
 		/// @returns The largest possible id.
 		static const HandleID<TDerived> GetNullID();
 
-	private:
+	protected:
+		// Can't be const because of the constructor
+		// But only a const reference is exposed
 		HandleID<TDerived> id; // The id of this (handle) object
 	};
 
@@ -96,13 +105,13 @@ namespace mbe
 	}
 
 	template<class TDerived>
-	inline HandleID<TDerived>& HandleBase<TDerived>::GetHandleID()
+	inline const HandleID<TDerived>& HandleBase<TDerived>::GetHandleID()
 	{
 		return id;
 	}
 
 	template<class TDerived>
-	inline const HandleID<TDerived>& HandleBase<TDerived>::GetHandleID() const
+	inline HandleID<const TDerived> HandleBase<TDerived>::GetHandleID() const
 	{
 		return id;
 	}
@@ -112,22 +121,6 @@ namespace mbe
 	{
 		return { std::numeric_limits<HandleID<TDerived>::UnderlyingType>::max() };
 	}
-
-	//template<class TDerived>
-	//inline typename HandleID<TDerived> HandleBase<TDerived>::NextHandle()
-	//{
-	//	// Every handle will get its own unique id
-	//	static HandleID<TDerived> next(0);
-	//	return next++;
-	//}
-
-	//template<class TDerived>
-	//inline typename HandleBase<TDerived>::HandleDictionary& HandleBase<TDerived>::GetMap()
-	//{
-	//	// Create the static map which will be used to keep track of the Derived handles and their ids
-	//	static HandleDictionary map;
-	//	return map;
-	//}
 
 #pragma endregion
 

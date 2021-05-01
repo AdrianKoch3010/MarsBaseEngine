@@ -17,13 +17,13 @@ RenderSystem::RenderSystem(sf::RenderWindow& windowPtr, EventManager& eventManag
 	// Subscribe to the events
 	std::function<void(const EntityCreatedEvent&)> onRenderEntityCreatedFunction = [this](const EntityCreatedEvent& event)
 	{
-		Entity::HandleID entityId = event.GetEntityID();
+		Entity::ID entityId = event.GetEntityID();
 		AddRenderEntity(entityId);
 	};
 
 	std::function<void(const EntityRemovedEvent&)> onRenderEntityRemovedFunction = [this](const EntityRemovedEvent& event)
 	{
-		Entity::HandleID entityId = event.GetEntityID();
+		Entity::ID entityId = event.GetEntityID();
 		RemoveRenderEntity(entityId);
 	};
 
@@ -129,7 +129,7 @@ const sf::View& RenderSystem::GetView(RenderLayer renderLayer) const
 	return viewDictionary[renderLayer];
 }
 
-void RenderSystem::AddRenderEntity(Entity::HandleID entityId)
+void RenderSystem::AddRenderEntity(Entity::ID entityId)
 {
 	// Can't add a non existing node
 	if (!entityId.Valid())
@@ -156,7 +156,7 @@ void RenderSystem::AddRenderEntity(Entity::HandleID entityId)
 	renderEntityDictionary[renderInformationComponent.GetRenderLayer()].push_back(entityId);
 }
 
-void RenderSystem::RemoveRenderEntity(Entity::HandleID entityId)
+void RenderSystem::RemoveRenderEntity(Entity::ID entityId)
 {
 	// If the pointed-to object no longer exists (or e.g. an invalid id has been passed)
 	if (!entityId.Valid())
@@ -218,7 +218,7 @@ bool RenderSystem::IsVisible(const Entity& entity, const sf::View& view)
 	return true;
 }
 
-void RenderSystem::SortByZOrder(std::vector<Entity::HandleID>& entityIdList)
+void RenderSystem::SortByZOrder(std::vector<Entity::ID>& entityIdList)
 {
 	// Use insertion sort to sort by zOrder
 	// Insertion sort is fast for nearly sorted lists

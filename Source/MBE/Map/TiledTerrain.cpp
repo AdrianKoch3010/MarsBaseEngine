@@ -53,7 +53,7 @@ TiledTerrain::~TiledTerrain()
 	eventManager.UnSubscribe<TextureWrapperChangedEvent>(componentChangedSubscription);
 }
 
-Entity::HandleID TiledTerrain::AddTileMapLayer(const std::string& textureWrapperId)
+Entity::ID TiledTerrain::AddTileMapLayer(const std::string& textureWrapperId)
 {
 	// Create the layer entity and add the according components
 	auto& layer = entityManager.CreateEntity();
@@ -72,7 +72,7 @@ Entity::HandleID TiledTerrain::AddTileMapLayer(const std::string& textureWrapper
 	return layer.GetHandleID();
 }
 
-Entity::HandleID TiledTerrain::GetLayer(const size_t layerIndex)
+Entity::ID TiledTerrain::GetLayer(const size_t layerIndex)
 {
 	// If the index is invalid, return a LayerId for which no object will exist
 	if (layerIndex >= renderLayerList.size())

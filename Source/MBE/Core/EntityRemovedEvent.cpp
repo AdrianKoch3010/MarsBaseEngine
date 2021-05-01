@@ -8,7 +8,7 @@ EntityRemovedEvent::EntityRemovedEvent() :
 {
 }
 
-EntityRemovedEvent::EntityRemovedEvent(Entity::HandleID entityId) :
+EntityRemovedEvent::EntityRemovedEvent(Entity::ID entityId) :
 	entityId(entityId)
 {
 }

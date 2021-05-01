@@ -30,6 +30,6 @@ namespace mbe
 		/// object's y-position. It can therefore be used to set the objects 'height' in the top down view/projection.
 		/// @param layer The layer to sort the top down objects in
 		/// @note In order to be sorted the the entity must be in the group: "TopDownObjects" and have the mbe::VisibleObjectInformationComponent
-		void operator() (std::vector<Entity::HandleID> & layer);
+		void operator() (std::vector<Entity::ID>& layer);
 	};
 }

@@ -12,7 +12,6 @@ void EventManager::UnSubscribe(SubscriptionID subscriptionId)
 		// Erase by key
 		callbackDictionary.erase(subscriptionId);
 		// Delete the wrapper (this will not be necessary when using unique pointers)
-		//delete BaseCallbackWrapper::GetObjectFromID(subscriptionId);
 		delete subscriptionId.GetObjectPtr();
 	}
 }

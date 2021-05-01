@@ -8,7 +8,7 @@ GoalInaccessibleEvent::GoalInaccessibleEvent() :
 {
 }
 
-GoalInaccessibleEvent::GoalInaccessibleEvent(Entity::HandleID entityId) :
+GoalInaccessibleEvent::GoalInaccessibleEvent(Entity::ID entityId) :
 	entityId(entityId)
 {
 }

@@ -29,7 +29,7 @@ namespace mbe
 
 			/// @brief Constructor
 			/// @param entityId The id of the mbe::Entity that has been removed
-			EntityRemovedEvent(Entity::HandleID entityId);
+			EntityRemovedEvent(Entity::ID entityId);
 
 		public:
 			/// @brief Default Destructor
@@ -38,18 +38,18 @@ namespace mbe
 			/// @brief Sets the entity id of the mbe::Entity that has been removed
 			/// @details This method is only needed when calling the default constructor.
 			/// @param id The id of the mbe::Entity that has been removed
-			inline void SetEntityID(Entity::HandleID id) { entityId = id; }
+			inline void SetEntityID(Entity::ID id) { entityId = id; }
 
 			/// @brief Returns the id of the mbe::Entity that has been removed
 			/// @details Meant for internal use by systems such as the mbe::RenderSystem
-			inline Entity::HandleID GetEntityID() const { return entityId; }
+			inline Entity::ID GetEntityID() const { return entityId; }
 
 			/// @brief Allows this class to be written to an out stream
 			/// @details This may be used to output the event's data to the console or a log file
 			friend std::ostream & operator << (std::ostream & stream, const EntityRemovedEvent & event);
 
 		private:
-			Entity::HandleID entityId;
+			Entity::ID entityId;
 		};
 	} // namespace event
 } // namespace mbe

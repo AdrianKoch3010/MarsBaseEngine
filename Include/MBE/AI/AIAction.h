@@ -31,7 +31,7 @@ namespace mbe
 		virtual void Update() = 0;
 
 		// Get the handle id of the entity the action belongs to
-		virtual Entity::HandleID GetHandleID() const = 0;
+		virtual Entity::ID GetHandleID() const = 0;
 
 		inline bool IsCompleted() const { return completed; }
 

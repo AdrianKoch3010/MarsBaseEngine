@@ -30,7 +30,7 @@ namespace mbe
 
 			/// @brief Constructor
 			/// @param entityId The id of the entity that has been created
-			EntityCreatedEvent(Entity::HandleID entityId);
+			EntityCreatedEvent(Entity::ID entityId);
 
 			/// @brief Default destructor
 			~EntityCreatedEvent() = default;
@@ -39,17 +39,17 @@ namespace mbe
 			/// @brief Sets the entity id of the mbe::Entity that has been created
 			/// @details This method is only needed when calling the default constructor.
 			/// @param id The id of the entity that has been created
-			inline void SetEntityID(Entity::HandleID id) { entityId = id; }
+			inline void SetEntityID(Entity::ID id) { entityId = id; }
 
 			/// @brief Returns the id of the mbe::Entity that has been created
-			inline Entity::HandleID GetEntityID() const { return entityId; }
+			inline Entity::ID GetEntityID() const { return entityId; }
 
 			/// @brief Allows this class to be written to an out stream
 			/// @details This may be used to output the event's data to the console or a log file
 			friend std::ostream & operator << (std::ostream & stream, const EntityCreatedEvent & event);
 
 		private:
-			Entity::HandleID entityId;
+			Entity::ID entityId;
 		};
 	} // namespace event
 } // namespace mbe

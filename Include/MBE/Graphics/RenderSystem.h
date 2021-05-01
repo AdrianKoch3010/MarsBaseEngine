@@ -43,13 +43,13 @@ namespace mbe
 	{
 	public:
 		// The signature of the function that is used to assign the zOrder to a layer of render entities
-		typedef std::function<void(std::vector<Entity::HandleID>&)> ZOrderAssignmentFunction;
+		typedef std::function<void(std::vector<Entity::ID>&)> ZOrderAssignmentFunction;
 
 		// When using the std::unordered_map operator[] the a default sf::View instance is created
 		typedef std::unordered_map<RenderLayer, sf::View> ViewDictionary;
 
-		// When using the std::unordered_map operator[] an emtpty std::vector<RenderObject::HandleID>() is created
-		typedef std::unordered_map<RenderLayer, std::vector<Entity::HandleID>> RenderEntityDictionary;
+		// When using the std::unordered_map operator[] an emtpty std::vector<RenderObject::ID>() is created
+		typedef std::unordered_map<RenderLayer, std::vector<Entity::ID>> RenderEntityDictionary;
 
 		typedef std::unordered_map<RenderLayer, ZOrderAssignmentFunction> ZOrderAssignmentFunctionDictionary;
 
@@ -85,8 +85,8 @@ namespace mbe
 		inline const sf::RenderWindow& GetRenderWindow() const { return window; }
 
 	private:
-		void AddRenderEntity(Entity::HandleID entityId);
-		void RemoveRenderEntity(Entity::HandleID entityId);
+		void AddRenderEntity(Entity::ID entityId);
+		void RemoveRenderEntity(Entity::ID entityId);
 
 		// Sets the correct texture wrapper based on the context
 		// Throws when the id has not been registerd
@@ -100,7 +100,7 @@ namespace mbe
 
 		// Performs an insertion sort
 		// Assumes that render nodes exist for all render node ids
-		static void SortByZOrder(std::vector<Entity::HandleID>& renderNodeIdList);
+		static void SortByZOrder(std::vector<Entity::ID>& renderNodeIdList);
 
 	private:
 		// A reference to the pointer is stored so that when a new window is created the correct pointer is referenced

@@ -28,7 +28,7 @@ ParseError::ParseError(const std::string& parser, const std::string& message, in
 {
 }
 
-//MissingComponentException::MissingComponentException(Entity::HandleID entityId, Component::TypeID componentTypeId) :
+//MissingComponentException::MissingComponentException(Entity::ID entityId, Component::TypeID componentTypeId) :
 //	FatalException("The entity (id = " + std::to_string(entityId.GetUnderlyingID()) + ") does not have the requested component (type = " + std::to_string(componentTypeId) + ")"),
 //	entityId(entityId),
 //	componentTypeId(componentTypeId)
