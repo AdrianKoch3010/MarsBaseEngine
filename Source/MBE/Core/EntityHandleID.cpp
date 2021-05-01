@@ -91,18 +91,18 @@ HandleID<const Entity>::HandleID(const HandleID<const Entity>& other) :
 {
 }
 
-// Creates a ID<const Entity> from a ID<Entity>
-HandleID<const Entity>::HandleID(const HandleID<Entity>& other) :
-	id(other.id),
-	cachedPointer(other.cachedPointer)
-{
-}
-
 HandleID<const Entity>& HandleID<const Entity>::operator=(const HandleID<const Entity>& other)
 {
 	this->id = other.id;
 	this->cachedPointer = other.cachedPointer;
 	return *this;
+}
+
+// Creates a ID<const Entity> from a ID<Entity>
+HandleID<const Entity>::HandleID(const HandleID<Entity>& other) :
+	id(other.id),
+	cachedPointer(other.cachedPointer)
+{
 }
 
 // Assigns a ID<Entity> to a ID<const Entity>

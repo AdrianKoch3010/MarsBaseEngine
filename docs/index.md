@@ -14,24 +14,24 @@ Its development is documented in a series of devlog videos which can be found on
 # Tutorials
 A few quick words on the structure of the following tutorials. The aim is to give an easy to understand reference point for users starting to learn the engine. It is further intended to give an overview of the functionality provided together with a short explanation and pieces of code showing how to use them in principle. This is by no means exhaustive; an (almost) complete documentation of the API can be found [here](Doxygen/index.html). Note, however, that this does not include explanation and should, therefore, be used as a reference only.
 
+The engine is divided into the following modules. The tutorials follow this structure by providing an overview of the core fucntionality of the differnt modules, focussing on their most imporant uses.
 
-- Download and Compilation
-- [The entity component system](Tutorials/EntityComponentSystem.md)
-- [Game loop and state system](Tutorials/StateSystem.md)
-- [Working with events](Tutorials/Events.md)
-- [The animation system](Tutorials/Animation.md)
-- [Dealing with user input](Tutorials/InputHandler.md)
-- [Resource management](Tutorials/ResourceManagement.md)
-- [Sound and Music](Tutorials/Audio.md)
-- [Game AI](Tutorials/GameAI.md)
-- [Serialisation](Tutorials/Serialisation.md)
+<!-- - Download and Compilation
+- First steps -->
+<!-- - [Sound and Music](Tutorials/Audio.md) -->
 
 # Modules
 
-- AI
-- Animation
-- Audio
-- Core
-- Graphics
-- Input
-- Map
+- [AI](Tutorials/AI/AI.md)
+- [Animation](Tutorials/Animation/Animation.md)
+- [Core](Tutorials/Core/Core.md)
+    - [The entity component system](Tutorials/Core/EntityComponentSystem.md)
+    - [Game loop and state system](Tutorials/Core/StateSystem.md)
+    - [Working with events](Tutorials/Core/Events.md)
+    - [HandleIDs](Tutorials/Core/HandleID.md)
+    - [Resource management](Tutorials/Core/ResourceManagement.md)
+- [Graphics](Tutorials/Graphics/Graphics.md)
+- [Input](Tutorials/Input/Input.md)
+- [Serialisation](Tutorials/Serialisation/Serialisation.md)
+
+<!-- Audio and Map is not complete -->
