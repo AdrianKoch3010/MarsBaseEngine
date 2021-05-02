@@ -1,0 +1,20 @@
+- [Home](readme)
+- **AI**
+    - [AI](AI/AI)
+- **Animation**
+    - [Animation](Animation/Animation)
+- **Core**
+    - [The entity component system](Core/EntityComponentSystem)
+    - [Game loop and state system](Core/StateSystem)
+    - [Working with events](Core/Events)
+    - [HandleIDs](Core/HandleID)
+    - [Resource management](Core/ResourceManagement)
+- **Graphics**
+    - [Graphics](Graphics/Graphics)
+- **Input**
+    - [Input](Input/Input)
+- **Serialisation**
+    - [Serialisation](Serialisation/Serialisation)
+- **Links**
+- [Github](https://github.com/AdrianKoch3010/MarsBaseEngine)
+- [Doxygen](https://adriankoch3010.github.io/MarsBaseEngine/Doxygen/html/index.html)

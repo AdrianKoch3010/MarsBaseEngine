@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['tcallback',['TCallback',['../classmbe_1_1_event_manager.html#a695e57f018a9d7dee7586a7b9b9ee453',1,'mbe::EventManager']]],
-  ['textureholder',['TextureHolder',['../namespacembe.html#ae83a46f16ac7753b3439568c5cbed0c4',1,'mbe']]],
-  ['texturewrapperholder',['TextureWrapperHolder',['../namespacembe.html#ade86fa22fae21c09102855b032288192',1,'mbe']]],
-  ['typeid',['TypeID',['../classmbe_1_1detail_1_1_base_event.html#afabc5b4e44a268a1ac5ce741cd4c6bfd',1,'mbe::detail::BaseEvent']]]
+  ['underlyingtype_1228',['UnderlyingType',['../classmbe_1_1_handle_i_d.html#a2d86bfc21ca113ca987db8fed517a9c8',1,'mbe::HandleID::UnderlyingType()'],['../classmbe_1_1_handle_i_d_3_01_entity_01_4.html#a4528375b5c9d38add03c27c3f59a4a6d',1,'mbe::HandleID&lt; Entity &gt;::UnderlyingType()'],['../classmbe_1_1_handle_i_d_3_01const_01_entity_01_4.html#a69a020b150d6cccb8f2eda4d9825520c',1,'mbe::HandleID&lt; const Entity &gt;::UnderlyingType()']]]
 ];
