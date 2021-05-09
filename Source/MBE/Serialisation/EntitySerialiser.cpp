@@ -153,6 +153,9 @@ std::vector<Entity::ID> EntitySerialiser::Load(const tinyxml2::XMLDocument& docu
 			// This is so that the parse error is not caught by the runtime_error
 			catch (const ParseError& parseError)
 			{
+#ifdef _DEBUG
+				std::cerr << std::endl << parseError.GetMessage() << std::endl;
+#endif
 				throw parseError;
 			}
 			catch (const std::runtime_error& error)

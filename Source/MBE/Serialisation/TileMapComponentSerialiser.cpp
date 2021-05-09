@@ -40,9 +40,22 @@ void TileMapComponentSerialiser::LoadComponent(Entity& entity, const tinyxml2::X
 				throw ParseError(MBE_NAME_OF(TileMapComponentSerialiser), "Failed to parse row text", rowElement->GetLineNum());
 			std::string rowString{ rowText };
 
-			movementSpeedShape.push_back(ParseRow(rowString));
+			try
+			{
+				movementSpeedShape.push_back(ParseRow(rowString));
+			}
+			catch (const std::invalid_argument& error)
+			{
+				throw ParseError(MBE_NAME_OF(TileMapComponentSerialiser), "Row element was not a float", rowElement->GetLineNum());
+			}
 		}
 		tileMapComponent.SetMovementSpeedShape(std::move(movementSpeedShape));
+
+		// Check that the rows are all equally long
+		if (movementSpeedShape.size() != 0)
+			for (size_t i = 1; i < movementSpeedShape.size(); i++)
+				if (movementSpeedShape.at(i).size() != movementSpeedShape.front().size())
+					throw mbe::ParseError(MBE_NAME_OF(TileMapComponentSerialiser), "Rows of the MovementSpeedShape element must be the same size", shapeElement->GetLineNum());
 	}
 }
 

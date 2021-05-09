@@ -20,7 +20,7 @@ float TileMapComponent::GetMovementSpeed(unsigned int x, unsigned int y) const
 
 sf::Vector2u mbe::TileMapComponent::GetSize() const
 {
-	sf::Vector2u size;
+	sf::Vector2u size{ 0u, 0u };
 	size.y = movementSpeedShape.size();
 
 	// If the height is not 0
@@ -54,6 +54,6 @@ void TileMapComponent::Rotate()
 			newShape.at(newRowCounter).push_back(GetMovementSpeed(i, j));
 	}
 
-	movementSpeedShape = newShape;
+	movementSpeedShape = std::move(newShape);
 }
 

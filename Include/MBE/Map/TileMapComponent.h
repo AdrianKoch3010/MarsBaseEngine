@@ -46,7 +46,6 @@ namespace mbe
 		inline void SetPosition(const Position& position) { this->position = position; }
 
 		inline void SetMovementSpeedShape(const MovementSpeedShape& movementSpeedShape) { this->movementSpeedShape = movementSpeedShape; }
-
 		inline void SetMovementSpeedShape(MovementSpeedShape&& movementSpeedShape) { this->movementSpeedShape = std::move(movementSpeedShape); }
 
 		// Throw if not in range
