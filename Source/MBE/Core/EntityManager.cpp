@@ -39,7 +39,7 @@ void EntityManager::Refresh()
 					// Either marked to be deleted (IsActive() == false)
 					// or has been removed from the group (IsInGroup(groupId) == false)
 					// The entityId is no longer valid at this point, so entityId->IsActive() will throw an exception
-					return !entityId.Valid() || !entityId->IsInGroup(pair.first);
+					return !entityId.Valid() || !entityId->IsActive() || !entityId->IsInGroup(pair.first);
 				}
 		), groupedEntityList.end());
 	}
@@ -57,7 +57,7 @@ void EntityManager::Refresh()
 					// Remove entities that are marked to be deleted
 					// Entities can't be removed from the group since components can only be added
 					// The entityId is no longer valid at this point, so entityId->IsActive() will throw an exception
-					return !entityId.Valid();
+					return !entityId.Valid() || !entityId->IsActive();
 				}
 		), groupedEntityList.end());
 	}

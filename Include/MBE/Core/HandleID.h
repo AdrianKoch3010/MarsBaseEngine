@@ -47,8 +47,8 @@ namespace mbe
 	/// @brief Acts as a unique identifier for and smart pointer to an object
 	/// @details Provides a wrapper around an unsigned long long base type. For performance reasons, a pointer to the referenced object
 	/// is cached. This object can be accessed through the interface provided by this class and const correctness will be preserved.
-	/// If the referenced object gets deleted (or in case of the template specialisations for the mbe::Entity is no longer active),
-	/// the HandleID will no longer be valid. This class is the id used by the HandleBase<TDerived> template base class.
+	/// If the referenced object gets deleted the HandleID will no longer be valid.
+	/// This class is the id used by the HandleBase<TDerived> template base class.
 	/// @tparam T The type of the object to which the id refers. Note that the class will behave differently for const types.
 	/// @see HandleBase, HandleID<Entity> and HandleID<const Entity>
 	template <class T>
@@ -139,8 +139,7 @@ namespace mbe
 
 		/// @brief Returns whether the id is valid
 		/// @details Checks if the object has been deleted. This is done through a static dictionary shared
-		/// with the HandleBase template base class. The template specialisation for T = Entity and T = const Entity
-		/// also checks if the entity is active.
+		/// with the HandleBase template base class.
 		/// @see HandleID<Entity> and HandleID<const Entity>
 		/// @return True if the object still exists, false otherwise
 		bool Valid() const;
@@ -194,7 +193,7 @@ namespace mbe
 	/// @brief Acts as a unique identifier for and smart pointer to an Entity
 	/// @details Provides a wrapper around an unsigned long long base type. For performance reasons, a pointer to the referenced entity
 	/// is cached. The entity can be accessed through the interface provided by this class and const correctness will be preserved.
-	/// If the entity gets deleted is no longer active, the HandleID will no longer be valid.
+	/// If the entity gets deleted, the HandleID will no longer be valid.
 	/// @note This is the id type returned by Entity::GetHandleID() when called on a non-const entity. For a const Entity see HandleID<const Entity>
 	/// @see HandleBase, Entity, HandleID<const Entity>
 	template<>
@@ -238,7 +237,7 @@ namespace mbe
 		inline UnderlyingType GetUnderlyingID() const { return id; }
 
 		/// @brief Gives direct access to the managed entity pointer
-		/// @return A const pointer to the entity or nullptr if it has been deleted (IsActive() is not relevant here)
+		/// @return A const pointer to the entity or nullptr if it has been deleted
 		/// @attention This method exposes a raw pointer to an entity that is likely managed by an EntityManager
 		// This could be done by using the internal valid function and the chachedPointer --> changes IsActive() behaviour
 		inline Entity* const GetEntityPtr() const { return GetEntityFromID(id); }
@@ -262,9 +261,9 @@ namespace mbe
 		inline Entity* const operator->() const { return &GetExistingEntity(); }
 
 		/// @brief Returns whether the id is valid
-		/// @details Checks if the entity has been deleted or set inactive by calling Entity::Delete().
+		/// @details Checks if the entity has been deleted.
 		/// This is done through a static dictionary shared with the HandleBase template base class. 
-		/// @return True if the entity exists and is active, false otherwise
+		/// @return True if the entity exists, false otherwise
 		bool Valid() const;
 
 		/// @brief Enables the id to be printed
@@ -311,7 +310,7 @@ namespace mbe
 	/// @brief Acts as a unique identifier for and smart pointer to a const Entity
 	/// @details Provides a wrapper around an unsigned long long base type. For performance reasons, a pointer to the referenced entity
 	/// is cached. The entity can be accessed through the interface provided by this class and const correctness will be preserved.
-	/// If the entity gets deleted is no longer active, the HandleID will no longer be valid.
+	/// If the entity gets deleted, the HandleID will no longer be valid.
 	/// @note This is the id type returned by Entity::GetHandleID() when called on a const entity. For a non-const Entity see HandleID<Entity>
 	/// @see HandleBase, Entity, HandleID<Entity>
 	template<>
@@ -367,7 +366,7 @@ namespace mbe
 		inline UnderlyingType GetUnderlyingID() const { return id; }
 
 		/// @brief Gives direct access to the managed entity pointer
-		/// @return A const pointer to the const entity or nullptr if it has been deleted (IsActive() is not relevant here)
+		/// @return A const pointer to the const entity or nullptr if it has been deleted.
 		/// @attention This method exposes a raw pointer to an entity that is likely managed by an EntityManager
 		// This could be done by using the internal valid function and the chachedPointer --> changes IsActive() behaviour
 		inline const Entity* const GetEntityPtr() const { return GetEntityFromID(id); }
@@ -391,9 +390,9 @@ namespace mbe
 		inline const Entity* const operator->() const { return &GetExistingEntity(); }
 
 		/// @brief Returns whether the id is valid
-		/// @details Checks if the entity has been deleted or set inactive by calling Entity::Delete().
+		/// @details Checks if the entity has been deleted.
 		/// This is done through a static dictionary shared with the HandleBase template base class. 
-		/// @return True if the entity exists and is active, false otherwise
+		/// @return True if the entity exists, false otherwise
 		bool Valid() const;
 
 		/// @brief Enables the id to be printed

@@ -42,7 +42,8 @@ Entity& HandleID<Entity>::GetExistingEntity() const
 bool HandleID<Entity>::Valid() const
 {
 	const auto entityPtr = GetEntityFromID(id);
-	return  entityPtr != nullptr && entityPtr->IsActive() == true;
+	return entityPtr != nullptr;
+	//return  entityPtr != nullptr && entityPtr->IsActive() == true;
 }
 
 inline Entity* HandleID<Entity>::GetEntityFromID(const UnderlyingType& id)
@@ -125,7 +126,8 @@ const Entity& HandleID<const Entity>::GetExistingEntity() const
 bool HandleID<const Entity>::Valid() const
 {
 	const auto entityPtr = GetEntityFromID(id);
-	return  entityPtr != nullptr && entityPtr->IsActive() == true;
+	return entityPtr != nullptr;
+	//return  entityPtr != nullptr && entityPtr->IsActive() == true;
 }
 
 inline const Entity* HandleID<const Entity>::GetEntityFromID(const UnderlyingType& id)

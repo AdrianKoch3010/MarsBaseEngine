@@ -206,7 +206,7 @@ void RenderSystem::Refresh()
 		auto& entityList = pair.second;
 		entityList.erase(std::remove_if(entityList.begin(), entityList.end(), [](const auto& currentEntityId)
 			{
-				return !currentEntityId.Valid();
+				return !currentEntityId.Valid() || !currentEntityId->IsActive();
 			}), entityList.end());
 	}
 }
