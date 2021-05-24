@@ -1,0 +1,7 @@
+Peter = 343.f;
+_Hjdsk323 = 2433.f;
+#Hello = "Peter";
+#special = "dsd\"sas";
+#dsdsds
+ddsd = 23.f;  #dddd;
+dss = 23.f;foo = 		0.f;
