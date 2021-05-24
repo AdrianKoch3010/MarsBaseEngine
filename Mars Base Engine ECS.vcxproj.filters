@@ -148,6 +148,9 @@
     <Filter Include="Quelldateien\Systems\AI System">
       <UniqueIdentifier>{64546994-32f0-40a2-a97e-3a253d1b6ea6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\Framework\Constants">
+      <UniqueIdentifier>{049eba87-6860-4619-bcc3-3c554a18d82f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\MBE\TransformComponent.cpp">
@@ -410,6 +413,12 @@
     </ClCompile>
     <ClCompile Include="Source\MBE\Core\EntityHandleID.cpp">
       <Filter>Quelldateien\Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Serialisation\ConstantsParser.cpp">
+      <Filter>Quelldateien\Framework\Constants</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MBE\Parser\lex.cc">
+      <Filter>Quelldateien\Framework\Constants</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -731,6 +740,15 @@
     <ClInclude Include="Include\MBE\Core\HandleID.h">
       <Filter>Headerdateien\Framework</Filter>
     </ClInclude>
+    <ClInclude Include="Include\MBE\Serialisation\ConstantsParser.h">
+      <Filter>Headerdateien\Resources Management\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MBE\Parser\Scannerbase.h">
+      <Filter>Quelldateien\Framework\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MBE\Parser\Scanner.h">
+      <Filter>Quelldateien\Framework\Constants</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Namespace Documentation.txt">
@@ -739,5 +757,10 @@
     <Text Include="Main page documentation.txt">
       <Filter>Ressourcendateien</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\MBE\Parser\Scanner.ih">
+      <Filter>Quelldateien\Framework\Constants</Filter>
+    </None>
   </ItemGroup>
 </Project>

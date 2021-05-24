@@ -261,6 +261,7 @@
     <ClCompile Include="Source\MBE\Core\TinyXML.cpp" />
     <ClCompile Include="Source\MBE\Graphics\TopDownInformationComponent.cpp" />
     <ClCompile Include="Source\MBE\Graphics\TopDownZOrderSorter.cpp" />
+    <ClCompile Include="Source\MBE\Parser\lex.cc" />
     <ClCompile Include="Source\MBE\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -270,6 +271,7 @@
     <ClCompile Include="Source\MBE\Serialisation\AnimationComponentSerialser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\BlinkingAnimationSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\ClickableComponentSerialiser.cpp" />
+    <ClCompile Include="Source\MBE\Serialisation\ConstantsParser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\CustomRenderComponentSerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\EntitySerialiser.cpp" />
     <ClCompile Include="Source\MBE\Serialisation\FrameAnimationSerialiser.cpp" />
@@ -373,6 +375,7 @@
     <ClInclude Include="Include\MBE\Serialisation\BlinkingAnimationSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\ClickableComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\ComponentSerialiser.h" />
+    <ClInclude Include="Include\MBE\Serialisation\ConstantsParser.h" />
     <ClInclude Include="Include\MBE\Serialisation\CustomRenderComponentSerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\EntitySerialiser.h" />
     <ClInclude Include="Include\MBE\Serialisation\FrameAnimationSerialiser.h" />
@@ -392,10 +395,15 @@
     <ClInclude Include="Include\MBE\Audio\MusicComponent.h" />
     <ClInclude Include="Include\MBE\Graphics\RenderInformationComponent.h" />
     <ClInclude Include="Include\MBE\Graphics\TextureWrapperComponent.h" />
+    <ClInclude Include="Source\MBE\Parser\Scanner.h" />
+    <ClInclude Include="Source\MBE\Parser\Scannerbase.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Main page documentation.txt" />
     <Text Include="Namespace Documentation.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\MBE\Parser\Scanner.ih" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,72 +1,3 @@
-//#pragma once
-//
-///// @file
-///// @brief Class mbe::Constants
-//
-//#include <iostream> // for debug messages
-//#include <vector>
-//#include <fstream>  // for reading files
-//
-//#include <MBE/Core/RegularExpressions.h>
-//#include <MBE/Core/Singleton.h>
-//
-//namespace mbe
-//{
-//	namespace detail
-//	{
-//		static const char contentDoesNotMatch[] = "Content does not match";
-//	}
-//
-//	/// @brief Singleton container class that reads in a the constants.txt and sets the constants used throughout the program
-//	class Constants : public detail::Singleton<Constants>
-//	{
-//		friend class detail::Singleton<Constants>;
-//
-//	protected:
-//		Constants();
-//
-//	public:
-//		~Constants();
-//
-//
-//	public:
-//		// Returns a flag set in the constructor (where the Load() function is called) that indicated whether there have been any loading errors
-//		auto HasLoadedSuccessfully() const { return hasLoadedSuccessfully; }
-//
-//		inline auto GetScreenWidth() const { return *screenWidth; }
-//
-//		inline auto GetScreenHeight() const { return *screenHeight; }
-//
-//		inline auto GetTestTimeMultiplicator() const { return *testTimeMultiplicator; }
-//
-//		// This defeats the entire purpose of the constants class, but it is obsolete anyway
-//		inline void SetTestTimeMultiplicator(float value) { *testTimeMultiplicator = value; }
-//
-//	protected:
-//		bool Load(std::string filePath);
-//
-//		template <typename TData>
-//		bool AddContent(TData** constantToDefine, std::string constantName, detail::RegularExpression expressionToMatch);
-//
-//		bool ReadFile(std::string filePath);
-//
-//		std::string FindContent(std::string searchContent, std::string lineToSearch, detail::RegularExpression expressionToMatch);
-//
-//	private:
-//		// The pointer is used to make the values nullable
-//		unsigned short int* screenHeight;
-//		unsigned short int* screenWidth;
-//
-//		float* testTimeMultiplicator;
-//
-//		std::vector<std::string> lines;
-//		// A flag (set in the constructor where the Load() function is called) that indicated whether there have been any loading errors
-//		bool hasLoadedSuccessfully;
-//	};
-//} // namespace mbe
-//
-
-
 #pragma once
 
 /// @file
@@ -77,8 +8,8 @@
 #include <unordered_map>
 #include <variant>
 
-#include <MBE/Core/RegularExpressions.h>
 #include <MBE/Core/Singleton.h>
+#include <MBE/Serialisation/ConstantsParser.h>
 #include <MBE/Core/Utility.h> // For NormaliseIDString
 
 namespace mbe
@@ -88,21 +19,13 @@ namespace mbe
 	// Convert between types???
 
 
-	/// @brief Singleton container class that reads in a the constants.txt and sets the constants used throughout the program
+	/// @brief Singleton container class
 	class Constants : public detail::Singleton<Constants>
 	{
 		friend class detail::Singleton<Constants>;
 
 	private:
-		typedef std::variant<
-			int,
-			unsigned,
-			long long,
-			unsigned long long,
-			float,
-			double,
-			std::string>
-			ValueType;
+		typedef ConstantsParser::ValueType ValueType;
 		typedef std::unordered_map<std::string, ValueType> ValueDictionary;
 
 	private:
@@ -113,19 +36,36 @@ namespace mbe
 
 
 	public:
-		// Returns a flag set in the constructor (where the Load() function is called) that indicated whether there have been any loading errors
-		inline bool HasLoadedSuccessfully() const { return hasLoadedSuccessfully; }
+		// Mutiple files can be loaded as long as the ids don't clash
+		void Load(const std::string& filePath);
 
 		template <typename T>
 		T Get(const std::string& id) const;
 
-	private:
-		bool Load(const std::string& filePath);
+		void Add(const std::string& id, ValueType value);
 
 	private:
 		ValueDictionary valueDictionary;
-
-		bool hasLoadedSuccessfully;
 	};
+
+#pragma region Template Implementation
+
+	template<typename T>
+	inline T Constants::Get(const std::string& id) const
+	{
+		auto normalId = NormaliseIDString(id);
+		auto it = valueDictionary.find(normalId);
+		if (it == valueDictionary.end())
+			throw std::runtime_error("ConstantsParser: No entry for this id: " + normalId);
+
+		// Check the type -- Some logic for type conversion could be added
+		if (!std::holds_alternative<T>(it->second))
+			throw std::runtime_error("The entry has been requested with the incorrect type: " + normalId);
+
+		return std::get<T>(it->second);
+	}
+
+#pragma endregion
+
 
 } // namespace mbe
